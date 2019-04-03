@@ -1,0 +1,84 @@
+@charset 'UTF-8';
+/* Slider */
+.slick-loading .slick-list {
+    background: #fff url('./ajax-loader.gif') center center no-repeat;
+}
+/* Dots */
+.slick-dots {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 10px 0 0 0;
+    list-style: none;
+    text-align: center;
+}
+.slick-dots li {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+}
+.slick-dots li button {
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    width: 10px;
+    height: 10px;
+	padding: 0;
+    cursor: pointer;
+    color: transparent;
+    border: 0;
+    outline: none;
+    background: #e6e6e6;
+	border-radius:50%;
+}
+.slick-dots li button:hover,
+.slick-dots li button:focus {
+	outline: none;
+	background: #2bbed3;
+}
+
+.slick-dots li.slick-active button{
+    background:#2bbed3;
+	border-radius:50%;
+}
+/* Arrows */
+.slick-prev,
+.slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+	margin-top: -21px;
+    display: block;
+    width: 43px;
+    height: 43px;
+    padding: 0;
+    cursor: pointer;
+	z-index: 999;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: url(arrow_thumb_carousel.png) center center no-repeat;
+	background-color: rgb(0,0,0, 0.6);
+
+	-webkit-border-radius: 50%; 
+	-moz-border-radius: 50%; 
+	border-radius: 50%;
+	border: 5px solid rgb(0,0,0, 0.6);
+}
+.slick-prev {
+    left: 25px;
+	background-position: 0 0
+}
+.slick-prev:hover {
+	background-position: 0 -33px
+}
+.slick-next {
+    right: 25px;
+	background-position: -33px 0
+}
+.slick-next:hover {
+	background-position: -30px -33px
+}

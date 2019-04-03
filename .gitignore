@@ -1,0 +1,15 @@
+*.log
+*.[jJ][pP][eE][gG]
+*.[jJ][pP][gG]
+*.[pP][nN][gG]
+*.[gG][iI][fF]
+*.[mM][oO][vV]
+*.[mM][pP]4
+*.[sS][qQ][lL]
+*.[dD][bB]
+*.[pP][dD][fF]
+*.db
+images/
+yachtimages/
+jsondata/
+rundata/

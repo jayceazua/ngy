@@ -1,0 +1,5 @@
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME}.o -f
+RewriteRule ^(.*)$ $1.o [L]
+
