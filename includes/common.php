@@ -19,6 +19,7 @@ require_once("classes/file.class.php");
 require_once("classes/email.class.php");
 require_once("classes/ym.class.php");
 require_once("classes/make.class.php");
+require_once("classes/model.class.php");
 require_once("classes/boattype.class.php");
 require_once("classes/creditapplication.class.php");
 require_once("classes/template.class.php");
@@ -48,6 +49,7 @@ $fle = new Fileclass();    //******************  File class
 $sdeml = new Emailclass();   //******************  Email class
 $ymclass = new Ymclass();   //******************  YM class
 $makeclass = new Makeclass();   //******************  Make class
+$modelclass = new Modelclass();   //******************  Model class
 $boattypeclass = new BoatTypeclass();   //******************  Boat Type class
 $creditappclass = new Creditapplicationclass();   //******************  Credit Application class
 $templateclass = new Templateclass();   //******************  Template class
@@ -364,6 +366,28 @@ function display_boat_type_boat_profile_local_shortcode($argu = array()){
 }
 $shortcodeclass->add_shortcode( 'fclocalboattype', 'display_boat_type_boat_profile_local_shortcode' );
 
+//Local boat model list
+function display_boat_model_list_shortcode($argu = array()){
+	global $modelclass;
+	return $modelclass->display_boat_model_list($argu);
+}
+$shortcodeclass->add_shortcode( 'fcboatmodellist', 'display_boat_model_list_shortcode' );
+
+//Local boat model list by category
+function display_boat_model_list_by_category_shortcode($argu = array()){
+	global $modelclass;
+	return $modelclass->display_boat_model_list_by_category($argu);
+}
+$shortcodeclass->add_shortcode( 'fcboatmodellistbycat', 'display_boat_model_list_by_category_shortcode' );
+
+//Local boat model find
+function display_find_right_model_main_shortcode($argu = array()){
+	global $modelclass;
+	return $modelclass->display_find_right_model_main($argu);
+}
+$shortcodeclass->add_shortcode( 'fcfindyourrightmodel', 'display_find_right_model_main_shortcode' );
+
+
 //our team
 function display_our_team_shortcode($argu = array()){
 	global $yachtchildclass;
@@ -534,6 +558,7 @@ if(($_REQUEST['fcapi'] != "")){
 	$yachtpopclass->submit_email_client_form();
 	$yachtpopclass->submit_email_friend_form();
 	$yachtpopclass->submit_send_email_my_broker_form();
+	$yachtpopclass->submit_contact_local_model_form();
 	
 	$frontend->member_get_logout();
 	$frontend->submit_contact_form();
@@ -547,8 +572,8 @@ if(($_REQUEST['fcapi'] != "")){
 	//$frontend->submit_boat_insurance_form();
 	//$frontend->submit_boat_transpost_form();
 	//$frontend->submit_tradein_welcome_form();
-	//$frontend->submit_talk_to_specialist_form();
-	//$frontend->submit_ask_for_brochure_form();
+	$frontend->submit_talk_to_specialist_form();
+	$frontend->submit_ask_for_brochure_form();
 	//$frontend->submit_service_request_form();
 	//$frontend->submit_parts_request_form();
 	//$frontend->submit_finance_form();

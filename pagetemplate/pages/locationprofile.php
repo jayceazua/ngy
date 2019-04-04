@@ -7,7 +7,7 @@ $parentpagear = (object)$parentpagear[0];
 
 $startend = 0;
 $main_heading = "n";
-$googlemap = 1;
+$googlemap = 0;
 $transparentheader = 1;
 
 $locnm = $_REQUEST["locnm"];
@@ -44,6 +44,26 @@ if ($appointment_time != ""){
 	';
 }
 
+//Map display
+if ($lat_val == 0 AND $lon_val == 0){
+	$mapdisplay = '
+	<div class="clearfixmain">
+		<div class="no-found-map"><img alt="Location Map" src="'. $cm->site_url .'/images/location-map-bg.png"></div>
+	</div>
+	';
+}else{	
+	if ($lat_val == 0 AND $lon_val == 0){
+		$latlonstring = $mapaddress;
+	}else{
+		$latlonstring = $lat_val . ", " . $lon_val;
+	}
+	$mapdisplay = '
+	<div class="clearfixmain">
+		<iframe class="" width="100%" height="300" id="gmap_canvas" src="https://www.google.com/maps/embed/v1/place?key='. $cm->googlemapkey .'&q='. $latlonstring .'&zoom=9" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+	</div>';
+}
+//end
+
 $breadcrumb = 1;
 $breadcrumb_extra[] = array(
             'a_title' => $parentpagear->name,
@@ -72,7 +92,7 @@ include($bdr."includes/head.php");
 
 if ($logo_image != ""){
 ?>
-<img class="full" src="<?php echo $cm->folder_for_seo; ?>locationimage/<?php echo $logo_image; ?>" alt="" />
+<img class="full" src="<?php echo $cm->folder_for_seo; ?>locationimage/<?php echo $logo_image; ?>" alt="<?php echo $name; ?>" />
 <?php	
 }
 ?>
@@ -114,9 +134,7 @@ if (isset($breadcrumb) AND $breadcrumb == 1){
 			</div>
 			
 			<div class="locationprofiletabcontent locationprofiletabcontent2 com_none clearfixmain">
-				<div class="map-container">
-					<div id="map"></div>
-				</div>
+				<?php echo $mapdisplay; ?>
 			</div>
 			
 			<div class="locationprofiletabcontent locationprofiletabcontent3 com_none clearfixmain">
@@ -133,83 +151,15 @@ if (isset($breadcrumb) AND $breadcrumb == 1){
 	</div>
 </div>
 <script type="text/javascript">	
-	//map
-	var mapCenter; 
-	var listingmap;
-	var marker;
-
-	function listingMap( lat, lng ) {
-
-		google.maps.visualRefresh = true;
-		var location = new google.maps.LatLng( lat, lng );
-
-		var mapOptions = {
-			zoom				: 9,
-			center				: location,
-			mapTypeId			: google.maps.MapTypeId.ROADMAP,
-			streetViewControl	: true,
-			scrollwheel			: false
-		};
-
-		listingmap = new google.maps.Map( document.getElementById( 'map' ), mapOptions );
-		//google.maps.event.trigger( listingmap, 'resize' );
-
-		marker = new google.maps.Marker({
-			map				: listingmap,
-			draggable		: false,
-			flat			: true,
-			position		: location,
-			icon			: '<?php echo $cm->folder_for_seo; ?>images/map-marker1.png'
-		});
-
-		marker.infoWindow = new InfoBox({
-			maxWidth				: 220,
-			pixelOffset				: new google.maps.Size( -29, -6 ),
-			boxStyle				: {
-				width	: '50px',
-				height	: '50px'
-			},
-			alignBottom				: true,
-			closeBoxURL				: '',
-			enableEventPropagation	: true,
-			disableAutoPan			: true,
-			zIndex					: 1,
-			content					: '<div class="listing-map-label listing-status-for-sale"><img width="100" height="30" src="<?php echo $cm->folder_for_seo; ?>locationimage/noflag.png" class="listing-thumbnail wp-post-image" alt="" /></div>'
-		});
-
-		marker.infoWindow.open( listingmap, marker );
-		mapCenter  = listingmap.getCenter();
-	}
-	
-	var lat = <?php echo $lat_val; ?>;
-	var lon = <?php echo $lon_val; ?>;
-	
 	$(document).ready(function(){
-		$(".main").off("click", ".locationtab").on("click", ".locationtab", function(){
-			
+		$(".main").off("click", ".locationtab").on("click", ".locationtab", function(){			
 			var locationtabid = parseInt($(this).attr("locationtabid"));
 			
 			$(".locationtab").removeClass("active");
 			$(this).addClass("active");
 			
 			$(".locationprofiletabcontent").hide();
-			$(".locationprofiletabcontent" + locationtabid).show();
-			
-			if (locationtabid == 2){
-				//map call
-				if(lat == 0 && lon == 0){
-						//hide map and subsitute coming soon map
-						$('#map').css({ height:0, 'visibility': 'hidden' });
-						$(".map-container").append('<div class="no-found-map"><img src="<?php echo  $cm->site_url; ?>/images/location-map-bg.png"></div>');
-						$(".map-container").css({ "height": "auto", "padding-bottom":0, "overflow": "auto" });
-				}else{
-					listingMap(lat,lon);
-					google.maps.event.addDomListener(window, "resize", function() {
-						listingmap.setCenter(mapCenter); 
-					});
-				}
-			}
-			
+			$(".locationprofiletabcontent" + locationtabid).show();			
 			$(document.body).trigger("sticky_kit:recalc");
 		});
 	});

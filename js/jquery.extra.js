@@ -1,28 +1,5 @@
-var cl_no_resize = 1;
 $(document).ready(function(){
-	onloadmethod();
-	if (sessionStorage["keepsearchsession"]){
-		sessionStorage.removeItem("keepsearchsession");
-		
-		if (sessionStorage.boatlistingdataright) {
-			if ($(".boatlistingmain").length > 0) {
-				var curpage = sessionStorage.currentpagename;
-				if (curpage == $(location).attr('href')){
-					//$(".boatlistingmain").html(sessionStorage.boatlistingdata);
-					//alert (sessionStorage.boatlistingdataleft);
-					$(".boatlistingmain .boatlistingsearchtop").html(sessionStorage.boatlistingdatatop);
-					if ($(".boatlistingmain .left-cell").length > 0) {
-						$(".boatlistingmain .left-cell").html(sessionStorage.boatlistingdataleft);
-					}
-					$(".boatlistingmain #listingholdermain").html(sessionStorage.boatlistingdataright);
-
-					$("#listingholdermain ul.product-list li").removeClass( 'no-transition' ).removeClass( 'hidden-listing' );
-					$(document.body).trigger("sticky_kit:recalc");				
-				}
-			}
-		}
-	}
-	
+	onloadmethod();	
 	$(".main").off("click", ".clearallfilter").on("click", ".clearallfilter", function(){
 		remove_session_storage();		
 	});	
@@ -38,7 +15,19 @@ $(document).ready(function(){
 	
 	if ($(".date-field-c").length > 0) {
 		set_date_picker(".date-field-c", 3);
-	}	
+	}
+	
+	//header func
+	$(".header-search-button-link").click(function(){
+		$(".header-search-show-hide").toggleClass("active");
+		$(this).toggleClass("active");
+		$(".menu-cont").toggleClass("com_none");
+		$("body").toggleClass("noscroll");
+	});
+	
+	$(".header-login-button-link").click(function(){
+		$(this).toggleClass("active");
+	});
 
 	//scroll to
 	if ($(".fcscrollto").length > 0){
@@ -139,25 +128,10 @@ $(document).ready(function(){
         });
     }
 	
-	if ($(".fancybox2").length > 0) {
-		cl_no_resize = 0;
-		$(".fancybox2").colorbox({
-			width:"90%",
-			fixed:true,
-			current:''
-		});
-	}
-	
 	/*Product Gallery*/
-	if ($(".fancybox").length > 0) {
-		cl_no_resize = 0;
-		$(".fancybox").colorbox({
-			width:"90%",
-			height:"90%",
-			fixed:true,
-			current:''
-		});
-	}
+	$('.fancybox').fancybox({
+		transitionEffect: "fade",
+	});
 	
 	
 	/*Product Tab*/
@@ -424,11 +398,11 @@ $(document).ready(function(){
 		var shortversion = $("#shortversion").val();
 		shortversion = parseInt(shortversion);
        
-        if (!field_validation_border("name", 1, 1)){ all_ok = "n"; }
-		if (!field_validation_border("phone", 1, 1)){ all_ok = "n"; }
-		if (!field_validation_border("email", 2, 1)){ all_ok = "n"; }
-		if (!field_validation_border("contact_subject", 1, 1)){ all_ok = "n"; }
-		if (!field_validation_border("message", 1, 1)){ all_ok = "n"; }		
+        if (!field_validation_border("con_name", 1, 1)){ all_ok = "n"; }
+		if (!field_validation_border("con_phone", 1, 1)){ all_ok = "n"; }
+		if (!field_validation_border("con_email", 2, 1)){ all_ok = "n"; }
+		//if (!field_validation_border("con_contact_subject", 1, 1)){ all_ok = "n"; }
+		if (!field_validation_border("con_message", 1, 1)){ all_ok = "n"; }		
 
         if (all_ok == "n"){            
             return false;
@@ -446,11 +420,11 @@ $(document).ready(function(){
 			  $(".fomrsubmit-result").html("Email sent successfully");
 			  $(".fomrsubmit-result").removeClass("com_none");
 			  
-			  $("#name").val('');
-			  $("#phone").val('');
-			  $("#email").val('');
-			  $("#contact_subject").val('');
-			  $("#message").val('');
+			  $("#con_name").val('');
+			  $("#con_phone").val('');
+			  $("#con_email").val('');
+			  $("#con_contact_subject").val('');
+			  $("#con_message").val('');
 			  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
 			}).fail(function() {
 			  $(".fomrsubmit-result").addClass("error");
@@ -1036,6 +1010,13 @@ $(document).ready(function(){
 	$(".serachinput").keyup(function(){
         $(this).searchfilter();
     });
+	if ($(".ydchange").length > 0) {
+		var dval = $(".vp a.active").attr('dval');
+		dval = parseInt(dval);
+		if (dval == 3){
+			$(this).searchfilter();
+		}
+	}
 	
 	$(".main, .fcajaxloadedcontent").off("click", ".filterwork").on("click", ".filterwork", function(){
 		$(".all-overlay").hide();
@@ -1791,18 +1772,16 @@ $(document).ready(function(){
 	});
 	
 	//popup
-	$("body").off("click", ".contactbroker, .loginpop, .joinmaillist, .commonpop, .joinourmailinglistbtn, .contactmarinaberths, .savesearchlink, .emailsearch, .referfriend, .feedbackbutton, .creategraph, .emailclient, .mappopup").on('click', '.contactbroker, .loginpop, .joinmaillist, .commonpop, .joinourmailinglistbtn, .contactmarinaberths, .savesearchlink, .emailsearch, .referfriend, .feedbackbutton, .creategraph, .emailclient, .mappopup', function(e) {
-		cl_no_resize = 1;
-		e.preventDefault();
-		$(this).colorbox({
-			iframe:true,
-			width: "90%",
-        	height: "90%",
-			maxWidth: 560,
-        	maxHeight: 560,
-			fixed:true,
-			current:''
-		});
+	$(".contactbroker, .loginpop, .joinmaillist, .commonpop, .joinourmailinglistbtn, .contactmarinaberths, .savesearchlink, .emailsearch, .referfriend, .feedbackbutton, .creategraph, .emailclient, .mappopup").fancybox({
+		toolbar  : false,
+		smallBtn : true,
+		iframe : {
+			preload : false,
+			css : {
+				width  : "90%",
+				"max-width": "560px"
+        	}
+		}
 	});
 		
 });
@@ -2080,31 +2059,6 @@ $(window).resize(function(){
 			}
 		}
 	}
-	
-	if($('#cboxOverlay').is(':visible')){
-		if (cl_no_resize == 1){
-			var cl_w = $(window).width()*0.9;
-			var cl_h = $(window).height()*0.9;
-
-
-			if (cl_w > 600){
-				cl_w = 600;
-			}
-
-			if (cl_h > 600){
-				cl_h = 600;
-			}
-
-			$.colorbox.resize({
-			   "width": cl_w,
-			   "height": cl_h
-		   });
-		}else{
-			$.colorbox.resize({
-			   "width": "90%"
-		   });
-		}
-	}
 });
 
 //update entered form field into dom
@@ -2166,7 +2120,7 @@ function column_scroll_stick(){
 		if($(window).width() > 725){
 			var extarheight = 0;
 			if ($(".fcheader").length > 0) {
-				extarheight = $(".fcheader").height() - 40;
+				extarheight = $(".fcheader").height() + 40;
 			}
 			
 			var parentdiv = $(".scrollcol").attr("parentdiv");

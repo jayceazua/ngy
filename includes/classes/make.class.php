@@ -220,9 +220,9 @@ class Makeclass {
 
 					<div class="right-cell scrollcol" parentdiv="model-detail">
 						'. $catalog_link_text .'
-						<div class="commonsection"><a href="'. $cm->get_page_url(0, "pop-ask-for-brochure") .'?make_id='. $makeid .'" class="button afterarrow buttonstyle2 commonpop" data-fancybox-type="iframe">Ask For '. $manufacturerarname .' Brochure</a></div>
+						<div class="commonsection"><a href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-ask-for-brochure") .'?make_id='. $makeid .'" class="button afterarrow buttonstyle2 commonpop" data-type="iframe">Ask For '. $manufacturerarname .' Brochure</a></div>
 
-						<div class="commonsection section2"><a href="'. $cm->get_page_url(0, "pop-trade-in-welcome") .'" class="commonpop" data-fancybox-type="iframe">
+						<div class="commonsection section2"><a href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-trade-in-welcome") .'" class="commonpop" data-type="iframe">
 							<span>Request your</span>
 							Free Trade-in Valuation</a>
 						</div>

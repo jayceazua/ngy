@@ -400,5 +400,39 @@ if ($az == 50){
 			$boatwatcherclass->boat_watcher_delete_backend($boatwatchercode);
 		}
 	}
+	
+	if ($az == 700){
+		$inoption = round($_REQUEST["inoption"], 0);
+		
+		if ($inoption == 1){
+			//model image display
+			$ms = round($_POST["ms"], 0);
+			$make_id = round($_POST["make_id"], 0);
+			$photocategoryid = round($_POST["photocategoryid"], 0);
+			echo $modelclass->model_image_display_list($ms, $make_id, $photocategoryid);
+		}
+		
+		if ($inoption == 2){
+			//model image delete
+			$imid = $_POST["imid"];
+			$modelclass->delete_model_image_ajax_call($imid);					
+			echo 'y';
+		}
+		
+		if ($inoption == 3){
+			//model image sort
+			$modelclass->update_model_image_rank();
+		}
+		
+		if ($inoption == 4){
+			//model image rotate
+			echo $modelclass->rotate_model_image();
+		}
+		
+		if ($inoption == 5){
+			//model image - remove original
+			echo $modelclass->remove_original_model_image();
+		}
+	}
 }
 ?>

@@ -1,8 +1,38 @@
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 seconds"
+  ExpiresByType text/html "access plus 1 seconds"
+  ExpiresByType image/gif "access plus 120 minutes"
+  ExpiresByType image/jpeg "access plus 120 minutes"
+  ExpiresByType image/png "access plus 120 minutes"
+  ExpiresByType text/css "access plus 60 minutes"
+  ExpiresByType text/javascript "access plus 60 minutes"
+  ExpiresByType application/x-javascript "access plus 60 minutes"
+  ExpiresByType text/xml "access plus 60 minutes"
+</IfModule>
+
+#Begin gzip and deflate
+<IfModule mod_deflate.c>
+	SetOutputFilter DEFLATE
+	SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|ico|png)$ \ no-gzip dont-vary
+	SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ \no-gzip dont-vary
+	SetEnvIfNoCase Request_URI \.pdf$ no-gzip dont-vary
+
+	BrowserMatch ^Mozilla/4 gzip-only-text/html
+	BrowserMatch ^Mozilla/4\.0[678] no-gzip
+	BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+</IfModule>
+
 # 1 Month for most static assets
 <filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
 Header set Cache-Control "max-age=2592000, public"
 </filesMatch>
 RewriteEngine On
+
+#Analytics Permissions Redirect
+RewriteCond %{HTTP_HOST} !^$
+RewriteRule ^analytics.txt analytics.php [R=301,L]
+
 SetEnvIfNoCase User-Agent '^libwww-perl*' block_bad_bots
 Deny from env=block_bad_bots
 RewriteBase /
@@ -90,7 +120,7 @@ RewriteCond %{HTTP_USER_AGENT} ^LexiBot [OR]
 RewriteCond %{HTTP_USER_AGENT} ^lftp [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Link*Sleuth [OR]
 RewriteCond %{HTTP_USER_AGENT} ^likse [OR]
-RewriteCond %{HTTP_USER_AGENT} ^Link [OR]
+# RewriteCond %{HTTP_USER_AGENT} ^Link [OR]
 RewriteCond %{HTTP_USER_AGENT} ^LinkWalker [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Mag-Net [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Magnet [OR]
@@ -189,8 +219,8 @@ RewriteCond %{HTTP_USER_AGENT} ^Zeus.*Webster [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Zeus
 
 RewriteRule ^.* - [F,L]
-RewriteCond %{HTTP_REFERER} ^http://ngyachting.com$
-RewriteRule !^https://[^/.]\.ngyachting.com.* - [F,L]
+RewriteCond %{HTTP_REFERER} ^https://www.ngyachting.com$
+RewriteRule !^https://[^/.]\.www.ngyachting.com.* - [F,L]
 
 <Files ~ '^\.ht'>
 Order allow,deny
@@ -308,6 +338,7 @@ RewriteRule ^common-feedback(/)?$ index.php?templateseo=common-feedback&popp=1 [
 RewriteRule ^company-broker-map(/)?$ index.php?templateseo=company-broker-map&popp=1&%{QUERY_STRING} [L]
 RewriteRule ^contact-broker(/)?$ index.php?templateseo=contact-broker&popp=1&%{QUERY_STRING} [L]
 RewriteRule ^contact-model(/)?$ index.php?templateseo=contact-model&popp=1&%{QUERY_STRING} [L]
+RewriteRule ^contact-model-local(/)?$ index.php?templateseo=contact-model-local&popp=1&%{QUERY_STRING} [L]
 RewriteRule ^contact-resource(/)?$ index.php?templateseo=contact-resource&popp=1&%{QUERY_STRING} [L]
 RewriteRule ^emailsearch(/)?$ index.php?templateseo=emailsearch&popp=1&%{QUERY_STRING} [L]
 RewriteRule ^pop-login(/)?$ index.php?templateseo=login&popp=1&%{QUERY_STRING} [L]
@@ -328,14 +359,11 @@ RewriteRule ^mkt-campaign-creator(/)?$ index.php?templateseo=mkt-campaign-creato
 RewriteRule ^mkt-custom-slideshow(/)?$ index.php?templateseo=mkt-custom-slideshow [L]
 RewriteRule ^customboatslideshow/([^/\.]+)/?$ index.php?templateseo=customboatslideshow&slideshowcode=$1&nohead=3 [L]
 RewriteRule ^boat-watcher-broker(/)?$ index.php?templateseo=boat-watcher-broker [L]
+RewriteRule ^boatmodel/([^/\.]+)/?$ index.php?templateseo=boatmodeldetails&slug=$1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)(/?)$ index.php?pageslug=$1&%{QUERY_STRING} [L]
-
-#CDN redirect
-RewriteCond %{REQUEST_URI} /yachtimage
-RewriteRule ^yachtimage/(\d{4})/(.*)/(.*)$ https://imgchk.yachtcloser.com/v1/feedImageCDN/ngyachting.com/$1/$2/$3 [R=301,L]
 
 ErrorDocument 404 /
 ErrorDocument 403 /index.php?templateseo=403

@@ -34,6 +34,7 @@ $(document).ready(function(){
 		az:25
 	},
 	function(data){
+		alert(data);
 		data = $.parseJSON(data);
 		displaytext = data.displaytext;
 		$(".waitmessage").html("<p>" + displaytext + "</p>");

@@ -70,8 +70,10 @@ class Emailclass {
 	 /*print $mail_to;
 	 print $mail_cc;
 	 print $mail_txt;
+	 print $mail_subject;
 	 exit;*/
-//collect email settings
+
+	//collect email settings
 	 $emailsend_option = $cm->get_common_field_name('tbl_email_settings', 'setvalue', 1);
 	 if ($emailsend_option == 2){
 		 //smtp email

@@ -99,7 +99,7 @@ class Commonclass {
 	public $maxboatcompare = 5;
 	public $max_upload_size_form = 10;
 	public $googlemapkey = "AIzaSyAlJl6Onr8SDkBtlUuXuW3gCg0BYMRsEPY";
-	public $geocodingkey = "AIzaSyCA0FeNzWGdbVBHvBr8dszp672DERvZxfU";
+	public $geocodingkey = "AIzaSyAlJl6Onr8SDkBtlUuXuW3gCg0BYMRsEPY"; //AIzaSyCA0FeNzWGdbVBHvBr8dszp672DERvZxfU
 	
 	public function __construct() {
 		$this->sitename = $this->get_systemvar('COMNM');
@@ -704,7 +704,10 @@ class Commonclass {
       }elseif ($pagetype == "customboatslideshow"){
           $ret_url = $this->folder_for_seo . "customboatslideshow/" . $checkid . "/";
 
-      }elseif ($pagetype == "page"){
+      }elseif ($pagetype == "boatmodel"){
+			$pagename = $this->serach_url_filtertext($checkid);
+			$ret_url = $this->folder_for_seo."boatmodel/" . $pagename . "/";		  
+	  	}elseif ($pagetype == "page"){
 	  	  $pagedet_ar = $this->get_table_fields('tbl_page', 'page_type, int_page_id, int_page_tp, pgnm, page_url, doc_name, only_menu', $checkid);
 		  $pagedet_ar = (object)$pagedet_ar[0];
 		  
@@ -1152,12 +1155,12 @@ class Commonclass {
 	}
 	
 	public function session_field_talk_to_specialist(){
-		$datastring = "name,email,phone";
+		$datastring = "name,email,phone,preferred_date,preferred_time";
 		return $datastring;
 	}
 	
 	public function session_field_ask_for_brochure(){
-		$datastring = "name,email,phone";
+		$datastring = "name,email,phone,model_id";
 		return $datastring;
 	}
 	
@@ -1416,10 +1419,10 @@ class Commonclass {
         }		
 		if ($template == 1){
 			//$returntext = '<li><a title="Facebook Share" href="http://www.facebook.com/sharer.php?s=100&p[title]='. urlencode($title) .'&p[summary]='. urlencode($content) .'&p[url]='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/facebook.png" alt=""></a></li>';
-			$returntext = '<li><a title="Facebook Share" href="https://www.facebook.com/sharer/sharer.php?u='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/facebook.png" alt=""></a></li>';
+			$returntext = '<li><a title="Facebook Share" href="https://www.facebook.com/sharer/sharer.php?u='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/facebook.png" alt="Facebook"></a></li>';
 		}else{
 			//$returntext = '<a title="Facebook Share" href="http://www.facebook.com/sharer.php?s=100&p[title]='. urlencode($title) .'&p[summary]='. urlencode($content) .'&p[url]='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-facebook-square"></i>';
-			$returntext = '<a title="Facebook Share" href="https://www.facebook.com/sharer/sharer.php?u='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-facebook-square"></i></a>';
+			$returntext = '<a title="Facebook Share" href="https://www.facebook.com/sharer/sharer.php?u='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-facebook-square"></i><span class="com_none">Facebook</span></a>';
 		}		
         
         return $returntext;
@@ -1435,9 +1438,9 @@ class Commonclass {
 		//end
 		
 		if ($template == 1){
-			 $returntext = '<li><a title="Google + Share" href="https://plusone.google.com/_/+1/confirm?hl=en&url='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/googleplus.png" alt=""></a></li>';
+			 $returntext = '<li><a title="Google + Share" href="https://plusone.google.com/_/+1/confirm?hl=en&url='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/googleplus.png" alt="Google Plus"></a></li>';
 		}else{
-			 $returntext = '<a title="Google + Share" href="https://plusone.google.com/_/+1/confirm?hl=en&url='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-google-plus-g"></i></a>';
+			 $returntext = '<a title="Google + Share" href="https://plusone.google.com/_/+1/confirm?hl=en&url='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-google-plus-g"></i><span class="com_none">Google Plus</span></a>';
 		}
        
         return $returntext;
@@ -1460,9 +1463,9 @@ class Commonclass {
         }
 		
 		if ($template == 1){
-			$returntext = '<li><a title="Twitter Post" href="http://twitter.com/home?status='. urlencode($content) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/twitter.png" alt=""></a></li>';
+			$returntext = '<li><a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/twitter.png" alt="Twitter"></a></li>';
 		}else{
-			$returntext = '<a title="Twitter Post" href="http://twitter.com/home?status='. urlencode($content) .'" target="_blank"><i class="fab fa-twitter"></i></a>';
+			$returntext = '<a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'" target="_blank"><i class="fab fa-twitter"></i><span class="com_none">Twitter</span></a>';
 		}
         
         return $returntext;
@@ -1485,9 +1488,9 @@ class Commonclass {
         }
 		
 		if ($template == 1){
-			$returntext = '<li><a title="Linkedin Post" href="http://www.linkedin.com/shareArticle?mini=true&url='. urlencode($fullurl) .'&title='. urlencode($title) .'&summary='. urlencode($content) .'&source='. $this->sitename .'" target="_blank"><img src="'. $this->folder_for_seo .'images/linkden.png" alt=""></a></li>';
+			$returntext = '<li><a title="Linkedin Post" href="https://www.linkedin.com/shareArticle?mini=true&url='. urlencode($fullurl) .'&title='. urlencode($title) .'&summary='. urlencode($content) .'&source='. $this->sitename .'" target="_blank"><img src="'. $this->folder_for_seo .'images/linkden.png" alt="Linkedin"></a></li>';
 		}else{
-			$returntext = '<a title="Linkedin Post" href="http://www.linkedin.com/shareArticle?mini=true&url='. urlencode($fullurl) .'&title='. urlencode($title) .'&summary='. urlencode($content) .'&source='. $this->sitename .'" target="_blank"><i class="fab fa-linkedin-in"></i></a>';
+			$returntext = '<a title="Linkedin Post" href="https://www.linkedin.com/shareArticle?mini=true&url='. urlencode($fullurl) .'&title='. urlencode($title) .'&summary='. urlencode($content) .'&source='. $this->sitename .'" target="_blank"><i class="fab fa-linkedin-in"></i><span class="com_none">Linkedin</span></a>';
 		}
 		
         return $returntext;
@@ -1510,9 +1513,9 @@ class Commonclass {
 		$image = $this->site_url . '/yachtimage/'. $listing_no .'/bigger/'.$image;
         
 		if ($template == 1){
-			$returntext = '<li><a title="Pinterest Post" href="http://pinterest.com/pin/create/button/?url='. urlencode($fullurl) .'&media='. urlencode($image) .'&description='. urlencode($title) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/pinterest.png" alt=""></a></li>';
+			$returntext = '<li><a title="Pinterest Post" href="https://pinterest.com/pin/create/button/?url='. urlencode($fullurl) .'&media='. urlencode($image) .'&description='. urlencode($title) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/pinterest.png" alt="Pinterest"></a></li>';
 		}else{
-			$returntext = '<a title="Pinterest Post" href="http://pinterest.com/pin/create/button/?url='. urlencode($fullurl) .'&media='. urlencode($image) .'&description='. urlencode($title) .'" target="_blank"><i class="fab fa-pinterest-p"></i></a>';
+			$returntext = '<a title="Pinterest Post" href="https://pinterest.com/pin/create/button/?url='. urlencode($fullurl) .'&media='. urlencode($image) .'&description='. urlencode($title) .'" target="_blank"><i class="fab fa-pinterest-p"></i><span class="com_none">Pinterest</span></a>';
 		}
 		
         return $returntext;
@@ -1523,10 +1526,15 @@ class Commonclass {
 			$imageurl = $this->site_url . "/images/logoshare.png";
 		}
 		$returntext = '
-		  <meta property="og:title" content="'. $title .'" />
-		  <meta property="og:description" content="'. $content .'" />
-		  <meta property="og:url" content="'. $fullurl .'" />
-		  <meta property="og:image" content="'. $imageurl .'" />	  
+		<meta property="og:title" content="'. $title .'" />
+		<meta property="og:description" content="'. $content .'" />
+		<meta property="og:url" content="'. $fullurl .'" />
+		<meta property="og:image" content="'. $imageurl .'" />
+		
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:description" content="'. $content .'" />
+		<meta name="twitter:title" content="'. $title .'" />
+		<meta name="twitter:image" content="'. $imageurl .'" />	  
 		';				
 		return $returntext;
 	}
@@ -1872,5 +1880,26 @@ class Commonclass {
 				
 		return $returntext;
     }
+
+	//Is mobile
+	public function isMobileDevice(){
+		$aMobileUA = array(
+			'/iphone/i' => 'iPhone', 
+			'/ipod/i' => 'iPod', 
+			'/ipad/i' => 'iPad', 
+			'/android/i' => 'Android', 
+			'/blackberry/i' => 'BlackBerry', 
+			'/webos/i' => 'Mobile'
+		);
+	
+		//Return true if Mobile User Agent is detected
+		foreach($aMobileUA as $sMobileKey => $sMobileOS){
+			if(preg_match($sMobileKey, $_SERVER['HTTP_USER_AGENT'])){
+				return true;
+			}
+		}
+		//Otherwise return false..  
+		return false;
+	}
 }
 ?>

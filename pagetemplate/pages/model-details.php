@@ -60,8 +60,8 @@ if ($model_template_id == 5){
 		echo '
 		<div class="model-button clearfixmain">
 			<ul>
-				<li><a href="'. $cm->get_page_url(0, "pop-trade-in-welcome") .'" class="button afterarrow buttonstyle2 commonpop" data-fancybox-type="iframe">Trade-in Welcome</a></li>
-				<li><a href="'. $cm->get_page_url(0, "pop-talk-to-specialist") .'?make_id='. $makeid .'" class="button afterarrow commonpop" data-fancybox-type="iframe">Talk to a Specialist</a></li>
+				<li><a href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-trade-in-welcome") .'" class="button afterarrow buttonstyle2 commonpop" data-type="iframe">Trade-in Welcome</a></li>
+				<li><a href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-talk-to-specialist") .'?make_id='. $makeid .'" class="button afterarrow commonpop" data-type="iframe">Talk to a Specialist</a></li>
 			</ul>
 		</div>
 		';

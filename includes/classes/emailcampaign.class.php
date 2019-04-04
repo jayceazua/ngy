@@ -866,7 +866,7 @@ class Emailcampaignclass {
 					$broker_fname = $broker_ar[0]["fname"];
 					$broker_lname = $broker_ar[0]["lname"];
 					$phone = $broker_ar[0]["phone"];
-					$broker_name = $broker_fname . "" . $broker_lname;					
+					$broker_name = $broker_fname . " " . $broker_lname;					
 					
 					$broker_ad_ar = $yachtclass->get_broker_address_array($broker_id);		
 					$officephone = $broker_ad_ar["phone"];

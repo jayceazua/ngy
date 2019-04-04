@@ -17,6 +17,7 @@ require_once("../includes/classes/email.class.php");
 require_once("../includes/classes/template.class.php");
 require_once("../includes/classes/ym.class.php");
 require_once("../includes/classes/make.class.php");
+require_once("../includes/classes/model.class.php");
 require_once("../includes/classes/boattype.class.php");
 require_once("../includes/classes/emailcampaign.class.php");
 require_once("../includes/classes/slideshow.class.php");
@@ -41,6 +42,7 @@ $sdeml = new Emailclass();   //******************  Email class
 $templateclass = new Templateclass();   //******************  Template class
 $ymclass = new Ymclass();   //******************  YM class
 $makeclass = new Makeclass();   //******************  Make class
+$modelclass = new Modelclass();   //******************  Model class
 $boattypeclass = new BoatTypeclass();   //******************  Boat Type class
 $slideshowclass = new Slideshowclass();   //******************  Slideshow class
 $emailcampaignclass = new Emailcampaignclass();   //******************  Email campaign class

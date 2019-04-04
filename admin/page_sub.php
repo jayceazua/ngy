@@ -48,7 +48,7 @@ if ($custom_make_id > 0 OR $custom_condition_id > 0 OR $custom_category_id > 0 O
 	}elseif ($custom_owned == 3){
 		$sp_typeid = 2;
 		$custom_owned = 2;
-	}else{
+	}elseif ($custom_owned == 1){
 		if ($custom_type_id == $yachtclass->catamaran_id){
 			$sp_typeid = 2;
 		}else{

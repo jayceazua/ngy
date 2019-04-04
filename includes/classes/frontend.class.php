@@ -302,9 +302,11 @@ class Frontendclass {
 				$socialmedia_class = "snapchat-ghost";
 			}
 			
-			$social_tag = '';
+			//$social_tag = '';
 			if ($displaytitle == 1){
 				$social_tag = $socialmedia_name;
+			}else{
+				$social_tag = '<span class="com_none">'. $socialmedia_name . '</span>';
 			}
 			
 			if ($socialmedia_url != "#"){
@@ -395,11 +397,15 @@ class Frontendclass {
 		$returntext = '
 		<h1 class="com_none">'. $companyname .'</h1>
 		'. $blanktop_text .'
+		
+		<div class="header_left"><a href="'. $cm->site_url .'" title="'. $companyname .'"><img src="'. $cm->folder_for_seo .'images/logo.png" alt="'. $companyname .'" /></a></div>
+		'. $this->get_top_right_menu($loggedin_member_id) .'
+		<div class="header-search-button"><a class="header-search-button-link" href="javascript:void(0);"><span class="com_none">Search</span></a></div> 
+				
+		
 		<div class="fcheader header'. $headerbgclass .' clearfixmain">
-			<div class="container clearfixmain">
-				<div class="header_left"><a href="'. $cm->site_url .'" title="'. $companyname .'"><img src="'. $cm->folder_for_seo .'images/logo.png" alt="'. $companyname .'" /></a></div>
-				'. $this->display_top_navigation($loggedin_member_id) .'
-				'. $this->get_top_right_menu($loggedin_member_id) .'
+			<div class="container clearfixmain">				
+				'. $this->display_top_navigation($loggedin_member_id) .'				
 			</div>
 		</div>
 		';		
@@ -469,31 +475,26 @@ class Frontendclass {
 			}
 			
 			$returntext = '
-			<div class="signin-register-link clearfixmain">
-				<div class="after-login">
-					<a href="javascript:void(0);" class="user"><span class="thumb"><img src="'. $cm->folder_for_seo .'userphoto/'. $member_image .'" alt=""></span></a>
-					<ul>
-						'. $backend_access_text .'
-						<li><a href="'. $cm->folder_for_seo .'dashboard/" class="icon-agent">Dashboard</a></li>
-						<li><a href="'. $cm->folder_for_seo .'searches/" class="icon-search">Your searches</a></li>
-						<li><a href="'. $cm->folder_for_seo .'favorites/" class="icon-heart">Your favorites</a></li>
-						<li><a href="'. $cm->folder_for_seo .'editprofile/" class="icon-tools">Edit Profile</a></li>
-						<li><a href="'. $cm->folder_for_seo .'logout/" class="icon-login">Sign out</a></li>
-					</ul>
-				</div>				
+			<div class="header-login-button after-login clearfixmain">
+				<a href="javascript:void(0);" class="header-login-button-link-afterlogin user"><span class="thumb"><img src="'. $cm->folder_for_seo .'userphoto/'. $member_image .'" alt=""></span></a>
+				<ul>
+					'. $backend_access_text .'
+					<li><a href="'. $cm->folder_for_seo .'dashboard/" class="icon-agent">Dashboard</a></li>
+					<li><a href="'. $cm->folder_for_seo .'searches/" class="icon-search">Your searches</a></li>
+					<li><a href="'. $cm->folder_for_seo .'favorites/" class="icon-heart">Your favorites</a></li>
+					<li><a href="'. $cm->folder_for_seo .'editprofile/" class="icon-tools">Edit Profile</a></li>
+					<li><a href="'. $cm->folder_for_seo .'logout/" class="icon-login">Sign out</a></li>
+				</ul>			
 			</div>	
 			';
 		}else{
 			$returntext = '
-			<div class="signin-register-link clearfixmain">
-				<div class="after-login">
-					<a href="javascript:void(0);" class="user"><span class="thumb"><img src="'. $cm->folder_for_seo .'userphoto/no.png" alt=""></span></a>					
-					<ul>
-						<li><a href="'. $cm->get_page_url(0, "login") .'" class="icon-login">Login</a></li>
-						<li><a href="'. $cm->get_page_url(0, "register") .'" class="icon-agent">Register</a></li>
-					</ul>
-				</div>
-				<div class="after-login-extra"><a href="'. $cm->get_page_url(0, "login") .'">Login</a></div>				
+			<div class="header-login-button after-login clearfixmain">
+				<a class="header-login-button-link" href="'. $cm->get_page_url(0, "login") .'"><span class="com_none">Login</span></a>				
+				<ul>
+					<li><a href="'. $cm->get_page_url(0, "login") .'" class="icon-login">Login</a></li>
+					<li><a href="'. $cm->get_page_url(0, "register") .'" class="icon-agent">Register</a></li>
+				</ul>							
 			</div>	
 			';
 		}
@@ -741,6 +742,7 @@ class Frontendclass {
 				}
 				
 				$returntext .= '<li><a href="'. $ss_lnk_url .'"'. $ss_link_target .'>'. $ss_extraclass_text . $ss_name .'</a></li>';
+				
 			}
 			$returntext .= '</ol>';
 		}
@@ -758,10 +760,12 @@ class Frontendclass {
 		
 		if ($mnid == 40){
 			$menusectiontag = 'Yachts';
+			$menusectiontag2 = 'Yachts';
 			$feacat = 1;
 			$featuredboat_url = $cm->get_page_url(16, "page");
 		}elseif ($mnid == 36){
 			$menusectiontag = 'Catamarans';
+			$menusectiontag2 = 'Constructions';
 			$featuredboat_url = $cm->get_page_url(65, "page");
 			$feacat = 2;
 		}else{
@@ -869,7 +873,7 @@ class Frontendclass {
 					</div>
 					
 					<div class="cols_menu_after">
-						'. $this->top_menu_section_display(array("submenusection" => $submenusection, "menusectiontag" => $menusectiontag, "feacat" => $feacat, "featuredboat_url" => $featuredboat_url)) .'
+						'. $this->top_menu_section_display(array("submenusection" => $submenusection, "menusectiontag" => $menusectiontag, "menusectiontag2" => $menusectiontag2, "feacat" => $feacat, "featuredboat_url" => $featuredboat_url)) .'
 					</div>
 					
 				</li>
@@ -887,6 +891,7 @@ class Frontendclass {
 		//param
 		$submenusection = $param["submenusection"];
 		$menusectiontag = $param["menusectiontag"];
+		$menusectiontag2 = $param["menusectiontag2"];
 		$feacat = $param["feacat"];
 		$featuredboat_url = $param["featuredboat_url"];		
 		//end
@@ -959,7 +964,7 @@ class Frontendclass {
 					<h3>Featured '. $menusectiontag .'</h3>
 					<div class="menuboatimg clearfixmain">'. $custom_label_txt .'<a class="imgbox" href="'. $details_url .'"><img src="'. $cm->folder_for_seo . $imagefolder . $ppath .'" alt="'. $imgalt .'"></a></div>
 					<a href="'. $details_url .'">'. $name .'</a>
-					<a href="'. $featuredboat_url .'"><strong>See All</strong></a>
+					<a href="'. $featuredboat_url .'" class="button">See All</a>
 				</div>
 				';
 			}
@@ -1065,10 +1070,10 @@ class Frontendclass {
 					
 				$returntext .= '
 				<div class="cols2">                        	
-					<h3>New '. $menusectiontag .'</h3>
+					<h3>New '. $menusectiontag2 .'</h3>
 					<div class="menuboatimg clearfixmain"><a class="imgbox" href="'. $go_url .'"><img src="'. $cm->folder_for_seo .'menuboximage/'. $imagepath .'" alt="'. $name .'"></a></div>
 					<a href="'. $go_url .'">'. $name .'</a>
-					<a href="'. $go_url2 .'"><strong>See All</strong></a>
+					<a href="'. $go_url2 .'" class="button">See All</a>
 				</div>
 				';
 			}
@@ -1379,8 +1384,7 @@ class Frontendclass {
 			<div class="container clearfixmain">
 				<ul class="footerbox">
 					<li>Copyright &copy; '. date("Y") .'</li>
-					<li><a href="'. $cm->get_page_url(42, "page").'">Terms and Conditions</a>  |  <a class="fc-open-contact" href="javascript:void(0);">Contact Us</a></li>
-					<li>Powered by <a href="http://www.yachtcloser.com" target="_blank">YachtCloser</a></li>
+					<li><a href="'. $cm->get_page_url(42, "page").'">Terms and Conditions</a>  |  <a class="fc-open-contact" href="javascript:void(0);">Contact Us</a></li>					
 				</ul>
 			</div>
 		</div>		
@@ -1575,7 +1579,7 @@ class Frontendclass {
 				
 				if ($s == 1){
 					
-					$poster_data = '<span class="postcolor1">' . $name . '</span>, ';
+					$poster_data = '<span class="postcolor1">'. $name .'</span>, ';
 					if ($designation != ""){
 						$poster_data .= $designation . ', ';
 					}
@@ -1875,7 +1879,7 @@ class Frontendclass {
                     ${$key} = $cm->filtertextdisplay(($val));
                 }
 				$reg_date_d = $cm->display_date($reg_date, 'y', 9);
-				$poster_data = '<span class="testi-author">' . $name . '</span>, ';
+				$poster_data = '<span class="testi-author">'. $name .'</span>, ';
 				if ($designation != ""){
 					$poster_data .= $designation . ', ';
 				}
@@ -1893,7 +1897,7 @@ class Frontendclass {
 				
 				if ($imgpath != ""){ 
 					$imagefolder = 'testimonialimage/';
-					$imagedata = $startlink . '<img src="'. $cm->folder_for_seo . $imagefolder . $imgpath .'" alt="">' . $endlink;
+					$imagedata = $startlink . '<img src="'. $cm->folder_for_seo . $imagefolder . $imgpath .'" alt="'. $name .'">' . $endlink;
 					$testimonialcontent = '
 					<div class="edimgleft testimonialimage">'. $imagedata .'</div>
 					<div class="edcontentright">						
@@ -2122,30 +2126,31 @@ class Frontendclass {
 		$returntext = '
 		<div class="singleblock_box">
 			<form method="post" action="'. $cm->folder_for_seo .'" id="testimonial-ff" name="testimonial-ff" enctype="multipart/form-data">
-			<input class="finfo" id="email2" name="email2" type="hidden" />
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
 			<input type="hidden" id="fcapi" name="fcapi" value="testimonialform" />
 			
 			<ul class="form">				           
 				<li class="left">
-					<p>Name <span class="requiredtext">*</span></p>
+					<p><label for="name">Name</label> <span class="requiredtext">*</span></p>
 					<input type="text" class="input" id="name" name="name" value="'. $name .'" />
 				</li>
 				<li class="right">
-					<p>Designation</p>
+					<p><label for="designation">Designation</label></p>
 					<input type="text" class="input" id="designation" name="designation" value="'. $designation .'" />
 				</li>
 				
 				<li class="left">
-					<p>Company Name</p>
+					<p><label for="company_name">Company Name</label></p>
 					<input type="text" class="input" id="company_name" name="company_name" value="'. $company_name .'" />
 				</li>
 				<li class="right">
-					<p>Website URL</p>
+					<p><label for="website_url">Website URL</label></p>
 					<input type="text" class="input" id="website_url" name="website_url" value="'. $website_url .'" />
 				</li>
 				
 				<li class="left">
-					<p>Select Image [w: '. $cm->testimonial_im_width .'px, h: '. $cm->testimonial_im_height .'px]</p>
+					<p><label for="testimonial_imgpath">Select Image [w: '. $cm->testimonial_im_width .'px, h: '. $cm->testimonial_im_height .'px]</label></p>
 					<input validval="'. $cm->allow_image_ext .'" type="file" id="testimonial_imgpath" name="testimonial_imgpath" class="input" />
 					<p>[Allowed file types: '. $cm->allow_image_ext .']</p>
 				</li>
@@ -2153,7 +2158,7 @@ class Frontendclass {
 		   
 		   <ul class="form">		
 				<li>
-					<p>Comments <span class="requiredtext">*</span></p>
+					<p><label for="message">Comments</label> <span class="requiredtext">*</span></p>
 					<textarea rows="1" cols="1" id="message" name="message" class="comments">'. $message .'</textarea>
 				</li>
 				
@@ -2372,9 +2377,9 @@ class Frontendclass {
 				
 				$returntext .= '--><li><a href="'. $go_url .'">
 				<article class="caption">
-					<img class="caption__media" src="'. $cm->folder_for_seo .'homeboximage/'. $imagepath .'" />
+					<img alt="'. $name .'" class="caption__media" src="'. $cm->folder_for_seo .'homeboximage/'. $imagepath .'" />
 					<div class="caption__overlay">
-						<div class="caption__overlay__title"><img src="'. $cm->folder_for_seo .'homeboximage/logo'. $id .'.png" /></div>
+						<div class="caption__overlay__title"><img alt="'. $name .' Logo" src="'. $cm->folder_for_seo .'homeboximage/logo'. $id .'.png" /></div>
 						<p class="caption__overlay__content">
 							'. $description .'
 						</p>
@@ -2434,7 +2439,7 @@ class Frontendclass {
 			$brokername = $fname .' '. $lname;
 
 			$gaeventtracking = $yachtclass->google_event_tracking_code('broker', $brokername);
-			$buttontext .= '<div class="buttonlink clearfixmain"><a '.$gaeventtracking.' href="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $int_page_id .'" class="contactbroker button requestprice arrow" data-fancybox-type="iframe">Begin to Create</a></div>';
+			$buttontext .= '<div class="buttonlink clearfixmain"><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $int_page_id .'" class="contactbroker button requestprice arrow" data-type="iframe">Begin to Create</a></div>';
 		}
 		
 		$returntext .= '
@@ -2548,9 +2553,9 @@ class Frontendclass {
 					
 				$returntext .= '--><li><a href="'. $go_url .'">
 				<article class="caption">
-					<img class="caption__media" src="'. $cm->folder_for_seo .'brandboximage/'. $imagepath .'" />
+					<img alt="'. $name .'" class="caption__media" src="'. $cm->folder_for_seo .'brandboximage/'. $imagepath .'" />
 					<div class="caption__overlay">
-						<div class="caption__overlay__title"><img src="'. $cm->folder_for_seo .'brandboximage/logo'. $id .'.png" /></div>
+						<div class="caption__overlay__title"><img alt="'. $name .' Logo" src="'. $cm->folder_for_seo .'brandboximage/logo'. $id .'.png" /></div>
 						<p class="caption__overlay__content">
 							'. $description .'
 						</p>
@@ -2814,7 +2819,7 @@ class Frontendclass {
 				<div id="mc_embed_signup_scroll"> 		
 						
 					<ul class="newsletterforpage clearfixmain">					
-						<li><input type="email" value="" name="EMAIL" class="input required email" id="mce-EMAIL" placeholder="Enter your Email"></li>
+						<li><label class="com_none" for="mce-EMAIL">Email</label><input type="email" value="" name="EMAIL" class="input required email" id="mce-EMAIL" placeholder="Enter your Email"></li>
 						<li><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></li>
 				   </ul>
 				   <div class="clear"></div>
@@ -2825,7 +2830,8 @@ class Frontendclass {
 					</div> 
 					<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 					<div style="position: absolute; left: -5000px;" aria-hidden="true">
-					<input type="text" name="b_de6006c711080e85329f32c9b_62f50a8e95" tabindex="-1" value="">
+					<label class="com_none" for="b_de6006c711080e85329f32c9b_62f50a8e95">Id</label>
+					<input type="text" id="b_de6006c711080e85329f32c9b_62f50a8e95" name="b_de6006c711080e85329f32c9b_62f50a8e95" tabindex="-1" value="">
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -4446,8 +4452,8 @@ class Frontendclass {
 		$f_pdata = $cm->passed_content_for_shortcode($f_pdata);
 		
 		$returntext = '
-		<div id="overlay" class="animated hide">
-			<a class="fc-close-contact" c="overlay" href="javascript:void(0);"><i class="fas fa-times"></i></a>
+		<div id="overlay" class="animated popcontact hide">
+			<a class="fc-close-contact" c="overlay" href="javascript:void(0);"><i class="fas fa-times"></i><span class="com_none">Close</span></a>
 			'. $f_pdata .'
 		</div>
 		';
@@ -4531,9 +4537,10 @@ class Frontendclass {
 		
 		$formstart = '
 		<form method="post" action="'. $cm->folder_for_seo .'" id="contact_ff" name="con_ff">
+		<label class="com_none" for="email2con">email2</label>
 		<input type="hidden" value="'. $shortversion .'" id="shortversion" name="shortversion" />
 		<input type="hidden" value="'. $pgid .'" id="pgid" name="pgid" />
-		<input class="finfo" id="email2" name="email2" type="hidden" />
+		<input class="finfo" id="email2con" name="email2" type="text" />
 		<input type="hidden" id="fcapi" name="fcapi" value="contactform" />
 		';
 		
@@ -4545,23 +4552,28 @@ class Frontendclass {
 			
 			<ul class="form">
 				<li>
-					<input type="text" id="name" name="name" value="'. $name .'" placeholder="Your Name" title="Enter Your Name" class="input nameicon" />
+					<label class="com_none" for="con_name">Name</label>
+					<input type="text" id="con_name" name="name" value="'. $name .'" placeholder="Your Name" title="Enter Your Name" class="input nameicon" />
 				</li>
 				
 				<li>
-					<input type="text" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" class="input phoneicon" />
+					<label class="com_none" for="con_phone">Phone</label>
+					<input type="text" id="con_phone" name="phone" value="'. $phone .'" placeholder="Phone" class="input phoneicon" />
 				</li>
 				
 				<li>
-					<input type="text" id="email" name="email" value="'. $email .'" placeholder="Email" class="input emailicon" />
+					<label class="com_none" for="con_email">Email</label>
+					<input type="text" id="con_email" name="email" value="'. $email .'" placeholder="Email" class="input emailicon" />
 				</li>
 				
 				<li>
-					<input type="text" id="contact_subject" name="contact_subject" value="'. $contact_subject .'" placeholder="Subject" class="input subjecticon" />
+					<label class="com_none" for="con_contact_subject">Contact Subject</label>
+					<input type="text" id="con_contact_subject" name="contact_subject" value="'. $contact_subject .'" placeholder="Subject" class="input subjecticon" />
 				</li>
 				
 				<li>					
-					<textarea name="message" id="message" rows="1" cols="1" placeholder="Comments" class="comments commenticon">'. $message .'</textarea>
+					<label class="com_none" for="con_message">Comments</label>
+					<textarea name="message" id="con_message" rows="1" cols="1" placeholder="Comments" class="comments commenticon">'. $message .'</textarea>
 				</li>
 				
 				<li>'. $captchaclass->call_captcha(). '</li>
@@ -4585,13 +4597,14 @@ class Frontendclass {
 				<h3>Online Inquiry</h3>
 				<div class="rowflex">
 					<div class="col-50 pr-3">
-						<input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name *" />
-						<input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone *" />
-						<input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email *" />
-						<input type="text" class="input" id="contact_subject" name="contact_subject" value="'. $contact_subject .'" placeholder="Subject *" />
+						<label class="com_none" for="con_name">Name</label><input type="text" class="input" id="con_name" name="name" value="'. $name .'" placeholder="Name *" />
+						<label class="com_none" for="con_phone">Phone</label><input type="text" class="input" id="con_phone" name="phone" value="'. $phone .'" placeholder="Phone *" />
+						<label class="com_none" for="con_email">Email</label><input type="text" class="input" id="con_email" name="email" value="'. $email .'" placeholder="Email *" />
+						<label class="com_none" for="con_contact_subject">Contact Subject</label><input type="text" class="input" id="con_contact_subject" name="contact_subject" value="'. $contact_subject .'" placeholder="Subject" />
 					</div>
 					<div class="col-50">
-						<textarea rows="1" cols="1" id="message" name="message" class="comments" placeholder="Comments *">'. $message .'</textarea>
+						<label class="com_none" for="con_message">Comments</label>
+						<textarea rows="1" cols="1" id="con_message" name="message" class="comments" placeholder="Comments *">'. $message .'</textarea>
 						
 						<div>'. $captchaclass->call_captcha(). '</div>
 						
@@ -4608,29 +4621,29 @@ class Frontendclass {
 					
 					<ul class="form">				          
 						<li>
-							<p>Name <span class="requiredtext">*</span></p>
-							<input type="text" class="input" id="name" name="name" value="'. $name .'" />
+							<p><label for="con_name">Name</label> <span class="requiredtext">*</span></p>
+							<input type="text" class="input" id="con_name" name="name" value="'. $name .'" />
 						</li>
 						
 						<li>
-							<p>Phone <span class="requiredtext">*</span></p>
-							<input type="text" class="input" id="phone" name="phone" value="'. $phone .'" />
+							<p><label for="con_phone">Phone</label> <span class="requiredtext">*</span></p>
+							<input type="text" class="input" id="con_phone" name="phone" value="'. $phone .'" />
 						</li>
 						
 						<li>
-							<p>Email <span class="requiredtext">*</span></p>
-							<input type="text" class="input" id="email" name="email" value="'. $email .'" />
+							<p><label for="con_email">Email</label> <span class="requiredtext">*</span></p>
+							<input type="text" class="input" id="con_email" name="email" value="'. $email .'" />
 						</li>
 				
 						<li>
-							<p>Subject <span class="requiredtext">*</span></p>
-							<input type="text" class="input" id="contact_subject" name="contact_subject" value="'. $contact_subject .'" />
+							<p><label for="con_contact_subject">Subject</label></p>
+							<input type="text" class="input" id="con_contact_subject" name="contact_subject" value="'. $contact_subject .'" />
 						</li>
 						
 				
 						<li>
-							<p>Comments <span class="requiredtext">*</span></p>
-							<textarea rows="1" cols="1" id="message" name="message" class="comments">'. $message .'</textarea>
+							<p><label for="con_message">Comments</label> <span class="requiredtext">*</span></p>
+							<textarea rows="1" cols="1" id="con_message" name="message" class="comments">'. $message .'</textarea>
 						</li> 
 						
 						<li>'. $captchaclass->call_captcha(). '</li>     
@@ -4679,7 +4692,7 @@ class Frontendclass {
 			$cm->field_validation($name, '', 'Name', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($phone, '', 'Phone', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');			
-			$cm->field_validation($contact_subject, '', 'Subject', $red_pg, '', '', 1, 'fr_');
+			//$cm->field_validation($contact_subject, '', 'Subject', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($message, '', 'Comments', $red_pg, '', '', 1, 'fr_');
 
 			
@@ -4814,6 +4827,7 @@ class Frontendclass {
 		
 		$formstart = '
 		<form method="post" action="'. $cm->folder_for_seo .'" id="boatfinder-ff" name="boatfinder-ff">
+		<label class="com_none" for="email2">email2</label>
 		<input class="finfo" id="email2" name="email2" type="text" />
 		<input type="hidden" id="fcapi" name="fcapi" value="boatfinder" />		   
 		';
@@ -4828,25 +4842,25 @@ class Frontendclass {
 			<ul class="form">
 				<li><strong>My Information</strong></li>   		
 				<li>
-					<p>Name <span class="requiredfieldindicate">*</span></p>
+					<p><label for="name">Name</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="name" name="name" value="'. $name .'" class="input" />
 				</li>			
 				<li>
-					<p>City</p>
+					<p><label for="city">City</label></p>
 					<input type="text" id="city" name="city" value="'. $city .'" class="input" />
 				</li>
 				
 				<li>
-					<p>State</p>
+					<p><label for="state">State</label></p>
 					<input type="text" id="state" name="state" value="'. $state .'" class="input" />
 				</li>			
 				<li>
-					<p>Phone <span class="requiredfieldindicate">*</span></p>
+					<p><label for="phone">Phone</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
 				</li>
 				
 				<li>
-					<p>Email Address <span class="requiredfieldindicate">*</span></p>
+					<p><label for="email">Email Address</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="email" name="email" value="'. $email .'" class="input" />
 				</li>
 			</ul>
@@ -4856,11 +4870,11 @@ class Frontendclass {
 			<ul class="form">
 				<li><strong>Boat Requirements</strong></li>	   		
 				<li>
-					<p>Budget</p>
+					<p><label for="boat_budget">Budget</label></p>
 					<input type="text" id="boat_budget" name="boat_budget" value="'. $boat_budget .'" class="input" />
 				</li>
 				<li>
-					<p>Boat Category</p>
+					<p><label for="boat_category">Boat Category</label></p>
 					<select name="boat_category" id="boat_category" class="select">
 						<option value="">Select</option>
 						'.
@@ -4870,24 +4884,24 @@ class Frontendclass {
 				</li>
 				
 				<li>
-					<p>Manufacturer</p>
+					<p><label for="manufacturer">Manufacturer</label></p>
 					<input type="text" id="manufacturer" name="manufacturer" value="'. $manufacturer .'" class="input" />
 				</li>
 				<li>
-					<p>Model</p>
+					<p><label for="model">Model</label></p>
 					<input type="text" id="model" name="model" value="'. $model .'" class="input" />
 				</li>
 				
 				<li>
-					<p>Size</p>
+					<p><label for="boat_size">Size</label></p>
 					<input type="text" id="boat_size" name="boat_size" value="'. $boat_size .'" class="input" />
 				</li>
 				<li>
-					<p>Year</p>
+					<p><label for="boat_year">Year</label></p>
 					<input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
 				</li>			
 				<li>
-					<p>Special Request</p>
+					<p><label for="comments">Special Request</label></p>
 					<textarea name="comments" id="comments" rows="1" cols="1" class="comments">'. $comments .'</textarea>
 				</li>
 			</ul>
@@ -4912,15 +4926,15 @@ class Frontendclass {
 			<div class="leftrightcolsection notopborder clearfixmain">			
 			<ul class="form">
 				<li>
-					<p>Name <span class="requiredfieldindicate">*</span></p>
+					<p><label for="name">Name</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="name" name="name" value="'. $name .'" class="input" />
 				</li>
 				<li>
-					<p>Phone <span class="requiredfieldindicate">*</span></p>
+					<p><label for="phone">Phone</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
 				</li>
 				<li>
-					<p>Email Address <span class="requiredfieldindicate">*</span></p>
+					<p><label for="email">Email Address</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="email" name="email" value="'. $email .'" class="input" />
 				</li>
 			</ul>
@@ -4929,23 +4943,23 @@ class Frontendclass {
 			$returntext .= '
 			<ul class="form">
 				<li>
-					<p>Manufacturer</p>
+					<p><label for="manufacturer">Manufacturer</label></p>
 					<input type="text" id="manufacturer" name="manufacturer" value="'. $manufacturer .'" class="input" />
 				</li>
 				<li>
-					<p>Model</p>
+					<p><label for="model">Model</label></p>
 					<input type="text" id="model" name="model" value="'. $model .'" class="input" />
 				</li>
 				<li>
-					<p>Year</p>
+					<p><label for="boat_year">Year</label></p>
 					<input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
 				</li>	
 				<li>
-					<p>Budget</p>
+					<p><label for="boat_budget">Budget</label></p>
 					<input type="text" id="boat_budget" name="boat_budget" value="'. $boat_budget .'" class="input" />
 				</li>							
 				<li>
-					<p>Special Request</p>
+					<p><label for="comments">Special Request</label></p>
 					<textarea name="comments" id="comments" rows="1" cols="1" class="comments">'. $comments .'</textarea>
 				</li>
 			</ul>
@@ -4969,25 +4983,25 @@ class Frontendclass {
 			<div class="singleblock_box singleblock_box_h clearfixmain">	   
 			<ul class="form">					   		
 				<li class="left">
-					<p>Name <span class="requiredfieldindicate">*</span></p>
+					<p><label for="name">Name</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="name" name="name" value="'. $name .'" class="input" />
 				</li>			
 				<li class="right">
-					<p>City</p>
+					<p><label for="city">City</label></p>
 					<input type="text" id="city" name="city" value="'. $city .'" class="input" />
 				</li>
 				
 				<li class="left">
-					<p>State</p>
+					<p><label for="state">State</label></p>
 					<input type="text" id="state" name="state" value="'. $state .'" class="input" />
 				</li>			
 				<li class="right">
-					<p>Phone <span class="requiredfieldindicate">*</span></p>
+					<p><label for="phone">Phone</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
 				</li>
 				
 				<li class="left">
-					<p>Email Address <span class="requiredfieldindicate">*</span></p>
+					<p><label for="email">Email Address</label> <span class="requiredfieldindicate">*</span></p>
 					<input type="text" id="email" name="email" value="'. $email .'" class="input" />
 				</li>
 			</ul>
@@ -5001,11 +5015,11 @@ class Frontendclass {
 			<div class="singleblock_box singleblock_box_h clearfixmain">	   
 			<ul class="form">	   		
 				<li class="left">
-					<p>Budget</p>
+					<p><label for="boat_budget">Budget</label></p>
 					<input type="text" id="boat_budget" name="boat_budget" value="'. $boat_budget .'" class="input" />
 				</li>
 				<li class="right">
-					<p>Boat Category</p>
+					<p><label for="boat_category">Boat Category</label></p>
 					<select name="boat_category" id="boat_category" class="select">
 						<option value="">Select</option>
 						'.
@@ -5015,25 +5029,25 @@ class Frontendclass {
 				</li>
 				
 				<li class="left">
-					<p>Manufacturer</p>
+					<p><label for="manufacturer">Manufacturer</label></p>
 					<input type="text" id="manufacturer" name="manufacturer" value="'. $manufacturer .'" class="input" />
 				</li>
 				<li class="right">
-					<p>Model</p>
+					<p><label for="model">Model</label></p>
 					<input type="text" id="model" name="model" value="'. $model .'" class="input" />
 				</li>
 				
 				<li class="left">
-					<p>Size</p>
+					<p><label for="boat_size">Size</label></p>
 					<input type="text" id="boat_size" name="boat_size" value="'. $boat_size .'" class="input" />
 				</li>
 				<li class="right">
-					<p>Year</p>
+					<p><label for="boat_year">Year</label></p>
 					<input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
 				</li>
 			
 				<li>
-					<p>Special Request</p>
+					<p><label for="comments">Special Request</label></p>
 					<textarea name="comments" id="comments" rows="1" cols="1" class="comments">'. $comments .'</textarea>
 				</li>
 			</ul>
@@ -6053,6 +6067,7 @@ class Frontendclass {
 		<h2>Your Yacht Search</h2>
 		
 		<form method="post" action="'. $cm->folder_for_seo .'" id="buyer-services-ff" name="buyer-services-ff">
+		<label class="com_none" for="email2">email2</label>
 		<input class="finfo" id="email2" name="email2" type="text" />
 		<input type="hidden" id="fcapi" name="fcapi" value="buyerservicessubmit" />	
 		<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />   
@@ -6063,15 +6078,15 @@ class Frontendclass {
 			<div class="col-30 pr-2">
                 <h5 class="mb-3"><strong>CONTACT INFO:</strong></h5>                
                 <div class="rowflex mb-1">
-                    <label>Name:<span class="requiredfieldindicate">*</span></label>
+                    <label for="name">Name:<span class="requiredfieldindicate">*</span></label>
                     <input type="text" id="name" name="name" value="'. $name .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Email:<span class="requiredfieldindicate">*</span></label>
+                    <label for="email">Email:<span class="requiredfieldindicate">*</span></label>
                     <input type="text" id="email" name="email" value="'. $email .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Phone Number:</label>
+                    <label for="phone">Phone Number:</label>
                     <input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
                 </div>                
             </div>
@@ -6079,40 +6094,41 @@ class Frontendclass {
 			<div class="col-30 pr-2">
                 <h5 class="mb-3"><strong>YACHT ON TRADE:</strong></h5>                
                 <div class="rowflex mb-1">
-                    <label>Make:</label>
+                    <label for="boat_make">Make:</label>
                     <input type="text" id="boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Model:</label>
+                    <label for="boat_model">Model:</label>
                     <input type="text" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Year:</label>
+                    <label for="boat_year">Year:</label>
                     <input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
                 </div>    
                 <div class="rowflex mb-1">
-                    <label>Location:</label>
+                    <label for="boat_location">Location:</label>
                     <input type="text" id="boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
                 </div>            
             </div>
 			
 			<div class="col-30">
-            	 <h5 class="mb-3"><strong>YACHT YOU ARE LOOKING FOR:</strong></h5>
+            	<h5 class="mb-3"><strong>YACHT YOU ARE LOOKING FOR:</strong></h5>
                 <div class="rowflex mb-1">
-                    <label>Size:</label>
+                    <label for="boat_size">Size:</label>
                     <input type="text" id="boat_size" name="boat_size" value="'. $boat_size .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Ideal Brand:</label>
+                    <label for="boat_ideal_brand">Ideal Brand:</label>
                     <input type="text" id="boat_ideal_brand" name="boat_ideal_brand" value="'. $boat_ideal_brand .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Budget:</label>
+                    <label for="boat_budget">Budget:</label>
                     <input type="text" id="boat_budget" name="boat_budget" value="'. $boat_budget .'" class="input" />
                 </div>
             </div>
 		</div>
 		<p class="mb-1">Message:</p>
+		<label class="com_none" for="comments">Message</label>
 		<textarea name="comments" id="comments" class="comments" rows="1" cols="1">'. $comments .'</textarea>
 		<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
 		<div align="center"><input name="submit" type="submit" value="Search Your Yacht"></div>
@@ -6361,6 +6377,7 @@ class Frontendclass {
 		<h2>Your Boat Evaluation</h2>
 		
 		<form method="post" action="'. $cm->folder_for_seo .'" id="seller-services-ff" name="seller-services-ff">
+		<label class="com_none" for="email2">email2</label>
 		<input class="finfo" id="email2" name="email2" type="text" />
 		<input type="hidden" id="fcapi" name="fcapi" value="sellerservicessubmit" />	
 		<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />   
@@ -6371,15 +6388,15 @@ class Frontendclass {
 			<div class="col-30 pr-2">
                 <h5 class="mb-3"><strong>CONTACT INFO:</strong></h5>                
                 <div class="rowflex mb-1">
-                    <label>Name:<span class="requiredfieldindicate">*</span></label>
+                    <label for="name">Name:<span class="requiredfieldindicate">*</span></label>
                     <input type="text" id="name" name="name" value="'. $name .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Email:<span class="requiredfieldindicate">*</span></label>
+                    <label for="email">Email:<span class="requiredfieldindicate">*</span></label>
                     <input type="text" id="email" name="email" value="'. $email .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Phone Number:</label>
+                    <label for="phone">Phone Number:</label>
                     <input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
                 </div>                
             </div>
@@ -6387,15 +6404,15 @@ class Frontendclass {
 			<div class="col-30 pr-2">
                 <h5 class="mb-3"><strong>YACHT:</strong></h5>                
                 <div class="rowflex mb-1">
-                    <label>Make:</label>
+                    <label for="boat_make">Make:</label>
                     <input type="text" id="boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Model:</label>
+                    <label for="boat_model">Model:</label>
                     <input type="text" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Year:</label>
+                    <label for="boat_year">Year:</label>
                     <input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
                 </div>      
             </div>
@@ -6403,20 +6420,21 @@ class Frontendclass {
 			<div class="col-30">
             	 <h5 class="mb-3 md-none">&nbsp;</h5>
                 <div class="rowflex mb-1">
-                    <label>Engines:</label>
+                    <label for="boat_engines">Engines:</label>
                     <input type="text" id="boat_engines" name="boat_engines" value="'. $boat_engines .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Hours on Engines:</label>
+                    <label for="boat_hours_on_engines">Hours on Engines:</label>
                     <input type="text" id="boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" />
                 </div>
                 <div class="rowflex mb-1">
-                    <label>Location:</label>
+                    <label for="boat_location">Location:</label>
                     <input type="text" id="boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
                 </div>
             </div>
 		</div>
 		<p class="mb-1">Message:</p>
+		<label class="com_none" for="comments">Message</label>
 		<textarea name="comments" id="comments" class="comments" rows="1" cols="1">'. $comments .'</textarea>
 		<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
 		<div align="center"><input name="submit" type="submit" value="Evaluate Your Boat"></div>
@@ -11099,6 +11117,7 @@ class Frontendclass {
 
 		$formstart = '
 		<form method="post" action="'. $cm->folder_for_seo .'" id="talktospecialist-ff" name="talktospecialist-ff">
+		<label class="com_none" for="email2">email2</label>
 		<input type="hidden" value="'. $shortversion .'" id="shortversion" name="shortversion" />
 		<input type="hidden" value="'. $frompopup .'" id="frompopup" name="frompopup" />
 		<input type="hidden" value="'. $pgid .'" id="pgid" name="pgid" />
@@ -11114,9 +11133,11 @@ class Frontendclass {
 			<div class="leftrightcolsection notopborder clearfixmain">
 				'. $formstart .'
 				<ul class="form">
-					<li><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
-					<li><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
-					<li><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="name">Name</label><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
+					<li><label class="com_none" for="email">Email</label><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
+					<li><label class="com_none" for="phone">Phone</label><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="preferred_date">Date</label><input defaultdateset="'. date("m-d-Y") .'" rangeyear="'. date("Y") .':'. (date("Y") + 1) .'" type="text" id="preferred_date" name="preferred_date" value="'. $preferred_date .'" class="date-field-c input2" placeholder="Appointment Date" /></li>
+					<li><label class="com_none" for="preferred_time">Time</label><input type="text" class="input timepick" id="preferred_time" name="preferred_time" value="'. $preferred_time .'" placeholder="Appointment Time" /></li>
 					<li>'. $captchaclass->call_captcha() .'</li>
 					<li><button type="submit" class="button" value="Submit">Send</button>	</li>
 				</ul>
@@ -11132,9 +11153,11 @@ class Frontendclass {
 				'. $formstart . '
 				
 				<ul class="form">
-					<li><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
-					<li><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
-					<li><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="name">Name</label><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
+					<li><label class="com_none" for="email">Email</label><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
+					<li><label class="com_none" for="phone">Phone</label><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="preferred_date">Date</label><input defaultdateset="'. date("m-d-Y") .'" rangeyear="'. date("Y") .':'. (date("Y") + 1) .'" type="text" id="preferred_date" name="preferred_date" value="'. $preferred_date .'" class="date-field-c input2" placeholder="Appointment Date" /></li>
+					<li><label class="com_none" for="preferred_time">Time</label><input type="text" class="input timepick" id="preferred_time" name="preferred_time" value="'. $preferred_time .'" placeholder="Appointment Time" /></li>
 					<li>'. $captchaclass->call_captcha() .'</li>
 					<li><button type="submit" class="button" value="Submit">Send</button>	</li>
 				</ul>							
@@ -11149,9 +11172,11 @@ class Frontendclass {
 				<h3>'. $custom_button_text .'</h3>			
 				'. $formstart . '				
 				<ul class="form">
-					<li><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
-					<li><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
-					<li><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="name">Name</label><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
+					<li><label class="com_none" for="email">Email</label><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
+					<li><label class="com_none" for="phone">Phone</label><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="preferred_date">Date</label><input defaultdateset="'. date("m-d-Y") .'" rangeyear="'. date("Y") .':'. (date("Y") + 1) .'" type="text" id="preferred_date" name="preferred_date" value="'. $preferred_date .'" class="date-field-c input2" placeholder="Appointment Date" /></li>
+					<li><label class="com_none" for="preferred_time">Time</label><input type="text" class="input timepick" id="preferred_time" name="preferred_time" value="'. $preferred_time .'" placeholder="Appointment Time" /></li>
 					<li>'. $captchaclass->call_captcha() .'</li>
 					<li><button type="submit" class="button" value="Submit">Send</button>	</li>
 				</ul>
@@ -11166,18 +11191,27 @@ class Frontendclass {
 				
 				<ul class="form">				          
 					<li>
-						<p>Name <span class="requiredtext">*</span></p>
+						<p><label for="name">Name</label> <span class="requiredtext">*</span></p>
 						<input type="text" class="input" id="name" name="name" value="'. $name .'" />
 					</li>
 					
 					<li>
-						<p>Email <span class="requiredtext">*</span></p>
+						<p><label for="email">Email</label> <span class="requiredtext">*</span></p>
 						<input type="text" class="input" id="email" name="email" value="'. $email .'" />
 					</li>
 				
 					<li>
-						<p>Phone <span class="requiredtext">*</span></p>
+						<p><label for="phone">Phone</label> <span class="requiredtext">*</span></p>
 						<input type="text" class="input" id="phone" name="phone" value="'. $phone .'" />
+					</li>
+					
+					<li>
+						<p><label for="preferred_date">Appointment Date</label> <span class="requiredtext">*</span></p>
+						<input defaultdateset="'. date("m-d-Y") .'" rangeyear="'. date("Y") .':'. (date("Y") + 1) .'" type="text" id="preferred_date" name="preferred_date" value="'. $preferred_date .'" class="date-field-c input2" />
+					</li>
+					<li>
+						<p><label for="preferred_time">Appointment Time</label> <span class="requiredtext">*</span></p>
+						<input type="text" class="input timepick" id="preferred_time" name="preferred_time" value="'. $preferred_time .'" placeholder="Appointment Time" />
 					</li>
 					
 					<li>'. $captchaclass->call_captcha(). '</li>     
@@ -11197,6 +11231,7 @@ class Frontendclass {
 		$returntext .= '
 	   <script type="text/javascript">
 	   $(document).ready(function(event){
+		   $(".timepick").timepicker({ "timeFormat": "h:i A", "minTime": "8:00 AM",  "maxTime": "6:00 PM", useSelect: true, className: "select" });
 		   $("#talktospecialist-ff").submit(function(){
 			   var all_ok = "y";
 			   var setfocus = "n";
@@ -11217,6 +11252,11 @@ class Frontendclass {
 			   if (!field_validation_border("phone", 1, 1)){ 
 					all_ok = "n"; 
 					setfocus = set_field_focus(setfocus, "phone");
+			   }
+			   
+			   if (!field_validation_border("preferred_date", 1, 1)){ 
+					all_ok = "n"; 
+					setfocus = set_field_focus(setfocus, "preferred_date");
 			   }			   
 			   
 			   if (all_ok == "n"){            
@@ -11237,7 +11277,8 @@ class Frontendclass {
 					  
 					  $("#name").val("");
 					  $("#email").val("");
-					  $("#phone").val("");					 
+					  $("#phone").val("");
+					  $("#preferred_date").val("");					 
 					}).fail(function(){
 					  $(".fomrsubmit-result").addClass("error");
 					  $(".fomrsubmit-result").html("ERROR! Please try again");
@@ -11268,6 +11309,10 @@ class Frontendclass {
 			$name = $_POST["name"];
 			$email = $_POST["email"];
 			$phone = $_POST["phone"];
+			
+			$preferred_date = $_POST["preferred_date"];
+			$preferred_time = $_POST["preferred_time"];
+			
 			$email2 = $_POST["email2"];
 			//end
 			
@@ -11290,6 +11335,8 @@ class Frontendclass {
 			$cm->field_validation($name, '', 'Name', $red_pg, '', '', 1, 'fr_');			
 			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($phone, '', 'Phone', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($preferred_date, '', 'Preferred Date', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($preferred_time, '', 'Preferred Time', $red_pg, '', '', 1, 'fr_');
 			
 			if ($email2 != ""){
 				header('Location: '. $cm->site_url .'');
@@ -11333,6 +11380,16 @@ class Frontendclass {
 				<tr>
 					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Phone:</td>
 					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($phone, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Preferred Date:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($preferred_date, 1) .'</td>
+				</tr>	
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Preferred Time:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($preferred_time, 1) .'</td>
 				</tr>
 			</table>          
 			';
@@ -11409,7 +11466,7 @@ class Frontendclass {
 	
 	//Ask For Brochure form
 	public function display_ask_for_brochure_form($argu = array()){
-		global $db, $cm, $captchaclass;
+		global $db, $cm, $modelclass, $captchaclass;
 		$pgid = round($argu["pgid"], 0);
 		$shortversion = round($argu["shortversion"], 0);
 		$frompopup = round($argu["frompopup"], 0);
@@ -11431,6 +11488,7 @@ class Frontendclass {
 
 		$formstart = '
 		<form method="post" action="'. $cm->folder_for_seo .'" id="askforbrochure-ff" name="askforbrochure-ff">
+		<label class="com_none" for="email2">email2</label>
 		<input type="hidden" value="'. $shortversion .'" id="shortversion" name="shortversion" />
 		<input type="hidden" value="'. $frompopup .'" id="frompopup" name="frompopup" />
 		<input type="hidden" value="'. $pgid .'" id="pgid" name="pgid" />
@@ -11446,9 +11504,15 @@ class Frontendclass {
 			<div class="leftrightcolsection notopborder clearfixmain">
 				'. $formstart .'
 				<ul class="form">
-					<li><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
-					<li><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
-					<li><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="name">Name</label><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
+					<li><label class="com_none" for="email">Email</label><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
+					<li><label class="com_none" for="phone">Phone</label><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="model_name">Model</label>
+					<select id="model_id" name="model_id" class="select">
+					<option value="">Select Model</option>
+					'. $modelclass->get_model_combo($model_id, 1) .'
+					</select>
+					</li>
 					<li>'. $captchaclass->call_captcha() .'</li>
 					<li><button type="submit" class="button" value="Submit">Send</button>	</li>
 				</ul>
@@ -11464,9 +11528,15 @@ class Frontendclass {
 				'. $formstart . '
 				
 				<ul class="form">
-					<li><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
-					<li><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
-					<li><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="name">Name</label><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
+					<li><label class="com_none" for="email">Email</label><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
+					<li><label class="com_none" for="phone">Phone</label><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="model_name">Model</label>
+					<select id="model_id" name="model_id" class="select">
+					<option value="">Select Model</option>
+					'. $modelclass->get_model_combo($model_id, 1) .'
+					</select>
+					</li>
 					<li>'. $captchaclass->call_captcha() .'</li>
 					<li><button type="submit" class="button" value="Submit">Send</button>	</li>
 				</ul>							
@@ -11481,9 +11551,15 @@ class Frontendclass {
 				<h3>'. $custom_button_text .'</h3>			
 				'. $formstart . '				
 				<ul class="form">
-					<li><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
-					<li><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
-					<li><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="name">Name</label><input type="text" class="input" id="name" name="name" value="'. $name .'" placeholder="Name" /></li>
+					<li><label class="com_none" for="email">Email</label><input type="text" class="input" id="email" name="email" value="'. $email .'" placeholder="Email Address" /></li>
+					<li><label class="com_none" for="phone">Phone</label><input type="text" class="input" id="phone" name="phone" value="'. $phone .'" placeholder="Phone" /></li>
+					<li><label class="com_none" for="model_name">Model</label>
+					<select id="model_id" name="model_id" class="select">
+					<option value="">Select Model</option>
+					'. $modelclass->get_model_combo($model_id, 1) .'
+					</select>
+					</li>
 					<li>'. $captchaclass->call_captcha() .'</li>
 					<li><button type="submit" class="button" value="Submit">Send</button>	</li>
 				</ul>
@@ -11498,18 +11574,26 @@ class Frontendclass {
 				
 				<ul class="form">				          
 					<li>
-						<p>Name <span class="requiredtext">*</span></p>
+						<p><label for="name">Name</label> <span class="requiredtext">*</span></p>
 						<input type="text" class="input" id="name" name="name" value="'. $name .'" />
 					</li>
 					
 					<li>
-						<p>Email <span class="requiredtext">*</span></p>
+						<p><label for="email">Email</label> <span class="requiredtext">*</span></p>
 						<input type="text" class="input" id="email" name="email" value="'. $email .'" />
 					</li>
 				
 					<li>
-						<p>Phone <span class="requiredtext">*</span></p>
+						<p><label for="phone">Phone</label> <span class="requiredtext">*</span></p>
 						<input type="text" class="input" id="phone" name="phone" value="'. $phone .'" />
+					</li>
+					
+					<li>
+						<p><label for="name">model_name</label> <span class="requiredtext">*</span></p>
+						<select id="model_id" name="model_id" class="select">
+						<option value="">Select Model</option>
+						'. $modelclass->get_model_combo($model_id, 1) .'
+						</select>
 					</li>
 					
 					<li>'. $captchaclass->call_captcha(). '</li>     
@@ -11549,6 +11633,11 @@ class Frontendclass {
 			   if (!field_validation_border("phone", 1, 1)){ 
 					all_ok = "n"; 
 					setfocus = set_field_focus(setfocus, "phone");
+			   }
+			   
+			   if (!field_validation_border("model_id", 1, 1)){ 
+					all_ok = "n"; 
+					setfocus = set_field_focus(setfocus, "model_id");
 			   }			   
 			   
 			   if (all_ok == "n"){            
@@ -11569,7 +11658,8 @@ class Frontendclass {
 					  
 					  $("#name").val("");
 					  $("#email").val("");
-					  $("#phone").val("");					 
+					  $("#phone").val("");	
+					  $("#model_name").val("");				 
 					}).fail(function(){
 					  $(".fomrsubmit-result").addClass("error");
 					  $(".fomrsubmit-result").html("ERROR! Please try again");
@@ -11590,7 +11680,7 @@ class Frontendclass {
 	//submit Ask For Brochure form
 	public function submit_ask_for_brochure_form(){
 		if(($_POST['fcapi'] == "submitaskforbrochureform")){					
-			global $db, $cm, $leadclass, $sdeml;			
+			global $db, $cm, $modelclass, $leadclass, $sdeml;			
 			
 			//field		
 			$shortversion = round($_POST["shortversion"], 0);
@@ -11600,6 +11690,8 @@ class Frontendclass {
 			$name = $_POST["name"];
 			$email = $_POST["email"];
 			$phone = $_POST["phone"];
+			$model_id = round($_POST["model_id"], 0);
+			//$model_name = $_POST["model_name"];
 			$email2 = $_POST["email2"];
 			//end
 			
@@ -11622,6 +11714,7 @@ class Frontendclass {
 			$cm->field_validation($name, '', 'Name', $red_pg, '', '', 1, 'fr_');			
 			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($phone, '', 'Phone', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($model_id, '', 'Model', $red_pg, '', '', 1, 'fr_');
 			
 			if ($email2 != ""){
 				header('Location: '. $cm->site_url .'');
@@ -11640,6 +11733,8 @@ class Frontendclass {
 			}else{
 				$custom_button_text = "Ask For Brochure";
 			}
+			
+			$model_name = $modelclass->get_model_combo($model_id);
 				
 			$companyname = $cm->sitename;
 			$companyphone = $cm->get_systemvar('COMPH');
@@ -11665,6 +11760,11 @@ class Frontendclass {
 				<tr>
 					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Phone:</td>
 					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($phone, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Model:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($model_name, 1) .'</td>
 				</tr>
 			</table>          
 			';
@@ -12174,22 +12274,22 @@ class Frontendclass {
 			<form id="cal1">
 				<ul class="form">
 					<li class="left">
-						<p>Monthly Payment</p>
+						<p><label for="monthlypayment">Monthly Payment</label></p>
 						<input type="text" id="monthlypayment" name="monthlypayment" value="" class="input" />
 					</li>
 					
 					<li class="right">
-						<p>Down Payment</p>
+						<p><label for="downpayment1">Down Payment</label></p>
 						<input type="text" id="downpayment1" name="downpayment1" value="" class="input" />
 					</li>
 					
 					<li class="left">
-						<p>Interest Rate</p>
+						<p><label for="interestrate1">Interest Rate</label></p>
 						<input type="text" id="interestrate1" name="interestrate1" value="" class="input" />
 					</li>
 					
 					<li class="right">
-						<p>Term (Years)</p>
+						<p><label for="termyear1">Term (Years)</label></p>
 						'. $this->trem_year('termyear1').'
 					</li>
 					
@@ -12239,22 +12339,22 @@ class Frontendclass {
 			<form id="cal2">
 				<ul class="form">
 					<li class="left">
-						<p>Boat Price</p>
+						<p><label for="boatprice">Boat Price</label></p>
 						<input type="text" id="boatprice" name="boatprice" value="" class="input" />
 					</li>
 					
 					<li class="right">
-						<p>Down Payment</p>
+						<p><label for="downpayment2">Down Payment</label></p>
 						<input type="text" id="downpayment2" name="downpayment2" value="" class="input" />
 					</li>
 					
 					<li class="left">
-						<p>Interest Rate</p>
+						<p><label for="interestrate2">Interest Rate</label></p>
 						<input type="text" id="interestrate2" name="interestrate2" value="" class="input" />
 					</li>
 					
 					<li class="right">
-						<p>Term (Years)</p>
+						<p><label for="termyear2">Term (Years)</label></p>
 						'. $this->trem_year('termyear2').'
 					</li>
 					
@@ -12347,8 +12447,7 @@ class Frontendclass {
 		<div class="dashboard-holder dashboard-main-flex clearfixmain">
 		'. $this->get_dashboard_menu_col($argu) .'
 		<div class="dashboard-contentcol flexcol clearfixmain">
-			'. $link_name_text .'		
-			
+			'. $link_name_text .'
 		';
 		
 		$html_start .= '<div class="dashboard-contentcol-inner clearfixmain">';
@@ -12371,6 +12470,134 @@ class Frontendclass {
 		);
 		
 		return json_encode($returnar);
+	}
+	
+	//header search content
+	public function header_search_content(){
+		global $db, $cm;
+		$search_content = '';
+		
+		/*$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where id IN (48,67) and status = 'y' order by rank";
+		$ss_result = $db->fetch_all_array($ss_sql);
+		$ss_found = count($ss_result);
+		if ($ss_found > 0){
+			$c = 0;
+			foreach($ss_result as $ss_row){
+				$ss_id = $ss_row['id'];
+				$ss_name = $ss_row['name'];				
+				$ss_open_new_window = $ss_row['new_window'];
+				$ss_extraclass = $ss_row['extraclass'];
+				$ss_lnk_url = $cm->get_page_url($ss_id, "page");
+				
+				$ss_link_target = "";
+				if ($ss_open_new_window == "y"){ $ss_link_target = ' target = "_blank"'; }
+				
+				if ($c == 0){
+					$containerclass = 'header-search-show-hide-left';	
+				}else{
+					$containerclass = 'header-search-show-hide-right';
+				}
+				
+				$search_content .= '
+				<div class="'. $containerclass .'">
+					<h3><a href="'. $ss_lnk_url .'"'. $ss_link_target .'>'. $ss_name .'</a></h3>
+					<hr>	
+					'. $this->get_special_menu_next_level(array("mnid" => $ss_id)) .'	
+				</div>
+				';
+				
+				$c++;
+				if ($c == 1){
+					$c = 0;	
+				}
+			}
+		}
+		*/
+		
+		/*$returntext = '
+		<div class="header-search-show-hide clearfixmain">
+			<div class="header-search-show-hide-full clearfixmain">
+				'. $this->get_special_menu_next_level(array("mnid" => 90)) .'
+			</div>
+		</div>
+		';*/
+		
+		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where id IN (135,136) and status = 'y' order by rank";
+		$ss_result = $db->fetch_all_array($ss_sql);
+		$ss_found = count($ss_result);
+		if ($ss_found > 0){
+			foreach($ss_result as $ss_row){
+				$ss_id = $ss_row['id'];
+				$ss_name = $ss_row['name'];				
+				$ss_open_new_window = $ss_row['new_window'];
+				$ss_extraclass = $ss_row['extraclass'];
+				$ss_lnk_url = $cm->get_page_url($ss_id, "page");
+				
+				$ss_link_target = "";
+				if ($ss_open_new_window == "y"){ $ss_link_target = ' target = "_blank"'; }
+				
+				$search_content .= '
+				<div class="header-search-show-hide-full clearfixmain">
+					<h3><a href="'. $ss_lnk_url .'"'. $ss_link_target .'>'. $ss_name .'</a></h3>
+					<hr>	
+					'. $this->get_special_menu_next_level(array("mnid" => $ss_id)) .'	
+				</div>
+				';
+			}
+			
+		}
+		
+		$returntext = '
+		<div class="header-search-show-hide clearfixmain">
+			<div class="header-search-show-hide-in clearfixmain">
+				'. $search_content .'
+			</div>
+		</div>
+		';
+		
+		return $returntext;
+	}
+	
+	//sudden popup
+	public function display_sudden_popup(){
+		global $cm;
+		$returntext = '
+		<div id="suddenpopupoverlay" class="animated hide">
+    		<div class="fc-pop-container">
+				<div class="fc-pop-content">
+                	<a class="fc-close-suddenpopup fc-close-pop" href="javascript:void(0);"><i class="fas fa-times"></i><span class="com_none">Close</span></a>
+                    	<h1>Selling <br> Your <br> Yacht?</h1>
+                    	<p>Learn more about our seller services.</p>
+                        <p class="pop-more-btn"><a href="'. $cm->get_page_url('46', 'page') .'">Learn More</a></p>
+				</div><!--/fc-pop-content-->
+			</div><!--/.fc-pop-container-->
+		</div>
+		';
+		
+		$returntext .= '
+		<script type="text/javascript">
+			$(document).ready(function(){
+				setTimeout(function() {
+					displayPopup();
+				  }, 60000);
+				  
+				$(".fc-close-pop").click(function(){
+					$("#suddenpopupoverlay").fadeOut(300);
+				});
+			})
+			
+			function displayPopup(){
+				if (sessionStorage.displaypopuponce) {
+					// no popup display for this session
+				}else{
+					sessionStorage.displaypopuponce = 1;
+					$("#suddenpopupoverlay").fadeIn(300);
+				}
+			}
+		</script> 
+		';
+		
+		return $returntext;
 	}
 	
 	//dashboard menu

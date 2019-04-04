@@ -82,8 +82,10 @@ if ($nohead == 1 OR $nohead == 3){
 //echo $yachtclass->display_company_location_details_footer(array("outsidefooter" => 1));
 //echo $frontend->display_mailchimp_form(array("s" => 1));
 echo $frontend->get_footer(array("loggedin_member_id" => $loggedin_member_id));
-echo $yachtchildclass->sliding_advanced_search_form($isdashboard);
+echo $yachtchildclass->sliding_advanced_search_form($isdashboard, $pageid);
 echo $frontend->contact_page_pop();
+echo $frontend->header_search_content();
+echo $frontend->display_sudden_popup();
 ?>
 <!--Footer End-->
 <?php
@@ -93,7 +95,7 @@ echo $frontend->contact_page_pop();
 <div class="fcajaxloadedcontent-inline all-overlay custom-overlay-common">
     <div class="custom-overlay-container clearfixmain">
         <div class="modal-dialog clearfixmain">
-            <div class="custom-overlay-close"><a href="javascript:void(0);" title="Close"><img src="<?php echo $cm->folder_for_seo; ?>images/inactive-icon.png" /></a></div>
+            <div class="custom-overlay-close"><a href="javascript:void(0);" title="Close"><img alt="Close" src="<?php echo $cm->folder_for_seo; ?>images/inactive-icon.png" /></a></div>
             <div class="fcajaxloadedcontent"></div>
         </div>
     </div>
@@ -116,8 +118,9 @@ echo $frontend->contact_page_pop();
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.carouFredSel-6.2.1-packed.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.cycle2.min.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.cycle2.carousel.js"></script>
-<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/owl.carousel.min.js"></script>
-<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/slick.min.js"></script>
+<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.fancybox.min.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.sticky-kit.min.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.previewer.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/parallax.min.js"></script>
@@ -189,6 +192,12 @@ function ___log__error(aMsg, aUrl, aLine, aCol, aErr) {
 <?php
 $google_remarketing_tag = $cm->get_systemvar('GORTC');
 echo $google_remarketing_tag;
+
+//$live_chat_code = $cm->get_systemvar('LVCHC');
+//echo $live_chat_code;
+
+$call_tracking_code = $cm->get_systemvar('CTSCD');
+echo $call_tracking_code;
 ?>
 </body>
 </html>

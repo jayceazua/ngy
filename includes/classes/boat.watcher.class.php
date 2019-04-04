@@ -104,11 +104,11 @@ class Boatwatcherclass {
 			}else{
 				$name_email_text = '
 				<li class="left">
-					<p>Name</p>
+					<p><label for="reg_name'. $counter .'">Name</label></p>
 					<input type="text" class="input" id="reg_name'. $counter .'" name="reg_name'. $counter .'" value="'. $reg_name .'" placeholder="" />
 				</li>
 				<li class="right">
-					<p>Email</p>
+					<p><label for="email'. $counter .'">Email</label></p>
 					<input type="text" class="input" id="email'. $counter .'" name="email'. $counter .'" value="'. $email .'" placeholder="" />
 				</li>
 				';
@@ -125,8 +125,9 @@ class Boatwatcherclass {
 			
 			$formstart = '
 			<form method="post" action="'. $cm->folder_for_seo .'" id="boatwatcher-ff" name="boatwatcher-ff">
+			<label class="com_none" for="email2b">email2</label>
 			<input type="hidden" value="'. $schedule_days .'" id="schedule_days_old'. $counter .'" name="schedule_days_old'. $counter .'" />
-			<input class="finfo" id="email2" name="email2" type="text" />
+			<input class="finfo" id="email2b" name="email2" type="text" />
 			<input type="hidden" id="fcapi" name="fcapi" value="submitboatwatcherform" />
 			';
 			
@@ -140,28 +141,32 @@ class Boatwatcherclass {
 					'. $name_email_text .'
 					
 					<li class="left">
-						<p>Send Alert</p>
+						<p><label for="schedule_days'. $counter .'">Send Alert</label></p>
 						<select name="schedule_days'. $counter .'" id="schedule_days'. $counter .'" class="select">
 						'. $this->get_days_frequency_combo($schedule_days) .'
 						</select>
 					</li>
 					
 					<li>
-						<p>Manufacturer</p>
+						<p><label for="keyterm'. $counter .'">Manufacturer</label><label class="com_none" for="mid'. $counter .'">Mid</label></p>
 						<input type="hidden" value="'. $makeid .'" id="mid'. $counter .'" name="mid'. $counter .'" />
 						<input type="text" id="keyterm'. $counter .'" class="azax_auto input" name="keyterm'. $counter .'" ckpage="5" counter="'. $counter .'"  value="'. $makename .'" placeholder="Manufacturer Name" autocomplete="off">
 					</li>
 					
 					<li>
 						<p>Length Range(ft)</p>
+						<label class="com_none" for="lnmin'. $counter .'">Min</label>
+						<label class="com_none" for="lnmax'. $counter .'">Max</label>
 						<div class="left-side"><input id="lnmin'. $counter .'" name="lnmin'. $counter .'" type="text" value="" class="input" placeholder="Min" value="'. $lnmin .'" /></div>
 						<div class="right-side"><input id="lnmax'. $counter .'" name="lnmax'. $counter .'" type="text" value="" class="input" placeholder="Max" value="'. $lnmax .'" /></div>
 					</li>
 					
 					<li>
 						<p>Price Range($)</p>
-						<div class="left-side"><input id="prmin'. $counter .'" name="prmin'. $counter .'" type="text" value="'. $prmin .'" class="input" /></div>
-						<div class="right-side"><input id="prmax'. $counter .'" name="prmax'. $counter .'" type="text" value="'. $prmax .'" class="input" /></div>
+						<label class="com_none" for="prmin'. $counter .'">Min</label>
+						<label class="com_none" for="prmax'. $counter .'">Max</label>
+						<div class="left-side"><input id="prmin'. $counter .'" name="prmin'. $counter .'" type="text" value="'. $prmin .'" class="input" placeholder="Min" /></div>
+						<div class="right-side"><input id="prmax'. $counter .'" name="prmax'. $counter .'" type="text" value="'. $prmax .'" class="input" placeholder="Max" /></div>
 					</li>
 					
 					<li>'. $captchaclass->call_captcha() .'</li>

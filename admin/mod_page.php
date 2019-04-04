@@ -111,6 +111,7 @@ include("head.php");
 <?php $_SESSION["postmessage"] = ""; } ?>
     
 <form method="get" action="mod_page.php" name="f1">
+<input type="hidden" name="parentid" value="<?php echo $parentid; ?>" />
 <table border="0" width="95%" cellspacing="0" cellpadding="4" align="center" class="htext">
     <tr>
         <td width="20%" align="left">Name:</td>

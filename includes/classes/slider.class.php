@@ -629,7 +629,7 @@ class Sliderclass {
 					 $messagetxt = '
 					 	<div class="buttonmessage '. $text_css_name .' clearfixmain">
 							<div datadelay="500" class="buttonmessage_con buttonmessage_con'. $counter .' animated animatedopacity clearfixmain">
-								<a class="commonpop" data-fancybox-type="iframe" href="'. $cm->get_page_url(0, "pop-talk-to-specialist") .'?make_id='. $slider_make_id .'">'. $custom_button_text .'</a>
+								<a class="commonpop" data-type="iframe" href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-talk-to-specialist") .'?make_id='. $slider_make_id .'">'. $custom_button_text .'</a>
 								<div class="sliderphone">'. $phone .'</div>
 							</div>
 						</div>
@@ -858,7 +858,7 @@ class Sliderclass {
 		return $returntxt;
 	}
 	
-	public function display_top_image_slider($param = array()){
+	public function display_top_image_slider_owl($param = array()){
 		global $db, $cm;
 		
 		//param
@@ -985,7 +985,7 @@ class Sliderclass {
 					$messagetxt = '
 					<div class="buttonmessage '. $text_css_name .' clearfixmain">
 						<div datadelay="500" class="buttonmessage_con buttonmessage_con'. $counter .' animated animatedopacity clearfixmain">
-							<a class="commonpop" data-fancybox-type="iframe" href="'. $cm->get_page_url(0, "pop-talk-to-specialist") .'?make_id='. $slider_make_id .'">'. $custom_button_text .'</a>
+							<a class="commonpop" data-type="iframe" href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-talk-to-specialist") .'?make_id='. $slider_make_id .'">'. $custom_button_text .'</a>
 							<div class="sliderphone">'. $phone .'</div>
 						</div>
 					</div>
@@ -1195,6 +1195,462 @@ class Sliderclass {
 					});
 				});
 				</script>						
+				';
+			}
+			
+		}else{
+			$returntxt = '';
+		}						
+		return $returntxt;
+	}
+	
+	public function display_top_image_slider($param = array()){
+		global $db, $cm;
+		
+		//param
+		$slider_category_id = $param["slider_category_id"];
+		$templatefile = $param["templatefile"];
+		$slider_make_id = $param["slider_make_id"];
+		$display_make_name = $param["display_make_name"];
+		//end
+		
+		$tag_line = $cm->get_systemvar('HMTAG');
+		$time_value = $cm->get_systemvar('SLTMH');
+   		$time_value = round($time_value * 1000);
+		if ($time_value == 0){ $time_value = 5000; }
+				
+		/*$imagefolder = 'sliderimage/inner/';
+		if ($slider_category_id == 1){
+			$imagefolder = 'sliderimage/';
+		}*/
+		$imagefolder = 'sliderimage/';
+		
+		$hang_button_text = '';
+		/*if ($slider_category_id == 1 AND $templatefile = "home.php"){
+			$hang_button_text = '
+			<div class="fcfirst-section clearfixmain">
+				<div class="fcscroll1"><a class="fcscrollto" href="#modellist">Custom Luxury Tenders</a></div>
+			</div>
+			';
+		}*/
+		
+		$video_sql_check = "select count(*) as ttl from tbl_image_slider where category_id = '". $slider_category_id ."' and video_type = 4";
+		$wh_video = $db->total_record_count($video_sql_check);
+				
+        $query_sql = "select *,";
+        $query_form = " from tbl_image_slider,";
+        $query_where = " where";
+		
+		if ($slider_category_id > 0){
+			$query_where .= " category_id = '". $slider_category_id ."' and";
+		}
+
+        $query_where .= " status_id = 1 and";
+      
+        $query_sql = rtrim($query_sql, ",");
+        $query_form = rtrim($query_form, ",");
+        $query_where = rtrim($query_where, "and");
+
+        $sql = $query_sql . $query_form . $query_where;
+        
+		if ($wh_video > 0){
+			$sql = $sql." order by RAND() limit 0, 1";
+		}else{		
+			$sql = $sql." order by rank";
+		}
+		
+        $result = $db->fetch_all_array($sql);
+        $found = count($result);
+		
+        if ($found > 0){
+			
+			if ($wh_video > 0){
+				$text_animation_class = '';
+				$returntxt = '
+				<div class="imagevideoslider mormalvideo clearfixmain">				
+				';
+			}else{			
+				$returntxt = '
+				<div class="normalslider clearfixmain">
+				'. $hang_button_text .'
+				<div class="main-slider" id="mainslider">
+				';
+			}
+			
+			$counter = 0;
+			 foreach($result as $row){
+				 
+				 foreach($row AS $key => $val){
+					${$key} = $cm->filtertextdisplay($val);
+				 }
+				
+				 $text_css_name = $cm->get_common_field_name("tbl_slider_text_position", "css_name", $text_position_id);
+				 $messagetxt = '';
+				 
+				 if ($display_message == 1){
+					 			 
+					 if ($link_type == 1){
+						  $go_url = $page_url;
+					 }elseif ($link_type == 2){
+						  $go_url = $cm->get_seo_linked_url($int_page_id, $int_page_tp);
+					 }else{
+						  $go_url = '';
+					 }
+					 
+					 $s_an = '';
+					 $e_an = '';
+					 $s_an_text = '';
+					 $messagelink = '';
+					 if ($go_url != ""){
+						 $link_target = "";
+						 if ($new_window == "y"){ $link_target = ' target = "_blank"'; }
+						 $s_an = '<a href="'. $go_url .'"'. $link_target .'>';
+						 $s_an_text = '<a style="color: #'. $fontcolor .';" href="'. $go_url .'"'. $link_target .'>';
+						 $e_an = '</a>';					 				 
+						 $messagelink = '<div class="sliderdetailsbutton sliderdetailsbutton'. $counter .' clearfixmain"><a href="'. $go_url .'"'. $link_target .'>' . $buttontext .'' . $e_an . '</div>';
+					 }
+					 			 
+					 $messagetxt = '<h2 class="captionanimation captionanimation'. $counter .'" style="color: #'. $fontcolor .'">'. $s_an_text . $name . $e_an .'</h2>';
+					 if ($pdes != ''){ $messagetxt .= '<p class="scaptionanimation scaptionanimation'. $counter .'" style="color: #'. $fontcolor2 .'">'. $pdes .'</p>'; }
+					 $messagetxt = '
+					 <div class="textmessage '. $text_css_name .' clearfixmain">
+						<div class="textmessage_con clearfixmain">'. $messagetxt . '</div>' . $messagelink . '
+					 </div>';
+			
+				 }
+				 
+				 if ($display_message == 2){	
+				 	 $phone = $cm->get_systemvar('PCLNW');				 
+					 if ($slider_make_id > 0){
+						 $make_name = $cm->get_common_field_name("tbl_manufacturer", "name", $slider_make_id);
+						 $custom_button_text = "Talk To A Certified ". $make_name ." Specialist";
+					 }else{
+						 $custom_button_text = "Talk To A Specialist";
+					 }
+					 
+					$messagetxt = '
+					<div class="buttonmessage '. $text_css_name .' clearfixmain">
+						<div datadelay="500" class="buttonmessage_con buttonmessage_con'. $counter .'  clearfixmain">
+							<a class="commonpop" data-type="iframe" href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-talk-to-specialist") .'?make_id='. $slider_make_id .'">'. $custom_button_text .'</a>
+							<div class="sliderphone">'. $phone .'</div>
+						</div>
+					</div>
+					 ';
+					 
+					 if ($display_make_name == 1 AND $slider_make_id > 0){
+						 global $yachtclass;
+						 $make_name_format = $yachtclass->format_brand_name($make_name);
+						 $messagetxt .= '
+						 <div class="textmessage transparentbgcolor middleleft clearfixmain">
+						 	<h2>'. $make_name_format .'</h2>
+						 </div>
+						 ';
+					 }
+				 }
+				 
+				 if ($wh_video > 0){
+					 $video_filepath = $cm->folder_for_seo . $imagefolder . $videopath;
+					 $typecast = $this->get_video_type_cast($video_filepath);
+					 $returntxt .= '
+					 <video loop muted autoplay poster="'. $cm->folder_for_seo . $imagefolder . 'videoimg.jpg" id="bgvid" allow="autoplay">
+						<source src="'. $video_filepath .'" type="'. $typecast .'">  
+					 </video>
+					 '. $messagetxt .'
+					 ';
+				 }else{
+					 $loadingtext = '';
+					 if ($counter == 0){
+						//$loadingtext = '<span class="loading">Loading...</span>';
+					 }
+					
+					 if ($video_type == 2){
+						//youtube
+						$video_id = $cm->get_youtube_video_code($cm->filtertextdisplay($video_url));
+						//https://img.youtube.com/vi/'. $video_id .'/0.jpg
+						$u = "https://www.youtube.com/embed/" . $video_id . "?enablejsapi=1";
+						
+						$returntxt .= '
+						<div class="item youtube">
+							'. $loadingtext .'
+							<iframe class="embed-player slide-media" src="'. $u .'" frameborder="0" allowfullscreen></iframe>
+							'. $messagetxt .'
+						</div>
+						';				
+					}elseif($video_type == 3){
+						//vimeo
+						$video_id = $cm->get_youtube_video_code($cm->filtertextdisplay($video_url));
+						$u = "https://player.vimeo.com/video/". $video_id ."?api=1&byline=0&portrait=0&title=0&background=1&mute=1&loop=1&autoplay=0&id=". $video_id .""; 
+						$returntxt .= '
+						<div class="item vimeo" data-video-start="4">
+							'. $loadingtext .'
+							<iframe class="embed-player slide-media" src="'. $u .'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+							'. $messagetxt .'
+						</div>
+						';						
+					}else{
+						//image
+						$returntxt .= '
+						<div class="item image">
+							'. $loadingtext .'
+							<figure>
+								<div class="slide-image slide-media" style="background-image:url(\''. $cm->folder_for_seo . $imagefolder . $imgpath .'\');">
+								<img alt="'. $name .'" data-lazy="'. $cm->folder_for_seo . $imagefolder . $imgpath .'" class="image-entity" />
+								</div>
+								'. $messagetxt .'
+							</figure>
+						</div>
+						';
+					 }					 
+				 }				 
+						
+				$counter++;
+			 }
+			
+			if ($wh_video > 0){
+				$returntxt .= '
+				<div class="videooptions">
+				<a class="videosound videosoundmute" href="javascript:void(0);" title="Un Mute">Mute/Un Mute</a>
+				<a class="videoplaypause" href="javascript:void(0);" title="Pause Video">Play/Pause</a>
+				</div>
+				</div>
+				';
+				
+				$returntxt .= '
+				<script language="javascript" type="text/javascript">
+				$(document).ready(function(){
+					$("#bgvid").on("loadstart", function (event) {
+						$(this).addClass("videoloading");
+					});
+					
+					$("#bgvid").on("canplay", function (event) {
+						$(this).removeClass("videoloading");
+						$("#bgvid").get(0).play();
+					});
+					
+					$(".videoplaypause").click(function(){
+						if ($(this).hasClass("videoplaypause videopause")){
+							$("#bgvid").get(0).play();
+							$(this).removeClass("videopause");
+							$(this).attr("title", "Pause Video");
+						}else{
+							$("#bgvid").get(0).pause();
+							$(this).addClass("videopause");
+							$(this).attr("title", "Play Video");
+						}
+					});
+					
+					$(".videosound").click(function(){
+						if ($(this).hasClass("videosoundmute")){
+							$("#bgvid").prop("muted", false);
+							$(this).removeClass("videosoundmute");
+							$(this).attr("title", "Mute");
+						}else{
+							$("#bgvid").prop("muted", true);
+							$(this).addClass("videosoundmute");
+							$(this).attr("title", "Play Sound");
+						}
+					});
+					
+					//checking mobile
+					var isMobile = {
+						Android: function() {
+							return navigator.userAgent.match(/Android/i);
+						},
+						BlackBerry: function() {
+							return navigator.userAgent.match(/BlackBerry/i);
+						},
+						iOS: function() {
+							return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+						},
+						Opera: function() {
+							return navigator.userAgent.match(/Opera Mini/i);
+						},
+						Windows: function() {
+							return navigator.userAgent.match(/IEMobile/i);
+						},
+						any: function() {
+							return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+						}
+					};
+					
+					if(isMobile.any()) {
+						// It is mobile
+						$("#bgvid").get(0).pause();
+						$(".videoplaypause").addClass("videopause");
+						$(".videoplaypause").attr("title", "Play Video");
+					}
+					
+				});
+				</script>
+				';
+			}else{
+				$returntxt .= '		
+				</div>
+				</div>
+				';
+				
+				$returntxt .= '<script>				
+				var slideWrapper = $(".main-slider"),
+				iframes = slideWrapper.find(".embed-player"),
+				lazyImages = slideWrapper.find(".slide-image"),
+				lazyCounter = 0;
+				
+				// POST commands to YouTube or Vimeo API
+				function postMessageToPlayer(player, command){
+					if (player == null || command == null) return;
+					player.contentWindow.postMessage(JSON.stringify(command), "*");
+				}
+				
+				// When the slide is changing
+				function playPauseVideo(slick, control){
+				  var currentSlide, slideType, startTime, player, video;
+				
+				  currentSlide = slick.find(".slick-current");
+				  slideType = currentSlide.attr("class").split(" ")[1];
+				  player = currentSlide.find("iframe").get(0);
+				  startTime = currentSlide.data("video-start");
+				
+				  if (slideType === "vimeo") {
+					switch (control) {
+					  case "play":
+						if ((startTime != null && startTime > 0 ) && !currentSlide.hasClass("started")) {
+						  currentSlide.addClass("started");
+						  postMessageToPlayer(player, {
+							"method": "setCurrentTime",
+							"value" : startTime
+						  });
+						}
+						postMessageToPlayer(player, {
+						  "method": "play",
+						  "value" : 1
+						});
+						break;
+					  case "pause":
+						postMessageToPlayer(player, {
+						  "method": "pause",
+						  "value": 1
+						});
+						break;
+					}
+				  } else if (slideType === "youtube") {
+					switch (control) {
+					  case "play":
+						postMessageToPlayer(player, {
+						  "event": "command",
+						  "func": "mute"
+						});
+						postMessageToPlayer(player, {
+						  "event": "command",
+						  "func": "playVideo"
+						});
+						break;
+					  case "pause":
+						postMessageToPlayer(player, {
+						  "event": "command",
+						  "func": "pauseVideo"
+						});
+						break;
+					}
+				  } else if (slideType === "video") {
+					video = currentSlide.children("video").get(0);
+					if (video != null) {
+					  if (control === "play"){
+						video.play();
+					  } else {
+						video.pause();
+					  }
+					}
+				  }
+				}
+				
+				// Resize player
+				function resizePlayer(iframes, ratio) {
+				  if (!iframes[0]) return;
+				  var win = $(".main-slider"),
+					  width = win.width(),
+					  playerWidth,
+					  height = win.height(),
+					  playerHeight,
+					  ratio = ratio || 16/9;
+				
+				  iframes.each(function(){
+					var current = $(this);
+					if (width / ratio < height) {
+					  playerWidth = Math.ceil(height * ratio);
+					  current.width(playerWidth).height(height).css({
+						left: (width - playerWidth) / 2,
+						 top: 0
+						});
+					} else {
+					  playerHeight = Math.ceil(width / ratio);
+					  current.width(width).height(playerHeight).css({
+						left: 0,
+						top: (height - playerHeight) / 2
+					  });
+					}
+				  });
+				}
+				
+				// DOM Ready
+				$(function() {
+				  // Initialize
+				  slideWrapper.on("init", function(slick){
+					slick = $(slick.currentTarget);
+					setTimeout(function(){
+					  playPauseVideo(slick,"play");
+					}, 1000);
+					resizePlayer(iframes, 16/9);
+				  });
+				  slideWrapper.on("beforeChange", function(event, slick) {
+					slick = $(slick.$slider);
+					playPauseVideo(slick,"pause");
+				  });
+				  slideWrapper.on("afterChange", function(event, slick) {
+					slick = $(slick.$slider);
+					playPauseVideo(slick,"play");
+				  });
+				  slideWrapper.on("lazyLoaded", function(event, slick, image, imageSource) {
+					lazyCounter++;
+					if (lazyCounter === lazyImages.length){
+					  lazyImages.addClass("show");
+					  // slideWrapper.slick("slickPlay");
+					}
+				  });
+				  
+				  //start the slider
+				  slideWrapper.slick({
+					fade:true,
+					autoplay: true,
+					autoplaySpeed:'. $time_value .',
+					lazyLoad:"progressive",
+					speed:600,
+					arrows:false,
+					dots:true,
+					pauseOnHover: true,
+					cssEase:"cubic-bezier(0.87, 0.03, 0.41, 0.9)"
+				  });
+				 });
+				 
+				 // Resize event
+				$(window).on("resize.slickVideoPlayer", function(){  
+				  resizePlayer(iframes, 16/9);
+				});
+				</script>						
+				';
+			}
+			
+			if ($templatefile == "home.php"){
+				global $yachtchildclass;			
+				$boatsearchformar = $yachtchildclass->display_boat_advanced_search_form_small();
+
+				$returntxt = '
+				<div class="slidersearch clearfixmain">
+					<div class="container clearfixmain">
+					'. $boatsearchformar["smallform"] .'				
+					</div>
+					'. $boatsearchformar["responsiveform"] .'				
+					'. $returntxt .'
+				</div>
 				';
 			}
 			

@@ -20,18 +20,22 @@ include("head.php");
                         </li>
                         <?php $_SESSION["fr_postmessage"] = ""; } ?>
                     <li>
+                        <label>
                         <p>Username</p>
                         <input type="text" id="t1" name="t1" value="<?php echo $cook_t1; ?>" class="input" />
+                        </label>
                     </li>
                     <li>
+                        <label>
                         <p>Password</p>
                         <input type="password" id="t2" name="t2" value="<?php echo $cook_t2; ?>" class="input" />
+                        </label>
                     </li>
                     <li>
                         <div class="forgot"><a class="fpassword" href="javascript:void(0);">Forgot Password?</a></div>
                     </li>
                     <li class="align-right">
-                        <div class="left"><input type="checkbox" value="y" id="log_remember_me" name="log_remember_me" /> Remember me on this computer</div>  <input type="submit" value="Login" class="button" />
+                        <div class="left"><label><input type="checkbox" value="y" id="log_remember_me" name="log_remember_me" /> Remember me on this computer</label></div>  <input type="submit" value="Login" class="button" />
                     </li>
                     
                     <li>

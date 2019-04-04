@@ -5,7 +5,8 @@ include("head.php");
 <script>
 	$(document).ready(function() {
 		setTimeout( function() {
-			parent.$.colorbox.close(true);
+			//parent.$.colorbox.close(true);
+			parent.$.fancybox.close(true);
 		},3000);
 		
 		//if (r == 1){

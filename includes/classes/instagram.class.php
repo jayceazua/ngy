@@ -192,7 +192,7 @@ class Instagramclass {
 		return $returntext;
 	}
 	
-	public function display_instagram_feed_home($param = array()){
+	public function display_instagram_feed_home_old($param = array()){
 		global $cm;
 		$returntext = '';
 		$container_start = '';
@@ -211,11 +211,12 @@ class Instagramclass {
 		$instadata = $insta->data;
 		$found = count($instadata);
 		if ($found > 0){
+			$instaurl = $cm->get_systemvar('INURL');
 			$returntext .= '
 			<div class="homesectioninsta clearfixmain">
 			'. $container_start .'
 			<ul>
-				<li><a href="https://www.instagram.com/ngyachting/" target="_blank">
+				<li><a href="'. $instaurl .'" target="_blank">
 					<div class="instaicon2"><i class="fab fa-instagram fa-fw"></i></div>
 					<h4>Follow us on<br>Instagram</h4>
 				</a></li>
@@ -227,10 +228,10 @@ class Instagramclass {
 				
 				$returntext .= '
 				<li><a href="'. $insta_links .'" target="_blank">
-					<div class="topimg2"><img src="'. $insta_img .'" /></div>
+					<div class="topimg2"><img alt="'. $instarow->caption->text .'" src="'. $insta_img .'" /></div>
 					<div class="imagehover">
 						<div class="instametaholder clearfixmain">
-							<div class="instaicon"><i class="fab fa-instagram fa-fw"></i></div>						
+							<div class="instaicon"><i class="fab fa-instagram fa-fw"></i><span class="com_none">Instagram</span></div>						
 							<div class="instacomment">'. $insta_text .'</div>
 						</div>
 					</div>
@@ -244,6 +245,101 @@ class Instagramclass {
 			</div>
 			';
 		}
+		return $returntext;
+	}
+	
+	public function display_instagram_feed_ajax_call($argu = array()){
+		global $cm;
+		$returntext = '';
+		$hashtag = $argu["hashtag"];
+		
+		$dcon = 5;
+		$instaurl = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' . $this->accesstoken . '&count=' . $dcon;
+		$instaResult = file_get_contents($instaurl);
+		$insta = json_decode($instaResult);
+		$instadata = $insta->data;
+		$found = count($instadata);
+
+		if ($found > 0){
+			$instaurl = $cm->get_systemvar('INURL');
+			$returntext .= '<ul>
+				<li><a href="'. $instaurl .'" target="_blank">
+					<div class="instaicon2"><i class="fab fa-instagram fa-fw"></i></div>
+					<h4>Follow us on<br>Instagram</h4>
+				</a></li>
+			';
+
+			foreach($instadata as $instarow){
+				$insta_img = $instarow->images->low_resolution->url;
+				$insta_text = $cm->fc_word_count($instarow->caption->text, 6);
+				$insta_links = $instarow->link;
+				
+				$returntext .= '
+				<li><a href="'. $insta_links .'" target="_blank">
+					<div class="topimg2"><img alt="'. $instarow->caption->text .'" src="'. $insta_img .'" /></div>
+					<div class="imagehover">
+						<div class="instametaholder clearfixmain">
+							<div class="instaicon"><i class="fab fa-instagram fa-fw"></i><span class="com_none">Instagram</span></div>						
+							<div class="instacomment">'. $insta_text .'</div>
+						</div>
+					</div>
+				</a></li>
+				';
+			}
+
+			$returntext .= '</ul>';
+		}
+
+		$returnval = array(
+            'doc' => $returntext
+        );
+        return json_encode($returnval);
+
+	}	
+	
+	public function display_instagram_feed_home($param = array()){
+		global $cm;
+		$returntext = '';
+		$container_start = '';
+		$container_end = '';
+		
+		$hashtag = $param["hashtag"];
+		$innerpage = round($param["innerpage"]);
+		if ($innerpage == 0){
+			$container_start = '<div class="containersmall clearfixmain">';
+			$container_end = '</div>';
+		}
+
+		$returntext = '
+		<div class="homesectioninsta clearfixmain">
+			'. $container_start .'
+			
+			<div id="instadiv" class="clearfixmain"></div>
+			
+			'. $container_end .'
+		</div>
+		
+		<script type="text/javascript">
+		$(window).load(function(){
+			var targetdiv = "instadiv";
+			var b_sURL = bkfolder + "includes/ajax.php";
+			$.post(b_sURL,
+			{		
+				hashtag:"'. $hashtag .'",
+				subsection:2,
+				az:199,
+				dataType: \'json\'
+			},
+			function(data){
+				//alert (data);
+				data = $.parseJSON(data);
+				content = data.doc;
+				$("#" + targetdiv).html(content);
+			});
+		});
+		</script>
+		';
+
 		return $returntext;
 	}
 }

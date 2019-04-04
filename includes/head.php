@@ -52,17 +52,15 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
     <link href="<?php echo $cm->folder_for_seo; ?>css/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $cm->folder_for_seo; ?>css/animate.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $cm->folder_for_seo; ?>css/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $cm->folder_for_seo; ?>css/slick/slick.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo $cm->folder_for_seo; ?>css/slick/slick-theme.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $cm->folder_for_seo; ?>css/jquery.timepicker.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $cm->folder_for_seo; ?>css/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $cm->folder_for_seo; ?>css/slider.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $cm->folder_for_seo; ?>css/style.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $cm->folder_for_seo; ?>css/style-extend.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $cm->folder_for_seo; ?>css/menu.css?s=1" rel="stylesheet" type="text/css" />    
-    <link href="<?php echo $cm->folder_for_seo; ?>css/jquery.timepicker.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $cm->folder_for_seo; ?>css/colorbox.css" rel="stylesheet" type="text/css" />    
+    <link href="<?php echo $cm->folder_for_seo; ?>css/menu.css?s=1" rel="stylesheet" type="text/css" /> 
     <link href="<?php echo $cm->folder_for_seo; ?>css/responsive.css" rel="stylesheet" type="text/css" />
-    <?php if (isset($slickslider) AND $slickslider == 1){?>
-    <link rel="stylesheet" type="text/css" href="<?php echo $cm->folder_for_seo; ?>css/slick/slick.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $cm->folder_for_seo; ?>css/slick/slick-theme.css" />
-    <?php } ?>
     
     <!--[if IE]>
     <link rel="stylesheet" href="<?php echo $cm->folder_for_seo; ?>css/ie.php?path=<?php echo $cm->folder_for_seo; ?>" type="text/css" media="screen">
@@ -72,7 +70,8 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
 		var bkfolder = "<?php echo $cm->folder_for_seo; ?>";
 		var siteurlfull = "<?php echo $cm->site_url; ?>";
 	</script>
-	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.min.js"></script>     
+	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.min.js"></script> 
+    <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.extra.top.js"></script>    
 </head>
 <body<?php echo $bodyclass; ?>>
 <!--==============================header start=================================-->

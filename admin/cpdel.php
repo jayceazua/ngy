@@ -115,6 +115,9 @@ if ($t=="companylocation"){
 }elseif ($t=="logoscroll"){
     $logoscrollclass->delete_logo($del_id);
 
+}elseif ($t=="model"){
+    $modelclass->delete_model($del_id);
+
 }else{
 	//--
 } 

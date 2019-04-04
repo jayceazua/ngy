@@ -1,8 +1,8 @@
 /* Don't Change */
-.topmenu{box-sizing:border-box; position:fixed; left:0; right:0; top:0; bottom:0; background:rgba(10,27,64, 1); z-index:9999;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.topmenu{box-sizing:border-box; position:fixed; left:0; right:0; top:0; bottom:0; background:rgba(10,27,64, 1); z-index:100;-webkit-tap-highlight-color:rgba(0,0,0,0);}
 @media (max-width: 1099px) {
 	.topmenu {
-		padding:50px 20px!important;
+		padding:80px 20px!important;
 		overflow-y: scroll;
 	}
 }
@@ -115,10 +115,10 @@
 
 @media (min-width: 1100px) {
 /* Don't Change */
-	.topmenu{box-sizing:border-box; position:relative;z-index:9999;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+	.topmenu{box-sizing:border-box; position:relative;z-index:100;-webkit-tap-highlight-color:rgba(0,0,0,0);}
 	.topmenu ul{position:absolute; width: 200px;}
-	.topmenu li{float:left}
-	.topmenu ul li{float: none}
+	.topmenu > li{float:none; display: inline-block; margin:0 3%;}
+	.topmenu ul li{float: none;}
 	.topmenu a{white-space: nowrap}
 	.topmenu ul a{white-space: normal}
 	.topmenu .sm-nowrap > li > a, .topmenu .sm-nowrap > li > :not(ul) a {white-space: nowrap}
@@ -134,13 +134,10 @@
 		background:none;
 		border: none;
 		position: absolute;
-		/*padding-left: calc(5% + 220px);*/
-
-		padding-left: -webkit-calc(5% + 220px);
-		padding-left: -moz-calc(5% + 220px);
-		padding-left: calc(5% + 220px);
-
 		height:0;
+		padding-left: 20%;
+		padding-right: 11%;
+		text-align: center;
 	}
   
 	.topmenu a, 
@@ -156,7 +153,7 @@
 	.topmenu > li > a:focus, 
 	.topmenu > li > a:active, 
 	.topmenu > li > a.highlighted {
-		padding:17px 14px 16px 14px!important;
+		padding:30px 0 29px 0!important;
 		border-bottom: 4px solid transparent;
 		color:#fff;		
 	}
@@ -169,7 +166,7 @@
 	}
   
 	.topmenu > li a.has-submenu {
-		padding-right: 14px!important;
+		/*padding-right: 14px!important;*/
 	}
      
 	.topmenu a .sub-arrow {
@@ -229,8 +226,8 @@
 .topmenu-btn {
   position: fixed;
   background-color: #0a1b40;
-  top:10px;
-  right:20px;
+  top:25px;
+  right:180px;
   display: inline-block;
   width: 28px;
   height: 28px;
@@ -239,7 +236,7 @@
   overflow: hidden;
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  z-index:99999!important;
+  z-index:999!important;
 }
 /* hamburger icon */
 .topmenu-btn-icon, .topmenu-btn-icon:before, .topmenu-btn-icon:after {
@@ -351,3 +348,4 @@
 	padding:4px 0;
 	border:0
 }
+.topmenu a.button{display:inline-block;width:auto;background-color:#2bbed3; font-weight: 500; color:#fff; padding:4px 7px !important;}

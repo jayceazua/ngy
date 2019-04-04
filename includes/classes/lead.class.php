@@ -8,11 +8,11 @@ class Leadclass {
 		"key4" => array("name" => "Sell your Boat", "messagebr" => 0, "id" => 4),
 		//"key5" => array("name" => "Boat Worth", "messagebr" => 0, "id" => 5),
 		"key6" => array("name" => "Newsletter Sign-up", "messagebr" => 1, "id" => 6),
-		"key7" => array("name" => "Contact Model", "messagebr" => 1, "id" => 7),
+		"key7" => array("name" => "Contact YC Model", "messagebr" => 1, "id" => 7),
 		"key8" => array("name" => "Boat Finder", "messagebr" => 0, "id" => 8),
 		//"key9" => array("name" => "Trade-In Welcome", "messagebr" => 0, "id" => 9),
-		//"key10" => array("name" => "Talk To A Specialist", "messagebr" => 0, "id" => 10),
-		//"key11" => array("name" => "Ask For Brochure", "messagebr" => 0, "id" => 11),
+		"key10" => array("name" => "Talk To A Specialist", "messagebr" => 0, "id" => 10),
+		"key11" => array("name" => "Ask For Brochure", "messagebr" => 0, "id" => 11),
 		//"key12" => array("name" => "Service Request", "messagebr" => 0, "id" => 12),
 		//"key13" => array("name" => "Parts Request", "messagebr" => 0, "id" => 13),
 		//"key14" => array("name" => "Finance", "messagebr" => 0, "id" => 14),
@@ -26,7 +26,8 @@ class Leadclass {
 		"key22" => array("name" => "Increase Yacht Value", "messagebr" => 0, "id" => 22),
 		"key23" => array("name" => "Boat Show Registration", "messagebr" => 0, "id" => 23),
 		"key24" => array("name" => "Open Yacht Days", "messagebr" => 0, "id" => 24),
-		"key25" => array("name" => "Chartering Your Yacht", "messagebr" => 0, "id" => 25)
+		"key25" => array("name" => "Chartering Your Yacht", "messagebr" => 0, "id" => 25),
+		"key26" => array("name" => "Contact Local Model", "messagebr" => 1, "id" => 7),
 	);
 	
 	//Lead Form Type Combo
@@ -136,7 +137,7 @@ class Leadclass {
     }
 	
 	public function form_lead_list($p, $pp = 0, $allrec = 0, $broker_id = 0){
-		global $db, $cm, $yachtclass, $ymclass;
+		global $db, $cm, $yachtclass, $ymclass, $modelclass;
         $returntext = '';
         $moreviewtext = '';
 		$limitsql = '';
@@ -214,6 +215,8 @@ class Leadclass {
 				if ($form_type == 7){
 					$retval = json_decode($ymclass->get_manufacturer_model_name_by_id($yacht_id));
 					$yacht_title = $retval->boat_title;
+				}elseif ($form_type == 26){
+					$yacht_title = $modelclass->get_model_name($yacht_id);
 				}else{
 					$yacht_title = $yachtclass->yacht_name($yacht_id);
 				}

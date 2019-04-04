@@ -252,7 +252,7 @@ class Yachtclass_Pop extends Yachtclass{
 		}
 	}
 	
-	//submit contact model submit
+	//submit contact yc model submit
 	public function submit_contact_model_form(){
 		if(($_POST['fcapi'] == "contactmodelsubmit")){
 			global $db, $cm, $frontend, $leadclass, $sdeml;
@@ -358,7 +358,118 @@ class Yachtclass_Pop extends Yachtclass{
 		}
 	}
 	
-	//submit contact model submit
+	//submit contact local model submit
+	public function submit_contact_local_model_form(){
+		if(($_POST['fcapi'] == "contactmodellocalsubmit")){
+			global $db, $cm, $frontend, $leadclass, $modelclass, $sdeml;
+			$fullname = $_POST["fullname"];
+			$email = $_POST["email"];
+			$subject = $_POST["subject"];
+			$message = $_POST["message"];
+			$email2 = $_POST["email2"];
+			$yid = round($_POST["yid"], 0);
+			
+			/*$result = $this->check_user_exist($id, 0, 1);
+			$row = $result[0];
+			$b_fname = $row["fname"];
+			$b_lname = $row["lname"];
+			$b_email = $row["email"];*/
+			$b_fullname = 'Member';
+			
+			//create the session
+			$datastring = $cm->session_field_contact_broker();
+			$cm->create_session_for_form($datastring, $_POST);
+			//end
+			
+			//field data checking
+			$red_pg = $cm->folder_for_seo . "contact-model-local/?m=" . $yid;
+			$cm->field_validation($fullname, '', 'Name', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($subject, '', 'Subject', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($message, '', 'Message', $red_pg, '', '', 1, 'fr_');
+			if ($email2 != ""){
+				header('Location: ' . $cm->get_page_url(0, "popsorry"));
+				exit;
+			}
+			//end
+						
+			//captcha
+			global $captchaclass;
+			$captchaclass->validate_captcha($red_pg);
+			//end
+			
+			//$cm->form_post_check_valid_main('contactmodelsubmit', 1);
+			$cm->delete_session_for_form($datastring);
+			
+			//add to lead
+			$form_type = 26;
+			$param = array(
+				"form_type" => $form_type,
+				"name" => $fullname,
+				"email" => $email,
+				"message" => $message,
+				"broker_id" => 1,
+				"yacht_id" => $yid
+			);
+			$leadclass->add_lead_message($param);
+			//end
+			
+			$model_name = $modelclass->get_model_name($yid);
+			$message = nl2br($message);
+			
+			$messagedetails = '<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			  <tr>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="45%">Chosen Model:</td>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width=""><strong>'. $model_name .'</strong></td>
+			  </tr>
+			  
+			  <tr>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="45%">Name:</td>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($fullname, 1) .'</td>
+			  </tr>
+			
+			  <tr>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Email Address:</td>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($email, 1) .'</td>
+			  </tr>
+			
+			  <tr>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Subject:</td>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($subject, 1) .'</td>
+			  </tr>
+			
+			  <tr>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Message:</td>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($message, 1) .'</td>
+			  </tr>
+			</table>';
+			
+			$send_ml_id = 2;
+			$msg = $db->total_record_count("select pdes as ttl from tbl_system_email where id = '". $send_ml_id ."'");
+			$mail_subject = $db->total_record_count("select email_subject as ttl from tbl_system_email where id = '". $send_ml_id ."'");
+			$companyname = $cm->sitename;
+			
+			$msg = str_replace("#name#", $cm->filtertextdisplay($b_fullname), $msg);
+			$msg = str_replace("#messagedetails#", $messagedetails, $msg);
+			$msg = str_replace("#companyname#", $companyname, $msg);
+			$mail_subject = str_replace("#companyname#", $companyname, $mail_subject);
+			
+			$mail_fm = $cm->admin_email();
+			$mail_to = $cm->admin_email_to();
+			$mail_cc = '';
+			$mail_reply = $cm->filtertextdisplay($email);
+			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $mail_subject, $msg, $cm->site_url, $news_footer_u);
+			
+			$pgid = 13;
+			$redpageurl = $cm->get_page_url(0, "popthankyou") . "?c=" . $pgid;
+			$pagecontent = $cm->get_common_field_name('tbl_page', 'file_data', $pgid);
+			$_SESSION["thnk"] = $pagecontent;
+			header('Location: ' . $redpageurl);
+			exit;
+		}
+	}
+	
+	//submit contact resource submit
 	public function submit_contact_resource_form(){
 		if(($_POST['fcapi'] == "contactresourcesubmit")){
 			global $db, $cm, $frontend, $sdeml;

@@ -3,10 +3,10 @@ class Captchaclass {
 	
 	//call captcha
 	public function call_captcha(){
-		global $cm;
+		/*global $cm;
 		//$publickey = "6LcwGwgUAAAAAJN4_TdrEza_l3sM3iSk0QXfC0L_";
 		//$captext = '<div class="g-recaptcha" data-sitekey="'. $publickey .'"></div>';
-		$captext = '<div class="g-recaptcha defaultcaptcha"></div>';
+		$captext = '<div class="g-recaptcha defaultcaptcha"></div>';*/
 		return $captext;
 	}
 	
@@ -18,16 +18,16 @@ class Captchaclass {
 		$buttonid = $param["buttonid"];
 		//end
 		
-		//$captext = '<button id="'. $buttonid .'" type="submit" class="button g-recaptcha invisible-recaptcha" value="Submit">Submit</button>';
-		$captext = '
+		$captext = '<button id="'. $buttonid .'" type="submit" class="button g-recaptcha invisible-recaptcha" value="Submit" data-callback="onSubmitform">Submit</button>';
+		/*$captext = '
 		<div id="'. $buttonid .'" class="g-recaptcha invisible-recaptcha" data-sitekey="6LceTHEUAAAAAM8okTHbTXQOjvcdv0MuqbenDmNZ" data-size="invisible"></div>
-		';
+		';*/
 		return $captext;
 	}
 	
 	//validate captcha	
 	public function validate_captcha($red_pg, $wh_ajax = 0){
-		global $cm;
+		/*global $cm;
 		$privatekey = "6LcwGwgUAAAAAKefQtzyDNCs7TPV8f-xI-SmG0Nl";
 		$verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$privatekey.'&response='.$_POST['g-recaptcha-response']);
         $responseData = json_decode($verifyResponse);
@@ -45,7 +45,8 @@ class Captchaclass {
 				header('location:' .$red_pg);
 				exit;
 			}
-		}
+		}*/
+		return 1;
 	}
 	
 	//validate captcha invisible

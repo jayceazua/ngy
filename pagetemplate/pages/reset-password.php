@@ -33,12 +33,16 @@ include($bdr."includes/head.php");
                   <p>Username: <?php echo $suidd; ?></p>
               </li>
               <li>
+                  <label>
                   <p>Password</p>
                   <input type="password" id="d_password" name="d_password" class="input" />
+                  </label>
               </li>
               <li>
+                  <label>
                   <p>Confirm</p>
                   <input type="password" id="cd_password" name="cd_password" class="input" />
+                  </label>
               </li>
               <li>
                   <input type="submit" value="Update" class="button" />

@@ -47,7 +47,7 @@ if ($blog_image != ""){
 	$imagefolder = 'blogimage/';
 	if ($image_display_post == 1){	
 	$blog_image_text = '
-	<div class="leftfloatdiv"><img src="'. $cm->folder_for_seo . $imagefolder . $blog_image .'" alt=""></div>
+	<div class="leftfloatdiv"><img src="'. $cm->folder_for_seo . $imagefolder . $blog_image .'" alt="'. $$name .'"></div>
 	';
 	}
 	$imagelink = $cm->site_url . '/' . $imagefolder . $blog_image;

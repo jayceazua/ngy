@@ -1239,4 +1239,17 @@ if ($az == 156){
 		echo $boatwatcherclass->boat_watcher_delete($boatwatchercode);
 	}	
 }
+
+if ($az == 199){
+	$subsection = round($_POST["subsection"], 0);
+
+	//Instagram feed - indirect way
+	if ($subsection == 2){
+		$hashtag = $_POST["hashtag"];			
+		$param = array(
+			"hashtag" => $hashtag
+		);
+		echo $instagramclass->display_instagram_feed_ajax_call($param);
+	}
+}
 ?>

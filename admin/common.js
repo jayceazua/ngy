@@ -372,15 +372,16 @@ $(document).ready(function(){
 		}
 	});
 	
-	//popup
-    $('.openpopup').colorbox({
-		iframe:true,
-        width: "90%",
-		height: "90%",
-		maxWidth: 560,
-		maxHeight: 560,
-		fixed:true,
-		current:''
+	$('.openpopup').fancybox({
+		toolbar  : false,
+		smallBtn : true,
+		iframe : {
+			preload : false,
+			css : {
+				width  : "90%",
+				"max-width": "560px"
+        	}
+		}
     });
 	
 	$(".backbutton").click(function() {

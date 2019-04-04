@@ -2415,7 +2415,7 @@ class Yachtclass {
 			<div><a href="'. $profile_url .'">View Profile</a></div>
 			';			
         if ($displayoption == 1){ 
-				$returntxt .= '<div><a '. $gaeventtracking .' href="'. $cm->folder_for_seo.'contact-broker/?id='. $cuser_id .'" class="contactbroker button contact" data-fancybox-type="iframe"><span>Contact<span></a></div>';
+				$returntxt .= '<div><a '. $gaeventtracking .' href="javascript:void(0);" data-src="'. $cm->folder_for_seo.'contact-broker/?id='. $cuser_id .'" class="contactbroker button contact" data-type="iframe"><span>Contact<span></a></div>';
 		}
         $returntxt .= '</div>
         ';		
@@ -2785,28 +2785,28 @@ class Yachtclass {
 		$blog_url = htmlspecialchars($row['blog_url']);
 		
 		if ($facebook_url != ""){
-			$socilatext .= '<a href="'. $facebook_url .'" target="_blank" title="Facebook"><i class="fab fa-facebook-square fa-fw"></i></a>';
+			$socilatext .= '<a href="'. $facebook_url .'" target="_blank" title="Facebook"><i class="fab fa-facebook-square fa-fw"></i><span class="com_none">Facebook</span></a>';
 		}
 		if ($twitter_url != ""){
-			$socilatext .= '<a href="'. $twitter_url .'" target="_blank" title="Twitter"><i class="fab fa-twitter-square fa-fw"></i></a>';
+			$socilatext .= '<a href="'. $twitter_url .'" target="_blank" title="Twitter"><i class="fab fa-twitter-square fa-fw"></i><span class="com_none">Twitter</span></a>';
 		}
 		if ($linkedin_url != ""){
-			$socilatext .= '<a href="'. $linkedin_url .'" target="_blank" title="LinkedIn"><i class="fab fa-linkedin fa-fw"></i></a>';
+			$socilatext .= '<a href="'. $linkedin_url .'" target="_blank" title="LinkedIn"><i class="fab fa-linkedin fa-fw"></i><span class="com_none">Linkedin</span></a>';
 		}
 		if ($youtube_url != ""){
-			$socilatext .= '<a href="'. $youtube_url .'" target="_blank" title="YouTube"><i class="fab fa-youtube-square fa-fw"></i></a>';
+			$socilatext .= '<a href="'. $youtube_url .'" target="_blank" title="YouTube"><i class="fab fa-youtube-square fa-fw"></i><span class="com_none">YouTube</span></a>';
 		}
 		if ($googleplus_url != ""){
-			$socilatext .= '<a href="'. $googleplus_url .'" target="_blank" title="Google Plus"><i class="fab fa-google-plus-square fa-fw"></i></a>';
+			$socilatext .= '<a href="'. $googleplus_url .'" target="_blank" title="Google Plus"><i class="fab fa-google-plus-square fa-fw"></i><span class="com_none">Google Plus</span></a>';
 		}
 		if ($instagram_url != ""){
-			$socilatext .= '<a href="'. $instagram_url .'" target="_blank" title="Instagram"><i class="fab fa-instagram fa-fw"></i></a>';
+			$socilatext .= '<a href="'. $instagram_url .'" target="_blank" title="Instagram"><i class="fab fa-instagram fa-fw"></i><span class="com_none">Instagram</span></a>';
 		}
 		if ($pinterest_url != ""){
-			$socilatext .= '<a href="'. $pinterest_url .'" target="_blank" title="Pinterest"><i class="fab fa-pinterest-square fa-fw"></i></a>';
+			$socilatext .= '<a href="'. $pinterest_url .'" target="_blank" title="Pinterest"><i class="fab fa-pinterest-square fa-fw"></i><span class="com_none">Pinterest</span></a>';
 		}
 		if ($blog_url != ""){
-			$socilatext .= '<a href="'. $blog_url .'" target="_blank" title="Blog"><i class="fas fa-rss-square fa-fw"></i></a>';
+			$socilatext .= '<a href="'. $blog_url .'" target="_blank" title="Blog"><i class="fas fa-rss-square fa-fw"></i><span class="com_none">Blog</span></a>';
 		}
 		
 		if ($socilatext != ""){
@@ -2854,6 +2854,7 @@ class Yachtclass {
 		$overview = $param["overview"];
 		$city = $param["city"];
 		$state = $param["state"];
+		$vessel_name = $param["vessel_name"];
 		$company_id = round($param["company_id"], 0);
 		//end
 		
@@ -2875,6 +2876,7 @@ class Yachtclass {
 			$m1 = str_replace("#companyname#", $cname, $m1);
 			$m1 = str_replace("#city#", $city, $m1);
 			$m1 = str_replace("#state#", $state, $m1);
+			$m1 = str_replace("#vesselname#", $vessel_name, $m1);
 		}
 		if ($m2 == ""){
 			$m2 = $default_meta->m2;
@@ -2888,6 +2890,7 @@ class Yachtclass {
 				$m2 = str_replace("#companyname#", $cname, $m2);
 				$m2 = str_replace("#city#", $city, $m2);
 				$m2 = str_replace("#state#", $state, $m2);
+				$m2 = str_replace("#vesselname#", $vessel_name, $m2);
 			}
 		}
 		if ($m3 == ""){ 
@@ -2899,6 +2902,7 @@ class Yachtclass {
 			$m3 = str_replace("#companyname#", $cname, $m3);
 			$m3 = str_replace("#city#", $city, $m3);
 			$m3 = str_replace("#state#", $state, $m3);
+			$m3 = str_replace("#vesselname#", $vessel_name, $m3);
 		}
 		
 		$final_meta = array("m1" => $m1, "m2" => $m2, "m3" => $m3);
@@ -5989,7 +5993,10 @@ class Yachtclass {
                 ${$key} = $cm->filtertextdisplay($val);
             }
             $addressfull = $this->get_yacht_address($id);
-            $ppath = $this->get_yacht_first_image($id);
+			
+            $boatimg_data_ar = json_decode($this->get_yacht_first_image($id, 1));				
+			$ppath = $boatimg_data_ar->imgpath;
+			$imgalt = $boatimg_data_ar->alttag;
             //$details_url = $cm->get_page_url($id, "yacht");
 			
 			$b_ar = array(
@@ -6017,9 +6024,9 @@ class Yachtclass {
 
             $contentval = '
             <div class="listing-map-label listing-status-for-sale">
-                <img class="listing-thumbnail wp-post-image" src="'. $cm->folder_for_seo . 'yachtimage/'. $listing_no .'/' . $ppath .'">
+                <img alt="'. $imgalt .'" class="listing-thumbnail" src="'. $cm->folder_for_seo . 'yachtimage/'. $listing_no .'/' . $ppath .'">
                 <a href="'. $details_url .'">
-                    <img class="listing-thumbnail-big wp-post-image" src="'. $cm->folder_for_seo . 'yachtimage/'. $listing_no .'/' . $ppath .'">
+                    <img alt="'. $imgalt .'" class="listing-thumbnail-big" src="'. $cm->folder_for_seo . 'yachtimage/'. $listing_no .'/' . $ppath .'">
                 </a>
                 <div class="map-label-content">
                     <span class="listing-address"><a href="'. $details_url .'">'. $addressfull .'</a></span>
@@ -6109,9 +6116,9 @@ class Yachtclass {
 		if ($loggedin_member_id > 0){			
 			$check_favorites = $this->check_yacht_favorites($id);
 			if ($check_favorites > 0){
-				$favtext = '<a id="favlist-'. $id .'" yid="'. $id .'" rtsection="0" href="javascript:void(0);" class="yachtfv removefavboat" title="Your favorite. Remove?"></a>';
+				$favtext = '<a id="favlist-'. $id .'" yid="'. $id .'" rtsection="0" href="javascript:void(0);" class="yachtfv removefavboat" title="Your favorite. Remove?"><span class="com_none">Remove</span></a>';
 			}else{
-				$favtext = '<a id="favlist-'. $id .'" yid="'. $id .'" rtsection="1" href="javascript:void(0);" class="yachtfv addfavboat" title="Add to favorites"></a>';
+				$favtext = '<a id="favlist-'. $id .'" yid="'. $id .'" rtsection="1" href="javascript:void(0);" class="yachtfv addfavboat" title="Add to favorites"><span class="com_none">Favorites</span></a>';
 			}
 			
 			/*if ($check_favorites > 0){
@@ -6132,7 +6139,7 @@ class Yachtclass {
 			  <dd class="options">'. $optiontext .'</dd>
 			</dl>';	
 		}else{
-			$favtext = '<a id="favlist-'. $id .'" href="'. $cm->folder_for_seo .'pop-login/?chkid='. $id .'" class="loginpop addfavboat" title="Add to favorites"></a>';
+			$favtext = '<a id="favlist-'. $id .'" href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'pop-login/?chkid='. $id .'" class="loginpop addfavboat" data-type="iframe" title="Add to favorites"><span class="com_none">Favorites</span></a>';
 		}
 		
 		$broker_ar = $cm->get_table_fields('tbl_user', 'fname, lname, phone', $broker_id);
@@ -6140,7 +6147,7 @@ class Yachtclass {
 		$lname = $broker_ar[0]["lname"];
 		$brokername = $fname .' '. $lname;
 		$gaeventtracking = $this->google_event_tracking_code('broker', $brokername);
-		$c_buttontext .= '<a '.$gaeventtracking.' href="'. $cm->get_page_url(0, "pop-lead-checkout") .'?id='. $broker_id . '&yid='. $id . '&servicerequest=1" class="contactbroker button buttonemail" data-fancybox-type="iframe">Contact</a>';
+		$c_buttontext .= '<a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-lead-checkout") .'?id='. $broker_id . '&yid='. $id . '&servicerequest=1" class="contactbroker button buttonemail" data-type="iframe">Contact</a>';
 		
 		$totalboatview = $this->get_total_view_boat(array("boatid" => $id, "daysint" => $this->mostviewdday));
 		
@@ -6498,7 +6505,7 @@ class Yachtclass {
 							<div class="detailsbutton"><a class="button arrow" href="'. $details_url .'">Details</a></div>
 						</div>
 					</li>
-					<li>'. $custom_label_txt .'<a href="'. $details_url .'"><img class="full" src="'. $cm->folder_for_seo . $imagefolder . $ppath .'" alt=""></a></li>	
+					<li>'. $custom_label_txt .'<a href="'. $details_url .'"><img class="full" src="'. $cm->folder_for_seo . $imagefolder . $ppath .'" alt="'. $imgalt .'"></a></li>	
 				</ul>';
 				$counter++;			 
             }
@@ -6506,8 +6513,8 @@ class Yachtclass {
 			$nextprev_text = '';
 			if($counter > 1){
 				$nextprev_text = '
-				<div class="featuredboat_prev"><img src="'. $cm->folder_for_seo .'images/prev2.png"></div>
-				<div class="featuredboat_next"><img src="'. $cm->folder_for_seo .'images/next2.png"></div>
+				<div class="featuredboat_prev"><img alt="Previous" src="'. $cm->folder_for_seo .'images/prev2.png"></div>
+				<div class="featuredboat_next"><img alt="Next" src="'. $cm->folder_for_seo .'images/next2.png"></div>
 				';
 			}
 
@@ -6530,7 +6537,7 @@ class Yachtclass {
 					autoplayTimeout: '. $time_value .',
 					animateOut: \'fadeOut\',
 					nav: false,
-					navText: ["<span class=\"featuredboatprev\"></span>","<span class=\"featuredboatnext\"></span>"],
+					navText: ["<span class=\"featuredboatprev\">P</span>","<span class=\"featuredboatnext\">N</span>"],
 					dots: false,
 					margin: 0
 				});
@@ -7960,12 +7967,17 @@ class Yachtclass {
 	public function display_yacht_slider_full($yacht_id){
         global $db, $cm;
         $returntxt = '';
+		$gallerylink = 0;
 
         $sql = "select * from tbl_yacht_photo where yacht_id = '". $yacht_id ."' and imgpath != '' and status_id = 1 order by rank limit 0, 10";
         $result = $db->fetch_all_array($sql);
         $found = count($result);
         if ($found > 0){
+			if ($found > 1){
+				$gallerylink = 1;
+			}
 			$listing_no = $this->get_yacht_no($yacht_id);
+			$yacht_title = $this->yacht_name($yacht_id);
             $status_id = $cm->get_common_field_name('tbl_yacht', 'status_id', $yacht_id);
 			$custom_label_id = $cm->get_common_field_name('tbl_yacht', 'custom_label_id', $yacht_id);
 			$custom_label_txt = '';
@@ -7985,7 +7997,7 @@ class Yachtclass {
 			}
 
             $returntxt .= '
-            <div class="product-slider-wrap">
+            <div class="product-slider-wrap clearfixmain">
                 '. $custom_label_txt .'
                 <ul class="product-slider">
                 ';
@@ -7993,21 +8005,33 @@ class Yachtclass {
                 $im_title = $row['im_title'];
                 $im_descriptions = $row['im_descriptions'];
                 $imgpath = $row['imgpath'];
-                $returntxt .= '<li><img src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'" /></li>'
-                ;
+				if ($im_title == ""){
+					$im_title = $yacht_title;
+				}
+                $returntxt .= '<li><a class="fc-slick-pop-open" href="javascript:void(0);"><img src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'" /></a></li>';
             }
 
             $returntxt .= '
                 </ul>
-				<a class="prev" href="#" title="Previous"></a><a class="next" href="#" title="Next"></a>
+				<a class="prev" href="#" title="Previous">Prev</a><a class="next" href="#" title="Next">Next</a>
 				<div id="pager" class="pager"></div>
             </div>
-                ';
+            ';
+			
+			/*if ($gallerylink == 1){
+				if ($cm->isMobileDevice()){
+					$returntxt .= '
+					<div class="clearfixmain">
+						<a class="button buttonfullcenter fc-slick-pop-open" href="javascript:void(0);">View Gallery</a>
+					</div>
+					';
+				}
+			}*/
         }
         return $returntxt;
     }
 	
-	public function display_yacht_slider_slick($yacht_id){
+	public function display_yacht_slider_slick($yacht_id, $extraclass = 'pop'){
         global $db, $cm;
         $returntxt = '';
 		$thumbnailtext = '';
@@ -8017,6 +8041,9 @@ class Yachtclass {
         $result = $db->fetch_all_array($sql);
         $found = count($result);
         if ($found > 1){
+			$sliderclassmain = 'slider-for-' . $extraclass;
+			$sliderclassnav = 'slider-nav-' . $extraclass;
+			
 			$listing_no = $this->get_yacht_no($yacht_id);
             $status_id = $cm->get_common_field_name('tbl_yacht', 'status_id', $yacht_id);
 			$custom_label_id = $cm->get_common_field_name('tbl_yacht', 'custom_label_id', $yacht_id);
@@ -8039,7 +8066,7 @@ class Yachtclass {
             $returntxt .= '
             <div class="fc_slick_slider clearfixmain">
                 '. $custom_label_txt .'
-                <div class="slider-for">
+                <div class="slider-for '. $sliderclassmain .'">
                 ';
 				
 				$counter_sl = 0;
@@ -8060,25 +8087,24 @@ class Yachtclass {
             $returntxt .= '
                 </div>
 				
-				<div class="slider-nav">'. $thumbnailtext .'</div>
+				<div class="slider-nav '. $sliderclassnav .'">'. $thumbnailtext .'</div>
             </div>';
 			
 			$returntxt .= '
-			<script type="text/javascript" src="'. $cm->folder_for_seo .'js/slick.min.js"></script>
 			<script>
 			jQuery(document).ready(function(){
-				jQuery(".slider-for").slick({
+				jQuery(".'. $sliderclassmain .'").slick({
 					slidesToShow: 1,
 					slidesToScroll: 1,
 					arrows: true,
 
 					fade: true,
-					asNavFor: ".slider-nav"
+					asNavFor: ".'. $sliderclassnav .'"
 				});
-				jQuery(".slider-nav").slick({
+				jQuery(".'. $sliderclassnav .'").slick({
 					slidesToShow: 8,
 					slidesToScroll: 1,
-					asNavFor: ".slider-for",
+					asNavFor: ".'. $sliderclassmain .'",
 					dots: false,
 					arrows: false,	
 					centerMode: true,
@@ -8127,7 +8153,7 @@ class Yachtclass {
 	
 	public function display_yacht_slider_slick_main($yacht_id){
 		 global $db, $cm;
-		 $slider_ar = json_decode($this->display_yacht_slider_slick($yacht_id));
+		 $slider_ar = json_decode($this->display_yacht_slider_slick($yacht_id, 'main'));
 		 return $slider_ar->returntxt;
 	}
 	
@@ -8151,7 +8177,7 @@ class Yachtclass {
 			';
 			
 			foreach($gallery_4pic as $gallery_4pic_row){
-				$gallery_text .= '<li><a class="fc-slick-pop-open" href="javascript:void(0);"><img src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/'. $gallery_4pic_row .'" /></a></li>';
+				$gallery_text .= '<li><a class="fc-slick-pop-open" href="javascript:void(0);"><img alt="Open Gallery" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/'. $gallery_4pic_row .'" /></a></li>';
 			}
 			
 			$gallery_text .= ' 
@@ -8162,7 +8188,7 @@ class Yachtclass {
 			 
 			$returntxt = '
 			<div id="overlay2" class="animated hide">
-				<a class="fc-close-contact" c="overlay2" href="javascript:void(0);"><i class="fas fa-times"></i></a>
+				<a class="fc-close-contact" c="overlay2" href="javascript:void(0);"><i class="fas fa-times"></i><span class="com_none">Close</span></a>
 				<div class="fc_slick_slider_top clearfixmain">
 				'. $returntxt .'
 				</div>
@@ -8172,8 +8198,8 @@ class Yachtclass {
 				$(document).ready(function(){
 					$(".fc-slick-pop-open").click(function(){
 						$("#overlay2").fadeIn(300);
-						$(".slider-for")[0].slick.refresh();
-						$(".slider-nav")[0].slick.refresh();
+						$(".slider-for-pop")[0].slick.refresh();
+						$(".slider-nav-pop")[0].slick.refresh();
 					});
 					
 					$(".fc-close-contact").click(function(){
@@ -8202,6 +8228,7 @@ class Yachtclass {
         $found = count($result);		 
         if ($found > 0){
 			$listing_no = $this->get_yacht_no($yacht_id);
+			$yacht_title = $this->yacht_name($yacht_id);
             $status_id = $cm->get_common_field_name('tbl_yacht', 'status_id', $yacht_id);
 			$custom_label_id = $cm->get_common_field_name('tbl_yacht', 'custom_label_id', $yacht_id);
 			$custom_label_txt = '';
@@ -8233,11 +8260,15 @@ class Yachtclass {
                 $im_descriptions = $cm->filtertextdisplay($row['im_descriptions']);
                 $imgpath = $row['imgpath'];
 				
+				if ($im_title == ""){
+					$im_title = $yacht_title;
+				}
+				
 				if ($c == 0){
 					$firstimage = $imgpath;
-					$firstimagealttag = $im_descriptions;
+					$firstimagealttag = $im_title;
 				}
-				$carousel_slide_text .= '<div><a class="fancybox" rel="gallery"  href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'"><img alt="'. $im_descriptions .'" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/big/'. $imgpath .'" /></a></div>';
+				$carousel_slide_text .= '<div><a class="fancybox" data-fancybox="gallery"  href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'"><img alt="'. $im_title .'" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/big/'. $imgpath .'" /></a></div>';
 				$c++;
 			}
 	
@@ -8303,6 +8334,7 @@ class Yachtclass {
         $found = count($result);
         if ($found > 0){
 			$listing_no = $this->get_yacht_no($yacht_id);
+			$yacht_title = $this->yacht_name($yacht_id);
             $returntxt .= '
             <h3 class="title">Gallery</h3>
             <div class="con clearfixmain">
@@ -8317,7 +8349,10 @@ class Yachtclass {
                 $im_title = $row['im_title'];
                 $im_descriptions = $row['im_descriptions'];
                 $imgpath = $row['imgpath'];
-                $returntxt .= '<li><a class="fancybox" rel="gallery"  href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'"><img src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" /></a></li>';
+				if ($im_title == ""){
+					$im_title = $yacht_title;
+				}
+                $returntxt .= '<li><a class="fancybox" data-fancybox="gallery"  href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'"><img alt="'. $im_title .'" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" /></a></li>';
             }
 
             $returntxt .= '
@@ -8338,6 +8373,7 @@ class Yachtclass {
         $found = count($result);
         if ($found > 0){
 			$listing_no = $this->get_yacht_no($yacht_id);
+			$yacht_title = $this->yacht_name($yacht_id);
             $returntxt .= '
 			<div class="clearfixmain"><a href="javascript:void(0);" ctabid="8" class="customboattab">Gallery</a></div>
 			<div id="ctab8" class="customboattabcontent com_none clearfixmain">
@@ -8348,8 +8384,10 @@ class Yachtclass {
                 $im_title = $row['im_title'];
                 $im_descriptions = $row['im_descriptions'];
                 $imgpath = $row['imgpath'];
-
-                $returntxt .= '<li><a class="fancybox" data-fancybox-group="gallery"  href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'"><img alt="'. $im_title .'" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" /></a></li>';
+				if ($im_title == ""){
+					$im_title = $yacht_title;
+				}
+                $returntxt .= '<li><a class="fancybox" data-fancybox="gallery"  href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'"><img alt="'. $im_title .'" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" /></a></li>';
             }
 
             $returntxt .= '
@@ -8382,7 +8420,7 @@ class Yachtclass {
                 $im_descriptions = $row['im_descriptions'];
                 $imgpath = $row['imgpath'];
 
-                $returntxt .= '<li><a class="fancybox" data-fancybox-group="gallery"  href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'"><img alt="'. $im_title .'" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" /></a></li>';
+                $returntxt .= '<li><a class="fancybox" data-fancybox="gallery"  href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'"><img alt="'. $im_title .'" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" /></a></li>';
             }
 
             $returntxt .= '
@@ -8566,7 +8604,7 @@ class Yachtclass {
 			
 			$brokercontactinfo = '
 			<div class="brokercontactinfo">
-				<a '.$gaeventtracking.' href="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $yacht_id .'" class="contactbroker brokeemailcontact" data-fancybox-type="iframe"><span>'. $contact_button_text .'</span></a><br>
+				<a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $yacht_id .'" class="contactbroker brokeemailcontact" data-type="iframe"><span>'. $contact_button_text .'</span></a><br>
 				<a class="tel brokerofficephone" href="tel:'. $officephone .'">'. $officephone .'</a>
 			</div>';
 		}else{
@@ -8582,7 +8620,7 @@ class Yachtclass {
 			$total_y = $this->get_total_yacht_by_broker(array("broker_id" => $broker_id, "status_id" => 1));
 			
 			$brokername = $fname .' '. $lname;
-			$broker_photo_text = '<div class="brokerphoto"><img class="full" src="'. $cm->folder_for_seo .'userphoto/big/'. $member_image .'" alt=""></div>';
+			$broker_photo_text = '<div class="brokerphoto"><img class="full" src="'. $cm->folder_for_seo .'userphoto/big/'. $member_image .'" alt="'. $brokername .'"></div>';
 			$broker_text = '
 			<div class="broker clearfixmain">				
 				'. $broker_photo_text .'
@@ -8605,7 +8643,7 @@ class Yachtclass {
 			<div class="brokercontactinfo clearfixmain">
 				<ul>
 				 	<li>
-					<a '.$gaeventtracking.' href="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $yacht_id .'" class="contactbroker brokeemailcontact" data-fancybox-type="iframe"><span>'. $contact_button_text .'</span></a><br>
+					<a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $yacht_id .'" class="contactbroker brokeemailcontact" data-type="iframe"><span>'. $contact_button_text .'</span></a><br>
 					'. $phonetext .'
 					</li>
 					<li><a class="button" href="'. $profile_url .'">View Profile</a></li>
@@ -8681,11 +8719,11 @@ class Yachtclass {
 				
 		//phone
 		$phone_copy = $cm->get_systemvar('PCLNW');
-		
+		$brokername = $cm->sitename;
         $returntxt = '
         <h3>Presented by :</h3>
         <div class="broker clearfixmain">
-            <img src="'. $cm->folder_for_seo .'images/logo-color.png" alt="">
+            <img src="'. $cm->folder_for_seo .'images/logo-color.png" alt="'. $brokername .'">
 			<div class="brokermeta clearfixmain">
 				<div class="locationaddress">'. $addressfull .'</div>					
 			</div>
@@ -8694,7 +8732,7 @@ class Yachtclass {
 		
         $returntxt .= '
 		<div class="ph"><a class="tel" href="tel:'. $phone_copy .'"><span>'. $phone_copy .'</span></a></div>
-		<div class="cb cb2"><a href="'. $cm->folder_for_seo .'contact-model/?m='. $modelid . '" class="contactbroker button contact" data-fancybox-type="iframe"><span>Contact Us</span></a></div>
+		<div class="cb cb2"><a href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-model/?m='. $modelid . '" class="contactbroker button contact" data-type="iframe"><span>Contact Us</span></a></div>
 		'. $boat_button_text .'
         ';
 		
@@ -8871,7 +8909,7 @@ class Yachtclass {
                     ';
 			if ($loggedin_member_id == $user_id){
                 $returntext .= '
-				<a svid="'. $searchno .'" href="'. $cm->folder_for_seo .'emailsearch/?id='. $searchno .'" class="emailsearch" title="Email Search"  data-fancybox-type="iframe"><img src="'. $cm->folder_for_seo .'images/email.png" alt="Email Search" /></a>
+				<a svid="'. $searchno .'" href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'emailsearch/?id='. $searchno .'" class="emailsearch" title="Email Search"  data-type="iframe"><img src="'. $cm->folder_for_seo .'images/email.png" alt="Email Search" /></a>
 				<a svid="'. $searchno .'" href="javascript:void(0);" class="removesearch" title="Remove Search"><img src="'. $cm->folder_for_seo .'images/del.png" alt="Remove Search" /></a>
 				';
 			}
@@ -10504,7 +10542,7 @@ class Yachtclass {
 		$returntext = '
 		<div class="'. $desktop_mobile_class .' clearfixmain">
 			<ul>
-				<li><a '.$gaeventtracking.' href="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-fancybox-type="iframe">Email Broker</a></li>
+				<li><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-type="iframe">Email Broker</a></li>
 				<li><a href="tel:'. $phone .'" class="tel button boatbuttonphone">Call Broker</a></li>
 			</ul>
 		</div>
@@ -10544,9 +10582,9 @@ class Yachtclass {
 		$gaeventtracking = $this->google_event_tracking_code('broker', $brokername);
 		
 		$returntext = '
-		<li><a '.$gaeventtracking.' href="'. $cm->get_page_url(0, "pop-lead-checkout") .'?id='. $broker_id . '&yid='. $boat_id . '&servicerequest=1" class="contactbroker button boatbuttonemail" data-fancybox-type="iframe">Email Broker</a></li>
+		<li><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-lead-checkout") .'?id='. $broker_id . '&yid='. $boat_id . '&servicerequest=1" class="contactbroker button boatbuttonemail" data-type="iframe">Email Broker</a></li>
 		<li><a href="tel:'. $phone .'" class="tel button boatbuttonphone">Call Broker</a></li>
-		<li><a href="'. $cm->get_page_url(0, "pop-lead-checkout") .'?yid='. $boat_id . '&servicerequest=2" class="contactbroker button boatbuttonfinanced" data-fancybox-type="iframe">Get Financed</a></li>			
+		<li><a href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-lead-checkout") .'?yid='. $boat_id . '&servicerequest=2" class="contactbroker button boatbuttonfinanced" data-type="iframe">Get Financed</a></li>			
 		';
 		
 		return $returntext;
@@ -10559,8 +10597,8 @@ class Yachtclass {
 		//end
 
 		$returntext = '
-		<li><a href="'. $cm->get_page_url(0, "pop-lead-checkout") .'?yid='. $boat_id . '&servicerequest=3" class="contactbroker button boatbuttonpricedown" data-fancybox-type="iframe">Email Me When Price Drop</a></li>
-		<li><a href="'. $cm->get_page_url(0, "pop-lead-checkout") .'?yid='. $boat_id . '&servicerequest=4" class="contactbroker button boatbuttonreview">Send Me Reviews</a></li>			
+		<li><a href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-lead-checkout") .'?yid='. $boat_id . '&servicerequest=3" class="contactbroker button boatbuttonpricedown" data-type="iframe">Email Me When Price Drop</a></li>
+		<li><a href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-lead-checkout") .'?yid='. $boat_id . '&servicerequest=4" class="contactbroker button boatbuttonreview" data-type="iframe">Send Me Reviews</a></li>			
 		';
 		
 		return $returntext;
@@ -10598,9 +10636,9 @@ class Yachtclass {
 		$gaeventtracking = $this->google_event_tracking_code('broker', $brokername);		
 		
 		if ($template == 1){
-			$returntext = '<div class="spacertop"><a '.$gaeventtracking.' href="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-fancybox-type="iframe">Send Inquiry</a></div>';
+			$returntext = '<div class="spacertop"><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-type="iframe">Send Inquiry</a></div>';
 		}else{
-			$returntext = '<li><a '.$gaeventtracking.' href="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-fancybox-type="iframe">Send Inquiry</a></li>';
+			$returntext = '<li><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-type="iframe">Send Inquiry</a></li>';
 		}		
 		
 		return $returntext;
@@ -10656,7 +10694,7 @@ class Yachtclass {
 			<div class="spacertop2 clearfixmain">
 			<ul>
 				<li class="title">Broker Features: </li>
-				<li><a href="'. $cm->folder_for_seo .'pop-send-email-client/?lno='. $listing_no .'" title="Email To Client" class="emailclient" data-fancybox-type="iframe"><img src="'. $cm->folder_for_seo .'images/emailclient.png" alt=""></a></li>
+				<li><a href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'pop-send-email-client/?lno='. $listing_no .'" title="Email To Client" class="emailclient" data-type="iframe"><img src="'. $cm->folder_for_seo .'images/emailclient.png" alt=""></a></li>
 			</ul>
 			</div>
 			';
@@ -10665,7 +10703,7 @@ class Yachtclass {
 			<div class="spacertop2 clearfixmain">
 				<ul>
 					<li class="title">Email To My Broker: </li>
-					<li><a href="'. $cm->folder_for_seo .'pop-send-email-my-broker/?lno='. $listing_no .'" title="Email To My Broker" class="emailclient" data-fancybox-type="iframe"><img src="'. $cm->folder_for_seo .'images/emailmybroker.png" alt=""></a></li>
+					<li><a href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'pop-send-email-my-broker/?lno='. $listing_no .'" title="Email To My Broker" class="emailclient" data-type="iframe"><img src="'. $cm->folder_for_seo .'images/emailmybroker.png" alt=""></a></li>
 				</ul>
 			</div>
 			';
@@ -10710,7 +10748,7 @@ class Yachtclass {
 			<div class="social lefticoncol clearfixmain">
 				<ul>
 				    <li class="title">Email To My Broker: </li>
-					<li><a href="'. $cm->folder_for_seo .'pop-send-email-my-broker/?lno='. $listing_no .'" title="Email To My Broker" class="emailclient" data-fancybox-type="iframe"><img src="'. $cm->folder_for_seo .'images/emailmybroker.png" alt=""></a></li>
+					<li><a href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'pop-send-email-my-broker/?lno='. $listing_no .'" title="Email To My Broker" class="emailclient" data-type="iframe"><img src="'. $cm->folder_for_seo .'images/emailmybroker.png" alt=""></a></li>
 				</ul>	
 			</div>
 			';
@@ -11249,7 +11287,7 @@ class Yachtclass {
 		//$location_id = round($this->get_company_default_location($id), 0);
 		if ($location_id > 0){
 			$addressfull = '<div>' . $this->com_address_format('', $city, $state, $state_id, $country_id) . '</div>';
-			$maplink = '<div class="map"><a href="' .$cm->folder_for_seo .'company-broker-map?id='. $id .'&op=1" class="mappopup" data-fancybox-type="iframe">View in Map</a></div>';
+			$maplink = '<div class="map"><a href="javascript:void(0);" data-src="' .$cm->folder_for_seo .'company-broker-map?id='. $id .'&op=1" class="mappopup" data-type="iframe">View in Map</a></div>';
 		}
 		
 		$total_y = $this->get_total_yacht_by_company($id);
@@ -11295,15 +11333,15 @@ class Yachtclass {
 			
 			$lat_val = $broker_ad_ar["lat_val"];
 			$lon_val = $broker_ad_ar["lon_val"];
-			
+			$brokername = $fname .' '. $lname;
 			$member_image = $this->get_user_image($id);		
             $details_url = $cm->get_page_url($id, 'user');
 
             $contentval = '
             <div class="listing-map-label listing-status-for-sale">
-                <img class="listing-thumbnail wp-post-image" src="'. $cm->folder_for_seo . 'userphoto/' . $member_image .'">
+                <img alt="'. $brokername .'" class="listing-thumbnail" src="'. $cm->folder_for_seo . 'userphoto/' . $member_image .'">
                 <a href="'. $details_url .'">
-                    <img class="listing-thumbnail-big wp-post-image" src="'. $cm->folder_for_seo . 'userphoto/' . $logo_imgpath .'">
+                    <img alt="'. $brokername .'" class="listing-thumbnail-big" src="'. $cm->folder_for_seo . 'userphoto/' . $logo_imgpath .'">
                 </a>
                 <div class="map-label-content">
                     <span class="listing-address"><a href="'. $details_url .'">'. $addressfull .'</a></span>
@@ -11337,11 +11375,8 @@ class Yachtclass {
 		$officephone = $broker_ad_ar["phone"]; 
 					    
         $addressfull = $this->com_address_format($address, $city, $state, $state_id, $country_id);
-		$maplink = '<div class="map"><a href="' .$cm->folder_for_seo .'company-broker-map/?id='. $id .'&op=2" class="mappopup" data-fancybox-type="iframe">View in Map</a></div>';
-
-        $member_image = $this->get_user_image($id);
-        $target_path_main = 'userphoto/big/';
-        $imgpath_d = '<img src="'. $cm->folder_for_seo . $target_path_main . $member_image .'" border="0" />';        
+		$maplink = '<div class="map"><a href="javascript:void(0);" data-src="' .$cm->folder_for_seo .'company-broker-map/?id='. $id .'&op=2" class="mappopup" data-type="iframe">View in Map</a></div>';
+       
         $total_y = $this->get_total_yacht_by_broker(array("broker_id" => $id, "status_id" => 1));
 		
 		if ($isdashboard == 1){
@@ -11356,6 +11391,12 @@ class Yachtclass {
 		$contactbuttontext = '';
 		$totalboattext = '';
 		$aboutmetext = '';
+		
+		//image
+		$member_image = $this->get_user_image($id);
+        $target_path_main = 'userphoto/big/';
+        $imgpath_d = '<img alt="'. $brokername .'" src="'. $cm->folder_for_seo . $target_path_main . $member_image .'" border="0" />';
+		//end
 
         if ($default_view == 1){
 			//grid
@@ -11368,7 +11409,7 @@ class Yachtclass {
 			}
 			
 			if ($support_crew == 0){
-				$contactbuttontext = '<a '. $gaeventtracking .' href="'. $cm->folder_for_seo.'contact-broker/?id='. $id .'" class="contactbroker button contact" data-fancybox-type="iframe">Contact</a>';
+				$contactbuttontext = '<a '. $gaeventtracking .' href="javascript:void(0);" data-src="'. $cm->folder_for_seo.'contact-broker/?id='. $id .'" class="contactbroker button contact" data-type="iframe">Contact</a>';
 			}
 			
 			if ($about_me != ""){
@@ -11401,7 +11442,7 @@ class Yachtclass {
 			if ($title != ""){ $titletextdisplay = ' - <span>'. $title . '</span>'; }
 			if ($support_crew == 0){
 				$totalboattext = '<p>'. $total_y .' Listing(s)</p>';
-				$contactbuttontext = '<p><a '. $gaeventtracking .' href="'. $cm->folder_for_seo.'contact-broker/?id='. $id .'" class="contactbroker button contact" data-fancybox-type="iframe">Contact</a></p>';
+				$contactbuttontext = '<p><a '. $gaeventtracking .' href="'. $cm->folder_for_seo.'contact-broker/?id='. $id .'" class="contactbroker button contact" data-type="iframe">Contact</a></p>';
 			}
 			
 			$addressfull = $this->com_address_format($address, $city, $state, $state_id, $country_id);

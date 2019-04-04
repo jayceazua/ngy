@@ -77,7 +77,7 @@ include($bdr."includes/head.php");
 
 <div class="profile-main">
     <div class="mainleft">
-        <img src="<?php echo $bdir; ?>userphoto/<?php echo $logo_imgpath; ?>" alt="" />
+        <img src="<?php echo $bdir; ?>userphoto/<?php echo $logo_imgpath; ?>" alt="<?php echo $companyname; ?>" />
     </div>
     <div class="mainright">        
         <div class="meta">

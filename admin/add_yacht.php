@@ -133,6 +133,7 @@ if ($ms > 0 OR $copyid > 0){
 			"overview" => $overview,
 			"city" => $city,
 			"state" => $statenm,
+			"vessel_name" => $vessel_name,
 			"company_id" => $company_id
 		);
 		$final_meta = $yachtclass->collect_meta_info_boat($meat_ar);

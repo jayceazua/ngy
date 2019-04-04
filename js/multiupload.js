@@ -79,6 +79,16 @@ function multiUploader(config){
 				data.append('postdata1',postdata1);
 			}
 			
+			if ($("#make_id").length > 0){
+				var make_id = $('#make_id').val();
+				data.append('make_id',make_id);
+			}
+			
+			if ($("#photocategoryid").length > 0){
+				var photocategoryid = $('#photocategoryid').val();
+				data.append('photocategoryid',photocategoryid);
+			}
+			
 			if ($("#crop_option").length > 0){
 				if($("#crop_option").is(':checked')){
 					var crop_option = 1;

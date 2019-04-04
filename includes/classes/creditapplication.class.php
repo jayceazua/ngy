@@ -328,8 +328,8 @@ class Creditapplicationclass {
 			
 			$assets_form .= '
 				<li class="first noborder"><p>'. $fieldname .'</p></li>
-				<li class="second"><input type="text" id="financial_inst'. $counter .'" name="financial_inst'. $counter .'" value="" class="input" /></li>
-				<li class="third"><input placeholder="$" type="text" id="assetamt'. $counter .'" name="assetamt'. $counter .'" value="" class="input assetamt" /></li>
+				<li class="second"><label class="com_none" for="financial_inst'. $counter .'">Financial Institution</label><input type="text" id="financial_inst'. $counter .'" name="financial_inst'. $counter .'" value="" class="input" /></li>
+				<li class="third"><label class="com_none" for="assetamt'. $counter .'">Asset Amount</label><input placeholder="$" type="text" id="assetamt'. $counter .'" name="assetamt'. $counter .'" value="" class="input assetamt" /></li>
 			';
 			
 			if ($fieldsep == 1){
@@ -359,9 +359,9 @@ class Creditapplicationclass {
 			
 			$assets_form .= '
 				<li class="first noborder"><p>'. $fieldname .'</p></li>
-				<li class="second"><input type="text" id="financial_inst'. $counter .'" name="financial_inst'. $counter .'" value="" class="input" /></li>
-				<li class="third"><input placeholder="$" type="text" id="assetincome'. $counter .'" name="assetincome'. $counter .'" value="" class="input assetamt" /></li>
-				<li class="fourth"><input placeholder="$" type="text" id="assetamt'. $counter .'" name="assetamt'. $counter .'" value="" class="input assetamt" /></li>
+				<li class="second"><label class="com_none" for="financial_inst'. $counter .'">Property Location</label><input type="text" id="financial_inst'. $counter .'" name="financial_inst'. $counter .'" value="" class="input" /></li>
+				<li class="third"><label class="com_none" for="assetincome'. $counter .'">Income</label><input placeholder="$" type="text" id="assetincome'. $counter .'" name="assetincome'. $counter .'" value="" class="input assetamt" /></li>
+				<li class="fourth"><label class="com_none" for="assetamt'. $counter .'">Present Value</label><input placeholder="$" type="text" id="assetamt'. $counter .'" name="assetamt'. $counter .'" value="" class="input assetamt" /></li>
 			';
 			
 			if ($fieldsep == 1){
@@ -386,7 +386,7 @@ class Creditapplicationclass {
 			$fieldsep = $innerar->sep;
 			
 			$assets_form .= '
-				<li class="first noborder"><p>'. $fieldname .'</p></li>
+				<li class="first noborder"><p><label for="assetamt'. $counter .'">'. $fieldname .'</label></p></li>
 				<li class="second"><input placeholder="$" type="text" id="assetamt'. $counter .'" name="assetamt'. $counter .'" value="" class="input assetamt" /></li>
 			';
 			
@@ -411,7 +411,7 @@ class Creditapplicationclass {
 			$fieldsep = $innerar->sep;
 			
 			$assets_form .= '
-				<li class="first noborder"><p>'. $fieldname .'</p></li>
+				<li class="first noborder"><p><label for="assetamt'. $counter .'">'. $fieldname .'</label></p></li>
 				<li class="second"><input placeholder="$" type="text" id="assetamt'. $counter .'" name="assetamt'. $counter .'" value="" class="input assetamt" /></li>
 			';
 			
@@ -437,8 +437,8 @@ class Creditapplicationclass {
 			$fieldsep = $innerar->sep;
 			
 			$assets_form .= '
-				<li class="first noborder"><input type="text" id="financial_inst'. $counter .'" name="financial_inst'. $counter .'" value="" class="input" /></li>
-				<li class="second"><input placeholder="$" type="text" id="assetamt'. $counter .'" name="assetamt'. $counter .'" value="" class="input assetamt" /></li>
+				<li class="first noborder"><label class="com_none" for="financial_inst'. $counter .'">A</label><input type="text" id="financial_inst'. $counter .'" name="financial_inst'. $counter .'" value="" class="input" /></li>
+				<li class="second"><label class="com_none" for="assetamt'. $counter .'">B</label><input placeholder="$" type="text" id="assetamt'. $counter .'" name="assetamt'. $counter .'" value="" class="input assetamt" /></li>
 			';
 			
 			if ($fieldsep == 1){
@@ -474,9 +474,9 @@ class Creditapplicationclass {
 			
 			$liabilities_form .= '
 				<li class="first noborder"><p>'. $fieldname .'</p></li>
-				<li class="second"><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
-				<li class="third"><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
-				<li class="fourth"><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
+				<li class="second"><label class="com_none" for="l_financial_inst'. $counter .'">Financial Institution</label><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
+				<li class="third"><label class="com_none" for="liabilitiesamt'. $counter .'">Amt</label><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
+				<li class="fourth"><label class="com_none" for="pmt'. $counter .'">PMT</label><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
 			';
 			
 			if ($fieldsep == 1){
@@ -502,9 +502,9 @@ class Creditapplicationclass {
 			
 			$liabilities_form .= '
 				<li class="first noborder"><p>'. $fieldname .'</p></li>
-				<li class="second"><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
-				<li class="third"><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
-				<li class="fourth"><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
+				<li class="second"><label class="com_none" for="l_financial_inst'. $counter .'">Financial Institution</label><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
+				<li class="third"><label class="com_none" for="liabilitiesamt'. $counter .'">Amt</label><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
+				<li class="fourth"><label class="com_none" for="pmt'. $counter .'">PMT</label><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
 			';
 			
 			if ($fieldsep == 1){
@@ -530,9 +530,9 @@ class Creditapplicationclass {
 			
 			$liabilities_form .= '
 				<li class="first noborder"><p>'. $fieldname .'</p></li>
-				<li class="second"><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
-				<li class="third"><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
-				<li class="fourth"><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
+				<li class="second"><label class="com_none" for="l_financial_inst'. $counter .'">Financial Institution</label><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
+				<li class="third"><label class="com_none" for="liabilitiesamt'. $counter .'">Amt</label><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
+				<li class="fourth"><label class="com_none" for="pmt'. $counter .'">PMT</label><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
 			';
 			
 			if ($fieldsep == 1){
@@ -558,9 +558,9 @@ class Creditapplicationclass {
 			
 			$liabilities_form .= '
 				<li class="first noborder"><p>'. $fieldname .'</p></li>
-				<li class="second"><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
-				<li class="third"><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
-				<li class="fourth"><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
+				<li class="second"><label class="com_none" for="l_financial_inst'. $counter .'">Financial Institution</label><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
+				<li class="third"><label class="com_none" for="liabilitiesamt'. $counter .'">Amt</label><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
+				<li class="fourth"><label class="com_none" for="pmt'. $counter .'">PMT</label><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
 			';
 			
 			if ($fieldsep == 1){
@@ -587,9 +587,9 @@ class Creditapplicationclass {
 			
 			$liabilities_form .= '
 				<li class="first noborder"><p>'. $fieldname .'</p></li>
-				<li class="second"><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
-				<li class="third"><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
-				<li class="fourth"><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
+				<li class="second"><label class="com_none" for="l_financial_inst'. $counter .'">Financial Institution</label><input type="text" id="l_financial_inst'. $counter .'" name="l_financial_inst'. $counter .'" value="" class="input" /></li>
+				<li class="third"><label class="com_none" for="liabilitiesamt'. $counter .'">Amt</label><input placeholder="$" type="text" id="liabilitiesamt'. $counter .'" name="liabilitiesamt'. $counter .'" value="" class="input liabilitiesamt" /></li>
+				<li class="fourth"><label class="com_none" for="pmt'. $counter .'">PMT</label><input placeholder="$" type="text" id="pmt'. $counter .'" name="pmt'. $counter .'" value="" class="input pmtamt" /></li>
 			';
 			
 			if ($fieldsep == 1){
@@ -672,11 +672,11 @@ class Creditapplicationclass {
 				<div class="singleblock_box">	 
 					<ul class="form">
 						<li class="left">
-						<p>Name <span class="requiredfieldindicate">*</span></p>
+						<p><label for="fullname">Name</label> <span class="requiredfieldindicate">*</span></p>
 						<input type="text" id="fullname" name="fullname" value="'. $fullname .'" class="input" />
 						</li>
 						<li class="right">
-						<p>Email Address <span class="requiredfieldindicate">*</span></p>
+						<p><label for="email">Email Address</label> <span class="requiredfieldindicate">*</span></p>
 						<input type="text" id="email" name="email" value="'. $email .'" class="input" />
 						</li>
 					</ul>
@@ -695,7 +695,7 @@ class Creditapplicationclass {
 					<div class="credit_authorization">		  	    
 					<ul class="form">	   		
 					<li class="t-center">					
-					<span class="creditauthcheckbox"><input type="checkbox" id="form_auth" name="form_auth" value="1" class="checkbox" /><label for="applicant_auth">I Agree</label></span>
+					<span class="creditauthcheckbox"><input type="checkbox" id="form_auth" name="form_auth" value="1" class="checkbox" /><label for="form_auth">I Agree</label></span>
 					</li>
 					</ul>
 					<div class="clear"></div>
@@ -1006,6 +1006,7 @@ class Creditapplicationclass {
 	  
 	  $returntext .= '
 	  <form method="post" action="'. $cm->folder_for_seo .'" id="creditapplication-ff" name="creditapplication-ff">
+	  <label class="com_none" for="email2">email2</label>
 	  <input type="hidden" id="s" name="s" type="text" value="'. $s .'" />
 	  <input class="finfo" id="email2" name="email2" type="text" />
 	  <input type="hidden" id="fcapi" name="fcapi" value="creditapplication" />	   	   
@@ -1020,7 +1021,7 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">
 	  <ul class="form">
 	  		<li class="left" id="application_type_id_heading">
-				<p>Application Type <span class="requiredfieldindicate">*</span></p>
+				<p><label for="application_type_id">Application Type</label> <span class="requiredfieldindicate">*</span></p>
 				<select id="application_type_id" name="application_type_id" class="select">		
 					'. $this->get_credit_application_type_combo($application_type_id) .'
 				</select>
@@ -1029,75 +1030,75 @@ class Creditapplicationclass {
 	    
 	  <ul class="form">	   		
 			<li class="left">
-				<p>First Name <span class="requiredfieldindicate">*</span></p>
+				<p><label for="fname">First Name</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="fname" name="fname" value="'. $fname .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Last Name <span class="requiredfieldindicate">*</span></p>
+				<p><label for="lname">Last Name</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="lname" name="lname" value="'. $lname .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Middle Name</p>
+				<p><label for="middle_name">Middle Name</label></p>
 				<input type="text" id="middle_name" name="middle_name" value="'. $middle_name .'" class="input" />
 			</li>			
 			<li class="right">
-				<p>Date of Birth (mm/dd/yyyy)</p>
+				<p><label for="dob">Date of Birth (mm/dd/yyyy)</label></p>
 				<input defaultdateset="01/01/1980" rangeyear="1900:'. (date("Y") - 18) .'" type="text" id="dob" name="dob" value="'. $dob .'" class="date-field-b input2" />
 			</li>
 			
 			<li class="left corp_llc_trust com_none">
-				<p>Corp/LLC/Trust Name</p>
+				<p><label for="crop_llc_trust_name">Corp/LLC/Trust Name</label></p>
 				<input type="text" id="crop_llc_trust_name" name="crop_llc_trust_name" value="'. $crop_llc_trust_name .'" class="input" />
 			</li>
 			<li class="right corp_llc_trust com_none">
-				<p>EIN</p>
+				<p><label for="llc_ein">EIN</label></p>
 				<input type="text" id="llc_ein" name="llc_ein" value="'. $llc_ein .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Social Security # <span class="requiredfieldindicate">*</span></p>
+				<p><label for="social_security">Social Security #</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="social_security" name="social_security" value="'. $social_security .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Drivers License #</p>
+				<p><label for="drivers_license">Drivers License #</label></p>
 				<input type="text" id="drivers_license" name="drivers_license" value="'. $drivers_license .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Drivers License State</p>
+				<p><label for="drivers_license_state">Drivers License State</label></p>
 				<select id="drivers_license_state" name="drivers_license_state" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_state_combo($drivers_license_state, 1) .'
 				</select>
 			</li>
 			<li class="right">
-				<p>Email Address <span class="requiredfieldindicate">*</span></p>
+				<p><label for="email">Email Address</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="email" name="email" value="'. $email .'" class="input" />
 			</li>
 						
 			<li class="left">
-				<p>Mobile Phone</p>
+				<p><label for="mobile">Mobile Phone</label></p>
 				<input type="text" id="mobile" name="mobile" value="'. $mobile .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Work Phone</p>
+				<p><label for="phone">Work Phone</label></p>
 				<input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Home Phone</p>
+				<p><label for="home_phone">Home Phone</label></p>
 				<input type="text" id="home_phone" name="home_phone" value="'. $home_phone .'" class="input" />
 			</li>
 			<li class="right">
-				<p>U.S. Citizen</p>
+				<p><label for="us_citizen">U.S. Citizen</label></p>
 				<input type="checkbox" id="us_citizen" name="us_citizen" value="1" class="checkbox"'. $us_citizen_checked .'> Yes
 			</li>
 	  </ul>
 	  
 	  <ul class="form citizencountry com_none">
 	  		<li class="left" id="citizen_country_heading">
-				<p>Country of Citizenship <span class="requiredfieldindicate">*</span></p>
+				<p><label for="citizen_country">Country of Citizenship</label> <span class="requiredfieldindicate">*</span></p>
 				<select id="citizen_country" name="citizen_country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($citizen_country, 1) .'
@@ -1113,25 +1114,25 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Address</p>
+				<p><label for="address">Address</label></p>
 				<input type="text" id="address" name="address" value="'. $address .'" class="input" />
 			</li>
 			<li class="right">
-				<p>City</p>
+				<p><label for="city">City</label></p>
 				<input type="text" id="city" name="city" value="'. $city .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>State</p>
+				<p><label for="state">State</label></p>
 				<input type="text" id="state" name="state" value="'. $state .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Postal Code</p>
+				<p><label for="zip">Postal Code</label></p>
 				<input type="text" id="zip" name="zip" value="'. $zip .'" class="input" />
 			</li>
 			
 			<li class="left" id="country_heading">
-				<p>Country</p>
+				<p><label for="country">Country</label></p>
 				<select id="country" name="country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($country, 1) .'
@@ -1139,17 +1140,21 @@ class Creditapplicationclass {
 			</li>
 			<li class="right">
 				<p>Years at Address</p>
+				<label class="com_none" for="address_year">Year</label>
+				<label class="com_none" for="address_month">Month</label>
 				<div class="leftfield"><input type="text" id="address_year" name="address_year" value="'. $address_year .'" class="input" placeholder="Years" /></div>
 				<div class="rightfield"><input type="text" id="address_month" name="address_month" value="'. $address_month .'" class="input" placeholder="Months" /></div>
 			</li>
 			
 			<li class="left">
 				<p>Own or Rent</p>
+				<label class="com_none" for="own_rent1">Own</label>
+				<label class="com_none" for="own_rent2">Month</label>
 				<input type="radio" id="own_rent1" name="own_rent" value="Own" class="radiobutton"'. $own_rent1 .' />&nbsp;Own&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="own_rent2" name="own_rent" value="Rent" class="radiobutton"'. $own_rent2 .' />&nbsp;Rent
 			</li>
 			<li class="right">
-				<p>Monthly Payment [$]</p>
+				<p><label for="monthly_payment">Monthly Payment [$]</label></p>
 				<input type="text" id="monthly_payment" name="monthly_payment" value="'. $monthly_payment .'" class="input" />
 			</li>		
 	  </ul>
@@ -1162,25 +1167,25 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Address</p>
+				<p><label for="prev_address">Address</label></p>
 				<input type="text" id="prev_address" name="prev_address" value="'. $prev_address .'" class="input" />
 			</li>
 			<li class="right">
-				<p>City</p>
+				<p><label for="prev_city">City</label></p>
 				<input type="text" id="prev_city" name="prev_city" value="'. $prev_city .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>State</p>
+				<p><label for="prev_state">State</label></p>
 				<input type="text" id="prev_state" name="prev_state" value="'. $prev_state .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Postal Code</p>
+				<p><label for="prev_zip">Postal Code</label></p>
 				<input type="text" id="prev_zip" name="prev_zip" value="'. $prev_zip .'" class="input" />
 			</li>
 			
 			<li class="left" id="prev_country_heading">
-				<p>Country</p>
+				<p><label for="prev_country">Country</label></p>
 				<select id="prev_country" name="prev_country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($prev_country, 1) .'
@@ -1188,17 +1193,21 @@ class Creditapplicationclass {
 			</li>
 			<li class="right">
 				<p>Years at Address</p>
+				<label class="com_none" for="prev_address_year">Year</label>
+				<label class="com_none" for="prev_address_month">Month</label>
 				<div class="leftfield"><input type="text" id="prev_address_year" name="prev_address_year" value="'. $prev_address_year .'" class="input" placeholder="Years" /></div>
 				<div class="rightfield"><input type="text" id="prev_address_month" name="prev_address_month" value="'. $prev_address_month .'" class="input" placeholder="Months" /></div>
 			</li>
 			
 			<li class="left">
 				<p>Own or Rent</p>
+				<label class="com_none" for="prev_own_rent1">Own</label>
+				<label class="com_none" for="prev_own_rent2">Rent</label>
 				<input type="radio" id="prev_own_rent1" name="prev_own_rent" value="Own" class="radiobutton"'. $prev_own_rent1 .' />&nbsp;Own&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="prev_own_rent2" name="prev_own_rent" value="Rent" class="radiobutton"'. $prev_own_rent2 .' />&nbsp;Rent
 			</li>
 			<li class="right">
-				<p>Monthly Payment [$]</p>
+				<p><label for="prev_monthly_payment">Monthly Payment [$]</label></p>
 				<input type="text" id="prev_monthly_payment" name="prev_monthly_payment" value="'. $prev_monthly_payment .'" class="input" />
 			</li>		
 	  </ul>
@@ -1211,29 +1220,29 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Employer</p>
+				<p><label for="employer">Employer</label></p>
 				<input type="text" id="employer" name="employer" value="'. $employer .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Address</p>
+				<p><label for="emp_address">Address</label></p>
 				<input type="text" id="emp_address" name="emp_address" value="'. $emp_address .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>City</p>
+				<p><label for="emp_city">City</label></p>
 				<input type="text" id="emp_city" name="emp_city" value="'. $emp_city .'" class="input" />
 			</li>			
 			<li class="right">
-				<p>State</p>
+				<p><label for="emp_state">State</label></p>
 				<input type="text" id="emp_state" name="emp_state" value="'. $emp_state .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Postal Code</p>
+				<p><label for="emp_zip">Postal Code</label></p>
 				<input type="text" id="emp_zip" name="emp_zip" value="'. $emp_zip .'" class="input" />
 			</li>
 			<li class="right" id="emp_country_heading">
-				<p>Country</p>
+				<p><label for="emp_country">Country</label></p>
 				<select id="emp_country" name="emp_country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($emp_country, 1) .'
@@ -1241,21 +1250,23 @@ class Creditapplicationclass {
 			</li>
 			
 			<li class="left">
-				<p>Phone</p>
+				<p><label for="emp_phone">Phone</label></p>
 				<input type="text" id="emp_phone" name="emp_phone" value="'. $emp_phone .'" class="input" />
 			</li>
 			<li class="right">
 				<p>Length of Employment</p>
+				<label class="com_none" for="emp_year">Year</label>
+				<label class="com_none" for="emp_month">Month</label>
 				<div class="leftfield"><input type="text" id="emp_year" name="emp_year" value="'. $emp_year .'" class="input" placeholder="Years" /></div>
 				<div class="rightfield"><input type="text" id="emp_month" name="emp_month" value="'. $emp_month .'" class="input" placeholder="Months" /></div>
 			</li>
 			
 			<li class="left">
-				<p>Position / Title</p>
+				<p><label for="emp_position">Position / Title</label></p>
 				<input type="text" id="emp_position" name="emp_position" value="'. $emp_position .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Supervisor</p>
+				<p><label for="emp_supervisor">Supervisor</label></p>
 				<input type="text" id="emp_supervisor" name="emp_supervisor" value="'. $emp_supervisor .'" class="input" />
 			</li>		
 	  </ul>
@@ -1268,29 +1279,29 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Employer</p>
+				<p><label for="prev_employer">Employer</label></p>
 				<input type="text" id="prev_employer" name="prev_employer" value="'. $prev_employer .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Address</p>
+				<p><label for="prev_emp_address">Address</label></p>
 				<input type="text" id="prev_emp_address" name="prev_emp_address" value="'. $prev_emp_address .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>City</p>
+				<p><label for="prev_emp_city">City</label></p>
 				<input type="text" id="prev_emp_city" name="prev_emp_city" value="'. $prev_emp_city .'" class="input" />
 			</li>			
 			<li class="right">
-				<p>State</p>
+				<p><label for="prev_emp_state">State</label></p>
 				<input type="text" id="prev_emp_state" name="prev_emp_state" value="'. $prev_emp_state .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Postal Code</p>
+				<p><label for="prev_emp_zip">Postal Code</label></p>
 				<input type="text" id="prev_emp_zip" name="prev_emp_zip" value="'. $prev_emp_zip .'" class="input" />
 			</li>
 			<li class="right" id="prev_emp_country_heading">
-				<p>Country</p>
+				<p><label for="prev_emp_country">Country</label></p>
 				<select id="prev_emp_country" name="prev_emp_country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($prev_emp_country, 1) .'
@@ -1298,11 +1309,13 @@ class Creditapplicationclass {
 			</li>
 			
 			<li class="left">
-				<p>Phone</p>
+				<p><label for="prev_emp_phone">Phone</label></p>
 				<input type="text" id="prev_emp_phone" name="prev_emp_phone" value="'. $prev_emp_phone .'" class="input" />
 			</li>
 			<li class="right">
 				<p>Length of Employment</p>
+				<label class="com_none" for="prev_emp_year">Year</label>
+				<label class="com_none" for="prev_emp_month">Month</label>
 				<div class="leftfield"><input type="text" id="prev_emp_year" name="prev_emp_year" value="'. $prev_emp_year .'" class="input" placeholder="Years" /></div>
 				<div class="rightfield"><input type="text" id="prev_emp_month" name="prev_emp_month" value="'. $prev_emp_month .'" class="input" placeholder="Months" /></div>
 			</li>		
@@ -1316,28 +1329,32 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Wages [$]</p>
+				<p><label for="wages">Wages [$]</label></p>
 				<input type="text" id="wages" name="wages" value="'. $wages .'" class="input" />
 			</li>
 			<li class="right">
 				<p>Paid</p>
+				<label class="com_none" for="paid1">Monthly</label>
+				<label class="com_none" for="paid2">Annually</label>
 				<input type="radio" id="paid1" name="paid" value="Monthly" class="radiobutton"'. $paid1.' />&nbsp;Monthly&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="paid2" name="paid" value="Annually" class="radiobutton"'. $paid2.' />&nbsp;Annually
 			</li>
 	  </ul>
 	  <ul class="form">		
 			<li class="left">
-				<p>Other Income [$]</p>
+				<p><label for="oth_income">Other Income [$]</label></p>
 				<input type="text" id="oth_income" name="oth_income" value="'. $oth_income .'" class="input" />
 			</li>			
 			<li class="right">
 				<p>Paid</p>
+				<label class="com_none" for="oth_income_paid1">Monthly</label>
+				<label class="com_none" for="oth_income_paid2">Annually</label>
 				<input type="radio" id="oth_income_paid1" name="oth_income_paid" value="Monthly" class="radiobutton"'. $oth_income_paid1.' />&nbsp;Monthly&nbsp;&nbsp;&nbsp;
-				<input type="radio" id="oth_income_paid1" name="oth_income_paid" value="Annually" class="radiobutton"'. $oth_income_paid2.' />&nbsp;Annually
+				<input type="radio" id="oth_income_paid2" name="oth_income_paid" value="Annually" class="radiobutton"'. $oth_income_paid2.' />&nbsp;Annually
 			</li>
 			
 			<li>
-				<p>Other Income Description</p>
+				<p><label for="oth_income_description">Other Income Description</label></p>
 				<textarea name="oth_income_description" id="oth_income_description" rows="1" cols="1" class="comments">'. $oth_income_description .'</textarea>
 				<p class="smalltext">Applicant does not need to disclose income from alimony, child support, or separate maintenance, unless applicant desires this income included in determining creditworthiness.</p>
 			</li>
@@ -1352,27 +1369,29 @@ class Creditapplicationclass {
 	  <ul class="form">	
       		<li class="left">
 				<p>Prior Bankruptcy</p>
+				<label class="com_none" for="prior_bankruptcy1">Yes</label>
+				<label class="com_none" for="prior_bankruptcy2">No</label>
 				<input type="radio" id="prior_bankruptcy1" name="prior_bankruptcy" value="1" class="prior_bankruptcy radiobutton"'. $prior_bankruptcy_checked_yes .'> Yes &nbsp;&nbsp;
 				<input type="radio" id="prior_bankruptcy2" name="prior_bankruptcy" value="0" class="prior_bankruptcy radiobutton"'. $prior_bankruptcy_checked_no .'> No
 			</li>
             <li class="right bankruptcyyear com_none">
-				<p>Bankruptcy Year <span class="requiredfieldindicate">*</span></p>
+				<p><label for="bankruptcy_year">Bankruptcy Year</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="bankruptcy_year" name="bankruptcy_year" value="" class="input">
 			</li>
       </ul>   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Nearest Relative - not living with you</p>
+				<p><label for="nearest_relative">Nearest Relative - not living with you</label></p>
 				<input type="text" id="nearest_relative" name="nearest_relative" value="'. $nearest_relative .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Relationship</p>
+				<p><label for="nearest_relative_relationship">Relationship</label></p>
 				<input type="text" id="nearest_relative_relationship" name="nearest_relative_relationship" value="'. $nearest_relative_relationship .'" class="input" />
 			</li>
 	  </ul>
 	  <ul class="form">		
 			<li class="left">
-				<p>Phone</p>
+				<p><label for="nearest_relative_phone">Phone</label></p>
 				<input type="text" id="nearest_relative_phone" name="nearest_relative_phone" value="'. $nearest_relative_phone .'" class="input" />
 			</li>	
 	  </ul>
@@ -1396,55 +1415,55 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>First Name <span class="requiredfieldindicate">*</span></p>
+				<p><label for="co_app_fname">First Name</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="co_app_fname" name="co_app_fname" value="'. $co_app_fname .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Last Name <span class="requiredfieldindicate">*</span></p>
+				<p><label for="co_app_lname">Last Name</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="co_app_lname" name="co_app_lname" value="'. $co_app_lname .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Middle Name</p>
+				<p><label for="co_app_middle_name">Middle Name</label></p>
 				<input type="text" id="co_app_middle_name" name="co_app_middle_name" value="'. $co_app_middle_name .'" class="input" />
 			</li>			
 			<li class="right">
-				<p>Date of Birth (mm/dd/yyyy)</p>
+				<p><label for="co_app_dob">Date of Birth (mm/dd/yyyy)</label></p>
 				<input defaultdateset="01/01/1980" rangeyear="1900:'. (date("Y") - 18) .'" type="text" id="co_app_dob" name="co_app_dob" value="'. $co_app_dob .'" class="date-field-b input2" />
 			</li>
 			
 			<li class="left">
-				<p>Social Security # <span class="requiredfieldindicate">*</span></p>
+				<p><label for="co_app_social_security">Social Security #</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="co_app_social_security" name="co_app_social_security" value="'. $co_app_social_security .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Drivers License #</p>
+				<p><label for="co_app_drivers_license">Drivers License #</label></p>
 				<input type="text" id="co_app_drivers_license" name="co_app_drivers_license" value="'. $co_app_drivers_license .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Drivers License State</p>
+				<p><label for="co_app_drivers_license_state">Drivers License State</label></p>
 				<select id="co_app_drivers_license_state" name="co_app_drivers_license_state" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_state_combo($co_app_drivers_license_state, 1) .'
 				</select>
 			</li>
 			<li class="right">
-				<p>Email Address <span class="requiredfieldindicate">*</span></p>
+				<p><label for="co_app_email">Email Address</label> <span class="requiredfieldindicate">*</span></p>
 				<input type="text" id="co_app_email" name="co_app_email" value="'. $co_app_email .'" class="input" />
 			</li>
 						
 			<li class="left">
-				<p>Mobile Phone</p>
+				<p><label for="co_app_mobile">Mobile Phone</label></p>
 				<input type="text" id="co_app_mobile" name="co_app_mobile" value="'. $co_app_mobile .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Work Phone</p>
+				<p><label for="co_app_app_phone">Work Phone</label></p>
 				<input type="text" id="co_app_app_phone" name="co_app_app_phone" value="'. $co_app_app_phone .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Home Phone</p>
+				<p><label for="co_app_home_phone">Home Phone</label></p>
 				<input type="text" id="co_app_home_phone" name="co_app_home_phone" value="'. $co_app_home_phone .'" class="input" />
 			</li>
 	  </ul>
@@ -1457,25 +1476,25 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Address</p>
+				<p><label for="co_app_address">Address</label></p>
 				<input type="text" id="co_app_address" name="co_app_address" value="'. $co_app_address .'" class="input" />
 			</li>
 			<li class="right">
-				<p>City</p>
+				<p><label for="co_app_city">City</label></p>
 				<input type="text" id="co_app_city" name="co_app_city" value="'. $co_app_city .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>State</p>
+				<p><label for="co_app_state">State</label></p>
 				<input type="text" id="co_app_state" name="co_app_state" value="'. $co_app_state .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Postal Code</p>
+				<p><label for="co_app_zip">Postal Code</label></p>
 				<input type="text" id="co_app_zip" name="co_app_zip" value="'. $co_app_zip .'" class="input" />
 			</li>
 			
 			<li class="left" id="co_app_country_heading">
-				<p>Country</p>
+				<p><label for="co_app_country">Country</label></p>
 				<select id="co_app_country" name="co_app_country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($co_app_country, 1) .'
@@ -1483,17 +1502,21 @@ class Creditapplicationclass {
 			</li>
 			<li class="right">
 				<p>Years at Address</p>
+				<label class="com_none" for="co_app_address_year">Year</label>
+				<label class="com_none" for="co_app_address_month">Month</label>
 				<div class="leftfield"><input type="text" id="co_app_address_year" name="co_app_address_year" value="'. $co_app_address_year .'" class="input" placeholder="Years" /></div>
 				<div class="rightfield"><input type="text" id="co_app_address_month" name="co_app_address_month" value="'. $co_app_address_month .'" class="input" placeholder="Months" /></div>
 			</li>
 			
 			<li class="left">
 				<p>Own or Rent</p>
+				<label class="com_none" for="co_app_own_rent1">Own</label>
+				<label class="com_none" for="co_app_own_rent2">Rent</label>
 				<input type="radio" id="co_app_own_rent1" name="co_app_own_rent" value="Own" class="radiobutton"'. $co_app_own_rent1 .' />&nbsp;Own&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="co_app_own_rent2" name="co_app_own_rent" value="Rent" class="radiobutton"'. $co_app_own_rent2 .' />&nbsp;Rent
 			</li>
 			<li class="right">
-				<p>Monthly Payment [$]</p>
+				<p><label for="co_app_monthly_payment">Monthly Payment [$]</label></p>
 				<input type="text" id="co_app_monthly_payment" name="co_app_monthly_payment" value="'. $co_app_monthly_payment .'" class="input" />
 			</li>		
 	  </ul>
@@ -1506,25 +1529,25 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Address</p>
+				<p><label for="co_app_prev_address">Address</label></p>
 				<input type="text" id="co_app_prev_address" name="co_app_prev_address" value="'. $co_app_prev_address .'" class="input" />
 			</li>
 			<li class="right">
-				<p>City</p>
+				<p><label for="co_app_prev_city">City</label></p>
 				<input type="text" id="co_app_prev_city" name="co_app_prev_city" value="'. $co_app_prev_city .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>State</p>
+				<p><label for="co_app_prev_state">State</label></p>
 				<input type="text" id="co_app_prev_state" name="co_app_prev_state" value="'. $co_app_prev_state .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Postal Code</p>
+				<p><label for="co_app_prev_zip">Postal Code</label></p>
 				<input type="text" id="co_app_prev_zip" name="co_app_prev_zip" value="'. $co_app_prev_zip .'" class="input" />
 			</li>
 			
 			<li class="left" id="co_app_prev_country_heading">
-				<p>Country</p>
+				<p><label for="co_app_prev_country">Country</label></p>
 				<select id="co_app_prev_country" name="co_app_prev_country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($co_app_prev_country, 1) .'
@@ -1532,17 +1555,21 @@ class Creditapplicationclass {
 			</li>
 			<li class="right">
 				<p>Years at Address</p>
+				<label class="com_none" for="co_app_prev_address_year">Year</label>
+				<label class="com_none" for="co_app_prev_address_month">Month</label>
 				<div class="leftfield"><input type="text" id="co_app_prev_address_year" name="co_app_prev_address_year" value="'. $co_app_prev_address_year .'" class="input" placeholder="Years" /></div>
 				<div class="rightfield"><input type="text" id="co_app_prev_address_month" name="co_app_prev_address_month" value="'. $co_app_prev_address_month .'" class="input" placeholder="Months" /></div>
 			</li>
 			
 			<li class="left">
 				<p>Own or Rent</p>
+				<label class="com_none" for="co_app_prev_own_rent1">Own</label>
+				<label class="com_none" for="co_app_prev_own_rent2">Rent</label>
 				<input type="radio" id="co_app_prev_own_rent1" name="co_app_prev_own_rent" value="Own" class="radiobutton"'. $co_app_prev_own_rent1 .' />&nbsp;Own&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="co_app_prev_own_rent2" name="co_app_prev_own_rent" value="Rent" class="radiobutton"'. $co_app_prev_own_rent2 .' />&nbsp;Rent
 			</li>
 			<li class="right">
-				<p>Monthly Payment [$]</p>
+				<p><label for="co_app_prev_monthly_payment">Monthly Payment [$]</label></p>
 				<input type="text" id="co_app_prev_monthly_payment" name="co_app_prev_monthly_payment" value="'. $co_app_prev_monthly_payment .'" class="input" />
 			</li>		
 	  </ul>
@@ -1555,29 +1582,29 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Employer</p>
+				<p><label for="co_app_employer">Employer</label></p>
 				<input type="text" id="co_app_employer" name="co_app_employer" value="'. $co_app_employer .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Address</p>
+				<p><label for="co_app_emp_address">Address</label></p>
 				<input type="text" id="co_app_emp_address" name="co_app_emp_address" value="'. $co_app_emp_address .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>City</p>
+				<p><label for="co_app_emp_city">City</label></p>
 				<input type="text" id="co_app_emp_city" name="co_app_emp_city" value="'. $co_app_emp_city .'" class="input" />
 			</li>			
 			<li class="right">
-				<p>State</p>
+				<p><label for="co_app_emp_state">State</label></p>
 				<input type="text" id="co_app_emp_state" name="co_app_emp_state" value="'. $co_app_emp_state .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Postal Code</p>
+				<p><label for="co_app_emp_zip">Postal Code</label></p>
 				<input type="text" id="co_app_emp_zip" name="co_app_emp_zip" value="'. $co_app_emp_zip .'" class="input" />
 			</li>
 			<li class="right" id="co_app_emp_country_heading">
-				<p>Country</p>
+				<p><label for="co_app_emp_country">Country</label></p>
 				<select id="co_app_emp_country" name="co_app_emp_country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($co_app_emp_country, 1) .'
@@ -1585,21 +1612,23 @@ class Creditapplicationclass {
 			</li>
 			
 			<li class="left">
-				<p>Phone</p>
+				<p><label for="co_app_emp_phone">Phone</label></p>
 				<input type="text" id="co_app_emp_phone" name="co_app_emp_phone" value="'. $co_app_emp_phone .'" class="input" />
 			</li>
 			<li class="right">
 				<p>Length of Employment</p>
+				<label class="com_none" for="co_app_emp_year">Year</label>
+				<label class="com_none" for="co_app_emp_month">Month</label>
 				<div class="leftfield"><input type="text" id="co_app_emp_year" name="co_app_emp_year" value="'. $co_app_emp_year .'" class="input" placeholder="Years" /></div>
 				<div class="rightfield"><input type="text" id="co_app_emp_month" name="co_app_emp_month" value="'. $co_app_emp_month .'" class="input" placeholder="Months" /></div>
 			</li>
 			
 			<li class="left">
-				<p>Position / Title</p>
+				<p><label for="co_app_emp_position">Position / Title</label></p>
 				<input type="text" id="co_app_emp_position" name="co_app_emp_position" value="'. $co_app_emp_position .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Supervisor</p>
+				<p><label for="co_app_emp_supervisor">Supervisor</label></p>
 				<input type="text" id="co_app_emp_supervisor" name="co_app_emp_supervisor" value="'. $co_app_emp_supervisor .'" class="input" />
 			</li>		
 	  </ul>
@@ -1612,29 +1641,29 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Employer</p>
+				<p><label for="co_app_prev_employer">Employer</label></p>
 				<input type="text" id="co_app_prev_employer" name="co_app_prev_employer" value="'. $co_app_prev_employer .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Address</p>
+				<p><label for="co_app_prev_emp_address">Address</label></p>
 				<input type="text" id="co_app_prev_emp_address" name="co_app_prev_emp_address" value="'. $co_app_prev_emp_address .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>City</p>
+				<p><label for="co_app_prev_emp_city">City</label></p>
 				<input type="text" id="co_app_prev_emp_city" name="co_app_prev_emp_city" value="'. $co_app_prev_emp_city .'" class="input" />
 			</li>			
 			<li class="right">
-				<p>State</p>
+				<p><label for="co_app_prev_emp_state">State</label></p>
 				<input type="text" id="co_app_prev_emp_state" name="co_app_prev_emp_state" value="'. $co_app_prev_emp_state .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Postal Code</p>
+				<p><label for="co_app_prev_emp_zip">Postal Code</label></p>
 				<input type="text" id="co_app_prev_emp_zip" name="co_app_prev_emp_zip" value="'. $co_app_prev_emp_zip .'" class="input" />
 			</li>
 			<li class="right" id="co_app_prev_emp_country_heading">
-				<p>Country</p>
+				<p><label for="co_app_prev_emp_country">Country</label></p>
 				<select id="co_app_prev_emp_country" name="co_app_prev_emp_country" class="select">
 				<option value="">Select</option>
 				'. $yachtclass->get_country_combo($co_app_prev_emp_country, 1) .'
@@ -1642,11 +1671,13 @@ class Creditapplicationclass {
 			</li>
 			
 			<li class="left">
-				<p>Phone</p>
+				<p><label for="co_app_prev_emp_phone">Phone</label></p>
 				<input type="text" id="co_app_prev_emp_phone" name="co_app_prev_emp_phone" value="'. $co_app_prev_emp_phone .'" class="input" />
 			</li>
 			<li class="right">
 				<p>Length of Employment</p>
+				<label class="com_none" for="co_app_prev_emp_year">Year</label>
+				<label class="com_none" for="co_app_prev_emp_month">Month</label>
 				<div class="leftfield"><input type="text" id="co_app_prev_emp_year" name="co_app_prev_emp_year" value="'. $co_app_prev_emp_year .'" class="input" placeholder="Years" /></div>
 				<div class="rightfield"><input type="text" id="co_app_prev_emp_month" name="co_app_prev_emp_month" value="'. $co_app_prev_emp_month .'" class="input" placeholder="Months" /></div>
 			</li>		
@@ -1660,28 +1691,32 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Wages [$]</p>
+				<p><label for="co_app_wages">Wages [$]</label></p>
 				<input type="text" id="co_app_wages" name="co_app_wages" value="'. $co_app_wages .'" class="input" />
 			</li>
 			<li class="right">
 				<p>Paid</p>
+				<label class="com_none" for="co_app_paid1">Monthly</label>
+				<label class="com_none" for="co_app_paid2">Annually</label>
 				<input type="radio" id="co_app_paid1" name="co_app_paid" value="Monthly" class="radiobutton"'. $co_app_paid1.' />&nbsp;Monthly&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="co_app_paid2" name="co_app_paid" value="Annually" class="radiobutton"'. $co_app_paid2.' />&nbsp;Annually
 			</li>
 	  </ul>
 	  <ul class="form">		
 			<li class="left">
-				<p>Other Income [$]</p>
+				<p><label for="co_app_oth_income">Other Income [$]</label></p>
 				<input type="text" id="co_app_oth_income" name="co_app_oth_income" value="'. $co_app_oth_income .'" class="input" />
 			</li>			
 			<li class="right">
 				<p>Paid</p>
+				<label class="com_none" for="co_app_oth_income_paid1">Monthly</label>
+				<label class="com_none" for="co_app_oth_income_paid2">Annually</label>
 				<input type="radio" id="co_app_oth_income_paid1" name="co_app_oth_income_paid" value="Monthly" class="radiobutton"'. $co_app_oth_income_paid1.' />&nbsp;Monthly&nbsp;&nbsp;&nbsp;
-				<input type="radio" id="co_app_oth_income_paid1" name="co_app_oth_income_paid" value="Annually" class="radiobutton"'. $co_app_oth_income_paid2.' />&nbsp;Annually
+				<input type="radio" id="co_app_oth_income_paid2" name="co_app_oth_income_paid" value="Annually" class="radiobutton"'. $co_app_oth_income_paid2.' />&nbsp;Annually
 			</li>
 			
 			<li>
-				<p>Other Income Description</p>
+				<p><label for="co_app_oth_income_description">Other Income Description</label></p>
 				<textarea name="co_app_oth_income_description" id="co_app_oth_income_description" rows="1" cols="1" class="comments">'. $co_app_oth_income_description .'</textarea>
 				<p class="smalltext">Applicant does not need to disclose income from alimony, child support, or separate maintenance, unless applicant desires this income included in determining creditworthiness.</p>
 			</li>
@@ -1695,17 +1730,17 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Nearest Relative - not living with you</p>
+				<p><label for="co_app_nearest_relative">Nearest Relative - not living with you</label></p>
 				<input type="text" id="co_app_nearest_relative" name="co_app_nearest_relative" value="'. $co_app_nearest_relative .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Relationship</p>
+				<p><label for="co_app_nearest_relative_relationship">Relationship</label></p>
 				<input type="text" id="co_app_nearest_relative_relationship" name="co_app_nearest_relative_relationship" value="'. $co_app_nearest_relative_relationship .'" class="input" />
 			</li>
 	  </ul>
 	  <ul class="form">			
 			<li class="left">
-				<p>Phone</p>
+				<p><label for="co_app_nearest_relative_phone">Phone</label></p>
 				<input type="text" id="co_app_nearest_relative_phone" name="co_app_nearest_relative_phone" value="'. $co_app_nearest_relative_phone .'" class="input" />
 			</li>	
 	  </ul>
@@ -1731,39 +1766,39 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Manufacturer</p>
+				<p><label for="boat_manufacturer">Manufacturer</label></p>
 				<input type="text" id="boat_manufacturer" name="boat_manufacturer" value="'. $boat_manufacturer .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Model</p>
+				<p><label for="boat_model">Model</label></p>
 				<input type="text" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Year</p>
+				<p><label for="boat_year">Year</label></p>
 				<input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Length [ft]</p>
+				<p><label for="boat_length">Length [ft]</label></p>
 				<input type="text" id="boat_length" name="boat_length" value="'. $boat_length .'" class="input" />
 			</li>
 			
 			<li class="left">
-				<p>Price [$]</p>
+				<p><label for="boat_price">Price [$]</label></p>
 				<input type="text" id="boat_price" name="boat_price" value="'. $boat_price .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Sales Agent Name</p>
+				<p><label for="sales_agent_name">Sales Agent Name</label></p>
 				<input type="text" id="sales_agent_name" name="sales_agent_name" value="'. $sales_agent_name .'" class="input" />
 			</li>		
 	  </ul>
 	  <ul class="form">
       		<li class="left">
-				<p>Engine Make</p>
+				<p><label for="engine_make">Engine Make</label></p>
 				<input type="text" id="engine_make" name="engine_make" value="'. $engine_make .'" class="input">
 			</li>
 			<li class="right">
-				<p>Engine Type</p>
+				<p><label for="engine_type">Engine Type</label></p>
 				<select name="engine_type" id="engine_type" class="select">
 				<option value="">Select</option>
                 '. $this->get_engine_type_combo($engine_type, 1, 1).'                      
@@ -1771,14 +1806,14 @@ class Creditapplicationclass {
 			</li>
             
             <li class="left">
-				<p>Drive Type</p>
+				<p><label for="drive_type">Drive Type</label></p>
 				<select name="drive_type" id="drive_type" class="select">
 				<option value="">Select</option>
                 '. $this->get_drive_type_combo($drive_type, 1, 1).'                      
                 </select>
 			</li>  
             <li class="right">
-				<p>Number of Engines</p>
+				<p><label for="engine_no">Number of Engines</label></p>
 				<select fieldvalue="" name="engine_no" id="engine_no" class="select">
 				<option value="">Select</option>
                 '. $yachtclass->get_common_number_combo($engine_no, 4, 1).'                      
@@ -1787,11 +1822,13 @@ class Creditapplicationclass {
             
             <li class="left">
 				<p>Fuel Type</p>
+				<label class="com_none" for="fuel_type1">Gas</label>
+				<label class="com_none" for="fuel_type2">Diesel</label>
 				<input type="radio" id="fuel_type1" name="fuel_type" value="Gas" class="radiobutton"'. $fuel_type1.'>&nbsp;Gas&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="fuel_type2" name="fuel_type" value="Diesel" class="radiobutton"'. $fuel_type2.'>&nbsp;Diesel
 			</li>
             <li class="right">
-				<p>Horsepower Individual</p>
+				<p><label for="horsepower_individual">Horsepower Individual</label></p>
 				<input fieldvalue="" type="text" id="horsepower_individual" name="horsepower_individual" value="'. $horsepower_individual .'" class="input">                
                 <p>Horsepower Combined: <span class="horsepower_combined_v fontbold">'. $horsepower_combined .'</span></p>
 			</li>
@@ -1799,40 +1836,40 @@ class Creditapplicationclass {
 	  
 	  <ul class="form">
       		<li>
-				<p>Is there a Trade-In&nbsp;&nbsp;
+				<p><label for="tradein">Is there a Trade-In</label>&nbsp;&nbsp;
 				<input type="checkbox" id="tradein" name="tradein" value="1" class="checkbox"'. $tradein_checked .'>&nbsp;Yes
                 </p>
 			</li>
             
             <li class="left tradeinclass com_none">
-				<p>Trade-In Year</p>
+				<p><label for="tradein_year">Trade-In Year</label></p>
 				<input type="text" id="tradein_year" name="tradein_year" value="'. $tradein_year .'" class="input">
 			</li>
 			<li class="right tradeinclass com_none">
-				<p>Trade-In Make</p>
+				<p><label for="tradein_make">Trade-In Make</label></p>
 				<input type="text" id="tradein_make" name="tradein_make" value="'. $tradein_make .'" class="input">
 			</li>
             
             <li class="left tradeinclass com_none">
-				<p>Trade-In Model</p>
+				<p><label for="tradein_model">Trade-In Model</label></p>
 				<input type="text" id="tradein_model" name="tradein_model" value="'. $tradein_model .'" class="input">
 			</li>
 			<li class="right tradeinclass com_none">
-				<p>Trade-In Length</p>
+				<p><label for="tradein_length">Trade-In Length</label></p>
 				<input type="text" id="tradein_length" name="tradein_length" value="'. $tradein_length .'" class="input">
 			</li>
             
             <li class="left tradeinclass com_none">
-				<p>Trade-In Engine Make</p>
+				<p><label for="tradein_engine_make">Trade-In Engine Make</label></p>
 				<input type="text" id="tradein_engine_make" name="tradein_engine_make" value="'. $tradein_engine_make .'" class="input">
 			</li>
 			<li class="right tradeinclass com_none">
-				<p>Trade-In HP</p>
+				<p><label for="tradein_hp">Trade-In HP</label></p>
 				<input type="text" id="tradein_hp" name="tradein_hp" value="'. $tradein_hp .'" class="input">
 			</li>
             
             <li class="left tradeinclass com_none">
-				<p>Trade-In # Engines</p>
+				<p><label for="tradein_engine_no">Trade-In # Engines</label></p>
 				<select fieldvalue="tradein_" name="tradein_engine_no" id="tradein_engine_no" class="select">
 				<option value="">Select</option>
                 '. $yachtclass->get_common_number_combo($tradein_engine_no, 4, 1).'                     
@@ -1840,13 +1877,15 @@ class Creditapplicationclass {
 			</li>
 			
 			<li class="right tradeinclass com_none">
-				<p>Trade-In Horsepower Individual</p>
+				<p><label for="tradein_horsepower_individual">Trade-In Horsepower Individual</label></p>
 				<input fieldvalue="tradein_" type="text" id="tradein_horsepower_individual" name="tradein_horsepower_individual" value="'. $tradein_horsepower_individual .'" class="input">                
                 <p>Trade-In Horsepower Combined: <span class="tradein_horsepower_combined_v fontbold">'. $tradein_horsepower_combined .'</span></p>
 			</li>
 			
 			<li class="left tradeinclass com_none">
 				<p>Trade-In Fuel Type</p>
+				<label class="com_none" for="tradein_fuel_type1">Gas</label>
+				<label class="com_none" for="tradein_fuel_type2">Diesel</label>
 				<input type="radio" id="tradein_fuel_type1" name="tradein_fuel_type" value="Gas" class="radiobutton"'. $tradein_fuel_type1 .'>&nbsp;Gas&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="tradein_fuel_type2" name="tradein_fuel_type" value="Diesel" class="radiobutton"'. $tradein_fuel_type2 .'>&nbsp;Diesel
 			</li>
@@ -1860,11 +1899,11 @@ class Creditapplicationclass {
 	  <div class="singleblock_box singleblock_box_h">	   
 	  <ul class="form">	   		
 			<li class="left">
-				<p>Purchase Price [$]</p>
+				<p><label for="purchase_price">Purchase Price [$]</label></p>
 				<input type="text" id="purchase_price" name="purchase_price" value="'. $purchase_price .'" class="input" />
 			</li>
 			<li class="right">
-				<p>Estimated Tax Rate %</p>
+				<p><label for="estimated_tax_rate">Estimated Tax Rate %</label></p>
 				<input type="text" id="estimated_tax_rate" name="estimated_tax_rate" value="'. $estimated_tax_rate .'" class="input" />
 			</li>
 			
@@ -1874,12 +1913,13 @@ class Creditapplicationclass {
 	  </ul>
 	  <ul class="form">			
 			<li class="left">				
-				<p>Cash Down [$]</p>
+				<p><label for="cash_down">Cash Down [$]</label></p>
 				<div class="column1">
 				<input type="text" id="cash_down" name="cash_down" value="'. $cash_down .'" class="input" />
 				</div>
 				
 				<div class="column2 responsivespace">
+				<label class="com_none" for="cash_down_per">Percent</label>
 				<select id="cash_down_per" name="cash_down_per" class="select">	
 				<option value="0">Select %</option>	
 				'. $yachtclass->get_common_percent_combo($cash_down_per, 50, 5, 5, 1) .'			
@@ -1892,11 +1932,11 @@ class Creditapplicationclass {
 	  </ul>
 	  <ul class="form">
 			<li class="left tradeinclass com_none">
-				<p>Trade Amount [$]</p>
+				<p><label for="trade_amount">Trade Amount [$]</label></p>
 				<input type="text" id="trade_amount" name="trade_amount" value="'. $trade_amount .'" class="input" />
 			</li>	
 			<li class="right tradeinclass com_none">
-				<p>Trade Payoff [$]</p>
+				<p><label for="trade_payoff">Trade Payoff [$]</label></p>
 				<input type="text" id="trade_payoff" name="trade_payoff" value="'. $trade_payoff .'" class="input" />
 			</li>	
 			
@@ -1953,11 +1993,11 @@ class Creditapplicationclass {
 		  <ul class="form">	   		
 				<li class="t-center">
 					<p>Applicant</p>
-					<span class="creditauthcheckbox"><input type="checkbox" id="applicant_auth" name="applicant_auth" value="1" class="checkbox" /><label for="applicant_auth">Credit Authorization</label></span>
+					<span class="creditauthcheckbox"><input type="checkbox" id="applicant_auth" name="applicant_auth" value="1" class="checkbox" /><label for="applicant_auth"> Credit Authorization</label></span>
 				</li>
 				<li class="t-center jointapplicant com_none">
 					<p>Co-Applicant</p>
-					<span class="cocreditauthcheckbox"><input type="checkbox" id="co_applicant_auth" name="co_applicant_auth" value="1" class="checkbox" /><label for="co_applicant_auth"></label> Credit Authorization</span>
+					<span class="cocreditauthcheckbox"><input type="checkbox" id="co_applicant_auth" name="co_applicant_auth" value="1" class="checkbox" /><label for="co_applicant_auth"> Credit Authorization</label></span>
 				</li>	
 		  </ul>
 		  <div class="clear"></div>

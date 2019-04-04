@@ -43,7 +43,7 @@ echo $html_start2
 <div class="dashboard-contentcol-inner clearfixmain">
 	<div class="recordsearchform clearfixmain">
 		<form name="leadrec" id="leadrec" method="post" action="<?php echo $cm->folder_for_seo;?>">
-		<input class="finfo" id="email2" name="email2" type="hidden" />
+		<input class="finfo" id="email2" name="email2" type="text" />
 		<input type="hidden" id="fcapi" name="fcapi" value="exportleads" />
 
 		<ul class="form">

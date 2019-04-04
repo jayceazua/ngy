@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="ie.css" type="text/css" media="screen">
 <![endif]-->
 <link href="../css/jquery-ui.css" type="text/css" rel="Stylesheet" />
-<link rel="stylesheet" href="../css/colorbox.css" type="text/css" />
+<link rel="stylesheet" href="../css/jquery.fancybox.min.css" type="text/css" />
 <link rel="shortcut icon" href="../favicons/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="../favicons/favicon.ico" type="image/x-icon" />
 <script language="javascript" type="text/javascript">
@@ -19,7 +19,7 @@
 
 <script language="javascript" type="text/javascript" src="../js/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="../js/jquery-ui.min.js"></script>
-<script language="javascript" type="text/javascript" src="../js/jquery.colorbox-min.js"></script>
+<script language="javascript" type="text/javascript" src="../js/jquery.fancybox.min.js"></script>
 <script language="javascript" type="text/javascript" src="../js/validator.js"></script>
 <script language="javascript" type="text/javascript" src="../js/multiupload.js"></script>
 <script language="javascript" type="text/javascript" src="../js/jscolor.js"></script>
@@ -50,13 +50,16 @@ if ($fullpage != "y"){
 	//$link_option_ar["Inventory"][] = array('Manage New Boats In Stock', 'boat_in_stock.php');
 	//$link_option_ar["Inventory"][] = array('Manage Model Groups', 'manage-boat-model-group.php');
 	//$link_option_ar["Inventory"][] = array('Home Page New Boats', 'home_new_boats.php');
+	$link_option_ar["Inventory"][] = array('sep', '');
+	$link_option_ar["Inventory"][] = array('View / Edit Model', 'mod_manufacturer.php');
+	$link_option_ar["Inventory"][] = array('Model Search Fields', 'model-search-fields.php');
 	
 	$link_option_ar["Page Slider Section"][] = "leftslidericon";
 	$link_option_ar["Page Slider Section"][] = array('Add Slider Category', 'add_slider_category.php');
 	$link_option_ar["Page Slider Section"][] = array('Modify Existing Slider Category', 'mod_slider_category.php');
 	$link_option_ar["Page Slider Section"][] = array('sep', '');
 	$link_option_ar["Page Slider Section"][] = array('Add New Image/Video', 'add_slider_image.php');
-    $link_option_ar["Page Slider Section"][] = array('Modify Existing Image/Video', 'mod_slider_image.php');
+    $link_option_ar["Page Slider Section"][] = array('Modify Existing Image/Video', 'mod_slider_image.php');	
 
     $link_option_ar["Page Section"][] = "leftpageicon";
     $link_option_ar["Page Section"][] = array('Add New Page', 'add_page.php');

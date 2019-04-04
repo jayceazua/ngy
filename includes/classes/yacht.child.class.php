@@ -299,12 +299,12 @@ class Yachtclass_Child extends Yachtclass{
 			if ($searchoption == 2){
 				$extra_search_text = '
 				<section class="section clearfixmain">
-					<div><input class="radiobutton allmylisting" type="radio" value="2" name="allmy" /><span class="formlabel">All Inventory</span></div>
-					<div><input class="radiobutton allmylisting" type="radio" value="1" name="allmy" checked="checked" /><span class="formlabel">My Listing</span></div>
+					<div><label class="com_none" for="allmy2">All Inventory</label><input class="radiobutton allmylisting" type="radio" value="2" id="allmy2" name="allmy" /><span class="formlabel">All Inventory</span></div>
+					<div><label class="com_none" for="allmy1">My Listing</label><input class="radiobutton allmylisting" type="radio" value="1" id="allmy1" name="allmy" checked="checked" /><span class="formlabel">My Listing</span></div>
 				</section>
 				
 				<section class="section com_none brokersearchdiv clearfixmain">
-					<h3>Broker Name :</h3>
+					<h3><label for="brokername">Broker Name :</label></h3>
 					<div class="serach">
 						<input type="text" id="brokername" name="brokername" value="" targetdiv="4" ckpage="4" class="azax_suggest azax_suggest4 input" autocomplete="off">
 						<div id="suggestsearch4" class="suggestsearch suggestsearchspace com_none"></div>
@@ -338,9 +338,12 @@ class Yachtclass_Child extends Yachtclass{
 				
 				$owned_field_text = '
 				<section class="section clearfixmain">
-				<input class="radiobutton ownedradio" type="radio" name="ls_owned" value="1"'. $owned1 .' /> Our Listings<br />
-				<input class="radiobutton ownedradio" type="radio" name="ls_owned" value="2"'. $owned2 .' /> Co-Brokerage<br />
-				<input class="radiobutton ownedradio" type="radio" name="ls_owned" value="0"'. $owned3 .' /> All Listings
+				<label class="com_none" for="ls_owned1">Our Listings</label>
+				<label class="com_none" for="ls_owned2">Co-Brokerage</label>
+				<label class="com_none" for="ls_owned3">All Listings</label>
+				<input class="radiobutton ownedradio" type="radio" id="ls_owned1" name="ls_owned" value="1"'. $owned1 .' /> Our Listings<br />
+				<input class="radiobutton ownedradio" type="radio" id="ls_owned2" name="ls_owned" value="2"'. $owned2 .' /> Co-Brokerage<br />
+				<input class="radiobutton ownedradio" type="radio" id="ls_owned3" name="ls_owned" value="0"'. $owned3 .' /> All Listings
 				</section>
 				';
 			}else{
@@ -351,6 +354,7 @@ class Yachtclass_Child extends Yachtclass{
 			if ($dashboardinventory == 1){
 				$excludesold_text = '
 				<section class="section clearfixmain">
+				<label class="com_none" for="dashboard_ex_sold">Exclude Sold</label>
 				<input class="checkbox dashboardexsold" type="checkbox" id="dashboard_ex_sold" name="dashboard_ex_sold" value="1" /> Exclude Sold
 				</section>
 				';
@@ -366,15 +370,15 @@ class Yachtclass_Child extends Yachtclass{
 				'. $owned_field_text .'
 				'. $excludesold_text .'
 				<section class="section clearfixmain">
-					<h3>Manufacturer :</h3>			
+					<h3><label for="mfcname">Manufacturer :</label></h3>
 					<div class="serach clearfixmain">
 						<input type="text" id="mfcname" name="mfcname" value="'. $mfcname .'" ckpage="5" class="azax_auto input" autocomplete="off">
-						<input type="button" name="searchb" id="searchb" value="" class="submit">
+						<button type="button" name="searchb" id="searchb" value="" class="submit" style="text-indent:-9999px;">Search</button>
 					</div>
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Length(ft) :</h3>
+					<h3><label for="lnmin">Length(ft) :</label><label class="com_none" for="lnmax">Length(ft) :</label></h3>
 					<div class="left-side clearfixmain">
 						<input id="lnmin" name="lnmin" type="text" value="'. $lnmin .'" placeholder="Min" class="serachinput lengthfield" autocomplete="off" />
 					</div>
@@ -384,7 +388,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Price($) :</h3>
+					<h3><label for="prmin">Price($) :</label><label class="com_none" for="prmax">Price($) :</label></h3>
 					<div class="left-side clearfixmain">
 						<input id="prmin" name="prmin" type="text" value="'. $prmin .'" placeholder="Min" class="serachinput pricefield" autocomplete="off" />
 					</div>
@@ -394,7 +398,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Year :</h3>
+					<h3><label for="yrmin">Year :</label><label class="com_none" for="yrmax">Year :</label></h3>
 					<div class="left-side clearfixmain">
 						<select class="my-dropdown2" id="yrmin" name="yrmin">
 							<option value="0" selected="selected">Min</option>
@@ -410,7 +414,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Condition :</h3>
+					<h3><label for="conditionid">Condition :</label></h3>
 					<select class="my-dropdown2" name="conditionid" id="conditionid">
 						<option value="0" selected="selected">All</option>
 						'. $this->get_condition_combo($conditionid, 0, 1) .'
@@ -418,7 +422,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Category :</h3>
+					<h3><label for="categoryid">Category :</label></h3>
 					<select class="my-dropdown2 catupdate" targetcombo="typeid" name="categoryid" id="categoryid">
 						<option selected="selected">All</option>
 						'. $this->get_category_combo($categoryid, 0, 1) .'
@@ -426,7 +430,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Boat Type :</h3>
+					<h3><label for="typeid">Boat Type :</label></h3>
 					<select class="my-dropdown2" name="typeid" id="typeid">
 						<option selected="selected">All</option>
 						'. $this->get_type_combo_parent($typeid, $categoryid, 0, 1) .'
@@ -434,7 +438,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Engine Type :</h3>
+					<h3><label for="enginetypeid">Engine Type :</label></h3>
 					<select class="my-dropdown2" name="enginetypeid" id="enginetypeid">
 						<option selected="selected">All</option>
 						'. $this->get_engine_type_combo($enginetypeid, 0, 1) .'
@@ -442,7 +446,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Drive Type :</h3>
+					<h3><label for="drivetypeid">Drive Type :</label></h3>
 					<select class="my-dropdown2" name="drivetypeid" id="drivetypeid">
 						<option selected="selected">All</option>
 						'. $this->get_drive_type_combo($drivetypeid, 0, 1) .'
@@ -450,7 +454,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>Fuel Type :</h3>
+					<h3><label for="fueltypeid">Fuel Type :</label></h3>
 					<select class="my-dropdown2" name="fueltypeid" id="fueltypeid">
 						<option selected="selected">All</option>
 						'. $this->get_fuel_type_combo($fueltypeid, 0, 1) .'
@@ -458,7 +462,7 @@ class Yachtclass_Child extends Yachtclass{
 				</section>
 				
 				<section class="section clearfixmain">
-					<h3>US State :</h3>
+					<h3><label for="stateid">US State :</label></h3>
 					<select class="my-dropdown2" name="stateid" id="stateid">
 						<option selected="selected">All</option>
 						'. $this->get_state_combo($stateid, 1) .'
@@ -533,7 +537,7 @@ class Yachtclass_Child extends Yachtclass{
 						${$key} = $cm->filtertextdisplay($val);
 						
 						if ($id == $activeval){
-							$righttext = '<div class="filter-remove"><a tfield="categoryid" tval="0" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
+							$righttext = '<div class="filter-remove"><a tfield="categoryid" tval="0" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i><span class="com_none">Remove</span></a></div>';
 						}else{
 							$righttext = '<div class="filter-no"> ('. $total .')</div>';
 						}
@@ -584,7 +588,7 @@ class Yachtclass_Child extends Yachtclass{
 						${$key} = $cm->filtertextdisplay($val);
 						
 						if ($id == $activeval){
-							$righttext = '<div class="filter-remove"><a tfield="conditionid" tval="0" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
+							$righttext = '<div class="filter-remove"><a tfield="conditionid" tval="0" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i><span class="com_none">Remove</span></a></div>';
 						}else{
 							$righttext = '<div class="filter-no"> ('. $total .')</div>';
 						}
@@ -641,7 +645,7 @@ class Yachtclass_Child extends Yachtclass{
 						${$key} = $cm->filtertextdisplay($val);
 						
 						if ($id == $activeval){
-							$righttext = '<div class="filter-remove"><a tfield="typeid" tval="0" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
+							$righttext = '<div class="filter-remove"><a tfield="typeid" tval="0" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i><span class="com_none">Remove</span></a></div>';
 						}else{
 							$righttext = '<div class="filter-no"> ('. $total .')</div>';
 						}
@@ -704,7 +708,7 @@ class Yachtclass_Child extends Yachtclass{
 						${$key} = $cm->filtertextdisplay($val);
 						
 						if ($name == $activeval){
-							$righttext = '<div class="filter-remove"><a tfield="mfcname" tval="" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
+							$righttext = '<div class="filter-remove"><a tfield="mfcname" tval="" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i><span class="com_none">Remove</span></a></div>';
 						}else{
 							$righttext = '<div class="filter-no"> ('. $total .')</div>';
 						}
@@ -768,7 +772,7 @@ class Yachtclass_Child extends Yachtclass{
 						${$key} = $cm->filtertextdisplay($val);
 						
 						if ($model_slug == $activeval){
-							$righttext = '<div class="filter-remove"><a tfield="modelname" tval="" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
+							$righttext = '<div class="filter-remove"><a tfield="modelname" tval="" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i><span class="com_none">Remove</span></a></div>';
 						}else{
 							$righttext = '<div class="filter-no"> ('. $total .')</div>';
 						}
@@ -831,7 +835,7 @@ class Yachtclass_Child extends Yachtclass{
 						${$key} = $cm->filtertextdisplay($val);
 						
 						if ($id == $activeval){
-							$righttext = '<div class="filter-remove"><a tfield="countryid" tval="0" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
+							$righttext = '<div class="filter-remove"><a tfield="countryid" tval="0" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i><span class="com_none">Remove</span></a></div>';
 						}else{
 							$righttext = '<div class="filter-no"> ('. $total .')</div>';
 						}
@@ -907,7 +911,7 @@ class Yachtclass_Child extends Yachtclass{
 						}
 						
 						if ($tval == $activeval){
-							$righttext = '<div class="filter-remove"><a tfield="stateid" tval="" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
+							$righttext = '<div class="filter-remove"><a tfield="stateid" tval="" class="filterwork" href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i><span class="com_none">Remove</span></a></div>';
 						}else{
 							$righttext = '<div class="filter-no"> ('. $total .')</div>';
 						}
@@ -1013,98 +1017,102 @@ class Yachtclass_Child extends Yachtclass{
 			<div class="singleblock_box clearfixmain">
 			<ul class="form">
 				<li class="left">
-					<p>Manufacturer</p>
-					<input type="text" id="mfcname" name="mfcname" class="input" />
+					<p><label for="ad_mfcname">Manufacturer</label></p>
+					<input type="text" id="ad_mfcname" name="mfcname" class="input" />
 				</li>
 				<li class="right">
-					<p>Price</p>
-					<div class="left-side"><input type="text" id="prmin" name="prmin" class="input" placeholder="Min" /></div>
-					<div class="right-side"><input type="text" id="prmax" name="prmax" class="input" placeholder="Max" /></div>
+					<p><label for="ad_prmin">Price</label><label class="com_none" for="ad_prmax">Price</label></p>
+					<div class="left-side"><input type="text" id="ad_prmin" name="prmin" class="input" placeholder="Min" /></div>
+					<div class="right-side"><input type="text" id="ad_prmax" name="prmax" class="input" placeholder="Max" /></div>
 				</li>
 			
 				<li class="left">
-					<p>Year</p>
+					<p><label for="ad_yrmin">Year</label><label class="com_none" for="ad_yrmax">Year</label></p>
 					<div class="left-side clearfixmain">
-						<select class="my-dropdown2" id="yrmin" name="yrmin">
+						<select class="my-dropdown2" id="ad_yrmin" name="yrmin">
 							<option selected>Min</option>
 							'. $this->get_year_combo(0, 1) .'
 						</select>
 					</div>
 					<div class="right-side clearfixmain">
-						<select class="my-dropdown2" id="yrmax" name="yrmax">
+						<select class="my-dropdown2" id="ad_yrmax" name="yrmax">
 							<option  selected="selected">Max</option>
 							'. $this->get_year_combo(0, 1) .'
 						</select>
 					</div>
 				</li>
 				<li class="right">
-					<p>Length</p>
-					<div class="left-side"><input type="text" id="lnmin" name="lnmin" class="input" placeholder="Min" /></div>
-					<div class="right-side"><input type="text" id="lnmax" name="lnmax" class="input" placeholder="Max" /></div>
+					<p><label for="ad_lnmin">Length</label><label class="com_none" for="ad_lnmax">Length</label></p>
+					<div class="left-side"><input type="text" id="ad_lnmin" name="lnmin" class="input" placeholder="Min" /></div>
+					<div class="right-side"><input type="text" id="ad_lnmax" name="lnmax" class="input" placeholder="Max" /></div>
 				</li>
 			
 				<li class="left">
-					<p>Condition</p>
-					<select class="my-dropdown2" name="conditionid" id="conditionid">
+					<p><label for="ad_conditionid">Condition</label></p>
+					<select class="my-dropdown2" name="conditionid" id="ad_conditionid">
 						<option value="0" selected="selected">All</option>
 						'. $this->get_condition_combo(0, 0, 1) .'
 					</select>
 				</li>
 				<li class="right">
-					<p>Category</p>
-					<select class="my-dropdown2 catupdate" targetcombo="typeid" name="categoryid" id="categoryid">
+					<p><label for="ad_categoryid">Category</label></p>
+					<select class="my-dropdown2 catupdate" targetcombo="typeid" name="categoryid" id="ad_categoryid">
 						<option selected="selected">All</option>
 						'. $this->get_category_combo(0, 0, 1) .'
 					</select>
 				</li>
 			
 				<li class="left">
-					<p>Engine Type</p>
-					<select class="my-dropdown2" name="enginetypeid" id="enginetypeid">
+					<p><label for="ad_enginetypeid">Engine Type</label></p>
+					<select class="my-dropdown2" name="enginetypeid" id="ad_enginetypeid">
 						<option selected="selected">All</option>
 						'. $this->get_engine_type_combo(0, 0, 1) .'
 					</select>
 				</li>
 				<li class="right">
-					<p>Drive Type</p>
-					<select class="my-dropdown2" name="drivetypeid" id="drivetypeid">
+					<p><label for="ad_drivetypeid">Drive Type</label></p>
+					<select class="my-dropdown2" name="drivetypeid" id="ad_drivetypeid">
 						<option selected="selected">All</option>
 						'. $this->get_drive_type_combo(0, 0, 1) .'
 					</select>
 				</li>
 			
 				<li class="left">
-					<p>Fuel Type</p>
-					<select class="my-dropdown2" name="fueltypeid" id="fueltypeid">
+					<p><label for="ad_fueltypeid">Fuel Type</label></p>
+					<select class="my-dropdown2" name="fueltypeid" id="ad_fueltypeid">
 						<option selected="selected">All</option>
 						'. $this->get_fuel_type_combo(0, 0, 1) .'
 					</select>
 				</li>
 				<li class="right">
-					<p>US State</p>
-					<select class="my-dropdown2" name="stateid" id="stateid">
+					<p><label for="ad_stateid">US State</label></p>
+					<select class="my-dropdown2" name="stateid" id="ad_stateid">
 						<option selected="selected">All</option>
 						'. $this->get_state_combo(0, 1, 1) .'
 					</select>
 				</li>
 				
 				<li class="left">
-					<p>Boat Type</p>
-					<select class="my-dropdown2 toplevelcat-x" name="typeid" id="typeid">
+					<p><label for="ad_typeid">Boat Type</label></p>
+					<select class="my-dropdown2 toplevelcat-x" name="typeid" id="ad_typeid">
 						<option selected="selected" value="0">All</option>
 						'. $this->get_type_combo_parent($typeid, $categoryid, 0, 1) .'
 					</select>
 				</li>
 				<li class="right">
 					<p>Search Type</p>
-					<input class="setformaction2 radiobutton" type="radio" name="sp_typeid" value="1" checked="checked" /> Yachts
-					<input class="setformaction2 radiobutton radiobutton_next" type="radio" name="sp_typeid" value="2" /> Catamaran
+					<label class="com_none" for="ad_sp_typeid1">Yachts</label>
+					<label class="com_none" for="ad_sp_typeid2">Catamaran</label>
+					<input class="setformaction2 radiobutton" type="radio" id="ad_sp_typeid1" name="sp_typeid" value="1" checked="checked" /> Yachts
+					<input class="setformaction2 radiobutton radiobutton_next" type="radio" id="ad_sp_typeid2" name="sp_typeid" value="2" /> Catamaran
 				</li>
 				
 				<li>
 					<p>Search In</p>
-					<input p="'. $post_url_yacht .'" pid="'. $our_page_id_yacht .'" p2="'. $post_url_catamaran .'" pid2="'. $our_page_id_catamaran .'" class="setformaction2 radiobutton" type="radio" name="owned" value="1" /> Our Listings
-					<input p="'. $post_url2_yacht .'" pid="'. $co_broker_page_id_yacht . '" p2="'. $post_url2_catamaran .'" pid2="'. $co_broker_page_id_catamaran .'" class="setformaction2 radiobutton radiobutton_next" type="radio" name="owned" value="2" checked="checked" /> Co-Brokerage
+					<label class="com_none" for="ad_owned1">Our Listings</label>
+					<label class="com_none" for="ad_owned2">Co-Brokerage</label>
+					<input p="'. $post_url_yacht .'" pid="'. $our_page_id_yacht .'" p2="'. $post_url_catamaran .'" pid2="'. $our_page_id_catamaran .'" class="setformaction2 radiobutton" type="radio" id="ad_owned1" name="owned" value="1" /> Our Listings
+					<input p="'. $post_url2_yacht .'" pid="'. $co_broker_page_id_yacht . '" p2="'. $post_url2_catamaran .'" pid2="'. $co_broker_page_id_catamaran .'" class="setformaction2 radiobutton radiobutton_next" type="radio" id="ad_owned2" name="owned" value="2" checked="checked" /> Co-Brokerage
 				</li>
 			</ul>			
 			</div>
@@ -2535,7 +2543,7 @@ class Yachtclass_Child extends Yachtclass{
 				
 				$contentval = '
 				<div class="listing-map-label listing-status-for-sale">
-					<img class="listing-thumbnail wp-post-image" src="'. $cm->folder_for_seo . 'locationimage/' . $logo_image .'">					
+					<img alt="'. $name .'" class="listing-thumbnail wp-post-image" src="'. $cm->folder_for_seo . 'locationimage/' . $logo_image .'">					
 					<div class="map-label-content">
 						<span class="listing-address"><a href="'. $details_url .'"><strong>'. $addressfull .'</strong>'. $usertext .'</a></span>
 					</div>
@@ -5321,7 +5329,7 @@ class Yachtclass_Child extends Yachtclass{
 		$searchtool_loggedin = '';
 		if ($loggedin_member_id > 0){
 			$searchtool_loggedin = '
-			<li><a href="'. $cm->folder_for_seo .'popsavesearch/" class="savesearchlink icon-savesearch" data-fancybox-type="iframe">Save this search</a></li>
+			<li><a href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'popsavesearch/" class="savesearchlink icon-savesearch" data-type="iframe">Save this search</a></li>
 			<li><a href="'. $cm->folder_for_seo .'searches/" class="icon-searchsearches">Saved searches</a></li>
 			';
 		}
@@ -5354,6 +5362,11 @@ class Yachtclass_Child extends Yachtclass{
 	public function display_boat_list($argu = array()){
 		global $db, $cm;
 		$returntext = '';
+		
+		if (!is_array($argu)){
+			$argu = array();
+		}
+		
 		$p_ar = $_REQUEST;
 		foreach($p_ar AS $key => $val){
 			$argu["$key"] = $val;
@@ -5609,7 +5622,7 @@ class Yachtclass_Child extends Yachtclass{
 					$boatlistinginfo["Company"][] = $companyname;
 					$boatlistinginfo["Listing Agent"][] = $fname .'&nbsp;'. $lname;
 					$boatlistinginfo["Phone"][] = $phone;
-					$boatlistinginfo["Contact"][] = '<a href="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $id .'" class="contactbroker button contact" data-fancybox-type="iframe"><span>Contact Broker</span></a>';
+					$boatlistinginfo["Contact"][] = '<a href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $id .'" class="contactbroker button contact" data-type="iframe"><span>Contact Broker</span></a>';
 					$boatlistinginfo["Remove"][] = $removelink;
 					
 				}
@@ -5918,8 +5931,10 @@ class Yachtclass_Child extends Yachtclass{
 		</div>';
 		
 		$boat_owned_section_text = '
-		<div class="input-left"><input p="'. $post_url_yacht .'" pid="'. $our_page_id_yacht .'" p2="'. $post_url_catamaran .'" pid2="'. $our_page_id_catamaran .'" class="setformaction radiobutton" type="radio" name="owned" value="1" /> Our Listings</div> 
-		<div class="input-right"><input p="'. $post_url2_yacht .'" pid="'. $co_broker_page_id_yacht .'" p2="'. $post_url2_catamaran .'" pid2="'. $co_broker_page_id_catamaran .'" class="setformaction radiobutton radiobutton_next" type="radio" name="owned" value="2" checked="checked" /> Co-Brokerage</div>
+		<label class="com_none" for="cm_owned1">Our Listings</label>
+		<label class="com_none" for="cm_owned2">Co-Brokerage</label>
+		<div class="input-left"><input p="'. $post_url_yacht .'" pid="'. $our_page_id_yacht .'" p2="'. $post_url_catamaran .'" pid2="'. $our_page_id_catamaran .'" class="setformaction radiobutton" type="radio" id="cm_owned1" name="owned" value="1" /> Our Listings</div> 
+		<div class="input-right"><input p="'. $post_url2_yacht .'" pid="'. $co_broker_page_id_yacht .'" p2="'. $post_url2_catamaran .'" pid2="'. $co_broker_page_id_catamaran .'" class="setformaction radiobutton radiobutton_next" type="radio" id="cm_owned2" name="owned" value="2" checked="checked" /> Co-Brokerage</div>
 		';
 		
 		//$condition_field_include_text = '';
@@ -5951,8 +5966,10 @@ class Yachtclass_Child extends Yachtclass{
 		$boat_type_section_text = '<div class="radio-group clearfixmain">
 			<h5 class="singlelinerightside">Search Type</h5>
 			<div class="clearfixmain">
-				<div class="input-left"><input class="setformaction radiobutton" type="radio" name="sp_typeid" value="1" checked="checked" /> Yachts</div> 
-				<div class="input-right"><input class="setformaction radiobutton radiobutton_next" type="radio" name="sp_typeid" value="2" /> Catamaran</div>
+				<label class="com_none" for="cm_sp_typeid1">Yachts</label>
+				<label class="com_none" for="cm_sp_typeid2">Catamaran</label>
+				<div class="input-left"><input class="setformaction radiobutton" type="radio" id="cm_sp_typeid1" name="sp_typeid" value="1" checked="checked" /> Yachts</div> 
+				<div class="input-right"><input class="setformaction radiobutton radiobutton_next" type="radio" id="cm_sp_typeid2" name="sp_typeid" value="2" /> Catamaran</div>
 			</div>
 		</div>
 		';
@@ -6008,8 +6025,10 @@ class Yachtclass_Child extends Yachtclass{
 				
 				$boat_owned_section_text = '
 				<div class="button-group clearfixmain">
-				<div class="input-left"><input class="radiobutton ownedradio" type="radio" name="ls_owned" value="1"'. $owned1 .' /> Our Listings</div> 
-				<div class="input-right"><input class="radiobutton radiobutton_next ownedradio" type="radio" name="ls_owned" value="2"'. $owned2 .' /> Co-Brokerage</div>
+				<label class="com_none" for="ls_owned1">Our Listings</label>
+				<label class="com_none" for="ls_owned2">Co-Brokerage</label>
+				<div class="input-left"><input class="radiobutton ownedradio" type="radio" id="ls_owned1" name="ls_owned" value="1"'. $owned1 .' /> Our Listings</div> 
+				<div class="input-right"><input class="radiobutton radiobutton_next ownedradio" type="radio" id="ls_owned2" name="ls_owned" value="2"'. $owned2 .' /> Co-Brokerage</div>
 				</div>
 				';
 			}else{
@@ -6034,9 +6053,12 @@ class Yachtclass_Child extends Yachtclass{
 			<div class="button-group clearfixmain">
 				<p>Condition</p>
 				<div class="clearfixmain">
-				<input class="radiobutton conditionidradio radiobutton_rightside" type="radio" name="conditionid_extend" value="1"'. $conditionid1 .'>New
-				<input class="radiobutton conditionidradio radiobutton_bothside" type="radio" name="conditionid_extend" value="2"'. $conditionid2 .'>Used
-				<input class="radiobutton conditionidradio radiobutton_leftside" type="radio" name="conditionid_extend" value="0"'. $conditionid3 .'>All
+				<label class="com_none" for="conditionid_extend1">New</label>
+				<label class="com_none" for="conditionid_extend2">Used</label>
+				<label class="com_none" for="conditionid_extend3">All</label>
+				<input class="radiobutton conditionidradio radiobutton_rightside" type="radio" id="conditionid_extend1" name="conditionid_extend" value="1"'. $conditionid1 .'>New
+				<input class="radiobutton conditionidradio radiobutton_bothside" type="radio" id="conditionid_extend2" name="conditionid_extend" value="2"'. $conditionid2 .'>Used
+				<input class="radiobutton conditionidradio radiobutton_leftside" type="radio" id="conditionid_extend3" name="conditionid_extend" value="0"'. $conditionid3 .'>All
 				</div>
 			</div>
 			';
@@ -6174,12 +6196,12 @@ class Yachtclass_Child extends Yachtclass{
 		}else{
 				
 			$smallform = '		
-			<p>Make</p>
+			<p><label for="mfcname'. $field_id_extra .'">Make</label></p>
 			<div class="input-group clearfixmain">			
 				<input id="mfcname'. $field_id_extra .'" name="mfcname" class="azax_auto input-field" placeholder="Manufacturer" type="text" value="'. $mfcname .'" ckpage="5" autocomplete="off">
 			</div>
 
-			<p>Length Range</p>
+			<p><label for="lnmin'. $field_id_extra .'">Length Range</label><label class="com_none" for="lnmax'. $field_id_extra .'">Length Range</label></p>
 			<div class="clearfixmain">
 				<div class="input-left">
 					<div class="input-group clearfixmain">
@@ -6193,7 +6215,7 @@ class Yachtclass_Child extends Yachtclass{
 				</div>
 			</div>
 
-			<p>Year Range</p>
+			<p><label for="yrmin'. $field_id_extra .'">Year Range</label><label class="com_none" for="yrmax'. $field_id_extra .'">Year Range</label></p>
 			<div class="clearfixmain">
 				<div class="input-left">
 					<div class="input-group clearfixmain">
@@ -6207,7 +6229,7 @@ class Yachtclass_Child extends Yachtclass{
 				</div>
 			</div>
 
-			<p>Price Range</p>
+			<p><label for="prmin'. $field_id_extra .'">Price Range</label><label class="com_none" for="prmax'. $field_id_extra .'">Price Range</label></p>
 			<div class="clearfixmain">
 				<div class="input-left">
 					<div class="input-group clearfixmain">
@@ -6369,15 +6391,15 @@ class Yachtclass_Child extends Yachtclass{
 	}
 	
 	//sliding Advanced Search form
-	public function sliding_advanced_search_form($isdashboard = 0){
-		if ($isdashboard == 0){
+	public function sliding_advanced_search_form($isdashboard = 0, $pageid = 0){
+		if ($isdashboard == 0 AND $pageid == 1){
 			global $cm;
 
 			$advform .= '
 			<div class="boatsearch-inline all-overlay custom-overlay">
 				<div class="custom-overlay-container clearfixmain">
 					<div class="modal-dialog clearfixmain">
-						<div class="custom-overlay-close"><a href="javascript:void(0);" title="Close"><img src="'. $cm->folder_for_seo .'images/inactive-icon.png" /></a></div>
+						<div class="custom-overlay-close"><a href="javascript:void(0);" title="Close"><img alt="Advanced Search Form Close" src="'. $cm->folder_for_seo .'images/inactive-icon.png" /></a></div>
 						<h5>Advanced Search</h5>
 						'. $this->display_boat_advanced_search_form() .'
 					</div>
@@ -6763,7 +6785,7 @@ class Yachtclass_Child extends Yachtclass{
 			';
 			
 			if ($support_crew == 0){
-				$returntext .= '<li><a '. $gaeventtracking .' href="'. $cm->folder_for_seo .'contact-broker/?id='. $id .'" class="contactbroker button contact" data-fancybox-type="iframe"><span>'. $contactbutton_text .'</span></a></li>';
+				$returntext .= '<li><a '. $gaeventtracking .' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $id .'" class="contactbroker button contact" data-type="iframe"><span>'. $contactbutton_text .'</span></a></li>';
 			}
 			
 			if ($testimonialfoundm > 0){

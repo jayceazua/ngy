@@ -275,14 +275,18 @@ echo $html_start;
 			
 			//$(".custom-overlay").hide();
 			popurl = popurl + '&printoption=' + printoption + '&include_broker=' + include_broker + '&sortop=' + sortop + '&orderbyop=' + orderbyop + '&boatselected=' + boatselected;
-			$.colorbox({
-				href : popurl,
-				iframe:true,
-				width: "90%",
-				height: "90%",
-				maxWidth: 900,
-				fixed:true,
-				current:''
+			$.fancybox.open({
+				src: popurl,
+				type: 'iframe',
+				toolbar  : false,
+				smallBtn : true,
+				iframe : {
+					preload : false,
+					css : {
+						width  : "90%",
+						"max-width": "800px"
+					}
+				}
 			});
 			
 			return false;

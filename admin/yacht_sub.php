@@ -131,6 +131,7 @@ if ($ms == 0){
 }
 
 $model_slug = $cm->create_slug($model);
+
 // common update
 $sql = "update tbl_yacht set location_id = '". $location_id ."'
 , broker_id = '". $broker_id ."'
@@ -183,9 +184,13 @@ $lon = $latlonar["lon"];
 //if ($m1 == ""){ $m1 = $yachtclass->yacht_name($iiid); }
 //if ($m2 == ""){ $m2 = $cm->get_sort_content_description($overview, 350); }
 
+//boat slug
+$boat_slug = $yachtclass->create_boat_slug($iiid);
+
 //2nd update
 $sql = "update tbl_yacht set lat_val = '". $cm->filtertext($lat)."'
 , lon_val = '". $cm->filtertext($lon)."'
+, boat_slug = '". $cm->filtertext($boat_slug) ."'
 , m1 = '". $cm->filtertext($m1) ."'
 , m2 = '". $cm->filtertext($m2) ."'
 , m3 = '". $cm->filtertext($m3) ."' where id = '". $iiid ."'";

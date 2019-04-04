@@ -102,9 +102,30 @@ if ($loggedin_member_id > 0){
 		$favtext = '<a id="favlist-'. $id .'" yid="'. $id .'" rtsection="1" href="javascript:void(0);" class="yachtfv addfavboat" title="Add to favorites">Favorite</a>';
 	}
 }else{
-	$favtext = '<a id="favlist-'. $id .'" href="'. $cm->folder_for_seo .'pop-login/?chkid='. $id .'" class="loginpop addfavboat" title="Add to favorites">Favorite</a>';
+	$favtext = '<a id="favlist-'. $id .'" href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'pop-login/?chkid='. $id .'" class="loginpop addfavboat" data-type="iframe" title="Add to favorites">Favorite</a>';
 }
 //end
+
+//Map display
+if ($lat_val == 0 AND $lon_val == 0){
+	$mapdisplay = '
+	<div class="customboattabcontent clearfixmain">
+		<div class="no-found-map mapgray"><img alt="Location Map" src="'. $cm->site_url .'/images/location-map-bg.png"></div>
+	</div>
+	';
+}else{		
+	if ($lat_val == 0 AND $lon_val == 0){
+		$latlonstring = $mapaddress;
+	}else{
+		$latlonstring = $lat_val . ", " . $lon_val;
+	}
+	$mapdisplay = '
+	<div class="customboattabcontent clearfixmain">
+		<iframe class="mapgray" width="100%" height="300" id="gmap_canvas" src="https://www.google.com/maps/embed/v1/place?key='. $cm->googlemapkey .'&q='. $latlonstring .'&zoom=9" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+	</div>';
+}
+//end
+
 
 $yachtclass->update_yacht_view($id);
 $_SESSION["visited_boat"] = $id;
@@ -244,6 +265,7 @@ $meat_ar = array(
 	"overview" => $overview,
 	"city" => $city,
 	"state" => $statenm,
+	"vessel_name" => $vessel_name,
 	"company_id" => $company_id
 );
 $final_meta = $yachtclass->collect_meta_info_boat($meat_ar);
@@ -294,6 +316,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 				<?php }else{ ?>
 				<div class="left"><span id="pricechange">$<?php echo $cm->price_format($price); ?></span></div>
                 <div class="right">
+                    <label class="com_none" for="currency_id">Price</label>
                     <select tdiv="" setpr="<?php echo round($price, 0); ?>" class="my-dropdown2" id="currency_id" name="currency_id">
                         <?php echo $yachtclass->get_currency_combo(0, 1); ?>
                     </select>
@@ -321,7 +344,8 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 				<h3>Charter price :</h3>
 				<div class="left"><span id="pricechangecharter">$<?php echo $cm->price_format($charter_price); ?></span> / <?php echo $price_per_option_name; ?></div>
 				<div class="right">
-					<select tdiv="charter" setpr="<?php echo round($charter_price, 0); ?>" class="my-dropdown2" id="currency_idcharter" name="currency_idcharter">
+					<label class="com_none" for="currency_idcharter">Price</label>
+                    <select tdiv="charter" setpr="<?php echo round($charter_price, 0); ?>" class="my-dropdown2" id="currency_idcharter" name="currency_idcharter">
 						<?php echo $yachtclass->get_currency_combo(0, 1); ?>
 					</select>
 				</div>
@@ -340,7 +364,14 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 
 
 	<div class="left-cell">
-		<?php echo $yachtclass->display_yacht_slider_full($id);?>
+		<?php
+		/*if ($cm->isMobileDevice()){
+			echo $yachtclass->display_yacht_slider_slick_main($id);
+		}else{
+        	echo $yachtclass->display_yacht_slider_full($id);
+		}*/
+		echo $yachtclass->display_yacht_slider_full($id);	
+		?>
      	
 		<div class="boatbuttonset3 clearfixmain">
 			<ul>
@@ -359,7 +390,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
                                 </span>
                             </div>
                         </li>
-                        <li><a class="boat_friend referfriend" href="<?php echo $cm->folder_for_seo;?>pop-send-email-friend/?lno=<?php echo $listing_no; ?>" title="Email A Friend">Email a Friend</a></li>                    
+                        <li><a class="boat_friend referfriend" data-type="iframe" href="javascript:void(0);" data-src="<?php echo $cm->folder_for_seo;?>pop-send-email-friend/?lno=<?php echo $listing_no; ?>" title="Email A Friend">Email a Friend</a></li>                    
                     	<li><?php echo $favtext; ?></li>
                     </ul>         
 				</li>
@@ -701,9 +732,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
       		<?php echo $yachtclass->display_yacht_video2($id);?>
              
             <h2 class="singlelinebottom">Location</h2>
-            <div class="customboattabcontent clearfixmain">
-                <iframe class="mapgray" width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=<?php echo $mapaddress; ?>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-            </div>
+            <?php echo $mapdisplay; ?>
             
        </div>
         
@@ -780,7 +809,7 @@ echo $pop_slider_text;
         <?php echo $yachtclass->yacht_button_set3(array("boat_id" => $id, "listing_no" => $listing_no, "location_id" => $location_id, "broker_id" => $broker_id, "template" => 1)); ?>
     </div>
     
-    <div class="boat_single_image clearfixmain"><img class="full" src="<?php echo $cm->folder_for_seo; ?>yachtimage/<?php echo $listing_no; ?>/slider/<?php echo $firstimage; ?>"></div>
+    <div class="boat_single_image clearfixmain"><img alt="<?php echo $$yacht_title; ?>" class="full" src="<?php echo $cm->folder_for_seo; ?>yachtimage/<?php echo $listing_no; ?>/slider/<?php echo $firstimage; ?>"></div>
         
         
     <div class="product-detail clearfixmain">
@@ -1112,13 +1141,11 @@ echo $pop_slider_text;
                     </span>
                 </div>
             </li>
-            <li><a class="boat_friend referfriend" href="<?php echo $cm->folder_for_seo;?>pop-send-email-friend/?lno=<?php echo $listing_no; ?>" title="Email A Friend">Email a Friend</a></li>                    
+            <li><a class="boat_friend referfriend" data-type="iframe" href="javascript:void(0);" data-src="<?php echo $cm->folder_for_seo;?>pop-send-email-friend/?lno=<?php echo $listing_no; ?>" title="Email A Friend">Email a Friend</a></li>                    
         </ul>
     </div>
     
-    <div class="customboattabcontent clearfixmain">
-    	<iframe class="mapgray" width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=<?php echo $mapaddress; ?>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-    </div>
+    <?php echo $mapdisplay; ?>
     
     <?php echo $similar_yacht_text; ?>    
     
