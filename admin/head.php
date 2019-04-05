@@ -24,7 +24,7 @@
 <script language="javascript" type="text/javascript" src="../js/multiupload.js"></script>
 <script language="javascript" type="text/javascript" src="../js/jscolor.js"></script>
 <script language="javascript" type="text/javascript" src="../js/jquery.imgareaselect.min.js"></script>
-<script language="javascript" type="text/javascript" src="common.js"></script>
+<script language="javascript" type="text/javascript" src="common.js?s=2"></script>
 </head>
 <body>
 <?php
