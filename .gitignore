@@ -9,6 +9,7 @@
 *.[dD][bB]
 *.[pP][dD][fF]
 *.db
+*.tgz
 images/
 yachtimages/
 jsondata/
