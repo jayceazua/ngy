@@ -11,6 +11,7 @@ $description = $_POST["description"];
 $broker_id = round($_POST["broker_id"], 0);
 $featured = round($_POST["featured"], 0);
 $status_id = round($_POST["status_id"], 0);
+$rating = round($_POST["rating"], 0);
 $ms = round($_POST["ms"], 0);
 $website_url = $cm->format_url_txt($website_url);
 
@@ -40,7 +41,8 @@ $sql = "update tbl_testimonial set description = '". $cm->filtertext($descriptio
 , featured = '". $featured ."'
 , broker_id = '". $broker_id ."'
 , status_id = '". $status_id ."'
-, reg_date = '". $cm->filtertext($reg_date_a) ."' where id = '". $iiid ."'";
+, reg_date = '". $cm->filtertext($reg_date_a) ."'
+, rating = '". $rating ."' where id = '". $iiid ."'";
 $db->mysqlquery($sql);
 // end 
 

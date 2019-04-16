@@ -75,6 +75,15 @@ $(document).ready(function(){
             <td width="" align="left"><input type="text" id="website_url" name="website_url" value="<?php echo $website_url; ?>" class="inputbox inputbox_size1" /></td>
         </tr>
         
+        <tr>
+        	<td width="" align="left"><span class="fontcolor3">* </span>Ratings (5 = Excellent, 1 = Very Poor):</td>
+            <td width="" align="left"><select name="rating" id="rating" class="combobox_size1 htext">
+                <?php
+                $yachtclass->get_common_number_combo($rating, 5);
+                ?>
+            </select></td>
+        </tr>
+        
         <?php if ($imgpath != ""){ ?>
         <tr>
             <td width="" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;</span>Selected Image:</td>

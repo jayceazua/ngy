@@ -1708,106 +1708,181 @@ class Frontendclass {
 		global $db, $cm;
 		$template = round($argu["template"], 0);	
 		$returntext = '';
-		
-		if ($template == 1){
-			$starttext = '
-			<h2 class="border-below t-center">WOWs from <span>Clients</span></h2>
-			';
-		}else{
-			$starttext = '
-			<h2>Not sure yet?</h2>
-			<p class="t-center uppercase"><strong>See some of our customer reviews below:</strong></p>
-			';
-		}
-		
-		$query_sql = "select *,";
-		$query_form = " from tbl_testimonial,";
-		$query_where = " where";
-		
-		$query_where .= " status_id = 1 and";
-		$query_sql = rtrim($query_sql, ",");
-		$query_form = rtrim($query_form, ",");
-		$query_where = rtrim($query_where, "and");
-		
-		$sql = $query_sql . $query_form . $query_where;
-		$sql = $sql." order by reg_date desc";
-		$result = $db->fetch_all_array($sql);
-		$found = count($result);
-		
-		if ($found > 0){
-			$collected_page_id = $cm->get_page_id_by_shortcode("[fctestimonial]");
-			$testimonial_url = $cm->get_page_url($collected_page_id, "page");
+		if ($template == 2){
+			$query_sql = "select *,";
+			$query_form = " from tbl_testimonial,";
+			$query_where = " where";
 			
-			$returntext .= '
-			<div class="fcscrollslider clearfixmain">
-			<div class="container container2 clearfixmain">
-				'. $starttext .'
-				<div id="fcwow" class="clearfixmain">
-					<div class="wow-slider owl-carousel" style="margin-top:0">
-			';
+			$query_where .= " status_id = 1 and";
+			$query_sql = rtrim($query_sql, ",");
+			$query_form = rtrim($query_form, ",");
+			$query_where = rtrim($query_where, "and");
 			
-			foreach($result as $row){
-				foreach($row AS $key => $val){
-					${$key} = $cm->filtertextdisplay(($val));
-			    }
+			$sql = $query_sql . $query_form . $query_where;
+			$sql = $sql." order by reg_date desc";
+			$result = $db->fetch_all_array($sql);
+			$found = count($result);
+			
+			if ($found > 0){
+				$returntext .= '
+				<div class="fctestimonial clearfixmain">
+					<div class="container clearfixmain">
+						<h1 class="t-center"><span>SEE WHAT OUR CLIENTS HAVE TO SAY</span>Read some of our reviews below</h1>
+						<div class="fctestimonial-wrap">
+				';
 				
-				$reg_date_d = $cm->display_date($reg_date, 'y', 9);
-				if ($imgpath == ""){ $imgpath = "no.jpg"; }
-				
-				$poster_data = '';
-				if ($designation != ""){
-					$poster_data .= $designation . ', ';
+				foreach($result as $row){
+					foreach($row AS $key => $val){
+						${$key} = $cm->filtertextdisplay(($val));
+					}
+					
+					$rating_text = '';
+					$full_rating = $rating;
+					$empty_rating = 5 - $rating;
+					
+					for ($k = 1; $k <= $full_rating; $k++){
+						$rating_text .= '<span class="fa fa-star checked"><span class="com_none">star</span></span>';
+					}
+					for ($k = 1; $k <= $empty_rating; $k++){
+						$rating_text .= '<span class="fa fa-star"><span class="com_none">star</span></span>';
+					}
+					
+					
+					$returntext .= '
+					<div class="clearfixmain">
+						<div class="right">'. $description .'</div>
+						<div class="left">
+							<h4>'. $name .'</h4>
+							'. $rating_text .'
+						</div>                
+					</div>
+					';
 				}
-				
-				if ($company_name != ""){
-					$poster_data .= $company_name . ', ';
-				}
-				$poster_data = rtrim($poster_data, ', ');
-				if ($website_url != ""){
-					$poster_data = '<a href="'. $website_url .'" target="_blank">'. $poster_data .'</a>';
-				}
-				
-				if ($poster_data != ""){
-					$poster_data = '<br>' . $poster_data;
-				}				
 				
 				$returntext .= '
-				<div>
-                    <div class="wow-left">
-                        <img src="'. $cm->folder_for_seo .'testimonialimage/'. $imgpath .'" title="'. $name .'" alt="'. $name .'">
-                        <p><span>'. $name .'</span>'. $poster_data .'</p>
-                    </div> 
-                    <div class="wow-right">      
-                      '. $description .'
-                    </div>       
-                </div>
+						</div>
+					</div>
+				</div>
+				';
+				
+				$returntext .= '
+				<script>
+				$(document).ready(function(){
+					$(".fctestimonial-wrap").slick({
+					  dots: true,
+					  infinite: true,
+					  speed: 300,
+					  slidesToShow: 1,
+					  adaptiveHeight: true,
+					  pauseOnHover: true,
+					  arrows:false,
+					});	
+				});
+				</script>
+				';
+			}
+		}else{
+		
+			if ($template == 1){
+				$starttext = '
+				<h2 class="border-below t-center">WOWs from <span>Clients</span></h2>
+				';
+			}else{
+				$starttext = '
+				<h2>Not sure yet?</h2>
+				<p class="t-center uppercase"><strong>See some of our customer reviews below:</strong></p>
 				';
 			}
 			
-			$returntext .= '
+			$query_sql = "select *,";
+			$query_form = " from tbl_testimonial,";
+			$query_where = " where";
+			
+			$query_where .= " status_id = 1 and";
+			$query_sql = rtrim($query_sql, ",");
+			$query_form = rtrim($query_form, ",");
+			$query_where = rtrim($query_where, "and");
+			
+			$sql = $query_sql . $query_form . $query_where;
+			$sql = $sql." order by reg_date desc";
+			$result = $db->fetch_all_array($sql);
+			$found = count($result);
+			
+			if ($found > 0){
+				$collected_page_id = $cm->get_page_id_by_shortcode("[fctestimonial]");
+				$testimonial_url = $cm->get_page_url($collected_page_id, "page");
+				
+				$returntext .= '
+				<div class="fcscrollslider clearfixmain">
+				<div class="container container2 clearfixmain">
+					'. $starttext .'
+					<div id="fcwow" class="clearfixmain">
+						<div class="wow-slider owl-carousel" style="margin-top:0">
+				';
+				
+				foreach($result as $row){
+					foreach($row AS $key => $val){
+						${$key} = $cm->filtertextdisplay(($val));
+					}
+					
+					$reg_date_d = $cm->display_date($reg_date, 'y', 9);
+					if ($imgpath == ""){ $imgpath = "no.jpg"; }
+					
+					$poster_data = '';
+					if ($designation != ""){
+						$poster_data .= $designation . ', ';
+					}
+					
+					if ($company_name != ""){
+						$poster_data .= $company_name . ', ';
+					}
+					$poster_data = rtrim($poster_data, ', ');
+					if ($website_url != ""){
+						$poster_data = '<a href="'. $website_url .'" target="_blank">'. $poster_data .'</a>';
+					}
+					
+					if ($poster_data != ""){
+						$poster_data = '<br>' . $poster_data;
+					}				
+					
+					$returntext .= '
+					<div>
+						<div class="wow-left">
+							<img src="'. $cm->folder_for_seo .'testimonialimage/'. $imgpath .'" title="'. $name .'" alt="'. $name .'">
+							<p><span>'. $name .'</span>'. $poster_data .'</p>
+						</div> 
+						<div class="wow-right">      
+						  '. $description .'
+						</div>       
+					</div>
+					';
+				}
+				
+				$returntext .= '
+						</div>
 					</div>
 				</div>
-			</div>
-			</div>
-			';
-			
-			$returntext .= '
-			<script> 
-			$(document).ready(function(){ 						
-				// Owl Carousel
-				var owl = $(".wow-slider");
-				owl.owlCarousel({
-					items: 1,
-					loop: true,
-					nav:false,
-					dots: true,
-					autoplay:true,
-					autoplayTimeout:5000,
-					autoplayHoverPause:true
+				</div>
+				';
+				
+				$returntext .= '
+				<script> 
+				$(document).ready(function(){ 						
+					// Owl Carousel
+					var owl = $(".wow-slider");
+					owl.owlCarousel({
+						items: 1,
+						loop: true,
+						nav:false,
+						dots: true,
+						autoplay:true,
+						autoplayTimeout:5000,
+						autoplayHoverPause:true
+					});
 				});
-			});
-			</script> 
-			';
+				</script> 
+				';
+			}
 		}
 		
 		return $returntext;
@@ -2114,13 +2189,17 @@ class Frontendclass {
   
 	//testimonial form
 	public function share_testimonial_form(){	
-		global $db, $cm, $captchaclass;
+		global $db, $cm, $yachtclass, $captchaclass;
 		
 		$datastring = $cm->session_field_testimonial();
 		$return_ar = $cm->collect_session_for_form($datastring);
 		
 		foreach($return_ar AS $key => $val){
 			${$key} = $val;
+		}
+		
+		if ($rating < 1){
+			$rating = 5;
 		}
 		
 		$returntext = '
@@ -2153,6 +2232,12 @@ class Frontendclass {
 					<p><label for="testimonial_imgpath">Select Image [w: '. $cm->testimonial_im_width .'px, h: '. $cm->testimonial_im_height .'px]</label></p>
 					<input validval="'. $cm->allow_image_ext .'" type="file" id="testimonial_imgpath" name="testimonial_imgpath" class="input" />
 					<p>[Allowed file types: '. $cm->allow_image_ext .']</p>
+				</li>
+				<li class="right">
+					<p><label for="rating">Rating (5 = Excellent, 1 = Very Poor)</label></p>
+					<select name="rating" id="rating" class="select">
+						'. $yachtclass->get_common_number_combo($rating, 5, 1) .'
+					</select>
 				</li>
 		   </ul>
 		   
@@ -2191,6 +2276,7 @@ class Frontendclass {
 			$website_url = $_POST["website_url"];
 			//$boat_reference = $_POST["boat_reference"];
 			$message = $_POST["message"];
+			$rating = round($_POST["rating"], 0);
 			$email2 = $_POST["email2"];
 						
 			//create the session
@@ -2238,7 +2324,8 @@ class Frontendclass {
 												, '". $cm->filtertext($designation) ."'
 												, '". $cm->filtertext($website_url) ."'
 												, '". $status_id ."'
-												, '". $reg_date ."')";							
+												, '". $reg_date ."'
+												, rating = '". $rating ."')";							
 			$iiid = $db->mysqlquery_ret($sql);
 			//end
 			
@@ -2287,6 +2374,11 @@ class Frontendclass {
 				<tr>
 					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Designation:</td>
 					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($designation, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Rating:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $rating .'</td>
 				</tr>
 					
 				<tr>
@@ -6363,86 +6455,135 @@ class Frontendclass {
 	public function display_seller_services_form($argu = array()){
 		global $cm, $yachtclass, $captchaclass;
 		$pgid = round($argu["pgid"], 0);
+		$templateid = round($argu["templateid"], 0);
 		
 		$datastring = $cm->session_field_seller_services_request();
 		$return_ar = $cm->collect_session_for_form($datastring);
 		
 		foreach($return_ar AS $key => $val){
 		   ${$key} = $val;
-		}		
+		}
 		
-		$returntext = '
-		<div class="container clearfixmain">
-		<div class="ssform clearfixmain">
-		<h2>Your Boat Evaluation</h2>
-		
-		<form method="post" action="'. $cm->folder_for_seo .'" id="seller-services-ff" name="seller-services-ff">
-		<label class="com_none" for="email2">email2</label>
-		<input class="finfo" id="email2" name="email2" type="text" />
-		<input type="hidden" id="fcapi" name="fcapi" value="sellerservicessubmit" />	
-		<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />   
-		';
-		
-		$returntext .= '
-		<div class="rowflex mt-4">
-			<div class="col-30 pr-2">
-                <h5 class="mb-3"><strong>CONTACT INFO:</strong></h5>                
-                <div class="rowflex mb-1">
-                    <label for="name">Name:<span class="requiredfieldindicate">*</span></label>
-                    <input type="text" id="name" name="name" value="'. $name .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="email">Email:<span class="requiredfieldindicate">*</span></label>
-                    <input type="text" id="email" name="email" value="'. $email .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="phone">Phone Number:</label>
-                    <input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
-                </div>                
-            </div>
+		if ($templateid == 1){
+			$returntext = '
+			<form method="post" action="'. $cm->folder_for_seo .'" id="seller-services-ff" name="seller-services-ff">
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="sellerservicessubmit" />	
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
 			
-			<div class="col-30 pr-2">
-                <h5 class="mb-3"><strong>YACHT:</strong></h5>                
-                <div class="rowflex mb-1">
-                    <label for="boat_make">Make:</label>
-                    <input type="text" id="boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="boat_model">Model:</label>
-                    <input type="text" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="boat_year">Year:</label>
-                    <input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
-                </div>      
-            </div>
+			<h3 class="t-center"><span>BOAT EVALUATION</span></h3>
+			<hr class="blue m-0">
+			<div class="fcform1">
+				<p>Contact Info</p>
+				<p><label for="name" class="d-none">Name</label>
+				<input type="text" name="name" placeholder="Name" id="name" value="'. $name .'" class="input" /></p>
+				<p><label for="email" class="d-none">Name</label>
+				<input type="text" name="email" placeholder="Email" id="email" value="'. $email .'" class="input" /></p>
+				<p><label for="phone" class="d-none">Name</label>
+				<input type="text" name="phone" placeholder="Phone Number" id="phone" value="'. $phone .'" class="input" /></p>
+			</div>
+			<hr class="blue m-0">
 			
-			<div class="col-30">
-            	 <h5 class="mb-3 md-none">&nbsp;</h5>
-                <div class="rowflex mb-1">
-                    <label for="boat_engines">Engines:</label>
-                    <input type="text" id="boat_engines" name="boat_engines" value="'. $boat_engines .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="boat_hours_on_engines">Hours on Engines:</label>
-                    <input type="text" id="boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="boat_location">Location:</label>
-                    <input type="text" id="boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
-                </div>
-            </div>
-		</div>
-		<p class="mb-1">Message:</p>
-		<label class="com_none" for="comments">Message</label>
-		<textarea name="comments" id="comments" class="comments" rows="1" cols="1">'. $comments .'</textarea>
-		<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
-		<div align="center"><input name="submit" type="submit" value="Evaluate Your Boat"></div>
-
-		</form>
-		</div>
-		</div>
-		';
+			<div class="fcform1">
+				<p>Yacht Info</p>
+				<p><label for="boat_make" class="d-none">Make</label>
+				<input type="text" placeholder="Make" id="boat_make" name="boat_make" value="'. $boat_make .'" class="input" /></p>
+				<p><label for="boat_model" class="d-none">Model</label>
+				<input type="text" placeholder="Model" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" /></p>
+				<p><label for="boat_year" class="d-none">Year</label>
+				<input type="text" placeholder="Year" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" /></p>
+				<p><label for="boat_engines" class="d-none">Engines</label>
+				<input type="text" placeholder="Engines" id="boat_engines" name="boat_engines" value="'. $boat_engines .'" class="input" /></p>
+				<p><label for="boat_hours_on_engines" class="d-none">Hours On Engines</label>
+				<input type="text" placeholder="Hours On Engines" id="boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" /></p>
+				<p><label for="boat_location" class="d-none">Location</label>
+				<input type="text" placeholder="Location" id="boat_location" name="boat_location" value="'. $boat_location .'" class="input" /></p>
+				<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+			</div>
+			<hr class="blue m-0">
+			
+			<div class="fcform1">
+				<p><button type="submit" class="button">SUBMIT</button></p>
+			</div> 
+			
+			</form>
+			';
+		}else{
+		
+			$returntext = '
+			<div class="container clearfixmain">
+			<div class="ssform clearfixmain">
+			<h2>Your Boat Evaluation</h2>
+			
+			<form method="post" action="'. $cm->folder_for_seo .'" id="seller-services-ff" name="seller-services-ff">
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="sellerservicessubmit" />	
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />   
+			';
+			
+			$returntext .= '
+			<div class="rowflex mt-4">
+				<div class="col-30 pr-2">
+					<h5 class="mb-3"><strong>CONTACT INFO:</strong></h5>                
+					<div class="rowflex mb-1">
+						<label for="name">Name:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="name" name="name" value="'. $name .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="email">Email:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="email" name="email" value="'. $email .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="phone">Phone Number:</label>
+						<input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
+					</div>                
+				</div>
+				
+				<div class="col-30 pr-2">
+					<h5 class="mb-3"><strong>YACHT:</strong></h5>                
+					<div class="rowflex mb-1">
+						<label for="boat_make">Make:</label>
+						<input type="text" id="boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="boat_model">Model:</label>
+						<input type="text" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="boat_year">Year:</label>
+						<input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
+					</div>      
+				</div>
+				
+				<div class="col-30">
+					 <h5 class="mb-3 md-none">&nbsp;</h5>
+					<div class="rowflex mb-1">
+						<label for="boat_engines">Engines:</label>
+						<input type="text" id="boat_engines" name="boat_engines" value="'. $boat_engines .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="boat_hours_on_engines">Hours on Engines:</label>
+						<input type="text" id="boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="boat_location">Location:</label>
+						<input type="text" id="boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
+					</div>
+				</div>
+			</div>
+			<p class="mb-1">Message:</p>
+			<label class="com_none" for="comments">Message</label>
+			<textarea name="comments" id="comments" class="comments" rows="1" cols="1">'. $comments .'</textarea>
+			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+			<div align="center"><input name="submit" type="submit" value="Evaluate Your Boat"></div>
+	
+			</form>
+			</div>
+			</div>
+			';
+		}
 		
 		$returntext .= '
 		<script type="text/javascript">

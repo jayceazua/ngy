@@ -3,6 +3,7 @@
 .slick-loading .slick-list {
     background: #fff url('./ajax-loader.gif') center center no-repeat;
 }
+
 /* Dots */
 .slick-dots {
     display: block;
@@ -82,3 +83,29 @@
 .slick-next:hover {
 	background-position: -30px -33px
 }
+
+/** Testimonial Slider ************************/
+.fctestimonial-wrap ul.slick-dots li button {
+	margin: 0;
+	padding: 0;
+	outline-style: none;
+	cursor: pointer;  
+    background: #ccc;
+	width: 18px;
+	height: 18px;
+	font-size: 0;
+	border-radius: 50%;	
+	border:none
+}
+
+.fctestimonial-wrap ul.slick-dots li button:hover,
+.fctestimonial-wrap ul.slick-dots li button:focus {
+	background: #2abfd0;
+	border:none
+}
+
+.fctestimonial-wrap .slick-dots li.slick-active button{
+    background:#2abfd0;
+	border:none
+}
+/** End Testimonial Slider ************************/
