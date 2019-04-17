@@ -5671,13 +5671,35 @@ class Yachtclass {
 	
 	public function create_boat_slug($yacht_id){
         global $db, $cm;
-        $yacht_ar = $cm->get_table_fields('tbl_yacht', 'manufacturer_id, model, model_slug, year, state_id', $yacht_id);
-        $manufacturer_id = $yacht_ar[0]['manufacturer_id'];		
+        $yacht_ar = $cm->get_table_fields('tbl_yacht', 'manufacturer_id, model, model_slug, year, city, state, state_id, country_id', $yacht_id);
+        $manufacturer_id = $yacht_ar[0]['manufacturer_id'];
+		$city = $yacht_ar[0]['city'];
+		$state = $yacht_ar[0]['state'];
+		$state_id = $yacht_ar[0]['state_id'];
+		$country_id = $yacht_ar[0]['country_id'];
+			
 		$manufacturerar = $cm->get_table_fields('tbl_manufacturer', 'slug, name', $manufacturer_id);
 		$manufacturerarslug = $manufacturerar[0]["slug"];
 		$manufacturer_name = $manufacturerar[0]["name"];
 		
-		$boat_slug = $cm->filtertextdisplay($yacht_ar[0]['year']) . "-" . $manufacturerarslug . "-" . $cm->filtertextdisplay($yacht_ar[0]['model_slug']) . "-for-sale";
+		$locationtext = '';
+		if ($country_id == 1){
+			$state = $cm->get_common_field_name('tbl_state', 'name', $state_id);
+		}
+		
+		if ($city != ""){
+			$locationtext .= " " . $city;
+		}
+		if ($state != ""){
+			$locationtext .= " " . $state;
+		}
+		//$locationtext = rtrim($locationtext, " ");
+		$locationtext = $cm->create_slug($locationtext);
+		if ($locationtext != ""){
+			$locationtext =	"-" . $locationtext;
+		}
+		
+		$boat_slug = $cm->filtertextdisplay($yacht_ar[0]['year']) . "-" . $manufacturerarslug . "-" . $cm->filtertextdisplay($yacht_ar[0]['model_slug']) . $locationtext . "-for-sale";
         return $boat_slug;
     }
 

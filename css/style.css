@@ -6321,60 +6321,71 @@ hr.blue{ background:#2abfd0; color:#2abfd0; height:2px;}
 	color:#fff;
 	padding:70px 0 50px 0;
 }
-.main .fcdiv3col .container{background-color:transparent;}
+.main .fcdiv3col .container{
+	background-color:transparent;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-moz-box-direction: normal;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;	
+/*	justify-content: space-between;*/
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	align-items:center;
+}
 
-.fcdiv3col .fcdiv3col-col1{
-	float:left;
+fcdiv3col .fcdiv3col-col1{
 	width:22%;	
 }
 
 .fcdiv3col .fcdiv3col-col2{
-	float:left;
 	width:25%;
 	margin-left:5%;
 	margin-right:5%;
 }
 
 .fcdiv3col .fcdiv3col-col3{
-	float:right;
 	width:43%;
 }
 
 @media (max-width: 1200px) {
 	.fcdiv3col .fcdiv3col-col1{
-		float:left;
 		width:50%;
-		margin-bottom:50px;
+		order: 2;	
 	}
 		
 	.fcdiv3col .fcdiv3col-col2{
-		float:left;
 		width:40%;
-		margin-left:5%;
-		margin-right:5%;
-		margin-bottom:50px;
+		margin-left:10%;
+		margin-right:0;
+		order: 3;
 	}
 	
 	.fcdiv3col .fcdiv3col-col3{
-		float:none;
 		width:100%;
-		clear:both;
+		margin-bottom:40px;
+		order;1;
 	}
 }
 
 @media (max-width: 600px) {
 	.fcdiv3col .fcdiv3col-col1{
-		float:none;
 		width:100%;
-		margin-bottom:50px;
+		order:3		
 	}
 		
 	.fcdiv3col .fcdiv3col-col2{
-		float:none;
 		width:100%;
+		order:2;
 		margin-left:0;
-		margin-right:0;
-		margin-bottom:50px;
+		margin-bottom:40px;
 	}
 }
 
@@ -6388,7 +6399,7 @@ hr.blue{ background:#2abfd0; color:#2abfd0; height:2px;}
 
 ul.tick2{ margin:0 0 20px 0; padding:0; list-style:none;}
 ul.tick2 li{ margin:2px 0; padding:0 0 0 25px; list-style:none;font-family: 'glober-bold'; font-size:24px; position:relative;}
-ul.tick2 li:before{ content:"✔"; font-family:Arial, Helvetica, sans-serif; color:#2abfd0; margin-right:15px; position:absolute; left:0; top:0;}
+ul.tick2 li:before{ content:"✔"; font-family:"Zapf Dingbats", Arial, Helvetica, sans-serif; color:#2abfd0 !important; margin-right:15px; position:absolute; left:0; top:0;}
 
 @media (max-width: 768px) {
 	ul.tick2 li{ font-size:20px;}
