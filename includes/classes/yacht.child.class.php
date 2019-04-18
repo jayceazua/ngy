@@ -2141,7 +2141,7 @@ class Yachtclass_Child extends Yachtclass{
 				</tr>
 				<tr>
                     <td align="left" valign="top">
-                    <p style="padding: 5px 10px 5px 0px;"><img style="width: 100%;" src="http://maps.googleapis.com/maps/api/staticmap?center='. urlencode($addressfull) .'&zoom=9&size=750x300&maptype=roadmap&sensor=false&&markers=size:mid%7Ccolor:green%7C'. urlencode($addressfull) .'"></p>
+                    <p style="padding: 5px 0px 5px 0px;"><img style="width: 100%;" src="https://maps.googleapis.com/maps/api/staticmap?center='. urlencode($addressfull) .'&zoom=9&size=750x300&maptype=roadmap&sensor=false&&markers=size:mid%7Ccolor:green%7C'. urlencode($addressfull) .'&key='. $cm->googlemapkey .'"></p>
                     </td>
                 </tr>
             </table>	
