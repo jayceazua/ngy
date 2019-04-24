@@ -1,8 +1,54 @@
 User-agent: *
-Disallow: /blogarchive/
-Disallow: /blogcategory/
-Disallow: /blogtag/
-Disallow: /?
-Disallow: /*?
-Disallow: /~
-Disallow: /*~
+Allow: /
+Disallow: /admin/
+Disallow: /ckeditor/
+Disallow: /cmsfile/
+Disallow: /cron/
+Disallow: /images/
+Disallow: /includes/
+Disallow: /mpdf/
+Disallow: /mpdf1/
+Disallow: /css/
+Disallow: /js/
+Disallow: /core/
+
+
+User-agent: Mediapartners-Google
+Disallow:
+Crawl-delay: 3600
+
+User-agent: Googlebot
+Disallow:
+Crawl-delay: 3600
+
+User-agent: Adsbot-Google
+Disallow:
+Crawl-delay: 3600
+
+User-agent: Googlebot-Image
+Disallow:
+Crawl-delay: 3600
+
+User-agent: Googlebot-Mobile
+Disallow:
+Crawl-delay: 3600
+
+#MICROSOFT BOTS
+
+User-agent: msnbot
+Disallow:
+Crawl-delay: 3600
+
+User-agent: bingbot
+Disallow:
+Crawl-delay: 3600
+
+#YAHOO BOTS
+
+User-agent: Slurp
+Disallow:
+Crawl-delay: 3600
+
+User-agent: Yahoo! Slurp
+Disallow:
+Crawl-delay: 3600
