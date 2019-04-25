@@ -11,7 +11,7 @@ Disallow: /mpdf1/
 Disallow: /css/
 Disallow: /js/
 Disallow: /core/
-
+Disallow: /category/uncategorized/
 
 User-agent: Mediapartners-Google
 Disallow:
