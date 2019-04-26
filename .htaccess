@@ -221,9 +221,9 @@ RewriteRule ^type/ourlistings/([^/\.]+)/?$ index.php?templateseo=listboat&rawtem
 RewriteRule ^condition/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&conditionname=$1 [L]
 RewriteRule ^state/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&statename=$1 [L]
 RewriteRule ^search/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&keyterm=$1 [L]
-RewriteRule ^category/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&categorynm=$1 [L]
+# RewriteRule ^category/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&categorynm=$1 [L]
 RewriteRule ^make/([^/\.]+)/condition/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&mfslug=$1&conditionname=$2&owned=2&frm=1 [L]
-RewriteRule ^category/([^/\.]+)/make/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&categorynm=$1&mfslug=$2&owned=2&frm=1&%{QUERY_STRING} [L]
+# RewriteRule ^category/([^/\.]+)/make/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&categorynm=$1&mfslug=$2&owned=2&frm=1&%{QUERY_STRING} [L]
 RewriteRule ^brokerinventory/([^/\.]+)/embed/?$ index.php?templateseo=listboat&rawtemplate=1&brokercode=$1&nohead=1 [L]
 RewriteRule ^savesearch/([^/\.]+)/?$ index.php?templateseo=listboat&rawtemplate=1&searchno=$1 [L]
 
