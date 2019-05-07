@@ -123,7 +123,7 @@ echo $frontend->display_sudden_popup();
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.fancybox.min.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.sticky-kit.min.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.previewer.js"></script>
-<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/parallax.min.js"></script>
+<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/parallax.min2.js"></script>
 
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/validator.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.extra.js"></script>
