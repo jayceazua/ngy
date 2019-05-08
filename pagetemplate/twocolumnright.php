@@ -9,7 +9,7 @@ $brdcmp_array = $frontend->create_bradcrumb_holder($pageid, $category_id_holder,
 include($bdr."includes/head.php");
 ?>
 <div class="leftcontentbox">
-<?php if ($connected_manufacturer_id == 0){ ?>
+<?php if ($connected_manufacturer_id == 0 AND $display_page_heading == 1){ ?>
 <h1 class="borderstyle1"><?php echo $frontend->head_title($link_name); ?></h1>
 <?php
 }else{

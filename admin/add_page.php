@@ -27,6 +27,7 @@ $rightcol_class = ' class="com_none"';
 $defaultpage = 0;
 $sidebarclass = ' com_none';
 $only_menu = 0;
+$display_page_heading = 1;
 
 //$make_shortcode_css = ' com_none';
 //$shortcodecontent = '';
@@ -860,6 +861,13 @@ function set_for_cattype(){
     <?php $adm->get_displayon_option($disp_on, $page_type); ?>
     </div></td>
    </tr>
+   
+   <?php if ($ms != 1){ ?>
+ 	<tr>
+        <td width="35%" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;</span>Display Page heading at the top of page content?</td>
+        <td width="65%" align="left" valign="top" class="tdpadding1"><input type="checkbox" name="display_page_heading" id="display_page_heading" value="1" <?php if ($display_page_heading == "1"){ echo 'checked="checked"'; } ?> /></td>
+    </tr>
+    <?php } ?>
 
    <tr>
     <td width="35%" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;&nbsp;</span>Display Status:</td>

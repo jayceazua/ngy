@@ -23,6 +23,7 @@ $file_data = $_POST["file_data"];
 $display_enquire_form = round($_POST["display_enquire_form"], 0);
 $only_menu = round($_POST["only_menu"], 0);
 $slider_category_id = round($_POST["slider_category_id"], 0);
+$display_page_heading = round($_POST["display_page_heading"], 0);
 
 $connected_manufacturer_id = round($_POST["connected_manufacturer_id"], 0);
 $connected_group_id = round($_POST["connected_group_id"], 0);
@@ -192,6 +193,7 @@ $sql = "update tbl_page set page_type = '". $page_type ."'
 
 , extraclass = '". $cm->filtertext($extraclass) ."'
 , submenusection = '". $cm->filtertext($submenusection) ."'
+, display_page_heading = '". $display_page_heading ."'
 
 , m1 = '". $cm->filtertext($m1) ."'
 , m2 = '". $cm->filtertext($m2) ."'

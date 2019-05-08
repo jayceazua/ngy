@@ -6512,9 +6512,9 @@ class Frontendclass {
 		}else{
 		
 			$returntext = '
-			<div class="container clearfixmain">
+			<!--<div class="container clearfixmain">
 			<div class="ssform clearfixmain">
-			<h2>Your Boat Evaluation</h2>
+			<h2>Your Boat Evaluation</h2>-->
 			
 			<form method="post" action="'. $cm->folder_for_seo .'" id="seller-services-ff" name="seller-services-ff">
 			<label class="com_none" for="email2">email2</label>
@@ -6536,7 +6536,7 @@ class Frontendclass {
 						<input type="text" id="email" name="email" value="'. $email .'" class="input" />
 					</div>
 					<div class="rowflex mb-1">
-						<label for="phone">Phone Number:</label>
+						<label for="phone">Phone Number:<span class="requiredfieldindicate">*</span></label>
 						<input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
 					</div>                
 				</div>
@@ -6544,15 +6544,15 @@ class Frontendclass {
 				<div class="col-30 pr-2">
 					<h5 class="mb-3"><strong>YACHT:</strong></h5>                
 					<div class="rowflex mb-1">
-						<label for="boat_make">Make:</label>
+						<label for="boat_make">Make:<span class="requiredfieldindicate">*</span></label>
 						<input type="text" id="boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
 					</div>
 					<div class="rowflex mb-1">
-						<label for="boat_model">Model:</label>
+						<label for="boat_model">Model:<span class="requiredfieldindicate">*</span></label>
 						<input type="text" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
 					</div>
 					<div class="rowflex mb-1">
-						<label for="boat_year">Year:</label>
+						<label for="boat_year">Year:<span class="requiredfieldindicate">*</span></label>
 						<input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
 					</div>      
 				</div>
@@ -6568,7 +6568,7 @@ class Frontendclass {
 						<input type="text" id="boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" />
 					</div>
 					<div class="rowflex mb-1">
-						<label for="boat_location">Location:</label>
+						<label for="boat_location">Location:<span class="requiredfieldindicate">*</span></label>
 						<input type="text" id="boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
 					</div>
 				</div>
@@ -6580,8 +6580,8 @@ class Frontendclass {
 			<div align="center"><input name="submit" type="submit" value="Evaluate Your Boat"></div>
 	
 			</form>
-			</div>
-			</div>
+			<!--</div>
+			</div>-->
 			';
 		}
 		
@@ -6600,7 +6600,32 @@ class Frontendclass {
 				if (!field_validation_border("email", 2, 1)){
 					all_ok = "n";
 					setfocus = set_field_focus(setfocus, "email");
-				}				
+				}
+				
+				if (!field_validation_border("phone", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "phone");
+				}	
+				
+				if (!field_validation_border("boat_make", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "boat_make");
+				}
+				
+				if (!field_validation_border("boat_model", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "boat_model");
+				}
+				
+				if (!field_validation_border("boat_year", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "boat_year");
+				}
+				
+				if (!field_validation_border("boat_location", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "boat_location");
+				}		
 				
 				if (all_ok == "n"){
 					return false;

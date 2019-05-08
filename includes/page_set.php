@@ -32,6 +32,7 @@ if ($pageid > 0){
 	$templatefile = $brow["templatefile"];
 	$connected_manufacturer_id = $slider_make_id = $brow["connected_manufacturer_id"];
 	$custom_inventory_view = $brow["custom_inventory_view"];
+	$display_page_heading = $brow["display_page_heading"];
     $atm1 = $brow["m1"];
     $atm2 = $brow["m2"];
     $atm3 = $brow["m3"];
