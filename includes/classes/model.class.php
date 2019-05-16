@@ -795,7 +795,7 @@ class Modelclass {
 							</div>
 							<div class="right">
 								<h4>Request Brochure</h4>
-								<a class="button commonpop" href="javascript:void(0);" data-src="'. $cm->get_page_url(0, "pop-ask-for-brochure") .'?make_id='. $makeid .'" data-type="iframe">Send Request</a>
+								<a class="button commonpop" href="'. $cm->get_page_url(0, "pop-ask-for-brochure") .'?make_id='. $makeid .'" data-type="iframe">Send Request</a>
 							</div>
 						</div>
 					</li>
@@ -1743,6 +1743,7 @@ class Modelclass {
         $returntext = '
 		<div class="modelmain container pt-5 pb-new-5 mb-5 clearfixmain">
 			<div class="clearfixmain">
+				<p class="t-left"><a href="'. $cm->get_page_url(145, "page").'" class="button">Back to Sunreef Collection</a></p>
 				<div class="right-col-30 sidebar-search-2 mb-3 scrollcol" parentdiv="modelmain">
 					'. $formcontent.'
 				</div>

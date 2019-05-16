@@ -5931,26 +5931,25 @@ ul.collection-yacht-list {
 .mm-modelbox ul.collection-yacht-list { margin-left: 20px; margin-right: 20px; }
 
 ul.collection-yacht-list li {
-	margin: 4% 0 0 2.66%;
-	width: 23%;
+	margin: 4% 0 0 2%;
+	width: 32%;
 }
-ul.collection-yacht-list li:nth-child(4n+1){margin-left:0;}
+ul.collection-yacht-list li:nth-child(3n+1){margin-left:0;}
 
-@media (max-width: 992px) {
+/*@media (max-width: 992px) {
 	ul.collection-yacht-list li {
 		width: 32%;
 		margin-left:2%;
 	}
 	ul.collection-yacht-list li:nth-child(4n+1){margin-left:2%;}
 	ul.collection-yacht-list li:nth-child(3n+1){margin-left:0;}
-}
+}*/
 
 @media (max-width: 768px) {
 	ul.collection-yacht-list li {
 		width: 49%;
 		margin-left:2%;
-	}
-	ul.collection-yacht-list li:nth-child(4n+1),
+	}	
 	ul.collection-yacht-list li:nth-child(3n+1){margin-left:2%;}
 	ul.collection-yacht-list li:nth-child(2n+1){margin-left:0;}
 }
@@ -5959,8 +5958,7 @@ ul.collection-yacht-list li:nth-child(4n+1){margin-left:0;}
 	ul.collection-yacht-list li {
 		width: 100%;
 		margin-left:0;		
-	}
-	ul.collection-yacht-list li:nth-child(4n+1),
+	}	
 	ul.collection-yacht-list li:nth-child(3n+1){margin-left:0;}
 }
 
@@ -6571,4 +6569,9 @@ ul.tick2 li:before{ content:"✔"; font-family:"Zapf Dingbats", Arial, Helvetica
 	.fctestimonial h1 span{
 		font-size:40px;
 	}
+}
+
+.fancybox-slide--iframe .fancybox-content {
+	width  : 90%;
+	max-width  : 560px;
 }

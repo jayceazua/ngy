@@ -1776,11 +1776,11 @@ $(document).ready(function(){
 		toolbar  : false,
 		smallBtn : true,
 		iframe : {
-			preload : false,
-			css : {
+			preload : true,
+			/*css : {
 				width  : "90%",
 				"max-width": "560px"
-        	}
+        	}*/
 		}
 	});
 		
