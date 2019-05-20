@@ -1783,6 +1783,22 @@ $(document).ready(function(){
         	}*/
 		}
 	});
+	
+	//custom parallax
+	var plx_position = $(window).scrollTop();
+	$(window).scroll(function() {
+		if ($(".parallax-div").length > 0){
+			var scroll = $(window).scrollTop();
+			if(scroll > plx_position) {        
+				$('.parallax-div').addClass('scale1');
+				$('div.fcmain').addClass('class1');
+			} else {         
+				 $('.parallax-div').removeClass('scale1');
+				 $('div.fcmain').removeClass('class1');
+			}
+			plx_position = scroll;
+		}
+	});
 		
 });
 

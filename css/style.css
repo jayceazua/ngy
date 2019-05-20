@@ -6575,3 +6575,80 @@ ul.tick2 li:before{ content:"✔"; font-family:"Zapf Dingbats", Arial, Helvetica
 	width  : 90%;
 	max-width  : 560px;
 }
+
+/* New Parallax Effect */
+.parallax-div {
+background-position: center top;
+background-repeat: no-repeat;
+background-attachment:fixed!important;
+-webkit-background-size: 130%;
+-moz-background-size: 130%;
+-o-background-size: 130%;
+background-size: 130%;
+
+-webkit-transition: all 500ms ease-out;
+-moz-transition: all 500ms ease-out;
+-o-transition: all 500ms ease-out;
+transition:all 500ms ease-out;
+position:relative;
+}
+.parallax-div img{
+width:100%;
+height:auto;
+}
+.parallax-div.scale1 {
+background-size:100%;
+}
+
+.parallax-div div.fcintro{
+width:90%;
+text-align:center;
+position:absolute;
+left:5%;
+right:5%;
+top:34%;
+-webkit-transform: translateY(-50%);
+-ms-transform: translateY(-50%);  
+transform: translateY(-50%);
+}
+
+@media screen and (max-width:768px) {
+.parallax-div {
+background:transparent!important;
+}
+.parallax-div div.fcintro{
+top:50%;
+}
+.fcmain:before {
+content: "";
+display: block;
+position: fixed;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+z-index: -10;
+-webkit-background-size: 150%!important;
+-moz-background-size: 150%!important;
+-o-background-size: 150%!important;
+background-size: 150%!important;
+-webkit-transition: all 500ms ease-out;
+-moz-transition: all 500ms ease-out;
+-o-transition: all 500ms ease-out;
+transition:all 500ms ease-out;
+}
+.fcmain.class1:before {
+ background-size: 120%!important;
+}
+.parallax-div h1{
+font-size:20px;
+}
+}
+
+@media screen and (min-width:1024px) {
+.parallax-div {
+	background-position: center center;
+ }
+}
+
+.fcmain.image1:before{background: url(/cmsfile/contentimages/seller-service.jpg) no-repeat center top;}
