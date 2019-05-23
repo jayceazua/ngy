@@ -6645,6 +6645,19 @@ transform: translateY(-50%);
 	}
 }
 
+@media screen and (max-width:350px) {
+	.fcmain:before {
+		-webkit-background-size: 180%!important;
+		-moz-background-size: 180%!important;
+		-o-background-size: 180%!important;
+		background-size: 180%!important;
+		-webkit-transition: all 300ms ease-out;
+		-moz-transition: all 300ms ease-out;
+		-o-transition: all 300ms ease-out;
+		transition:all 300ms ease-out;
+	}
+}
+
 @media screen and (min-width:1024px) {
 .parallax-div {
 	background-position: center center;

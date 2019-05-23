@@ -150,8 +150,8 @@ echo $frontend->display_sudden_popup();
 	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/maplisting.js"></script>
 <?php } ?>
 
-<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/abclient.js"></script>
-<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/abjquery.js"></script>
+<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/abclient.js"></script>
+<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/abjquery.js"></script>
 
 <?php
 $google_analytics = $cm->get_systemvar('GLANY');
