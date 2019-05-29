@@ -33,30 +33,26 @@
 
 
 <!-- phone insertion script begins -->
-
 <script type='text/javascript' src='https://reports.yellowbook.com/analytics/js/ybDynamicPhoneInsertion.js'></script>
-
 <script>
-
 ybFindPhNums = ['17862469873', '17862469873'];
 ybReplacePhNums = ['13056800413', '13056765539'];
 
-if (typeof dmAPI != 'undefined') {
-dmAPI.runOnReady('dpni', function() {
-setTimeout(ybFun_ReplaceText, 500);
-});
-dmAPI.subscribeEvent(dmAPI.EVENTS.SHOW_POPUP, function(data) {
-setTimeout(ybFun_ReplaceText, 500);
-console.log('dmAPI.EVENTS.SHOW_POPUP' + data);
-});
-} else {
-window.onload = function() {
-setTimeout(ybFun_ReplaceText, 500);
-}
-}
+	if (typeof dmAPI != 'undefined') {
+		dmAPI.runOnReady('dpni', function() {
+			setTimeout(ybFun_ReplaceText, 500);
+		});
+		dmAPI.subscribeEvent(dmAPI.EVENTS.SHOW_POPUP, function(data) {
+			setTimeout(ybFun_ReplaceText, 500);
+			console.log('dmAPI.EVENTS.SHOW_POPUP' + data);
+		});
+	} else {
+		window.onload = function() {
+			setTimeout(ybFun_ReplaceText, 500);
+		}
+	}
 
 </script>
-
 <!-- phone insertion script ends -->
 </body>
 </html>
