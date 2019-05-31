@@ -28,6 +28,7 @@ class Leadclass {
 		"key24" => array("name" => "Open Yacht Days", "messagebr" => 0, "id" => 24),
 		"key25" => array("name" => "Chartering Your Yacht", "messagebr" => 0, "id" => 25),
 		"key26" => array("name" => "Contact Local Model", "messagebr" => 1, "id" => 7),
+		"key27" => array("name" => "Watch Price", "messagebr" => 0, "id" => 8)
 	);
 	
 	//Lead Form Type Combo

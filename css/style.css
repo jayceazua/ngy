@@ -3083,6 +3083,18 @@ ul.product-slider li img{ width:100%; height:auto; border-radius:3px; }
     color: #fff;font-weight: 900;
 }
 
+.button.boatbuttonwatchprice {background-color: #2bbed3; width: 100%; max-width: 200px; font-size: 15px; text-transform: uppercase; }
+.button.boatbuttonwatchprice:hover{ background-color: #0a1b40; }
+.button.boatbuttonwatchprice:before{
+	font-family: 'Font Awesome 5 Free';
+    content: "\f155";
+    font-size: 16px;
+	line-height:inherit;
+    display: inline-block;
+    margin-right: 8px;
+    color: #fff;font-weight: 900;
+}
+
 .brokeremailphonemobile{display: none; background-color: #221d1a; padding: 10px 20px; margin: 0 0 20px 0; }
 .brokeremailphonemobile ul {margin: 0; padding: 0; list-style:none; font-size: 0;}
 .brokeremailphonemobile ul li { width:100%; padding: 0; margin: 10px 0 0 0; text-align: center; }

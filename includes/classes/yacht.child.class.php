@@ -2944,7 +2944,7 @@ class Yachtclass_Child extends Yachtclass{
 	public function display_our_team($argu = array()){
 		global $db, $cm;
 		$_SESSION["s_locationpage"] = 0;
-		$_SESSION["s_brokerprofilepath"] = $cm->get_page_id_by_slug($_REQUEST["pageslug"]);
+		$_SESSION["s_brokerprofilepath"] = $cm->get_page_id_by_slug($cm->format_page_slug());
 			
 		$retval = json_decode($this->display_out_team_broker($argu));
 		$returntext = '		
@@ -3026,7 +3026,7 @@ class Yachtclass_Child extends Yachtclass{
 		global $db, $cm;
 		$returntext = '';
 		$_SESSION["s_locationpage"] = 0;
-		$_SESSION["s_brokerprofilepath"] = $cm->get_page_id_by_slug($_REQUEST["pageslug"]);
+		$_SESSION["s_brokerprofilepath"] = $cm->get_page_id_by_slug($cm->format_page_slug());
 		
 		//create sql
 		$query_sql = "select *,";
@@ -5737,7 +5737,7 @@ class Yachtclass_Child extends Yachtclass{
 		$groupid = round($argu["groupid"], 0);
 		
 		$_SESSION["s_normal_pagination"] = 1;
-		$pageid = $cm->get_page_id_by_slug($_REQUEST["pageslug"]);
+		$pageid = $cm->get_page_id_by_slug($cm->format_page_slug());
 		$_SESSION["conditional_page_id"] = $pageid;
 		
 		$query_sql = "select id, name,";

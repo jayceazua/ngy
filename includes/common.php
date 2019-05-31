@@ -584,7 +584,8 @@ if(($_REQUEST['fcapi'] != "")){
 	$frontend->submit_increase_yacht_value_form();
 	$frontend->submit_boat_show_registration_form();
 	$frontend->submit_open_yacht_days_form();
-	$frontend->submit_chartering_your_yacht_form();	
+	$frontend->submit_chartering_your_yacht_form();
+	$frontend->submit_watch_price_form();
 	
 	$creditappclass->submit_online_credit_application_form();
 

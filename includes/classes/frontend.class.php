@@ -39,12 +39,12 @@ class Frontendclass {
 		global $db, $cm;
 		//$pageid = round($_REQUEST["pageid"], 0);
 
-		$pageslug = $_REQUEST["pageslug"];
+		//$pageslug = $_REQUEST["pageslug"];
 		$templateseo = $_REQUEST["templateseo"];
 		$popp = round($_REQUEST["popp"], 0);
 		$nohead = round($_REQUEST["nohead"], 0);
 		
-		$pageslug = rtrim($pageslug, "/");
+		$pageslug = $cm->format_page_slug();
 		$pageid = $cm->get_page_id_by_slug($pageslug);
 		
 		$lastpageid = 0;
@@ -12412,6 +12412,305 @@ class Frontendclass {
 
 			$pgid = 67;
 			$redpageurl = $cm->get_page_url(0, "popthankyou") . "?servicerequest=" . $servicerequest;
+			$pagecontent = $cm->get_common_field_name('tbl_page', 'file_data', $pgid);
+			$_SESSION["thnk"] = $pagecontent;
+			header('Location: ' . $redpageurl);
+			exit;
+		}
+	}
+	
+	//Watch Price form
+	public function display_watch_price_form($argu = array()){
+		global $cm, $yachtclass, $captchaclass;
+		$loggedin_member_id = $yachtclass->loggedin_member_id();
+		
+		$boat_id = round($argu["boat_id"], 0);
+		$frompopup = round($argu["frompopup"], 0);
+		$pgid = round($argu["pgid"], 0);
+		
+		$datastring = $cm->session_field_watch_price();
+		$return_ar = $cm->collect_session_for_form($datastring);
+		
+		foreach($return_ar AS $key => $val){
+		   ${$key} = $val;
+		}
+		
+		if ($fname == "" AND $email == ""){
+			//form not submitted
+			$user_det = $cm->get_table_fields('tbl_user', 'fname, lname, email, phone', $loggedin_member_id);
+			$email = $user_det[0]['email'];
+			$fname = $user_det[0]['fname'];
+			$lname = $user_det[0]['lname'];
+			$phone = $user_det[0]['phone'];
+			$name = $fname . ' ' . $lname;
+		}		
+		
+		$returntext = '
+		<h2>Watch Price</h2>
+		
+		<form method="post" action="'. $cm->folder_for_seo .'" id="watch-price-ff" name="watch-price-ff">
+		<label class="com_none" for="email2">email2</label>
+		<input class="finfo" id="email2" name="email2" type="text" />
+		<input type="hidden" id="fcapi" name="fcapi" value="watchpricesubmit" />
+		<input id="boat_id" name="boat_id" value="'. $boat_id .'" type="hidden" />	
+		<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+		<input id="frompopup" name="frompopup" value="'. $frompopup .'" type="hidden" />
+		';
+		
+		$returntext .= '	
+		<div class="singleblock clearfixmain"> 
+		<ul class="form">	   		
+			<li>
+				<p><label for="name">Name</label> <span class="requiredfieldindicate">*</span></p>
+				<input type="text" id="name" name="name" value="'. $name .'" class="input" />
+			</li>
+						
+			<li>
+				<p><label for="email">Email Address</label> <span class="requiredfieldindicate">*</span></p>
+				<input type="text" id="email" name="email" value="'. $email .'" class="input" />
+			</li>
+						
+			<li>
+				<p><label for="phone">Phone</label> <span class="requiredfieldindicate">*</span></p>
+				<input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
+			</li>			
+			
+			<li>'. $captchaclass->call_captcha(). '</li>
+			<li class="submit"><button type="submit" class="button" value="Submit">Submit</button></li>		
+		</ul>
+		</div>
+		';
+		
+		$returntext .= '
+		</form>';
+		
+		$returntext .= '
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#watch-price-ff").submit(function(){
+				var all_ok = "y";
+				var setfocus = "n";
+				
+				//contact
+				if (!field_validation_border("name", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "name");
+				}			
+					
+				if (!field_validation_border("email", 2, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "email");
+				}
+				
+				if (!field_validation_border("phone", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "phone");
+				}
+				//end				
+				
+				if (all_ok == "n"){
+					return false;
+				}
+				return true;
+			});
+		});
+		</script>
+		';		
+		return $returntext;
+	}
+	
+	//Submit Watch Price form
+	public function submit_watch_price_form(){
+		if(($_POST['fcapi'] == "watchpricesubmit")){
+			global $db, $cm, $sdeml;
+			
+			//get form fields
+			$name = $_POST["name"];
+			$email = $_POST["email"];
+			$phone = $_POST["phone"];
+			
+			$newsletter_subscribe = round($_POST["newsletter_subscribe"], 0);
+			$boat_id = round($_POST["boat_id"], 0);				
+			$pgid = round($_POST["pgid"], 0);
+			$frompopup = round($_POST["frompopup"], 0);
+			$email2 = $_POST["email2"];
+			//end
+			
+			//create the session
+			$datastring = $cm->session_field_watch_price();
+			$cm->create_session_for_form($datastring, $_POST);
+			//end
+			
+			//checking
+			$red_pg = $_SESSION["s_backpage"];
+			$cm->field_validation($name, '', 'Name', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($phone, '', 'Phone', $red_pg, '', '', 1, 'fr_');
+						
+			if ($email2 != ""){
+				header('Location: ' . $cm->get_page_url(0, "popsorry"));
+				exit;
+			}
+			//end
+			
+			//captcha
+			global $captchaclass;
+			$captchaclass->validate_captcha($red_pg);
+			//end
+			
+			//$cm->form_post_check_valid_main('partsrequestsubmit');
+			$cm->delete_session_for_form($datastring);			
+		
+			$comments = nl2br($comments);
+	
+			$companyname = $cm->sitename;
+			$companyphone = $cm->get_systemvar('COMPH');
+			$companyemail = $cm->admin_email_to();
+			
+			$boat_info_text = '';
+			$broker_id = 1;
+			if ($boat_id > 0){
+				$boat_url = $cm->site_url . $cm->get_page_url($boat_id, "yacht");
+				$boat_ar = $cm->get_table_fields("tbl_yacht", "manufacturer_id, broker_id, model, year, yw_id", $boat_id);
+				$boat_ar = $boat_ar[0];
+
+				$manufacturer_id = $boat_ar["manufacturer_id"];
+				$boat_model = $boat_ar["model"];
+				$boat_year = $boat_ar["year"];
+				$yw_id = $boat_ar["yw_id"];
+				$broker_id = $boat_ar["broker_id"];
+				$boat_make = $cm->get_common_field_name('tbl_manufacturer', 'name', $manufacturer_id);				
+				
+				$boat_info_text = '
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td align="left" valign="top" style="padding: 15px 5px 5px 0px;'. $defaultheading .'" colspan="2"><strong>Selected Boat</strong></td>
+					</tr>
+
+					<tr>
+					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="55%">Make:</td>
+					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $boat_make .'</td>
+					</tr>
+
+					<tr>
+					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Model:</td>
+					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $boat_model .'</td>
+					</tr>
+
+					<tr>
+					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Year:</td>
+					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $boat_year .'</td>
+					</tr>
+				</table>
+				';				
+			}
+			
+			$newsletter_subscribe_text = $cm->set_yesyno_field($newsletter_subscribe);
+			
+			//create email message
+			$emailmessage = '
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="left" valign="top" style="padding: 15px 5px 5px 0px;'. $defaultheading .'" colspan="2"><strong>Watch Price</strong></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="55%">Name:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($name, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Email Address:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($email, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Phone:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($phone, 1) .'</td>
+				</tr>
+				
+				<tr>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Newsletter:</td>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $newsletter_subscribe_text .'</td>
+			  	</tr>												
+			</table>
+			'. $boat_info_text .'
+			';
+			//end
+			
+			//add to lead
+			$form_type = 27;
+			$extra_message = '';
+			global $leadclass;
+			$param = array(
+				"form_type" => $form_type,
+				"name" => $name,
+				"email" => $email,
+				"phone" => $phone,
+				"message" => $emailmessage,
+				"broker_id" => $broker_id,
+				"yacht_id" => $boat_id
+			);
+			$leadclass->add_lead_message($param);
+				
+			//send email to admin
+			$send_ml_id = 49;
+			$ad_email_ar = $cm->get_table_fields('tbl_system_email', 'email_subject, pdes, cc_email', $send_ml_id);
+			$ad_email_ar = (object)$ad_email_ar[0];
+			$ad_msg = $ad_email_ar->pdes;
+			$ad_mail_subject = $ad_email_ar->email_subject;
+			$ad_cc_email = $ad_email_ar->cc_email;
+			
+			$ad_msg = str_replace("#companyname#", $cm->filtertextdisplay($companyname), $ad_msg);
+			$ad_msg = str_replace("#formdatasubmission#", $emailmessage, $ad_msg);
+			$ad_mail_subject = str_replace("#companyname#", $companyname, $ad_mail_subject);
+			
+			if ($broker_id > 0){
+				$extra_cc_email = $cm->get_common_field_name("tbl_user", "email", $broker_id);
+			}else{
+				$extra_cc_email = '';
+			}
+			
+			if ($ad_cc_email != ""){
+				if ($extra_cc_email != ""){
+					$ad_cc_email = ', ' . $extra_cc_email;
+				}
+			}else{
+				$ad_cc_email = $extra_cc_email;
+			}
+			
+			$mail_fm = $cm->admin_email();
+			$mail_to = $cm->admin_email_to();
+			$mail_bcc = '';
+			$mail_reply = $cm->filtertextdisplay($email);
+			$fromnamesender = $cm->filtertextdisplay($name);		 		  
+			$sdeml->send_email($mail_fm, $mail_to, $ad_cc_email, $mail_bcc, $mail_reply, $ad_mail_subject, $ad_msg, $cm->site_url, $fromnamesender);
+			//end
+			
+			//send email to user
+			$send_ml_id = 50;
+			$fr_email_ar = $cm->get_table_fields('tbl_system_email', 'email_subject, pdes', $send_ml_id);
+			$fr_email_ar = (object)$fr_email_ar[0];
+			$fr_msg = $fr_email_ar->pdes;
+			$fr_mail_subject = $fr_email_ar->email_subject;			
+			
+			$fr_msg = str_replace("#name#", $cm->filtertextdisplay($name), $fr_msg);
+			$fr_msg = str_replace("#companyname#", $cm->filtertextdisplay($companyname), $fr_msg);
+			$fr_msg = str_replace("#companyphone#", $companyphone, $fr_msg);
+			$fr_msg = str_replace("#companyemail#", $companyemail, $fr_msg);
+			
+			$fr_mail_subject = str_replace("#name#", $cm->filtertextdisplay($name), $fr_mail_subject);
+			$fr_mail_subject = str_replace("#companyname#", $companyname, $fr_mail_subject);
+			$fr_mail_subject = str_replace("#companyphone#", $companyphone, $fr_mail_subject);
+			
+			$mail_fm = $cm->admin_email();
+			$mail_to = $cm->filtertextdisplay($email);
+			$mail_cc = "";
+			$mail_reply = "";
+			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $fr_mail_subject, $fr_msg, $cm->site_url);
+			//end
+			
+			$redpageurl = $cm->get_page_url(0, "popthankyou") . "?pgid=" . $pgid;
 			$pagecontent = $cm->get_common_field_name('tbl_page', 'file_data', $pgid);
 			$_SESSION["thnk"] = $pagecontent;
 			header('Location: ' . $redpageurl);

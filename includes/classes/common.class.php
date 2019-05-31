@@ -518,6 +518,8 @@ class Commonclass {
 			$ret_url = $this->folder_for_seo . "pop-open-yacht-days/";
 	  }elseif ($pagetype == "pop-chartering-your-yacht"){
 			$ret_url = $this->folder_for_seo . "pop-chartering-your-yacht/";
+	  }elseif ($pagetype == "pop-watch-price"){
+			$ret_url = $this->folder_for_seo . "pop-watch-price/";
 	  }elseif ($pagetype == "popthankyou"){
 			$ret_url = $this->folder_for_seo . "popthankyou/";
 	  }elseif ($pagetype == "popsorry"){
@@ -975,7 +977,7 @@ class Commonclass {
         if ($select_enter == 1){ $displaymess_phase = "Please enter "; }
         if ($select_enter == 2){ $displaymess_phase = "Please select " ; }
             
-        if (trim($c_field) == ""){
+        if (trim($c_field) == "" OR trim($c_field) == "&nbsp;"){
             $_SESSION[$sesinitial . "postmessage"] = $displaymess_phase . $fieldname;
             if ($red_pg != ""){
 				header('Location: '.$red_pg);
@@ -1111,7 +1113,7 @@ class Commonclass {
 	}
 	
 	public function session_field_testimonial(){     
-	  $datastring = "name,company_name,designation,website_url,boat_reference,message";
+	  $datastring = "name,company_name,designation,website_url,boat_reference,message,rating";
 	  return $datastring;
 	}
 	
@@ -1210,6 +1212,11 @@ class Commonclass {
 		$datastring = "name,email,phone";
 		$datastring .= ",boat_details,boat_location,comments,newsletter";
 		return $datastring;
+	}
+	
+	public function session_field_watch_price(){     
+	  $datastring = "name,email,phone";
+	  return $datastring;
 	}
  
 	public function create_session_for_form($datastring, $vl_ar = array()){
@@ -1773,6 +1780,13 @@ class Commonclass {
 			$templatefile = "pages/404.php";
 			return $templatefile;
 		}
+	}
+	
+	//format page slug
+	public function format_page_slug(){
+		$pageslug = $_REQUEST["pageslug"];
+		$pageslug = rtrim($pageslug, "/");
+		return $pageslug;
 	}
 	
 	//----------------data session--------------------------

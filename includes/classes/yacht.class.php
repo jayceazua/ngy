@@ -6335,7 +6335,7 @@ class Yachtclass {
 		$returntext = '';
 		$imgwrapperstart = $imgwrapperend = '';
 		$infowrapperstart = $infowrapperend = '';
-		$_SESSION["conditional_page_id"] = $cm->get_page_id_by_slug($_REQUEST["pageslug"]);
+		$_SESSION["conditional_page_id"] = $cm->get_page_id_by_slug($cm->format_page_slug());
 		
 		//collect other featured boat
         $query_sql = "select a.*,";
@@ -6436,7 +6436,7 @@ class Yachtclass {
 		$innerpage = round($param["innerpage"], 0);
 		//end		
 		
-		$_SESSION["conditional_page_id"] = $cm->get_page_id_by_slug($_REQUEST["pageslug"]);
+		$_SESSION["conditional_page_id"] = $cm->get_page_id_by_slug($cm->format_page_slug());
 		
 		//collect other featured boat
         $query_sql = "select a.*,";
@@ -6673,7 +6673,7 @@ class Yachtclass {
 		$returntext = '';
 		$imgwrapperstart = $imgwrapperend = '';
 		$infowrapperstart = $infowrapperend = '';
-		$_SESSION["conditional_page_id"] = $cm->get_page_id_by_slug($_REQUEST["pageslug"]);
+		$_SESSION["conditional_page_id"] = $cm->get_page_id_by_slug($cm->format_page_slug());
 		
 		//collect other featured boat
         $query_sql = "select a.*,";
@@ -10663,7 +10663,10 @@ class Yachtclass {
 		$gaeventtracking = $this->google_event_tracking_code('broker', $brokername);		
 		
 		if ($template == 1){
-			$returntext = '<div class="spacertop"><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-type="iframe">Send Inquiry</a></div>';
+			$returntext = '
+			<div class="spacertop"><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-type="iframe">Send Inquiry</a></div>
+			<div class="spacertop clearfixmain"><a href="'. $cm->get_page_url(0, 'pop-watch-price') .'?boat_id='. $boat_id .'" title="Watch Price" data-type="iframe" class="commonpop button boatbuttonwatchprice">Watch Price</a></div>
+			';
 		}else{
 			$returntext = '<li><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $boat_id . '" class="contactbroker button boatbuttonemail" data-type="iframe">Send Inquiry</a></li>';
 		}		
