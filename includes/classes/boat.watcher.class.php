@@ -264,8 +264,6 @@ class Boatwatcherclass {
 			}
 			</script>
 			';
-			
-
 		}else{
 			//Collecting Data
 			$boatwatchercode =  $param["boatwatchercode"];
@@ -1086,6 +1084,13 @@ class Boatwatcherclass {
 			$fromnamesender = "The Yacht Finder";
 			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $fr_mail_subject, $fr_msg, $cm->site_url, '');
 			//end
+			
+			//insert email to DB
+			$send_date = date("Y-m-d H:i:s");
+			$boatwatcheremailcode = $cm->get_unq_code("tbl_boat_watcher_email", "id", 10) . time();
+			$sql = "insert into tbl_boat_watcher_email (id, email, email_content, send_date) values ('". $cm->filtertext($boatwatcheremailcode) ."', '". $cm->filtertext($email_to) ."', '". $cm->filtertext($fr_msg) ."', '". $send_date ."')";
+			$db->mysqlquery($sql);
+			//end
 		}
 	}
 	
@@ -1169,5 +1174,44 @@ class Boatwatcherclass {
 		}
 	}
 	//end
+	
+	//display boat watcher email content
+	public function display_boat_watcher_email_content($id){
+		global $db, $cm;
+		$returntext = '';
+		
+		$query_sql = "select *";
+		$query_form = " from tbl_boat_watcher_email";
+		$query_where = " where";
+		
+		$query_where .= " id = '". $cm->filtertext($id) ."' and";
+		
+		$query_sql = rtrim($query_sql, ",");
+		$query_form = rtrim($query_form, ",");
+		$query_where = rtrim($query_where, "and");
+		$sql = $query_sql . $query_form . $query_where;
+		$result = $db->fetch_all_array($sql);
+		$found = count($result);
+		if ($found > 0){
+			$row = $result[0];
+			foreach($row AS $key => $val){
+				${$key} = $cm->filtertextdisplay($val);
+			}
+			
+			$returntext = $email_content;
+		}else{
+			$returntext = '<h2>Invalid selection</h2>';
+		}
+		
+		return $returntext;
+	}
+	
+	//delete boat watcher email content
+	public function boat_watcher_delete_email_content($boatwatcheremailcode){
+		global $db, $cm;		
+		$sql = "delete from tbl_boat_watcher_email where id = '". $cm->filtertext($boatwatcheremailcode) ."'";
+		$db->mysqlquery($sql);
+	}
+	
 }
 ?>

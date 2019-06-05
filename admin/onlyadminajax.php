@@ -399,6 +399,12 @@ if ($az == 50){
 			$boatwatchercode = $_POST["boatwatchercode"];
 			$boatwatcherclass->boat_watcher_delete_backend($boatwatchercode);
 		}
+		
+		if ($inoption == 3){
+			//delete yacht finder email
+			$boatwatcheremailcode = $_POST["boatwatcheremailcode"];
+			$boatwatcherclass->boat_watcher_delete_email_content($boatwatcheremailcode);
+		}
 	}
 	
 	if ($az == 700){

@@ -41,6 +41,7 @@ if ($fullpage != "y"){
 	$link_option_ar["User Section"][] = array('Company Profile', 'mod_company.php');
 	$link_option_ar["User Section"][] = array('User Rank', 'user_rank_location.php');
 	$link_option_ar["User Section"][] = array('Yacht Finder List', 'yacht_finder_list.php');
+	$link_option_ar["User Section"][] = array('Yacht Finder Sent Email', 'yacht_finder_email_list.php');
 
     $link_option_ar["Inventory"][] = "leftlistingicon";
 	$link_option_ar["Inventory"][] = array('Custom Label Background', 'custom_label_bgcolor.php');

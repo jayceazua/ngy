@@ -216,7 +216,7 @@ include("head.php");
 			 <tr> 
                   <td valign="top" class="displaytd1" align="center"><?php echo $adm->delete_record($id, 'creditapplication'); ?></td>
                   <td valign="top" class="displaytd1" align="center">
-                  <a class="openpopup" data-fancybox-type="iframe" href="credit-application-details.php?id=<?php echo $id; ?>" title="View Details"><img alt="View Details" title="View Details" src="images/mod.gif"  class="imgcommon" /></a>
+                  <a class="openpopup" data-type="iframe" href="credit-application-details.php?id=<?php echo $id; ?>" title="View Details"><img alt="View Details" title="View Details" src="images/mod.gif"  class="imgcommon" /></a>
                   <a href="create-credit-application-pdf.php?id=<?php echo $id; ?>" title="Create PDF Document"><img alt="Create PDF Document" src="images/pdficon.png"  class="imgcommon" /></a>
                   </td>
                   <td valign="top" class="displaytd1" width="" align="left"><?php echo $first_name; ?> <?php echo $last_name; ?></td>
