@@ -374,6 +374,9 @@ textarea { resize: none;outline: none; }
 .button.buttonfull{width:100%;}
 .button.buttonfullcenter{width:100%;text-align:center;}
 
+.button.buttonreverse{background-color:#0a1b40;}
+.button.buttonreverse:hover{background-color:#2bbed3;}
+
 .moreyacht.button {background-color:#0a1b40; width: 250px; text-align:center; padding: 12px; text-transform:uppercase;}
 .moreyacht.button:hover{background-color:#0a1b40;}
 
@@ -3083,8 +3086,8 @@ ul.product-slider li img{ width:100%; height:auto; border-radius:3px; }
     color: #fff;font-weight: 900;
 }
 
-.button.boatbuttonwatchprice {background-color: #2bbed3; width: 100%; max-width: 200px; font-size: 15px; text-transform: uppercase; }
-.button.boatbuttonwatchprice:hover{ background-color: #0a1b40; }
+.button.boatbuttonwatchprice {background-color: #0a1b40; width: 100%; max-width: 200px; font-size: 15px; text-transform: uppercase; }
+.button.boatbuttonwatchprice:hover{ background-color: #2bbed3; }
 .button.boatbuttonwatchprice:before{
 	font-family: 'Font Awesome 5 Free';
     content: "\f155";
@@ -4840,6 +4843,13 @@ ul.footercol > li:nth-child(4) { width: 25%; }
 .footerlast ul.footerbox > li:nth-child(3) a:hover{ color:#2bbed3;}*/
 
 /*Ajax Auto */
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;   /* prevent horizontal scrollbar */
+    overflow-x: hidden; /* add padding to account for vertical scrollbar */
+    z-index:1000 !important;
+}
+
 .ui-autocomplete li {
     font-size: 12px;
 }
