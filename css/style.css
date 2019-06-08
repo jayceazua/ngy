@@ -3088,7 +3088,10 @@ ul.product-slider li img{ width:100%; height:auto; border-radius:3px; }
 
 .button.boatbuttonwatchprice {background-color: #0a1b40; width: 100%; max-width: 200px; font-size: 15px; text-transform: uppercase; }
 .button.boatbuttonwatchprice:hover{ background-color: #2bbed3; }
-.button.boatbuttonwatchprice:before{
+.button.boatbuttonwatchprice2 {background-color: #2bbed3; width: 100%; max-width: 200px; font-size: 15px; text-transform: uppercase; }
+.button.boatbuttonwatchprice2:hover{ background-color: #0a1b40; }
+.button.boatbuttonwatchprice:before,
+.button.boatbuttonwatchprice2:before{
 	font-family: 'Font Awesome 5 Free';
     content: "\f155";
     font-size: 16px;

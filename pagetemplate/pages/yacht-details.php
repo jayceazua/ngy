@@ -359,7 +359,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 				?>
 			</div>
 			<?php } ?>
-            <div class="spacertop clearfixmain"><a href="<?php echo $cm->get_page_url(0, 'pop-watch-price'); ?>?boat_id=<?php echo $id ; ?>" title="Watch Price" data-type="iframe" class="commonpop button boatbuttonwatchprice">Watch Price</a></div>
+            <div class="spacertop clearfixmain"><a href="<?php echo $cm->get_page_url(0, 'pop-watch-price'); ?>?boat_id=<?php echo $id ; ?>" title="Watch Price" data-type="iframe" class="commonpop button boatbuttonwatchprice2">Watch Price</a></div>
 		</section>    	
 	</div>
 
