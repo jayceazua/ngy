@@ -7456,6 +7456,59 @@ class Yachtclass {
 				$searchitem["s_typename"] = $cm->filtertextdisplay($typename);
 			}
 	
+			//if ($typeid > 0 OR $typename != ""){
+			if ($typeid > 0 ){
+				$searchitem["s_typeid"] = $typeid;
+	
+				$typesql = "";
+				$type_sql = $cm->all_child_type($typeid, $typesql);
+				$type_sql = $typeid . ", " . $type_sql;
+				$type_sql = rtrim($type_sql, ", ");
+	
+				$query_form .= " tbl_yacht_type_assign as d,";
+				$query_where .= " a.id = d.yacht_id and d.type_id IN (". $type_sql .") and";
+			}else{
+				if ($owned == 1){
+					if ($sp_typeid == 1){
+						$query_form .= " tbl_yacht_type_assign as d,";
+						$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->catamaran_id .") and";
+					}elseif ($sp_typeid == 2){
+						$query_form .= " tbl_yacht_type_assign as d,";
+						$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->catamaran_id .") and";
+					}
+				}elseif ($owned == 2){
+					if ($similaryacht_type_filter > 0){
+						if ($similaryacht_type_filter == $this->centerconsole_id ){
+							//only center console
+							$query_form .= " tbl_yacht_type_assign as d,";
+							$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->centerconsole_id .") and";
+							
+						}elseif ($similaryacht_type_filter == $this->sportfishing_id ){
+							//only sport fishing
+							$query_form .= " tbl_yacht_type_assign as d,";
+							$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->sportfishing_id .") and";
+							
+						}elseif ($similaryacht_type_filter == $this->convertible_id ){
+							//only convertible
+							$query_form .= " tbl_yacht_type_assign as d,";
+							$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->convertible_id .") and";
+							
+						}elseif ($similaryacht_type_filter == $this->motoryacht_id ){
+							//Motor Yacht - exclude Sportfishing and CONVERTIBLE BOAT
+							$query_form .= " tbl_yacht_type_assign as d,";
+							$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->sportfishing_id .", ". $this->convertible_id .") and";
+							
+						}else{
+							//all except center console
+							$query_form .= " tbl_yacht_type_assign as d,";
+							$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->centerconsole_id .") and";
+						}
+					}
+				}
+			}
+			$searchitem["s_sp_typeid"] = $sp_typeid;
+			$searchitem["s_similaryacht_type_filter"] = $similaryacht_type_filter;
+	
 			if ($enginetypeid > 0 OR $drivetypeid > 0 OR $fueltypeid > 0){
 				$query_form .= " tbl_yacht_engine as e,";
 				$query_where .= " a.id = e.yacht_id and";
@@ -7473,57 +7526,6 @@ class Yachtclass {
 				$searchitem["s_fueltypeid"] = $fueltypeid;
 			}
 			if ($owned > 0){
-				
-				if ($typeid > 0 ){
-					$searchitem["s_typeid"] = $typeid;
-	
-					$typesql = "";
-					$type_sql = $cm->all_child_type($typeid, $typesql);
-					$type_sql = $typeid . ", " . $type_sql;
-					$type_sql = rtrim($type_sql, ", ");
-		
-					$query_form .= " tbl_yacht_type_assign as d,";
-					$query_where .= " a.id = d.yacht_id and d.type_id IN (". $type_sql .") and";
-				}else{
-					if ($owned == 1){
-						if ($sp_typeid == 1){
-							$query_form .= " tbl_yacht_type_assign as d,";
-							$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->catamaran_id .") and";
-						}elseif ($sp_typeid == 2){
-							$query_form .= " tbl_yacht_type_assign as d,";
-							$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->catamaran_id .") and";
-						}
-					}elseif ($owned == 2){
-						if ($similaryacht_type_filter > 0){
-							if ($similaryacht_type_filter == $this->centerconsole_id ){
-								//only center console
-								$query_form .= " tbl_yacht_type_assign as d,";
-								$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->centerconsole_id .") and";
-								
-							}elseif ($similaryacht_type_filter == $this->sportfishing_id ){
-								//only sport fishing
-								$query_form .= " tbl_yacht_type_assign as d,";
-								$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->sportfishing_id .") and";
-								
-							}elseif ($similaryacht_type_filter == $this->convertible_id ){
-								//only convertible
-								$query_form .= " tbl_yacht_type_assign as d,";
-								$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->convertible_id .") and";
-								
-							}elseif ($similaryacht_type_filter == $this->motoryacht_id ){
-								//Motor Yacht - exclude Sportfishing and CONVERTIBLE BOAT
-								$query_form .= " tbl_yacht_type_assign as d,";
-								$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->sportfishing_id .", ". $this->convertible_id .") and";
-								
-							}else{
-								//all except center console
-								$query_form .= " tbl_yacht_type_assign as d,";
-								$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->centerconsole_id .") and";
-							}
-						}
-					}
-				}
-				
 				if ($owned == 1){
 					//$query_where .= "  a.yw_id > 0 and a.ownboat = 1 and";
 					$query_where .= "  a.ownboat = 1 and";					
@@ -7538,33 +7540,8 @@ class Yachtclass {
 					}				
 				}
 				
-			}else{
-				if ($typeid > 0 ){
-					$searchitem["s_typeid"] = $typeid;
-		
-					$typesql = "";
-					$type_sql = $cm->all_child_type($typeid, $typesql);
-					$type_sql = $typeid . ", " . $type_sql;
-					$type_sql = rtrim($type_sql, ", ");
-		
-					$query_form .= " tbl_yacht_type_assign as d,";
-					$query_where .= " a.id = d.yacht_id and d.type_id IN (". $type_sql .") and";
-				}else{
-					if ($sp_typeid == 1){
-						$query_form .= " tbl_yacht_type_assign as d,";
-						$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->yacht_feed_id."') and";
-					}elseif ($sp_typeid == 2){
-						$query_form .= " tbl_yacht_type_assign as d,";
-						$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->catamaran_feed_id."') and";
-					}
-				}
+				$searchitem["s_owned"] = $owned;
 			}
-			
-			$searchitem["s_owned"] = $owned;
-			$searchitem["s_sp_typeid"] = $sp_typeid;
-			$searchitem["s_similaryacht_type_filter"] = $similaryacht_type_filter;
-			
-			
 			if ($featured > 0){
 				$query_form .= " tbl_yacht_featured as g,";
 				$query_where .= " a.id = g.yacht_id and";

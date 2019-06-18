@@ -1,7 +1,7 @@
 <?php
 class Instagramclass {
 	
-	private $accesstoken = '350149725.1677ed0.43821c7806404b52bbda9142b451be69';
+	private $accesstoken = '350149725.1677ed0.c40193aaa58b421584fcb56c02baaa07';
 	private $mediafetch = 24;
 	
 	public function get_instagram_feed($param = array(), $az = 0){
