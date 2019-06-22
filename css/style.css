@@ -30,8 +30,8 @@
 }
 
 html, body { height: 100%; -webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased; }
-body{ margin:0; padding:0; color:#414141; font-size: 16px; font-weight:400; line-height:1.5; font-family: 'Open Sans', serif; cursor:default; background-color: #fff; }
-.adminbodyclass { padding:0; margin:0; background: #fff; color:#000; font-size: 16px; font-weight:400; font-family: 'Open Sans', serif; line-height:1.5; cursor:default;}
+body{ margin:0; padding:0; color:#414141; font-size: 16px; font-weight:400; line-height:1.5; font-family: 'Open Sans', verdana, serif; cursor:default; background-color: #fff; }
+.adminbodyclass { padding:0; margin:0; background: #fff; color:#000; font-size: 16px; font-weight:400; font-family: 'Open Sans', verdana, serif; line-height:1.5; cursor:default;}
 .animatedopacity { opacity: 0;}
 .skiptranslate { display: none; }
 
@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6 {
 	padding:0;
 	color:#050505;
 	text-transform:capitalize;
-	font-family: 'Noto Serif', serif;
+	font-family: 'Noto Serif', verdana, serif;
 }
 
 h1 {font-size: 32px;}
@@ -1045,6 +1045,10 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 
 .cols2:nth-child(2n+1){clear:left; margin-right: 1%;}
 .cols2:nth-child(2n+2){clear:right; margin-left: 1%;}
+
+.cols2 a{
+	border: 0!important
+}
 
 .cols3{
 	float:left;

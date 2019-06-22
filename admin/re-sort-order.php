@@ -8,8 +8,6 @@ $tblname = $_POST["tblname"];
 
 $wh_field = "id";
 
-if ($tblname == "tbl_featured_product"){ $wh_field = "product_id"; }
-
 for ($k = 0; $k < $t_found; $k++){
  $id = $_POST["id" . $k];
  $sortorder = round($_POST["sortorder" . $k], 0);

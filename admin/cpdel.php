@@ -95,6 +95,15 @@ if ($t=="companylocation"){
     $sql = "delete from tbl_service_partners where id = '". $del_id ."'";
     $db->mysqlquery($sql);
 
+}elseif ($t=="brandbox"){
+	$fimg1 = $db->total_record_count("select imgpath as ttl from tbl_brand_specific where id = '". $del_id ."'");
+    if ($fimg1 != ""){
+        $fle->filedelete("../brandboximage/".$fimg1);
+    }
+	
+    $sql = "delete from tbl_brand_specific where id = '". $del_id ."'";
+    $db->mysqlquery($sql);
+
 }elseif ($t=="creditapplication"){
     $sql = "delete from tbl_credit_application where id = '". $del_id ."'";
     $db->mysqlquery($sql);

@@ -5,7 +5,7 @@ $call_function = "a";
 $def_meta_collect = "n";
 include("pageset.php");
 
-$link_name = "Brand Box";
+$sectionid = round($_GET["sectionid"], 0);
 $ms = round($_GET["id"], 0);
 $status_id = 1;
 
@@ -19,35 +19,47 @@ $logoconnectcss1 = '';
 $logoconnectcss2 = ' com_none';
 $logoconnectcss3 = ' com_none';
 
-$sql="select * from tbl_brand_specific where id = '". $cm->filtertext($ms) ."'";
-$result = $db->fetch_all_array($sql);
-$found = count($result); 
-
-$row = $result[0];
-foreach($row AS $key => $val){
-	${$key} = $cm->filtertextdisplay($val);	
-}
-
-if ($make_id > 0){
-	$connected_to = 2;
-	$logoconnectcss1 = ' com_none';
-	$logoconnectcss2 = '';
-	$logoconnectcss3 = ' com_none';
-}elseif ($page_id > 0){
-	//default value
-}elseif ($link_url != ""){
-	$connected_to = 3;
-	$logoconnectcss1 = ' com_none';
-	$logoconnectcss2 = ' com_none';
-	$logoconnectcss3 = '';
+if ($sectionid == 2){
+	$link_name = "Brand Box - Yacht Page";
+}elseif ($sectionid == 2){
+	$link_name = "Brand Box - Catamaran Page";
 }else{
-	$connected_to = 0;
-	$logoconnectcss1 = ' com_none';
-	$logoconnectcss2 = ' com_none';
-	$logoconnectcss3 = ' com_none';
+	$sectionid = 1;
+	$link_name = "Brand Box - Home Page";
 }
-		
-$link_name .= " - " . $name;
+if ($ms > 0){
+
+	$sql="select * from tbl_brand_specific where id = '". $cm->filtertext($ms) ."' and section_id = '". $sectionid ."'";
+	$result = $db->fetch_all_array($sql);
+	$found = count($result); 
+	
+	$row = $result[0];
+	foreach($row AS $key => $val){
+		${$key} = $cm->filtertextdisplay($val);	
+	}
+	
+	if ($make_id > 0){
+		$connected_to = 2;
+		$logoconnectcss1 = ' com_none';
+		$logoconnectcss2 = '';
+		$logoconnectcss3 = ' com_none';
+	}elseif ($page_id > 0){
+		//default value
+	}elseif ($link_url != ""){
+		$connected_to = 3;
+		$logoconnectcss1 = ' com_none';
+		$logoconnectcss2 = ' com_none';
+		$logoconnectcss3 = '';
+	}else{
+		$connected_to = 0;
+		$logoconnectcss1 = ' com_none';
+		$logoconnectcss2 = ' com_none';
+		$logoconnectcss3 = ' com_none';
+	}
+	$link_name .= " - " . $name;
+}else{
+	$ms = 0;
+}
 
 $imw = $cm->boattype_box_im_width;
 $imh = $cm->boattype_box_im_height;
@@ -56,6 +68,7 @@ include("head.php");
 
 <form method="post" action="brand-box-sub.php" id="brand_box_ff" name="ff" enctype="multipart/form-data">
     <input type="hidden" value="<?php echo $ms; ?>" id="ms" name="ms" />
+    <input type="hidden" value="<?php echo $sectionid; ?>" name="section_id" />
     <input type="hidden" value="<?php echo $rank; ?>" name="oldrank" />
     <table border="0" width="95%" cellspacing="0" cellpadding="5" class="htext">
         <tr>

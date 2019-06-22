@@ -3,9 +3,18 @@ $bdr = "../";
 include("common.php");
 $call_function = "a";
 include("pageset.php");
-$link_name = "Our Exlusive Brand Boxes";
+$sectionid = round($_GET["sectionid"], 0);
 
-$sql = "select * from tbl_brand_specific order by rank";
+if ($sectionid == 2){
+	$link_name = "Brand Box - Yacht Page";
+}elseif ($sectionid == 2){
+	$link_name = "Brand Box - Catamaran Page";
+}else{
+	$sectionid = 1;
+	$link_name = "Brand Box - Home Page";
+}
+
+$sql = "select * from tbl_brand_specific where section_id = '". $sectionid."' order by rank";
 $result = $db->fetch_all_array($sql);
 $found = count($result); 
 
@@ -31,18 +40,20 @@ include("head.php");
 		
 <form method="post" action="brandbox.php" name="ff" enctype="multipart/form-data">
 		<input type="hidden" value="tbl_brand_specific" name="tblname" id="tblname" />
+        <input type="hidden" value="<?php echo $sectionid; ?>" name="sectionid" id="sectionid" />
 		<input type="hidden" value="<?php echo $found; ?>" name="t_found" id="t_found" />
 		<table border="0" width="95%" cellspacing="0" cellpadding="0">
         	<tr>
-				<td width="" height="10"><img border="0" src="images/sp.gif" alt="" /></td>
+				<td colspan="2" width="" height="10"><img border="0" src="images/sp.gif" alt="" /></td>
 			</tr>
         	
          	<tr>
-				<td width="" align="right" valign="top"><button type="button" class="butta" onclick="javascript:re_sort_order();"><span class="saveIcon butta-space">Save Sort Order</span></button></td>
+				<td width="330" align="left" valign="top"><a href="add-brand-box.php?sectionid=<?php echo $sectionid; ?>" class="butta"><span class="addIcon butta-space">Add</span></a></td>
+                <td width="" align="right" valign="top"><button type="button" class="butta" onclick="javascript:re_sort_order();"><span class="saveIcon butta-space">Save Sort Order</span></button></td>
           	</tr>
           		  
 			<tr>
-				<td width="" height="10"><img border="0" src="images/sp.gif" alt="" /></td>
+				<td colspan="2" width="" height="10"><img border="0" src="images/sp.gif" alt="" /></td>
 			</tr>
 		</table>	
 		
@@ -52,6 +63,7 @@ include("head.php");
 		   
 		   <table border="0" width="100%" cellspacing="1" cellpadding="4" class="htext">
                <tr>
+                   <td class="displaytdheading" align="center">Del</td>
                    <td class="displaytdheading" align="center">Mod</td>
                    <td class="displaytdheading" width="55%" align="left">Name</td>
                    <td class="displaytdheading" width="" align="center">Top Nav Under</td>
@@ -67,7 +79,7 @@ include("head.php");
                  $imagepath = $row['imagepath'];
 				 $categoryrank = $row['rank'];
 				 $inside_top_nav = $row['inside_top_nav'];
-				 
+				 $section_id = $row['section_id'];
 				 if ($inside_top_nav == 1){
 					 $inside_top_nav_d = 'Yes'; 
 					 $ch_opt_dh = 0;
@@ -77,7 +89,8 @@ include("head.php");
 			     }
 			 ?>     
 			 <tr>  
-                  <td class="displaytd1" align="center"><a href="add-brand-box.php?id=<?php echo $id; ?>" title="Modify Record"><img alt="Modify Record" title="Modify Record" src="images/mod.gif"  class="imgcommon" /></a></td>
+                  <td class="displaytd1" align="center"><?php echo $adm->delete_record($id, 'brandbox'); ?></td>
+                  <td class="displaytd1" align="center"><a href="add-brand-box.php?id=<?php echo $id; ?>&sectionid=<?php echo $section_id; ?>" title="Modify Record"><img alt="Modify Record" title="Modify Record" src="images/mod.gif"  class="imgcommon" /></a></td>
                   <td class="displaytd1" width="" align="left"><?php echo $name; ?></td>
                   <td class="displaytd1" align="center"><a class="htext" href="javascript:void(0);" onclick="javascript:enable_disable('<?php echo $id; ?>', 'inside_top_nav', 'tbl_brand_specific', '<?php echo $ch_opt_dh; ?>', 'id')"><?php echo $inside_top_nav_d; ?></a></td>
                   <td class="displaytd1" width="" align="center"><?php if ($imagepath != ""){?><img src="../brandboximage/<?php echo $imagepath; ?>" border="0" width="100" /><?php }else{ ?> - <?php } ?></td>
@@ -95,15 +108,16 @@ include("head.php");
 	   
 	   <table border="0" width="95%" cellspacing="0" cellpadding="0">
         	<tr>
-				<td width="" height="10"><img border="0" src="images/sp.gif" alt="" /></td>
+				<td colspan="2" width="" height="10"><img border="0" src="images/sp.gif" alt="" /></td>
 			</tr>
         	
          	<tr>
-				<td width="" align="right" valign="top"><button type="button" class="butta" onclick="javascript:re_sort_order();"><span class="saveIcon butta-space">Save Sort Order</span></button></td>
+				<td width="330" align="left" valign="top"><a href="add-brand-box.php?sectionid=<?php echo $sectionid; ?>" class="butta"><span class="addIcon butta-space">Add</span></a></td>
+                <td width="" align="right" valign="top"><button type="button" class="butta" onclick="javascript:re_sort_order();"><span class="saveIcon butta-space">Save Sort Order</span></button></td>
           	</tr>
           		  
 			<tr>
-				<td width="" height="10"><img border="0" src="images/sp.gif" alt="" /></td>
+				<td colspan="2" width="" height="10"><img border="0" src="images/sp.gif" alt="" /></td>
 			</tr>
 		</table>
 	  

@@ -717,9 +717,24 @@ class Frontendclass {
 		global $db, $cm;
 		$returntext = '';
 		$mnid = $param["mnid"];
+		$menulimit = round($param["menulimit"], 0);
+		$orderby = round($param["orderby"], 0);
+		$parentlink = $param["parentlink"];
+		$parentlinktarget = $param["parentlinktarget"];
+		
+		
+		if ($orderby == 1){
+			$orderbyfield = "name";
+		}else{
+			$orderbyfield = "rank";
+		}
 		
 		//collect child menu
-		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where parent_id = '". $mnid ."' and status = 'y' order by rank";
+		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where parent_id = '". $mnid ."' and status = 'y' order by " . $orderbyfield;
+		if ($menulimit > 0){
+			$ss_sql .= " limit 0, " . $menulimit;
+		}
+				
 		$ss_result = $db->fetch_all_array($ss_sql);
 		$ss_found = count($ss_result);
 		//end
@@ -745,6 +760,16 @@ class Frontendclass {
 				
 			}
 			$returntext .= '</ol>';
+			
+			if ($menulimit > 0){
+				$t_sql = "select count(*) as ttl from tbl_page where parent_id = '". $mnid ."' and status = 'y'";
+				$total = $db->total_record_count($t_sql);
+				if ($total > $menulimit){
+					$returntext .= '
+					<div class="clearfixmain"><a href="'. $parentlink .'" class="button">See All</a></div>
+					';
+				}
+			}
 		}
 		
 		return $returntext;
@@ -843,7 +868,7 @@ class Frontendclass {
 			</ul>
 			';
 		}else{
-			
+			$menulimit = 0;
 			$returntext .= '
 			<ul>
 				<li>
@@ -859,11 +884,15 @@ class Frontendclass {
 				$ss_link_target = "";
 				if ($ss_open_new_window == "y"){ $ss_link_target = ' target = "_blank"'; }
 				
+				if ($ss_id == 48 OR $ss_id == 67){
+					$menulimit = 14;
+				}
+				
 				$returntext .= '
 				<div class="cols2">
 					<h3><a class="titlelink" href="'. $ss_lnk_url .'"'. $ss_link_target .'>'. $ss_name .'</a></h3>
 					<div class="cols3-padded clearfixmain">
-					'. $this->get_special_menu_next_level(array("mnid" => $ss_id)) .'
+					'. $this->get_special_menu_next_level(array("mnid" => $ss_id, "parentlink" => $ss_lnk_url, "parentlinktarget" => $ss_link_target, "menulimit" => $menulimit)) .'
 					</div>
 				</div>
 				';
@@ -2586,10 +2615,12 @@ class Frontendclass {
 		$returntext = '';
 		
 		//param
-		$default_param = array("ownboat" => 1, "innerpage" => 0);
+		$default_param = array("ownboat" => 1, "innerpage" => 0, "sectionid" => 1, "hideheading" => 0);
 		$param = array_merge($default_param, $param);	
 		$ownboat = round($param["ownboat"], 0);
 		$innerpage = round($param["innerpage"], 0);
+		$hideheading = round($param["hideheading"], 0);
+		$sectionid = round($param["sectionid"], 0);
 		//$ownboat = 2;
 		//end
 		
@@ -2609,7 +2640,9 @@ class Frontendclass {
 		$box_heading = '<h2 class="singlelinebottom30">Yacht Search By <span>Brand</span></h2>';
 		
 		if ($innerpage == 1){
-			$contauner_start = $box_heading;
+			if ($hideheading == 0){
+				$contauner_start = $box_heading;
+			}
 		}else{
 			$contauner_start = '
 			<div class="homesectionbrandbox clearfixmain">			
@@ -2620,7 +2653,7 @@ class Frontendclass {
 			$contauner_end = '</div></div>';
 		}
 		
-		$sql = "select * from tbl_brand_specific order by rank";
+		$sql = "select * from tbl_brand_specific where section_id = '". $sectionid ."' order by rank";
 		$result = $db->fetch_all_array($sql);
         $found = count($result);
 		
@@ -2858,13 +2891,14 @@ class Frontendclass {
 			$returntext = '
 			<h3 class="doublelinebothside"><span>Join our</span> Mailing List</h3>
 			<form method="post" action="'. $cm->folder_for_seo .'" id="joinourmailing-ff" name="joinourmailing-ff">
-			<input class="finfo" id="email2" name="email2" type="text" />
+			<label class="com_none" for="email2j">email2</label>
+			<input class="finfo" id="email2j" name="email2" type="text" />
 			<input id="jname" name="jname" type="hidden" value="User" />
 			<input id="s" name="s" type="hidden" value="'. $s .'" />
 			<input type="hidden" value="1" id="shortversion" name="shortversion" />
 			<input type="hidden" id="fcapi" name="fcapi" value="joinourmailing" />
 			<ul class="newsletterformhome clearfixmain">
-				<li><input type="text" class="input" id="jemail" name="jemail" value="'. $email .'" placeholder="your email address here" /></li>
+				<li><label class="com_none" for="jemail">Email</label><input type="text" class="input" id="jemail" name="jemail" value="'. $email .'" placeholder="your email address here" /></li>
 				<li class="submit"><button type="submit" class="button" value="Submit">Sign Up</button></li>
 			</ul>
 			<div class="fomrsubmit-result com_none"></div>
@@ -2877,16 +2911,15 @@ class Frontendclass {
 		   $returntext .= '
 		   <h3>Join our Mailing List</h3>
 		   <form method="post" action="'. $cm->folder_for_seo .'" id="joinourmailing-ff" name="joinourmailing-ff">
-		   <input class="finfo" id="email2" name="email2" type="text" />
+		   <label class="com_none" for="email2j">email2</label>
+		   <input class="finfo" id="email2j" name="email2" type="text" />
 		   <input id="s" name="s" type="hidden" value="'. $s .'" />
 		   <input type="hidden" value="0" id="shortversion" name="shortversion" />
 		   <input type="hidden" id="fcapi" name="fcapi" value="joinourmailing" />
 		   <ul class="form clearfixmain">
-				<li><input type="text" class="input" id="jname" name="jname" value="'. $name .'" placeholder="Name" /></li>
-				<li><input type="text" class="input" id="jemail" name="jemail" value="'. $email .'" placeholder="Email Address" /></li>
-				<li class="submit">
-					<button type="submit" class="button" value="Submit">Submit</button>
-				</li>
+				<li><label class="com_none" for="jname">Name</label><input type="text" class="input" id="jname" name="jname" value="'. $name .'" placeholder="Name" /></li>
+				<li><label class="com_none" for="jemail">Email</label><input type="text" class="input" id="jemail" name="jemail" value="'. $email .'" placeholder="Email Address" /></li>
+				<li class="submit"><button type="submit" class="button" value="Submit">Submit</button></li>
 		   </ul>
 		   </form>
 		   </section>
@@ -12987,7 +13020,7 @@ class Frontendclass {
 		</div>
 		';*/
 		
-		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where id IN (135,136) and status = 'y' order by rank";
+		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where id IN (48,67) and status = 'y' order by rank";
 		$ss_result = $db->fetch_all_array($ss_sql);
 		$ss_found = count($ss_result);
 		if ($ss_found > 0){
@@ -13005,7 +13038,7 @@ class Frontendclass {
 				<div class="header-search-show-hide-full clearfixmain">
 					<h3><a href="'. $ss_lnk_url .'"'. $ss_link_target .'>'. $ss_name .'</a></h3>
 					<hr>	
-					'. $this->get_special_menu_next_level(array("mnid" => $ss_id)) .'	
+					'. $this->get_special_menu_next_level(array("mnid" => $ss_id, "orderby" => 1)) .'	
 				</div>
 				';
 			}
