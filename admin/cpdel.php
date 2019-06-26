@@ -101,6 +101,11 @@ if ($t=="companylocation"){
         $fle->filedelete("../brandboximage/".$fimg1);
     }
 	
+	$fimg1 = $db->total_record_count("select logoimage as ttl from tbl_brand_specific where id = '". $del_id ."'");
+    if ($fimg1 != ""){
+        $fle->filedelete("../brandboximage/".$fimg1);
+    }
+	
     $sql = "delete from tbl_brand_specific where id = '". $del_id ."'";
     $db->mysqlquery($sql);
 

@@ -84,6 +84,9 @@ class Commonclass {
 	public $boattype_box_im_width = 500;
     public $boattype_box_im_height = 333;
 	
+	public $brand_box_logo_im_width = 185;
+    public $brand_box_logo_im_height = 63;
+	
 	public $menu_im_width = 300;
     public $menu_im_height = 200;
 	
@@ -91,6 +94,7 @@ class Commonclass {
     public $make_logo_scroll_im_height = 333;
 	
     public $allow_image_ext = '.jpg, .jpeg, .gif, .png';
+	public $allow_image_ext1 = '.png';
 	public $allow_video_ext = '.mp4';
 	public $allow_attachment_ext = '.pdf, .doc, .docx, .ppt, .pptx, .zip';
     public $pagination_record = 24;

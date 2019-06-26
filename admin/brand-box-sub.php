@@ -51,10 +51,7 @@ if ($inside_top_nav == 1){
 	$db->mysqlquery($sql);
 }
 
-$imw = $cm->boattype_box_im_width;
-$imh = $cm->boattype_box_im_height;
-
-//image upload
+//box image upload
 $filename = $_FILES['imgpath']['name'] ;
 if ($filename != ""){
 	$filename_tmp = $_FILES['imgpath']['tmp_name'];
@@ -63,7 +60,9 @@ if ($filename != ""){
 	
 	$target_path_main = "../brandboximage/";
 
-    //slider image
+	$imw = $cm->boattype_box_im_width;
+	$imh = $cm->boattype_box_im_height;
+
     $target_path = $target_path_main;
     $r_width = $imw;
     $r_height = $imh;
@@ -71,6 +70,29 @@ if ($filename != ""){
 
 	$fle->filedelete($filename_tmp);
 	$sql = "update tbl_brand_specific set imagepath = '".$cm->filtertext($filename1)."' where id = '". $iiid ."'";
+	$db->mysqlquery($sql);
+}
+//end
+
+//logo image upload
+$filename = $_FILES['logoimage']['name'] ;
+if ($filename != ""){
+	$filename_tmp = $_FILES['logoimage']['tmp_name'];
+	$filename = $fle->uploadfilename($filename);	
+	$filename1 = $iiid."brandlogoimage".$filename;
+	
+	$target_path_main = "../brandboximage/";
+
+	$imw = $cm->brand_box_logo_im_width;
+	$imh = $cm->brand_box_logo_im_height;
+
+    $target_path = $target_path_main;
+    $r_width = $imw;
+    $r_height = $imh;
+    $fle->new_image($filename_tmp, $r_width, $r_height, $target_path, $cm->filtertextdisplay($filename1));
+
+	$fle->filedelete($filename_tmp);
+	$sql = "update tbl_brand_specific set logoimage = '".$cm->filtertext($filename1)."' where id = '". $iiid ."'";
 	$db->mysqlquery($sql);
 }
 //end

@@ -2656,7 +2656,7 @@ class Frontendclass {
 		$sql = "select * from tbl_brand_specific where section_id = '". $sectionid ."' order by rank";
 		$result = $db->fetch_all_array($sql);
         $found = count($result);
-		
+
 		if ($found > 0){
 			$returntext .= $contauner_start . '
 			<ul class="tophomeboxbrand"><!--';
@@ -2675,12 +2675,18 @@ class Frontendclass {
 				}else{
 					$go_url = 'javascript:void(0);';
 				}
+				
+				if ($logoimage != ""){
+					$overlay_content = '<img alt="'. $name .' Logo" src="'. $cm->folder_for_seo .'brandboximage/'. $logoimage .'" />';
+				}else{
+					$overlay_content = $name;
+				}
 					
 				$returntext .= '--><li><a href="'. $go_url .'">
 				<article class="caption">
 					<img alt="'. $name .'" class="caption__media" src="'. $cm->folder_for_seo .'brandboximage/'. $imagepath .'" />
 					<div class="caption__overlay">
-						<div class="caption__overlay__title"><img alt="'. $name .' Logo" src="'. $cm->folder_for_seo .'brandboximage/logo'. $id .'.png" /></div>
+						<div class="caption__overlay__title">'. $overlay_content .'</div>
 						<p class="caption__overlay__content">
 							'. $description .'
 						</p>

@@ -118,7 +118,7 @@ include("head.php");
     
 	<?php if ($imagepath != ""){ ?>
     <tr>
-        <td width="" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;</span>Selected Image:</td>
+        <td width="" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;</span>Selected Box Image:</td>
         <td width="" align="left" valign="top" class="tdpadding1">
         <img src="../brandboximage/<?php echo $imagepath; ?>" border="0" width="100" /><br />
         <a class="htext" href="javascript:delete_image('<?php echo $ms; ?>','imagepath','tbl_brand_specific','id','brandboximage')">Delete Image</a>
@@ -126,8 +126,23 @@ include("head.php");
     </tr>
     <?php }else{ ?>
     <tr>
-        <td width="" align="left" class="tdpadding1"><span class="fontcolor3">* </span>Select Image [w: <?php echo $imw; ?>px, h: <?php echo $imh ?>px]:<br />&nbsp;&nbsp;[Allowed file types: <?php echo $cm->allow_image_ext; ?>]</td>
-        <td width="" align="left" class="tdpadding1"><input type="file" id="imgpath" name="imgpath" class="inputbox" size="65" /></td>
+        <td width="" align="left" class="tdpadding1"><span class="fontcolor3">* </span>Select Box Image [w: <?php echo $imw; ?>px, h: <?php echo $imh ?>px]:<br />&nbsp;&nbsp;[Allowed file types: <?php echo $cm->allow_image_ext; ?>]</td>
+        <td width="" align="left" class="tdpadding1"><input type="file" id="imgpath" name="imgpath" class="inputbox inputbox_size4" /></td>
+    </tr>
+    <?php } ?>
+    
+    <?php if ($logoimage != ""){ ?>
+    <tr>
+        <td width="" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;</span>Selected Logo Image:</td>
+        <td width="" align="left" valign="top" class="tdpadding1">
+        <img src="../brandboximage/<?php echo $logoimage; ?>" border="0" width="100" /><br />
+        <a class="htext" href="javascript:delete_image('<?php echo $ms; ?>','logoimage','tbl_brand_specific','id','brandboximage')">Delete Image</a>
+        </td>
+    </tr>
+    <?php }else{ ?>
+    <tr>
+        <td width="" align="left" class="tdpadding1"><span class="fontcolor3">* </span>Select Logo Image [w: <?php echo $cm->brand_box_logo_im_width; ?>px, h: <?php echo $cm->brand_box_logo_im_height ?>px]:<br />&nbsp;&nbsp;[Allowed file types: <?php echo $cm->allow_image_ext1; ?>]</td>
+        <td width="" align="left" class="tdpadding1"><input type="file" id="logoimage" name="logoimage" class="inputbox inputbox_size4" /></td>
     </tr>
     <?php } ?>
     
@@ -157,6 +172,10 @@ $(document).ready(function(){
 		
 		if ($("#imgpath").length > 0) {
 			if (!image_validation(document.ff.imgpath.value, 'y', '<?php echo $cm->allow_image_ext; ?>')){ return false; }
+		}
+		
+		if ($("#logoimage").length > 0) {
+			if (!image_validation(document.ff.logoimage.value, 'y', '<?php echo $cm->allow_image_ext1; ?>')){ return false; }
 		}
 		
 		var connected_to = parseInt($("#connected_to").val());
