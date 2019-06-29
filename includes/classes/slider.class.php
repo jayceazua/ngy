@@ -490,14 +490,82 @@ class Sliderclass {
 		//end
 		
 		$slider_category_id = $cm->get_common_field_name('tbl_page', 'slider_category_id', $pageid);
-		if ($slider_category_id > 0){
-			$argu = array(
-				"slider_category_id" => $slider_category_id,
-				"templatefile" => $templatefile,
-				"slider_make_id" => $slider_make_id,
-				"display_make_name" => $display_make_name
-			);
-			$returntxt .= $this->display_top_image_slider($argu);	
+		
+		if ($pageid == 1 AND $cm->isMobileDevice()){
+			$imagefolder = 'sliderimage/';		
+			$imgpath = $db->total_record_count("select imgpath as ttl from tbl_image_slider where category_id = '". $slider_category_id ."' and imgpath != '' and status_id = 1 order by rank limit 0,1");
+			if ($imgpath == ""){
+				$imgpath = "default.jpg"; 
+			}
+			
+			$returntxt = '
+			<div class="mobilestatic fill clearfixmain" style="background-image:url('. $cm->folder_for_seo . $imagefolder . $imgpath.');">
+				<div class="container clearfixmain">
+					<div class="mobile-search-container clearfixmain">
+						<h6>Yacht &amp; Catamaran Search</h6>
+						<div class="mobile-search-container-in clearfixmain">
+							<form method="get" action="'. $cm->get_page_url(2, "page") .'" id="mboat_ff" name="ff">
+								<ul>
+									<li class="left">
+										<label for="mfcname">Make</label>
+										<input id="mfcname" name="mfcname" class="azax_auto input-field" placeholder="Manufacturer" type="text" value="" ckpage="5" autocomplete="off">
+									</li>
+									<li class="right">
+										<label for="lnmin">Length</label><label class="com_none" for="lnmax">Length</label>
+										<div class="clearfixmain">
+											<div class="input-left"><input id="lnmin" name="lnmin" class="input-field" placeholder="Min" type="text" value=""></div>
+											<div class="input-right"><input id="lnmax" name="lnmax" class="input-field" placeholder="Max" type="text" value=""></div>
+										</div>
+									</li>
+									
+									<li class="left">
+										<label for="yrmin">Year</label><label class="com_none" for="yrmax">Year</label>
+										<div class="clearfixmain">
+											<div class="input-left"><input id="yrmin" name="yrmin" class="input-field" placeholder="Min" type="text" value=""></div>
+											<div class="input-right"><input id="yrmax" name="yrmax" class="input-field" placeholder="Max" type="text" value=""></div>
+										</div>
+									</li>
+									<li class="right">
+										<label for="prmin">Price</label><label class="com_none" for="prmax">Price</label>
+										<div class="clearfixmain">
+											<div class="input-left"><input id="prmin" name="prmin" class="input-field" placeholder="Min" type="text" value=""></div>
+											<div class="input-right"><input id="prmax" name="prmax" class="input-field" placeholder="Max" type="text" value=""></div>
+										</div>
+									</li>
+									
+									<li>
+										<label>Search Type</label>
+										<div class="clearfixmain">
+											<label class="com_none" for="cm_sp_typeid1">Yachts</label>
+											<label class="com_none" for="cm_sp_typeid2">Catamaran</label>
+											<div class="input-left"><input class="setformaction radiobutton" type="radio" id="cm_sp_typeid1" name="sp_typeid" value="1" checked="checked" /> Yachts</div> 
+											<div class="input-right"><input class="setformaction radiobutton radiobutton_next" type="radio" id="cm_sp_typeid2" name="sp_typeid" value="2" /> Catamaran</div>
+										</div>
+									</li>
+									
+									<li><button type="submit" class="button1">Search</button></li>
+								</ul>
+								
+								<input type="hidden" name="freshstart" value="1">
+								<input type="hidden" name="rawtemplate" value="0">
+								<input type="hidden" name="owned" value="0">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			';
+			
+		}else{
+			if ($slider_category_id > 0){
+				$argu = array(
+					"slider_category_id" => $slider_category_id,
+					"templatefile" => $templatefile,
+					"slider_make_id" => $slider_make_id,
+					"display_make_name" => $display_make_name
+				);
+				$returntxt .= $this->display_top_image_slider($argu);	
+			}
 		}
 		return $returntxt;
 	}

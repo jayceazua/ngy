@@ -859,11 +859,18 @@ $(document).ready(function(){
 			}
 		}
 		
-		var sp_typeid = 0;
+		/*var sp_typeid = 0;
 		if ($("#sp_typeid").length > 0){
 			sp_typeid = $("#sp_typeid").val();
-		}
+		}*/
 		
+		var sp_typeidchoose = $(':radio[name=ls_sp_typeid]').length;
+		if (sp_typeidchoose > 0){
+			var sp_typeid = $('input[name=ls_sp_typeid]:radio:checked').val();
+		}else{
+			var sp_typeid = $("#sp_typeid").val();
+		}
+				
 		var similaryacht_type_filter = 0;
 		if ($("#similaryacht_type_filter").length > 0){
 			similaryacht_type_filter = $("#similaryacht_type_filter").val();

@@ -21,7 +21,6 @@ class Yachtclass_Child extends Yachtclass{
 		$rawtemplate = $param["rawtemplate"];	
 		//$apinoselection = round($_REQUEST["owned"], 0);
 		$apinoselection = round($param["apinoselection"], 0);
-		$searchtypeselection = round($param["searchtypeselection"], 0);
 		$gen_sql = $param["gen_sql"];		
 		
 		if (isset($_SESSION["created_search"]) AND is_array($_SESSION["created_search"]) AND count($_SESSION["created_search"]) > 0){
@@ -111,12 +110,10 @@ class Yachtclass_Child extends Yachtclass{
 			$form_argu = array(
 				"formtype" => 3,
 				"apinoselection" => $apinoselection,
-				"searchtypeselection" => $searchtypeselection,
 				"owned" => $owned,
 				"mfcname" => $mfcname,
 				"conditionid" => $conditionid,
 				"typeid" => $typeid,
-				"sp_typeid" => $sp_typeid,
 				"lnmin" => $lnmin,
 				"lnmax" => $lnmax,
 				"yrmin" => $yrmin,
@@ -204,6 +201,7 @@ class Yachtclass_Child extends Yachtclass{
 			<input type="hidden" name="stateid" id="stateid" value="'. $stateid .'" />
 			<input type="hidden" name="countryid" id="countryid" value="'. $countryid .'" />
 			<input type="hidden" name="brokerslug" id="brokerslug" value="'. $brokerslug .'" />
+			<input type="hidden" name="sp_typeid" id="sp_typeid" value="'. $sp_typeid .'" />
 			<input type="hidden" name="similaryacht_type_filter" id="similaryacht_type_filter" value="'. $similaryacht_type_filter .'" />
 			<input type="hidden" name="mostviewed" id="mostviewed" value="'. $mostviewed .'" />
 			
@@ -5430,7 +5428,6 @@ class Yachtclass_Child extends Yachtclass{
 				"searchoption" => 1,
 				"rawtemplate" => 0,
 				"apinoselection" => $argu["apinoselection"],
-				"searchtypeselection" => $argu["searchtypeselection"],
 				"gen_sql" => $sql
 			);
 	
@@ -5912,11 +5909,9 @@ class Yachtclass_Child extends Yachtclass{
 		
 		$formtype = $param["formtype"];
 		$apinoselection = $param["apinoselection"];
-		$searchtypeselection = $param["searchtypeselection"];
 		$conditionid = $param["conditionid"];
 		$typeid = $param["typeid"];
 		$owned = $param["owned"];
-		$sp_typeid = $param["sp_typeid"];
 		
 		$mfcname = $param["mfcname"];
 		$lnmin = $param["lnmin"];
@@ -5941,38 +5936,6 @@ class Yachtclass_Child extends Yachtclass{
 		<div class="input-left"><input p="'. $post_url_yacht .'" pid="'. $our_page_id_yacht .'" p2="'. $post_url_catamaran .'" pid2="'. $our_page_id_catamaran .'" class="setformaction radiobutton" type="radio" id="cm_owned1" name="owned" value="1" /> Our Listings</div> 
 		<div class="input-right"><input p="'. $post_url2_yacht .'" pid="'. $co_broker_page_id_yacht .'" p2="'. $post_url2_catamaran .'" pid2="'. $co_broker_page_id_catamaran .'" class="setformaction radiobutton radiobutton_next" type="radio" id="cm_owned2" name="owned" value="2" checked="checked" /> Co-Brokerage</div>
 		';
-		
-		if ($searchtypeselection == 1){
-			if ($sp_typeid == 2){
-				$sp_typeid1 = '';
-				$sp_typeid2 = ' checked="checked"';
-				$sp_typeid3 = '';
-			}elseif ($sp_typeid == 1){
-				$sp_typeid1 = ' checked="checked"';
-				$sp_typeid2 = '';
-				$sp_typeid3 = '';
-			}else{
-				$sp_typeid1 = '';
-				$sp_typeid2 = '';
-				$sp_typeid3 = ' checked="checked"';
-			}
-			
-			$searchtypeselection_text = '
-			<div class="radio-group clearfixmain">
-			<p>Search Type</p>
-			<div class="clearfixmain">
-				<label class="com_none" for="ls_sp_typeid1">Yacht</label>
-				<label class="com_none" for="ls_sp_typeid2">Catamaran</label>
-				<label class="com_none" for="ls_sp_typeid3">All</label>
-				<div><input class="radiobutton ownedradio" type="radio" id="ls_sp_typeid1" name="ls_sp_typeid" value="1"'. $sp_typeid1 .' /> Yacht</div> 
-				<div><input class="radiobutton ownedradio" type="radio" id="ls_sp_typeid2" name="ls_sp_typeid" value="2"'. $sp_typeid2 .' /> Catamaran</div>
-				<div><input class="radiobutton ownedradio" type="radio" name="ls_sp_typeid" id="ls_sp_typeid3" value="0"'. $sp_typeid3 .' /> All</div>
-			</div>
-			</div>
-			';
-		}else{
-			$searchtypeselection_text = '<input type="hidden" name="sp_typeid" id="sp_typeid" value="'. $sp_typeid .'" />';
-		}
 		
 		//$condition_field_include_text = '';
 		if ($conditionid == 1){
@@ -6054,27 +6017,18 @@ class Yachtclass_Child extends Yachtclass{
 					$owned1 = '';
 					$owned2 = ' checked="checked"';
 					$owned3 = '';
-				}elseif ($owned == 1){
+				}else{
 					$owned1 = ' checked="checked"';
 					$owned2 = '';
 					$owned3 = '';
-				}else{
-					$owned1 = '';
-					$owned2 = '';
-					$owned3 = ' checked="checked"';
 				}
 				
 				$boat_owned_section_text = '
-				<div class="radio-group clearfixmain">
-				<p>Search In</p>
-				<div class="clearfixmain">
-					<label class="com_none" for="ls_owned1">Our Listings</label>
-					<label class="com_none" for="ls_owned2">Co-Brokerage</label>
-					<label class="com_none" for="ls_owned3">All</label>
-					<div><input class="radiobutton ownedradio" type="radio" id="ls_owned1" name="ls_owned" value="1"'. $owned1 .' /> Our Listings</div> 
-					<div><input class="radiobutton ownedradio" type="radio" id="ls_owned2" name="ls_owned" value="2"'. $owned2 .' /> Co-Brokerage</div>
-					<div><input class="radiobutton ownedradio" type="radio" name="ls_owned" id="ls_owned3" value="0"'. $owned3 .' /> All</div>
-				</div>
+				<div class="button-group clearfixmain">
+				<label class="com_none" for="ls_owned1">Our Listings</label>
+				<label class="com_none" for="ls_owned2">Co-Brokerage</label>
+				<div class="input-left"><input class="radiobutton ownedradio" type="radio" id="ls_owned1" name="ls_owned" value="1"'. $owned1 .' /> Our Listings</div> 
+				<div class="input-right"><input class="radiobutton radiobutton_next ownedradio" type="radio" id="ls_owned2" name="ls_owned" value="2"'. $owned2 .' /> Co-Brokerage</div>
 				</div>
 				';
 			}else{
@@ -6235,9 +6189,7 @@ class Yachtclass_Child extends Yachtclass{
 				</div>
 			</div>
 			
-			
 			'. $boat_owned_section_text .'
-			'. $searchtypeselection_text .'
 			'. $boat_type_section_text .'
 			'. $form_button_text .'
 			';
@@ -6292,7 +6244,6 @@ class Yachtclass_Child extends Yachtclass{
 			</div>
 
 			'. $condition_field_include_text .'	
-			'. $searchtypeselection_text .'
 			'. $boat_type_section_text .'			
 			'. $boat_owned_section_text .'				 
 			'. $form_button_text .'   
@@ -6358,8 +6309,8 @@ class Yachtclass_Child extends Yachtclass{
 		return $returntext;
 	}
 	
-	//search over slider	
-	public function display_boat_advanced_search_form_small_old(){
+	//search over slider
+	public function display_boat_advanced_search_form_small(){
 		global $db, $cm;
 		
 		$formdata = json_decode($this->boat_advanced_search_form_small(array("formtype" => 2)));
@@ -6410,57 +6361,6 @@ class Yachtclass_Child extends Yachtclass{
 
 				//remove session storage if any
 				remove_session_storage();
-			});
-		});
-		</script>
-		';
-		
-		$responsiveform = '<div class="slidersearch_responsive"><a class="openadvsearch button" href="javascript:void(0);">Search Inventory</a></div>';
-		
-		$returnar = array(
-			"smallform" => $smallform,
-			"responsiveform" => $responsiveform
-		);
-		
-		return $returnar;
-	}
-	public function display_boat_advanced_search_form_small(){
-		global $db, $cm;
-		
-		$formdata = json_decode($this->boat_advanced_search_form_small(array("formtype" => 2)));
-		$smallform = $formdata->smallform;
-		
-		$our_page_id_yacht = $formdata->our_page_id_yacht;
-		$post_url_yacht = $formdata->post_url_yacht;
-		$co_broker_page_id_yacht = $formdata->co_broker_page_id_yacht;
-		$post_url2_yacht = $formdata->post_url2_yacht;
-		
-		$our_page_id_catamaran = $formdata->our_page_id_catamaran;
-		$post_url_catamaran = $formdata->post_url_catamaran;
-		$co_broker_page_id_catamaran = $formdata->co_broker_page_id_catamaran;
-		$post_url2_catamaran = $formdata->post_url2_catamaran;
-		
-		$smallform = '		
-		<div class="search-container clearfixmain">
-			<h6>Yacht &amp; Catamaran Search</h6>
-			<div class="search-container-in clearfixmain">
-				<form method="get" action="'. $cm->get_page_url(2, "page") .'" id="mboat_ff" name="ff">
-				'. $smallform .'
-				
-				<input type="hidden" name="freshstart" value="1">
-				<input type="hidden" name="rawtemplate" value="0">
-				</form>
-			</div>
-		</div>
-		';		
-		
-		$smallform .= '
-		<script type="text/javascript">
-		$(document).ready(function(){				
-			$("#mboat_ff").submit(function(){				
-				//remove session storage if any
-				remove_session_storage();
-				return true;
 			});
 		});
 		</script>

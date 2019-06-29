@@ -976,6 +976,76 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 .header-bottom-inner .rightpart { float: right; width: 36%; padding-bottom:6px; }
 .header-bottom-inner .rightpart .res { text-align: right; }
 
+/*----- Mobile Search Box----- */
+.homebanner {height: 100%;}
+.fill {
+	width: 100%;
+	height: calc(100vh - 80px);
+	background-position: center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover !important;
+	-o-background-size: cover;
+}
+.mobilestatic {
+	position: relative; 
+	background-color: #cacac8;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-image:url(../sliderimage/0sliderfountanepayjot.jpg);
+	
+}
+.mobilestatic .container { position: relative; }
+.mobilestatic .mobile-search-container{
+	width: 100%;
+	max-width:350px;
+	position:absolute; 
+	top: 50px; left: 0;	
+	font-size:14px; 
+	color:#fff;
+	padding:0;	
+	z-index:2;
+}
+.mobilestatic .mobile-search-container h6{ 
+	font-size:28px; 
+	text-transform:uppercase; 
+	color:#fff;
+	margin:0 0 10px 0;
+	text-align:center;
+	letter-spacing: 0.6px;
+	font-family:'Open Sans Condensed', serif;
+}
+
+.mobilestatic .mobile-search-container .mobile-search-container-in{width: 100%;}
+.mobile-search-container-in ul{margin: 0; padding: 0; list-style:none; font-size: 0;}
+.mobile-search-container-in ul > li { width: 100%; padding: 0; margin: 0 0 8px 0; font-size: 14px; vertical-align: top; }
+.mobile-search-container-in ul > li.left{width:48%; float:left;}
+.mobile-search-container-in ul > li.right{width:48%; float:right;}
+
+.mobile-search-container p{ margin:0 0 6px 0; padding:0; font-weight: 500; }
+.mobile-search-container .input-left{ float:left; width:48%;}
+.mobile-search-container .input-right{ float:right; width:48%;}
+.mobile-search-container .input-field{ width: 100%; height:45px; display:inline-block; background:#fff; float:left; margin:0; border:0; padding:0 10px; color:#636363;font-family: inherit;}
+.mobile-search-container label{font-size: 12px; font-weight:700; text-transform:uppercase;}
+
+.mobile-search-container .button1{
+	font-family: inherit;
+	width:100%;
+	background:#0a1b40;
+	color:#fff;
+	border:0;
+	font-size:16px;
+	font-weight:600;
+	margin:0; 
+	padding:10px;
+	text-align:center;
+	display:block;
+	cursor:pointer;
+	text-transform:uppercase;
+	transition:background 300ms ease;
+}
+.mobile-search-container .button1:hover{ background:#2bbed3;}
+
 /*-- SEARCH Box ------*/
 .search-container { width:270px; float:left; font-size:13px; color:#636363;}
 .search-container-in{ padding:0 40px 0 0;}
