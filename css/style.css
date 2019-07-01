@@ -980,7 +980,7 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 .homebanner {height: 100%;}
 .fill {
 	width: 100%;
-	height: calc(100vh - 80px);
+	min-height: calc(100vh - 80px);
 	background-position: center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -999,8 +999,10 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 .mobilestatic .mobile-search-container{
 	width: 100%;
 	max-width:350px;
-	position:absolute; 
+	/*position:absolute; 
 	top: 50px; left: 0;	
+	*/
+	margin-top: 50px;
 	font-size:14px; 
 	color:#fff;
 	padding:0;	
