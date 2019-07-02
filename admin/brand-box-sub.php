@@ -9,6 +9,7 @@ $description = $_POST["description"];
 $make_id = round($_POST["make_id"], 0);
 $page_id = round($_POST["page_id"], 0);
 $link_url = $_POST["link_url"];
+$bgimagealt = $_POST["bgimagealt"];
 
 $status_id = 1;
 $oldrank = round($_POST["oldrank"], 0);
@@ -37,6 +38,7 @@ if ($ms == 0){
 
 // common update
 $sql = "update tbl_brand_specific set description = '". $cm->filtertext($description) ."'
+, bgimagealt = '". $cm->filtertext($bgimagealt) ."'
 , page_id = '". $page_id ."'
 , make_id = '". $make_id ."'
 , link_url = '". $cm->filtertext($link_url) ."'

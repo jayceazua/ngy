@@ -131,6 +131,11 @@ include("head.php");
     </tr>
     <?php } ?>
     
+    <tr>
+        <td width="" align="left"><span class="fontcolor3">&nbsp;&nbsp;</span>Box Image Alt Text:</td>
+        <td width="" align="left"><input type="text" id="bgimagealt" name="bgimagealt" value="<?php echo $bgimagealt; ?>" class="inputbox inputbox_size4" /></td>
+    </tr>
+    
     <?php if ($logoimage != ""){ ?>
     <tr>
         <td width="" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;</span>Selected Logo Image:</td>

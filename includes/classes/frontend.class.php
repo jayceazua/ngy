@@ -2681,10 +2681,14 @@ class Frontendclass {
 				}else{
 					$overlay_content = $name;
 				}
+				
+				if ($bgimagealt == ""){
+					$bgimagealt = $name;
+				}
 					
 				$returntext .= '--><li><a href="'. $go_url .'">
 				<article class="caption">
-					<img alt="'. $name .'" class="caption__media" src="'. $cm->folder_for_seo .'brandboximage/'. $imagepath .'" />
+					<img alt="'. $bgimagealt .'" class="caption__media" src="'. $cm->folder_for_seo .'brandboximage/'. $imagepath .'" />
 					<div class="caption__overlay">
 						<div class="caption__overlay__title">'. $overlay_content .'</div>
 						<p class="caption__overlay__content">

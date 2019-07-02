@@ -498,6 +498,7 @@ class Sliderclass {
 				$imgpath = "default.jpg"; 
 			}
 			
+			/*
 			$returntxt = '
 			<div class="mobilestatic fill clearfixmain" style="background-image:url('. $cm->folder_for_seo . $imagefolder . $imgpath.');">
 				<div class="container clearfixmain">
@@ -549,6 +550,56 @@ class Sliderclass {
 								<input type="hidden" name="freshstart" value="1">
 								<input type="hidden" name="rawtemplate" value="0">
 								<input type="hidden" name="owned" value="0">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			';
+			*/
+			
+			$returntxt = '
+			<div class="mobilestatic fill clearfixmain" style="background-image:url('. $cm->folder_for_seo . $imagefolder . $imgpath.');">
+				<div class="container clearfixmain">
+					<div class="mobile-search-container clearfixmain">
+						<h6>Yacht &amp; Catamaran Search</h6>
+						<div class="mobile-search-container-in clearfixmain">
+							<form method="get" action="'. $cm->get_page_url(2, "page") .'" id="mboat_ff" name="ff">
+								<ul>
+									<li class="left">
+										<label for="mfcname">Make</label>
+										<input id="mfcname" name="mfcname" class="azax_auto input-field" placeholder="Manufacturer" type="text" value="" ckpage="5" autocomplete="off">
+									</li>
+									<li class="right">
+										<label for="lnmin">Length</label><label class="com_none" for="lnmax">Length</label>
+										<div class="clearfixmain">
+											<div class="input-left"><input id="lnmin" name="lnmin" class="input-field" placeholder="Min" type="text" value=""></div>
+											<div class="input-right"><input id="lnmax" name="lnmax" class="input-field" placeholder="Max" type="text" value=""></div>
+										</div>
+									</li>
+									
+									<li class="left">
+										<label for="yrmin">Year</label><label class="com_none" for="yrmax">Year</label>
+										<div class="clearfixmain">
+											<div class="input-left"><input id="yrmin" name="yrmin" class="input-field" placeholder="Min" type="text" value=""></div>
+											<div class="input-right"><input id="yrmax" name="yrmax" class="input-field" placeholder="Max" type="text" value=""></div>
+										</div>
+									</li>
+									<li class="right">
+										<label for="prmin">Price</label><label class="com_none" for="prmax">Price</label>
+										<div class="clearfixmain">
+											<div class="input-left"><input id="prmin" name="prmin" class="input-field" placeholder="Min" type="text" value=""></div>
+											<div class="input-right"><input id="prmax" name="prmax" class="input-field" placeholder="Max" type="text" value=""></div>
+										</div>
+									</li>
+									
+									<li><button type="submit" class="button1">Search</button></li>
+								</ul>
+								
+								<input type="hidden" name="freshstart" value="1">
+								<input type="hidden" name="rawtemplate" value="0">
+								<input type="hidden" name="owned" value="0">
+								<input type="hidden" name="sp_typeid" value="0">
 							</form>
 						</div>
 					</div>
