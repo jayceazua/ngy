@@ -6023,17 +6023,19 @@ class Yachtclass_Child extends Yachtclass{
 			$condition_field_include_text = '';
 			//$boat_owned_section_text = '<input type="hidden" name="owned" id="owned" value="2" />';
 			//$boat_owned_section_text = '<div class="button-group clearfixmain">'. $boat_owned_section_text .'</div>';
-			
-			$boat_owned_section_text = '
+						
+			/*$boat_owned_section_text = '
 			<div class="radio-group clearfixmain">
 				<h5 class="singlelinerightside">Search In</h5>
 				<div class="clearfixmain">
 				'. $boat_owned_section_text .'
 				</div>
 			</div>
-			';
+			';*/
+			$boat_owned_section_text = '';
+			$boat_type_section_text = '';
 			
-			$form_button_text = '<div class="button-group clearfixmain">
+			$form_button_text = '<div class="button-group mt-2 clearfixmain">
 			<div class="input-left"><button type="submit" class="button1">Search</button></div> 
 			</div>';
 			
@@ -6430,16 +6432,6 @@ class Yachtclass_Child extends Yachtclass{
 		$formdata = json_decode($this->boat_advanced_search_form_small(array("formtype" => 2)));
 		$smallform = $formdata->smallform;
 		
-		$our_page_id_yacht = $formdata->our_page_id_yacht;
-		$post_url_yacht = $formdata->post_url_yacht;
-		$co_broker_page_id_yacht = $formdata->co_broker_page_id_yacht;
-		$post_url2_yacht = $formdata->post_url2_yacht;
-		
-		$our_page_id_catamaran = $formdata->our_page_id_catamaran;
-		$post_url_catamaran = $formdata->post_url_catamaran;
-		$co_broker_page_id_catamaran = $formdata->co_broker_page_id_catamaran;
-		$post_url2_catamaran = $formdata->post_url2_catamaran;
-		
 		$smallform = '		
 		<div class="search-container clearfixmain">
 			<h6>Yacht &amp; Catamaran Search</h6>
@@ -6449,6 +6441,8 @@ class Yachtclass_Child extends Yachtclass{
 				
 				<input type="hidden" name="freshstart" value="1">
 				<input type="hidden" name="rawtemplate" value="0">
+				<input type="hidden" name="owned" value="0">
+				<input type="hidden" name="sp_typeid" value="0">
 				</form>
 			</div>
 		</div>

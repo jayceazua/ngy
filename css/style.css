@@ -1023,6 +1023,7 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 .mobile-search-container-in ul > li { width: 100%; padding: 0; margin: 0 0 8px 0; font-size: 14px; vertical-align: top; }
 .mobile-search-container-in ul > li.left{width:48%; float:left;}
 .mobile-search-container-in ul > li.right{width:48%; float:right;}
+.mobile-search-container-in ul > li.space1{margin-top: 20px;}
 
 .mobile-search-container p{ margin:0 0 6px 0; padding:0; font-weight: 500; }
 .mobile-search-container .input-left{ float:left; width:48%;}
@@ -1033,7 +1034,7 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 .mobile-search-container .button1{
 	font-family: inherit;
 	width:100%;
-	background:#0a1b40;
+	background:#2bbed3;
 	color:#fff;
 	border:0;
 	font-size:16px;
@@ -1046,7 +1047,7 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 	text-transform:uppercase;
 	transition:background 300ms ease;
 }
-.mobile-search-container .button1:hover{ background:#2bbed3;}
+.mobile-search-container .button1:hover{ background:#0a1b40;}
 
 /*-- SEARCH Box ------*/
 .search-container { width:270px; float:left; font-size:13px; color:#636363;}

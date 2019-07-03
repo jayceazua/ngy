@@ -565,7 +565,7 @@ class Sliderclass {
 						<h6>Yacht &amp; Catamaran Search</h6>
 						<div class="mobile-search-container-in clearfixmain">
 							<form method="get" action="'. $cm->get_page_url(2, "page") .'" id="mboat_ff" name="ff">
-								<ul>
+								<ul class="clearfixmain">
 									<li class="left">
 										<label for="mfcname">Make</label>
 										<input id="mfcname" name="mfcname" class="azax_auto input-field" placeholder="Manufacturer" type="text" value="" ckpage="5" autocomplete="off">
@@ -592,8 +592,10 @@ class Sliderclass {
 											<div class="input-right"><input id="prmax" name="prmax" class="input-field" placeholder="Max" type="text" value=""></div>
 										</div>
 									</li>
-									
-									<li><button type="submit" class="button1">Search</button></li>
+								</ul>
+								
+								<ul>	
+									<li class="space1"><button type="submit" class="button1">Search</button></li>
 								</ul>
 								
 								<input type="hidden" name="freshstart" value="1">
@@ -1766,8 +1768,7 @@ class Sliderclass {
 				<div class="slidersearch clearfixmain">
 					<div class="container clearfixmain">
 					'. $boatsearchformar["smallform"] .'				
-					</div>
-					'. $boatsearchformar["responsiveform"] .'				
+					</div>								
 					'. $returntxt .'
 				</div>
 				';

@@ -885,7 +885,7 @@ class Frontendclass {
 				if ($ss_open_new_window == "y"){ $ss_link_target = ' target = "_blank"'; }
 				
 				if ($ss_id == 48 OR $ss_id == 67){
-					$menulimit = 14;
+					$menulimit = 11;
 				}
 				
 				$returntext .= '
@@ -12613,7 +12613,7 @@ class Frontendclass {
 			$boat_info_text = '';
 			$broker_id = 1;
 			if ($boat_id > 0){
-				$boat_url = $cm->site_url . $cm->get_page_url($boat_id, "yacht");
+				//$boat_url = $cm->site_url . $cm->get_page_url($boat_id, "yacht");
 				$boat_ar = $cm->get_table_fields("tbl_yacht", "manufacturer_id, broker_id, model, year, yw_id", $boat_id);
 				$boat_ar = $boat_ar[0];
 
@@ -12622,7 +12622,17 @@ class Frontendclass {
 				$boat_year = $boat_ar["year"];
 				$yw_id = $boat_ar["yw_id"];
 				$broker_id = $boat_ar["broker_id"];
-				$boat_make = $cm->get_common_field_name('tbl_manufacturer', 'name', $manufacturer_id);				
+				$boat_make = $cm->get_common_field_name('tbl_manufacturer', 'name', $manufacturer_id);	
+				
+				global $yachtclass;
+				$b_ar = array(
+					"boatid" => $boat_id, 
+					"makeid" => 0, 
+					"ownboat" => 0, 
+					"feed_id" => "", 
+					"getdet" => 1
+				);
+				$boat_url = $cm->site_url . $yachtclass->get_boat_details_url($b_ar);						
 				
 				$boat_info_text = '
 				<table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -12643,6 +12653,11 @@ class Frontendclass {
 					<tr>
 					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Year:</td>
 					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $boat_year .'</td>
+					</tr>
+					
+					<tr>
+					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Listing URL:</td>
+					   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width=""><a href="'. $boat_url .'">'. $boat_url .'</a></td>
 					</tr>
 				</table>
 				';				

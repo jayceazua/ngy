@@ -1534,7 +1534,7 @@ class Commonclass {
 	
 	public function meta_open_graph($title, $content, $imageurl, $fullurl){		
 		if ($imageurl == ""){
-			$imageurl = $this->site_url . "/images/logoshare.png";
+			$imageurl = $this->site_url . "/images/shareimg.png";
 		}
 		$returntext = '
 		<meta property="og:title" content="'. $title .'" />
