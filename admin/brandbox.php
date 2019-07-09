@@ -7,7 +7,7 @@ $sectionid = round($_GET["sectionid"], 0);
 
 if ($sectionid == 2){
 	$link_name = "Brand Box - Yacht Page";
-}elseif ($sectionid == 2){
+}elseif ($sectionid == 3){
 	$link_name = "Brand Box - Catamaran Page";
 }else{
 	$sectionid = 1;

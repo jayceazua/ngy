@@ -871,7 +871,7 @@ class Frontendclass {
 			$menulimit = 0;
 			$returntext .= '
 			<ul>
-				<li>
+				<li><div style="width:100%; max-width: 1366px; margin:0 auto;">
 					<div class="cols_menu">';
 			
 			foreach($ss_result as $ss_row){
@@ -904,7 +904,7 @@ class Frontendclass {
 					<div class="cols_menu_after">
 						'. $this->top_menu_section_display(array("submenusection" => $submenusection, "menusectiontag" => $menusectiontag, "menusectiontag2" => $menusectiontag2, "feacat" => $feacat, "featuredboat_url" => $featuredboat_url)) .'
 					</div>
-					
+				</div>
 				</li>
 			</ul>
 			';
