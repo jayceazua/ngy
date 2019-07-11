@@ -6,6 +6,7 @@ $include_fck = 1;
 $yachtform = 1;
 $enable_charter = 0;
 $isdashboard = 1;
+$latloncss = ' com_none';
 
 $yachtclass->check_user_permission(array(1, 2, 3, 4, 5));
 $cuser_ar = $cm->get_table_fields('tbl_user', 'type_id, company_id, location_id', $loggedin_member_id);		
@@ -123,6 +124,7 @@ if  ($found > 0){
 		$sold_day_no = $cm->difference_between_dates($sold_date, $display_upto);
 	}
     
+	$latloncss = '';
     $link_name = 'Modify Existing Boat';
 	
 	$statenm = $state;
@@ -413,7 +415,26 @@ echo $html_start;
                     Available for sale in U.S. waters? &nbsp;&nbsp;&nbsp;
                     <input type="radio" id="sale_usa1" name="sale_usa" value="1" <?php if ($sale_usa == 1){?> checked="checked"<?php } ?> /> Yes &nbsp;&nbsp;
                     <input type="radio" id="sale_usa2" name="sale_usa" value="0" <?php if ($sale_usa == 0){?> checked="checked"<?php } ?> /> No
-                </li>                
+                </li> 
+                
+                <li><p><strong>Latitude and Longitude</strong></p></li>
+				<?php
+				if ($ms > 0){
+				?>
+				<li>Latitude: <span class="fontbold"><?php echo $lat_val; ?></span>, Longitude <span class="fontbold"><?php echo $lon_val; ?></span></li>
+				<?php
+				}
+				?>
+
+				<li><p>Enter Latitude and Longitude manually? &nbsp;&nbsp; <input type="checkbox" class="latlonmanual" id="lat_lon_manual" name="lat_lon_manual" value="1" <?php if ($ms > 0){?> checked="checked"<?php } ?>  /> Yes</p></li>
+                <li class="left latlonfield<?php echo $latloncss; ?>">
+					<p>Latitude:</p>
+					<input type="text" id="lat_val" name="lat_val" value="<?php echo $lat_val; ?>" class="input" />
+				</li>
+				<li class="right latlonfield<?php echo $latloncss; ?>">
+					<p>Longitude</p>
+					<input type="text" id="lon_val" name="lon_val" value="<?php echo $lon_val; ?>" class="input" />
+				</li>               
             </ul>
             
             <?php

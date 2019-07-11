@@ -67,6 +67,7 @@ foreach($p_ar AS $key => $val){
 			OR $key == "price_tag_id" 
 			OR $key == "price_per_option_id" 
 			OR $key == "yc_mm" 
+			OR $key == "lat_lon_manual"
         ){
             ${$key} = round(${$key}, 0);
         }else{
@@ -176,9 +177,14 @@ $sql = "update tbl_yacht set location_id = '". $location_id ."'
 $db->mysqlquery($sql);
 
 //lat-lon
-$latlonar = $geo->getLatLon($iiid, 1);
-$lat = $latlonar["lat"];
-$lon = $latlonar["lon"];
+if ($lat_lon_manual == 1){
+	$lat = $_POST["lat_val"];
+	$lon = $_POST["lon_val"];
+}else{		
+	$latlonar = $geo->getLatLon($iiid, 1);
+	$lat = $latlonar["lat"];
+	$lon = $latlonar["lon"];
+}
 
 //meta
 //if ($m1 == ""){ $m1 = $yachtclass->yacht_name($iiid); }

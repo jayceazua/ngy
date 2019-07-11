@@ -764,11 +764,11 @@ class Frontendclass {
 			if ($menulimit > 0){
 				$t_sql = "select count(*) as ttl from tbl_page where parent_id = '". $mnid ."' and status = 'y'";
 				$total = $db->total_record_count($t_sql);
-				if ($total > $menulimit){
+				//if ($total > $menulimit){
 					$returntext .= '
 					<div class="clearfixmain"><a href="'. $parentlink .'" class="button">See All</a></div>
 					';
-				}
+				//}
 			}
 		}
 		

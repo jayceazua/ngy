@@ -13253,7 +13253,8 @@ class Yachtclass {
 					OR $key == "custom_label_id"
 					OR $key == "show_price"
 					OR $key == "price_tag_id" 
-					OR $key == "price_per_option_id"			
+					OR $key == "price_per_option_id" 
+					OR $key == "lat_lon_manual"		
 				){
 					${$key} = round(${$key}, 0);
 				}else{
@@ -13359,10 +13360,15 @@ class Yachtclass {
 		, charter_descriptions = '". $cm->filtertext($charter_descriptions)."' where id = '". $iiid ."'";
 		$db->mysqlquery($sql);
 		
-		//lat-lon
-		$latlonar = $geo->getLatLon($iiid, 1);
-		$lat = $latlonar["lat"];
-		$lon = $latlonar["lon"];
+		//lat-lon	
+		if ($lat_lon_manual == 1){
+			$lat = $_POST["lat_val"];
+			$lon = $_POST["lon_val"];
+		}else{		
+			$latlonar = $geo->getLatLon($iiid, 1);
+			$lat = $latlonar["lat"];
+			$lon = $latlonar["lon"];
+		}
 		
 		//meta
 		//if ($m1 == ""){ $m1 = $this->yacht_name($iiid); }

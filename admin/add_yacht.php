@@ -31,6 +31,7 @@ $charter_id = 1;
 $charter_class = ' com_none';
 $crop_option = 1;
 $rotateimage = 0;
+$latloncss = ' com_none';
 
 $checkid = 0;
 if ($ms > 0 OR $copyid > 0){
@@ -144,7 +145,8 @@ if ($ms > 0 OR $copyid > 0){
 }
 
 if ($ms > 0){		
-	if ($found > 0){				
+	if ($found > 0){
+		$latloncss = '';			
 		$link_name = "Modify Existing Yacht";
 	}else{
 		$ms = 0;
@@ -474,6 +476,16 @@ $(document).ready(function(){
             $(".solddaynoclass").addClass("com_none");
         }
     });
+	
+	//lat-lon manual entry
+	$(".latlonmanual").click(function(){   
+		if($(this).is(':checked')){
+			$(".latlonfield").show();
+		}else{
+			$(".latlonfield").hide();
+		}
+	}); 
+	//end
 	
 	//charter
 	$("#charter_id").change(function(){
@@ -972,6 +984,32 @@ function horsepower_individual_calculate(){
                     
                     <td width="" align="left">&nbsp;&nbsp;</td>
                     <td width="" align="left">&nbsp;&nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td width="" colspan="4" align="left"><span class="subhead">Latitude and Longitude</span></td>
+                </tr>
+    
+                <?php
+                if ($ms > 0){
+                ?>
+                <tr>
+                    <td width="" colspan="4" align="left">&nbsp;&nbsp;Latitude: <span class="fontbold"><?php echo $lat_val; ?></span>, Longitude <span class="fontbold"><?php echo $lon_val; ?></span></td>
+                </tr>			
+                <?php
+                }
+                ?>
+    
+                <tr>
+                   <td width="" colspan="4" align="left"><span class="mandt_color">&nbsp;&nbsp;</span>Enter Latitude and Longitude manually? <input type="checkbox" class="latlonmanual" id="lat_lon_manual" name="lat_lon_manual" value="1" <?php if ($ms > 0){?> checked="checked"<?php } ?>  /> Yes</td>
+               </tr>
+                
+                <tr class="latlonfield<?php echo $latloncss; ?>">
+                    <td width="" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;</span>Latitude:</td>
+                    <td width="" align="left" valign="top" class="tdpadding1"><input type="text" id="lat_val" name="lat_val" value="<?php echo $lat_val; ?>" class="inputbox inputbox_size4" /></td>
+               
+                    <td width="" align="left" valign="top" class="tdpadding1"><span class="fontcolor3">&nbsp;&nbsp;</span>Longitude</td>
+                    <td width="" align="left" valign="top" class="tdpadding1"><input type="text" id="lon_val" name="lon_val" value="<?php echo $lon_val; ?>" class="inputbox inputbox_size4" /></td>
                 </tr>
               
               <?php
