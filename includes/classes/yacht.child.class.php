@@ -7462,6 +7462,110 @@ class Yachtclass_Child extends Yachtclass{
 		return $returntext;
 	}
 	
+	//Most viewed/popular boats
+	public function most_popular_boat_list($param = array()){
+		global $db, $cm;
+		$returntext = '';
+		
+		//get param
+		$default_param = array(
+			"sp_typeid" => 0,
+			"owned" => 0
+		);
+		$param = array_merge($default_param, $param);
+		$sp_typeid = round($param["sp_typeid"], 0);
+		$owned = round($param["owned"], 0);
+		//end
+		
+		//sql
+		
+		$query_sql = "select distinct a.*,";
+        $query_form = " from tbl_yacht as a,";
+        $query_where = " where";
+		$query_group_by = "";
+		
+		$query_form .= " tbl_manufacturer as b,";
+		$query_where .= " b.id = a.manufacturer_id and";
+		
+		$query_form .= " tbl_yacht_dimensions_weight as c,";
+		$query_where .= " a.id = c.yacht_id and";
+		
+		if ($owned > 0){
+			if ($owned == 1){
+				if ($sp_typeid == 1){
+					$query_form .= " tbl_yacht_type_assign as d,";
+					$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->catamaran_id .") and";
+				}elseif ($sp_typeid == 2){
+					$query_form .= " tbl_yacht_type_assign as d,";
+					$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->catamaran_id .") and";
+				}
+				
+				$query_where .= "  a.ownboat = 1 and";
+			}elseif ($owned == 2){
+				$query_where .= "  a.yw_id > 0 and a.ownboat = 0 and";
+					
+				if ($sp_typeid == 1){
+					$query_where .= "  a.feed_id = '". $this->yacht_feed_id."' and";
+				}elseif ($sp_typeid == 2){
+					$query_where .= "  a.feed_id = '". $this->catamaran_feed_id."' and";
+				}
+			}
+		}else{
+			if ($sp_typeid == 1){
+				$query_form .= " tbl_yacht_type_assign as d,";
+				$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->yacht_feed_id."') and";
+			}elseif ($sp_typeid == 2){
+				$query_form .= " tbl_yacht_type_assign as d,";
+				$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->catamaran_feed_id."') and";
+			}
+		}
+		
+		$mostviewed = 30;
+		$query_sql .= " sum(mv.total_view) as total_view_boat,";
+		$query_form .= " tbl_yacht_view as mv,";
+		$query_where .= " a.id = mv.yacht_id and mv.reg_date >= DATE_SUB(CURDATE(), INTERVAL ". $mostviewed ." DAY) and mv.view_type = 1 and";
+		$query_group_by = " GROUP BY a.id";
+		
+		$query_where .= " a.status_id = 1 and";
+		
+		
+		$query_sql = rtrim($query_sql, ",");
+        $query_form = rtrim($query_form, ",");
+        $query_where = rtrim($query_where, "and");
+		$sql = $query_sql . $query_form . $query_where . $query_group_by;
+		
+		$sql = $sql . " order by total_view_boat desc limit 0, 30";
+		$result = $db->fetch_all_array($sql);
+        $found = count($result);
+		//end
+		
+		$compareboat = 0;
+		$charter = 0;
+		$extraclass = '';
+		$displayoption = 1;
+		
+		if ($found > 0){
+			$returntext .= '
+			<div class="mostviewed clearfixmain">
+				<ul class="product-list gridview-new">
+			';
+			
+			foreach($result as $row){
+				$returntext .= $this->display_yacht($row, $displayoption, $extraclass, $compareboat, $charter);				
+			}
+			
+			$returntext .= '
+				</ul>
+			</div>
+			';
+		}else{
+			global $frontend;
+			$returntext = '<script src="https://www.google.com/recaptcha/api.js" async defer></script><p>'. $cm->get_systemvar('BTNFD') .'</p>'. $frontend->display_boat_finder_form(1);
+		}
+		
+		return $returntext;
+	}
+	
 	//----------sold boat stat---------------
 	//total sold unit
 	public function get_total_sold_unit($argu = array()){

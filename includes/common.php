@@ -387,6 +387,12 @@ function display_find_right_model_main_shortcode($argu = array()){
 }
 $shortcodeclass->add_shortcode( 'fcfindyourrightmodel', 'display_find_right_model_main_shortcode' );
 
+//Most viewed/popular boats
+function display_most_popular_boat_list_shortcode($argu = array()){
+	global $yachtchildclass;
+	return $yachtchildclass->most_popular_boat_list($argu);
+}
+$shortcodeclass->add_shortcode( 'fcpopularboatlist', 'display_most_popular_boat_list_shortcode' );
 
 //our team
 function display_our_team_shortcode($argu = array()){
