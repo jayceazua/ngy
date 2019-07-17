@@ -13123,6 +13123,47 @@ class Frontendclass {
 		return $returntext;
 	}
 	
+	//form submit thank you popup
+	public function display_formsubmit_popup(){
+		global $cm, $yachtclass;
+		$loggedin_member_id = $yachtclass->loggedin_member_id();
+		
+		if ($loggedin_member_id == 0){
+			$default_content = '
+			<hr/>
+			<p>If you would like to improve your browsing experience and save your preferences, <a href="'. $cm->get_page_url(0, "register") .'">sign up</a> or <a href="'. $cm->get_page_url(0, "login") .'">log in</a> to your account.</p>
+			';
+		}else{
+			$default_content = '';
+		}
+		
+		$returntext = '
+		<div id="formsubmitoverlay" class="">
+			<div class="fc-formsubmit-container">
+				<a class="fc-close-formsubmit" href="javascript:void(0);"><i class="fas fa-times"></i><span class="com_none">Close</span></a>
+				<i class="far fa-check-circle"><span class="com_none">Success</span></i>
+				
+				<h2>Thank You</h2>
+				<p id="formsubmitcontent"></p>
+				'. $default_content .'
+			</div>
+		</div>
+		';
+		
+		$returntext .= '
+		<script type="text/javascript">
+			$(document).ready(function(){
+				
+				$(".fc-close-formsubmit").click(function(){
+					$("#formsubmitoverlay").fadeOut(300);
+				});
+			})
+		</script> 
+		';
+		
+		return $returntext;
+	}
+	
 	//dashboard menu
 	public function get_dashboard_url(){
 		global $cm;

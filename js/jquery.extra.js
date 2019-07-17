@@ -408,7 +408,7 @@ $(document).ready(function(){
             return false;
         }
 		
-		if (shortversion == 1){
+		if (shortversion > 0){
 			//Ajax submit
 			var form = $(this);
 			$.ajax({
@@ -425,6 +425,10 @@ $(document).ready(function(){
 			  $("#con_email").val('');
 			  $("#con_contact_subject").val('');
 			  $("#con_message").val('');
+			  $("#overlay").hide();
+			  
+			  $("#formsubmitcontent").html("Your Enquiry has been sent.<br>We will get back to you asap.");
+			  $("#formsubmitoverlay").show();
 			  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
 			}).fail(function() {
 			  $(".fomrsubmit-result").addClass("error");

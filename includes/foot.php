@@ -86,6 +86,7 @@ echo $yachtchildclass->sliding_advanced_search_form($isdashboard, $pageid);
 echo $frontend->contact_page_pop();
 echo $frontend->header_search_content();
 echo $frontend->display_sudden_popup();
+echo $frontend->display_formsubmit_popup();
 ?>
 <!--Footer End-->
 <?php
