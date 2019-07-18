@@ -244,13 +244,13 @@ class Yachtclass_Pop extends Yachtclass{
 			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $mail_subject, $msg, $cm->site_url, $fromnamesender);
 		
 			$pgid = 13;
-			/*$redpageurl = $cm->get_page_url(0, "popthankyou") . "?c=" . $pgid;
-			$pagecontent = $cm->get_common_field_name('tbl_page', 'file_data', $pgid);
-			$_SESSION["thnk"] = $pagecontent;
+			$redpageurl = $cm->get_page_url(0, "popthankyou") . "?p=1&c=" . $pgid;
+			//$pagecontent = $cm->get_common_field_name('tbl_page', 'file_data', $pgid);
+			//$_SESSION["thnk"] = $pagecontent;
 			header('Location: ' . $redpageurl);
-			exit;*/
-			header('Location: ' . $cm->get_page_url($pgid, 'page'));
 			exit;
+			/*header('Location: ' . $cm->get_page_url($pgid, 'page'));
+			exit;*/
 		}
 	}
 	
@@ -352,11 +352,11 @@ class Yachtclass_Pop extends Yachtclass{
 			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $mail_subject, $msg, $cm->site_url, $news_footer_u);
 			
 			$pgid = 13;
-			/*$redpageurl = $cm->get_page_url(0, "popthankyou") . "?c=" . $pgid;
-			$pagecontent = $cm->get_common_field_name('tbl_page', 'file_data', $pgid);
-			$_SESSION["thnk"] = $pagecontent;
-			header('Location: ' . $redpageurl);*/
-			header('Location: ' . $cm->get_page_url($pgid, 'page'));
+			$redpageurl = $cm->get_page_url(0, "popthankyou") . "?c=" . $pgid;
+			//$pagecontent = $cm->get_common_field_name('tbl_page', 'file_data', $pgid);
+			//$_SESSION["thnk"] = $pagecontent;
+			header('Location: ' . $redpageurl);
+			//header('Location: ' . $cm->get_page_url($pgid, 'page'));
 			exit;
 		}
 	}

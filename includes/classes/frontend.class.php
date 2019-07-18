@@ -6499,6 +6499,7 @@ class Frontendclass {
 		global $cm, $yachtclass, $captchaclass;
 		$pgid = round($argu["pgid"], 0);
 		$templateid = round($argu["templateid"], 0);
+		$ajaxsubmit = round($argu["ajaxsubmit"], 0);
 		
 		$datastring = $cm->session_field_seller_services_request();
 		$return_ar = $cm->collect_session_for_form($datastring);
@@ -6514,6 +6515,7 @@ class Frontendclass {
 			<input class="finfo" id="email2" name="email2" type="text" />
 			<input type="hidden" id="fcapi" name="fcapi" value="sellerservicessubmit" />	
 			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+			<input type="hidden" value="'. $ajaxsubmit .'" id="ajaxsubmit" name="ajaxsubmit" />
 			
 			<h3 class="t-center"><span>BOAT EVALUATION</span></h3>
 			<hr class="blue m-0">
@@ -6549,7 +6551,7 @@ class Frontendclass {
 			<div class="fcform1">
 				<p><button type="submit" class="button">SUBMIT</button></p>
 			</div> 
-			
+			<div class="fomrsubmit-result com_none"></div>
 			</form>
 			';
 		}else{
@@ -6563,7 +6565,8 @@ class Frontendclass {
 			<label class="com_none" for="email2">email2</label>
 			<input class="finfo" id="email2" name="email2" type="text" />
 			<input type="hidden" id="fcapi" name="fcapi" value="sellerservicessubmit" />	
-			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />   
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+			<input type="hidden" value="'. $ajaxsubmit .'" id="ajaxsubmit" name="ajaxsubmit" /> 
 			';
 			
 			$returntext .= '
@@ -6620,8 +6623,7 @@ class Frontendclass {
 			<label class="com_none" for="comments">Message</label>
 			<textarea name="comments" id="comments" class="comments" rows="1" cols="1">'. $comments .'</textarea>
 			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
-			<div align="center"><input name="submit" type="submit" value="Evaluate Your Boat"></div>
-	
+			<div align="center"><input name="submit" type="submit" value="Evaluate Your Boat"></div>			
 			</form>
 			<!--</div>
 			</div>-->
@@ -6631,9 +6633,12 @@ class Frontendclass {
 		$returntext .= '
 		<script type="text/javascript">
 		$(document).ready(function(){
-			$("#seller-services-ff").submit(function(){
+			$("#seller-services-ff").submit(function(event){
 				var all_ok = "y";
 				var setfocus = "n";
+				
+				var ajaxsubmit = $("#ajaxsubmit").val();
+				ajaxsubmit = parseInt(ajaxsubmit);
 				
 				if (!field_validation_border("name", 1, 1)){
 					all_ok = "n";
@@ -6673,7 +6678,45 @@ class Frontendclass {
 				if (all_ok == "n"){
 					return false;
 				}
-				return true;
+				
+				if (ajaxsubmit > 0){
+					
+					//Ajax submit
+					var form = $(this);
+					$.ajax({
+					  type: form.attr("method"),
+					  url: form.attr("action"),
+					  data: form.serialize()
+					}).done(function() {					  
+					  $("#name").val("");
+					  $("#email").val("");
+					  $("#phone").val("");
+					  $("#boat_make").val("");
+					  $("#boat_model").val("");
+					  $("#boat_year").val("");
+					  $("#boat_engines").val("");
+					  $("#boat_hours_on_engines").val("");
+					  $("#boat_location").val("");
+					  
+					  //$(".fomrsubmit-result").addClass("success");
+					  //$(".fomrsubmit-result").html("Email sent successfully");
+					  //$(".fomrsubmit-result").removeClass("com_none");
+					  
+					  $("#formsubmitcontent").html("Thank you for sending your yacht info.<br>We will get back to you asap.");
+					  $("#formsubmitoverlay").show();
+					  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+					}).fail(function() {
+					  $(".fomrsubmit-result").addClass("error");
+					  $(".fomrsubmit-result").html("ERROR! Please try again");
+					  $(".fomrsubmit-result").removeClass("com_none");
+					  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+					});
+					
+					event.preventDefault();
+					
+				}else{
+					return true;
+				}
 			});
 		});
 		</script>
@@ -6703,6 +6746,7 @@ class Frontendclass {
 				
 			$pgid = round($_POST["pgid"], 0);
 			$email2 = $_POST["email2"];
+			$ajaxsubmit = round($_POST["ajaxsubmit"], 0);
 			//end
 			
 			//create the session
@@ -6857,10 +6901,14 @@ class Frontendclass {
 			$mail_reply = "";
 			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $fr_mail_subject, $fr_msg, $cm->site_url);
 			//end
-
-			$_SESSION["s_pgid"] = $pgid;
-			header('Location: ' . $cm->get_page_url($pgid, 'page'));
-			exit;
+			
+			if ($ajaxsubmit > 0){
+				return 1;
+			}else{
+				$_SESSION["s_pgid"] = $pgid;
+				header('Location: ' . $cm->get_page_url($pgid, 'page'));
+				exit;
+			}
 		}
 	}
 	

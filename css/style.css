@@ -5753,7 +5753,7 @@ p.h6 span {color: #2bbed3;}
 
 /*Form submit popup*/
 .fc-formsubmit-container{
-	width: 100%;
+	width: 94%;
 	max-width:450px;
 	height:auto;
 	position:absolute; 
@@ -5777,8 +5777,24 @@ p.h6 span {color: #2bbed3;}
 
 .fc-formsubmit-container a {color: #0a1b40;}
 .fc-formsubmit-container a:hover {color: #000;}
-.fc-formsubmit-container i.fa-check-circle {font-size: 90px; color: #bd0000; margin-bottom: 30px;}
+.fc-formsubmit-container i.fa-check-circle {font-size: 90px; color: #259905; margin-bottom: 30px;}
 .fc-close-formsubmit {
+	color: #FFFFFF;
+	font-size: 25px;
+	position: fixed;
+	right: 40px;
+	top: 15px;
+	z-index:99;
+}
+
+.fc-formsubmit-container2{
+	width: 100%;
+	padding: 15px;
+	text-align:center;
+}
+
+.fc-formsubmit-container2 i.fa-check-circle {font-size: 90px; color: #259905; margin-bottom: 30px;}
+.fc-close-formsubmit2 {
 	color: #FFFFFF;
 	font-size: 25px;
 	position: fixed;

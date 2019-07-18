@@ -27,7 +27,7 @@ if ($subject == ""){
 $default_message = '';
 include("head.php");
 ?>
-    <form method="post" action="<?php echo $cm->folder_for_seo; ?>" id="contact_roker_ff" name="ff" target="_parent">
+    <form method="post" action="<?php echo $cm->folder_for_seo; ?>" id="contact_roker_ff" name="ff">
         <input type="hidden" value="<?php echo $id; ?>" id="id" name="id" />
         <input type="hidden" value="<?php echo $yid; ?>" id="yid" name="yid" />
         <input class="finfo" id="email2" name="email2" type="text" />

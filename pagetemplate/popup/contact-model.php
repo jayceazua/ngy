@@ -23,7 +23,7 @@ if ($subject == ""){
 include("head.php");
 ?>
 <p>Please tell us everything you want us to know about your yacht and tender needs.</p>
-    <form method="post" action="<?php echo $cm->folder_for_seo; ?>" id="contact_roker_ff" name="ff" target="_parent">
+    <form method="post" action="<?php echo $cm->folder_for_seo; ?>" id="contact_roker_ff" name="ff">
     	<input type="hidden" value="<?php echo $m; ?>" id="yid" name="yid" />
         <input class="finfo" id="email2" name="email2" type="text" />
         <input type="hidden" id="fcapi" name="fcapi" value="contactmodelsubmit" />
