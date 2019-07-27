@@ -2605,7 +2605,7 @@ ul.cat-list .thumb img{display:block;}
 .section{/*background:#f3f2f2;*/ border:solid 1px #e8e7e7; padding:10px 20px 10px 20px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; margin-bottom:12px;}
 .section.sectionbg { background-color: #f3f2f2; padding: 12px; border: 0; text-align: left; }
 .section.sectionbg2 { padding: 12px; background-color: #ffffff; }
-.section.sectionbg3 { padding: 12px; background-color: #0a1b40; }
+.section.sectionbg3 { padding: 12px; background-color: #0a1b40; color: #fff; }
 .section h3{text-align: left; font-size: 20px;}
 .section.sectionbg h3 { color: #100c0d; border-bottom: 0; padding: 0; margin-bottom: 10px;}
 .section.sectionbg3 h3 { color: #fff; border-bottom: 0; padding: 0; margin-bottom: 10px;}

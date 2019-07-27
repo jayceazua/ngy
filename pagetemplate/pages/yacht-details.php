@@ -742,7 +742,10 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 
     <div class="right-cell scrollcol" parentdiv="product-detail">
         <section class="section sectionbg3 broker-wrap clearfixmain">
-            <?php echo $yachtclass->display_yacht_broker_info($company_id, $location_id, $broker_id, $id, $condition_id); ?>
+            <?php
+				$paramar = array("company_id" => $company_id, "location_id" => $location_id, "broker_id" => $broker_id, "yacht_id" => $id, "manufacturer_id" => $manufacturer_id, "condition_id" => $condition_id, "ownboat" => $ownboat);
+            	echo $yachtclass->display_yacht_broker_info($paramar); 
+			?>
         </section>
         
         <?php

@@ -8611,9 +8611,24 @@ class Yachtclass {
         return $total_y;
     }
 
-    public function display_yacht_broker_info($company_id, $location_id, $broker_id, $yacht_id, $condition_id = 0, $template = 0){
+    public function display_yacht_broker_info($param = array()){
         global $db, $cm;
-        $loggedin_member_id = $this->loggedin_member_id();
+        
+		//param
+		$default_param = array("company_id" => 0, "location_id" => 0, "broker_id" => 0, "yacht_id" => 0, "manufacturer_id" => 0, "condition_id" => 0, "ownboat" => 1, "template" => 0);
+		$param = array_merge($default_param, $param);
+	
+		$company_id = round($param["company_id"], 0);
+		$broker_id = round($param["broker_id"], 0);
+		$location_id = round($param["location_id"], 0);
+		$yacht_id = round($param["yacht_id"], 0);
+		$manufacturer_id = round($param["manufacturer_id"], 0);
+		$condition_id = round($param["condition_id"], 0);
+		$ownboat = round($param["ownboat"], 0);
+		$template = round($param["template"], 0);
+		//end
+		
+		$loggedin_member_id = $this->loggedin_member_id();
 		$adminedit = $this->check_user_admin_permission($company_id, $location_id, $loggedin_member_id);
 				
         $company_ar = $cm->get_table_fields('tbl_company', 'cname, logo_imgpath', $company_id);
@@ -8702,11 +8717,18 @@ class Yachtclass {
 			';
 		}
 		
-		if ($template == 1){
-			$presented_by = '<h3 class="singlelinebottom"><span>Presented</span> by</h3>';
+		if ($ownboat == 1){
+			if ($template == 1){
+				$presented_by = '<h3 class="singlelinebottom"><span>Presented</span> by</h3>';
+			}else{
+				$presented_by = '<h3>Presented by</h3>';
+			}
 		}else{
-			$presented_by = '<h3>Presented by</h3>';
+			$manufacturer_name = $cm->get_common_field_name('tbl_manufacturer', 'name', $manufacturer_id);
+			$presented_by = '<p>Need more information? Please contact your <strong>'. $manufacturer_name .'</strong> expert</p><hr>';
 		}
+		
+		
 		
         $returntxt = '
         '. $presented_by .'
