@@ -2638,7 +2638,7 @@ class Frontendclass {
 		$contauner_start = "";
 		$contauner_end = "";
 		$box_heading = '<h2 class="singlelinebottom30">Yacht Search By <span>Brand</span></h2>';
-		
+				
 		if ($innerpage == 1){
 			if ($hideheading == 0){
 				$contauner_start = $box_heading;
@@ -2648,9 +2648,11 @@ class Frontendclass {
 			<div class="homesectionbrandbox clearfixmain">			
 			<div class="container clearfixmain">
 			'. $box_heading .'
+			<div class="homesectionbrandbox_container2 clearfixmain">
+				<a class="brandviewall" href="'. $cm->get_page_url(48, "page") .'">View All<br>Brands</a>
 			';
 			
-			$contauner_end = '</div></div>';
+			$contauner_end = '</div></div></div>';
 		}
 		
 		$sql = "select * from tbl_brand_specific where section_id = '". $sectionid ."' order by rank";
