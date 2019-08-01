@@ -1626,6 +1626,7 @@ ul.generalstat_child li h3 { border: 0; padding-bottom: 0; }
 	
 	padding: 25px 40px;
 }
+.brandviewall:hover{background-color: #0a1b40; color:#fff;}
 
 ul.tophomeboxbrand { padding:0; margin: 0; list-style:none; text-align: center; font-size:0; }
 ul.tophomeboxbrand > li{ position: relative; display: inline-block; width:24%; margin:0 0 20px 1.33%; padding:0; background:none; font-size:14px; font-weight: 600; }
