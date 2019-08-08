@@ -8151,6 +8151,7 @@ class Yachtclass {
 					fade: true,
 					asNavFor: ".'. $sliderclassnav .'"
 				});
+				jQuery(".'. $sliderclassmain .'").bind("touchstart", function(){ console.log("touchstart") });
 				jQuery(".'. $sliderclassnav .'").slick({
 					slidesToShow: 8,
 					slidesToScroll: 1,
