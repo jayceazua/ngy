@@ -139,7 +139,7 @@ $from_price_ck = $price - 500000;
 $to_price_ck = $price + 500000;
 
 if ($ownboat == 1){
-	if ($type_id == $yachtclass->catamaran_id){
+	if ($type_id == $yachtclass->catamaran_id OR $feed_id == $yachtclass->catamaran_feed_id2){
 		$sp_typeid = 2;
 		$column_id = 7;
 	}else{

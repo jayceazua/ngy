@@ -16,6 +16,7 @@ class Yachtclass {
 	public $motoryacht_id = 26;
 	public $yacht_feed_id = "iqfvvoqavhlo";
 	public $catamaran_feed_id = "90sxtvkwmutb";
+	public $catamaran_feed_id2 = "9695221a8b884112b1a4dd39fbaf3c";
 	public $mostviewdno = 30;
 	public $mostviewdday = 30;
     //end
@@ -4898,7 +4899,7 @@ class Yachtclass {
 		}
 
 		if ($ownboat == 1){
-			if ($type_id == $this->catamaran_id){
+			if ($type_id == $this->catamaran_id OR $feed_id == $this->catamaran_feed_id2){
 				$categoryid_front = 2;
 			}else{
 				$categoryid_front = 1;
@@ -5993,7 +5994,7 @@ class Yachtclass {
 		}
 		$type_id = $cm->get_common_field_name('tbl_yacht_type_assign', 'type_id', $boatid, 'yacht_id');
 		if ($ownboat == 1){
-			if ($type_id == $this->catamaran_id){
+			if ($type_id == $this->catamaran_id OR $feed_id == $this->catamaran_feed_id2){
 				$details_url = $cm->get_page_url($boatid, "catamaransales");
 			}else{
 				$details_url = $cm->get_page_url($boatid, "yachtsale");
@@ -7491,7 +7492,7 @@ class Yachtclass {
 							$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->catamaran_id .") and";
 						}elseif ($sp_typeid == 2){
 							$query_form .= " tbl_yacht_type_assign as d,";
-							$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->catamaran_id .") and";
+							$query_where .= " a.id = d.yacht_id and (d.type_id IN (". $this->catamaran_id .")  OR a.feed_id = '". $this->catamaran_feed_id2 ."') and";
 						}
 					}elseif ($owned == 2){
 						if ($similaryacht_type_filter > 0){
@@ -7555,7 +7556,7 @@ class Yachtclass {
 						$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->yacht_feed_id."') and";
 					}elseif ($sp_typeid == 2){
 						$query_form .= " tbl_yacht_type_assign as d,";
-						$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->catamaran_feed_id."') and";
+						$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->catamaran_feed_id."','". $this->catamaran_feed_id2 ."')) and";
 					}
 				}
 			}
@@ -7580,7 +7581,7 @@ class Yachtclass {
 				}
 			}else{
 				//homd_assigned_featured_boats
-				$query_where .= " a.id NOT IN (". $homd_assigned_featured_boats .") and";
+				//$query_where .= " a.id NOT IN (". $homd_assigned_featured_boats .") and";
 			}
 			
 			if ($chartercheck == 1){
