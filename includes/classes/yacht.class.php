@@ -16,8 +16,9 @@ class Yachtclass {
 	public $motoryacht_id = 26;
 	public $yacht_feed_id = "iqfvvoqavhlo";
 	public $catamaran_feed_id = "90sxtvkwmutb";
-	public $catamaran_feed_id2 = "9695221a8b884112b1a4dd39fbaf3c";
-	public $mostviewdno = 30;
+	//public $catamaran_feed_id2 = "9695221a8b884112b1a4dd39fbaf3c";
+	public $catamaran_feed_id2 = "9695221a8b884112b1a4dd39fbaf3";
+        public $mostviewdno = 30;
 	public $mostviewdday = 30;
     //end
 

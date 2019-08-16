@@ -22,6 +22,7 @@ class Yachtclass_Child extends Yachtclass{
 		//$apinoselection = round($_REQUEST["owned"], 0);
 		$apinoselection = round($param["apinoselection"], 0);
 		$searchtypeselection = round($param["searchtypeselection"], 0);
+		$disable_make_search = round($param["disable_make_search"], 0);
 		$gen_sql = $param["gen_sql"];		
 		
 		if (isset($_SESSION["created_search"]) AND is_array($_SESSION["created_search"]) AND count($_SESSION["created_search"]) > 0){
@@ -110,6 +111,7 @@ class Yachtclass_Child extends Yachtclass{
 		if ($searchtemplate == 1){
 			$form_argu = array(
 				"formtype" => 3,
+				"disable_make_search" => $disable_make_search,
 				"apinoselection" => $apinoselection,
 				"searchtypeselection" => $searchtypeselection,
 				"owned" => $owned,
@@ -5374,13 +5376,19 @@ class Yachtclass_Child extends Yachtclass{
 			$argu["$key"] = $val;
 		}
 		
+		$makeid = round($argu["makeid"], 0);
 		$listsort = round($argu["listsort"], 0);
 		$listorder = round($argu["listorder"], 0);
 		$nosearchcol = round($argu["nosearchcol"], 0);
 		$mostviewed = round($argu["mostviewed"], 0);
 		$sp_typeid = round($argu["sp_typeid"], 0);
 		$compareboat = 0;
-
+		
+		$disable_make_search = 0;
+		if ($makeid > 0){
+			$disable_make_search = 1;
+		}
+	
 		//$sql = $this->create_yacht_sql(0, 0, $argu);
 		$boat_check_sql = json_decode($this->get_boat_check_sql(0, 0, $argu));
 		$to_check_val = $boat_check_sql->to_check_val;
@@ -5431,6 +5439,7 @@ class Yachtclass_Child extends Yachtclass{
 				"rawtemplate" => 0,
 				"apinoselection" => $argu["apinoselection"],
 				"searchtypeselection" => $argu["searchtypeselection"],
+				"disable_make_search" => $disable_make_search,
 				"gen_sql" => $sql
 			);
 	
@@ -5911,6 +5920,7 @@ class Yachtclass_Child extends Yachtclass{
 		$post_url2_catamaran = $formpostar->post_url2_catamaran;
 		
 		$formtype = $param["formtype"];
+		$disable_make_search = $param["disable_make_search"];
 		$apinoselection = $param["apinoselection"];
 		$searchtypeselection = $param["searchtypeselection"];
 		$conditionid = $param["conditionid"];
@@ -6243,13 +6253,19 @@ class Yachtclass_Child extends Yachtclass{
 			'. $boat_type_section_text .'
 			'. $form_button_text .'
 			';
-		}else{
+		}else{			
+			if ($disable_make_search == 1){
+				$make_search_string = '<input id="mfcname'. $field_id_extra .'" name="mfcname"type="hidden" value="'. $mfcname .'">';
+			}else{
+				$make_search_string = '
+				<p><label for="mfcname'. $field_id_extra .'">Make</label></p>
+				<div class="input-group clearfixmain">			
+					<input id="mfcname'. $field_id_extra .'" name="mfcname" class="azax_auto input-field" placeholder="Manufacturer" type="text" value="'. $mfcname .'" ckpage="5" autocomplete="off">
+				</div>
+				';
+			}
 				
-			$smallform = '		
-			<p><label for="mfcname'. $field_id_extra .'">Make</label></p>
-			<div class="input-group clearfixmain">			
-				<input id="mfcname'. $field_id_extra .'" name="mfcname" class="azax_auto input-field" placeholder="Manufacturer" type="text" value="'. $mfcname .'" ckpage="5" autocomplete="off">
-			</div>
+			$smallform = $make_search_string . '
 
 			<p><label for="lnmin'. $field_id_extra .'">Length Range</label><label class="com_none" for="lnmax'. $field_id_extra .'">Length Range</label></p>
 			<div class="clearfixmain">
@@ -7347,7 +7363,7 @@ class Yachtclass_Child extends Yachtclass{
 				$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->catamaran_id .") and";
 			}elseif ($sp_typeid == 2){
 				$query_form .= " tbl_yacht_type_assign as d,";
-				$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->catamaran_id .") and";
+				$query_where .= " a.id = d.yacht_id and (d.type_id IN (". $this->catamaran_id .") OR a.feed_id = '". $this->catamaran_feed_id2 ."') and";
 			}				
 		}else{
 			$query_where .= "  a.yw_id > 0 and a.ownboat = 0 and";
@@ -7390,7 +7406,7 @@ class Yachtclass_Child extends Yachtclass{
 		
 		$query_where .= " a.status_id = 1 and";
 		//$query_where .= " a.id != '". $currentboat ."' and";
-		$query_where .= " a.id NOT IN (". $homd_assigned_featured_boats .") and";
+		//$query_where .= " a.id NOT IN (". $homd_assigned_featured_boats .") and";
 		
 		$query_sql = rtrim($query_sql, ",");
         $query_form = rtrim($query_form, ",");
@@ -7408,6 +7424,7 @@ class Yachtclass_Child extends Yachtclass{
 			$qstring = "?lnmin=" . $lnmin . "&lnmax=" . $lnmax . "&prmin=" . $prmin . "&prmax=" . $prmax . "&categoryid=" . $categoryid. "&owned=" . $owned. "&sp_typeid=" . $sp_typeid. "&similaryacht_type_filter=" . $similaryacht_type_filter . "&freshstart=1&rawtemplate=0";
 			
 			$formpostar = json_decode($this->get_advanced_search_post_url());
+			/*
 			if ($owned == 2){
 				if ($sp_typeid == 2){
 					$all_url = $formpostar->post_url2_catamaran;
@@ -7421,6 +7438,8 @@ class Yachtclass_Child extends Yachtclass{
 					$all_url = $formpostar->post_url_yacht;
 				}
 			}
+			*/
+			$all_url = $cm->get_page_url(2, "page");
 			
 			$returntext = '
 			<div class="similaryacht clearfixmain">
@@ -7497,7 +7516,7 @@ class Yachtclass_Child extends Yachtclass{
 					$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->catamaran_id .") and";
 				}elseif ($sp_typeid == 2){
 					$query_form .= " tbl_yacht_type_assign as d,";
-					$query_where .= " a.id = d.yacht_id and d.type_id IN (". $this->catamaran_id .") and";
+					$query_where .= " a.id = d.yacht_id and (d.type_id IN (". $this->catamaran_id .")  OR a.feed_id = '". $this->catamaran_feed_id2 ."') and";
 				}
 				
 				$query_where .= "  a.ownboat = 1 and";
@@ -7507,7 +7526,7 @@ class Yachtclass_Child extends Yachtclass{
 				if ($sp_typeid == 1){
 					$query_where .= "  a.feed_id = '". $this->yacht_feed_id."' and";
 				}elseif ($sp_typeid == 2){
-					$query_where .= "  a.feed_id = '". $this->catamaran_feed_id."' and";
+					$query_where .= "  a.feed_id IN = '". $this->catamaran_feed_id."' and";
 				}
 			}
 		}else{
@@ -7516,7 +7535,7 @@ class Yachtclass_Child extends Yachtclass{
 				$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->yacht_feed_id."') and";
 			}elseif ($sp_typeid == 2){
 				$query_form .= " tbl_yacht_type_assign as d,";
-				$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->catamaran_feed_id."') and";
+				$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->catamaran_feed_id."','". $this->catamaran_feed_id2 ."')) and";
 			}
 		}
 		
