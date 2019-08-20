@@ -16,9 +16,8 @@ class Yachtclass {
 	public $motoryacht_id = 26;
 	public $yacht_feed_id = "iqfvvoqavhlo";
 	public $catamaran_feed_id = "90sxtvkwmutb";
-	//public $catamaran_feed_id2 = "9695221a8b884112b1a4dd39fbaf3c";
-	public $catamaran_feed_id2 = "9695221a8b884112b1a4dd39fbaf3";
-        public $mostviewdno = 30;
+	public $catamaran_feed_id2 = "9695221a8b884112b1a4dd39fbaf3c";
+	public $mostviewdno = 30;
 	public $mostviewdday = 30;
     //end
 
@@ -8728,7 +8727,19 @@ class Yachtclass {
 			}
 		}else{
 			$manufacturer_name = $cm->get_common_field_name('tbl_manufacturer', 'name', $manufacturer_id);
-			$presented_by = '<p>Need more information? Please contact your <strong>'. $manufacturer_name .'</strong> expert</p><hr>';
+			$feed_id = $cm->get_common_field_name('tbl_yacht', 'feed_id', $yacht_id);
+			
+			if ($feed_id == $this->catamaran_feed_id){
+				$manufacturer_name_display = $manufacturer_name . " Catamarans";
+			}else{
+				if (strpos($manufacturer_name, 'Yachts') !== false){
+					$manufacturer_name_display = $manufacturer_name;
+				}else{
+					$manufacturer_name_display = $manufacturer_name .' Yachts';
+				}
+			}
+			
+			$presented_by = '<p>Need more information? Please contact your <strong>'. $manufacturer_name_display .'</strong> expert</p><hr>';
 		}
 		
 		
@@ -10041,6 +10052,7 @@ class Yachtclass {
 		//some default css
 		$defaultheading = ' font-size: 16px; font-family: arial; color:#4c4c4c; text-align:left; text-decoration: none; text-transform:uppercase;';
         $defaultfontcss = ' font-size: 13px; font-family: arial; color:#4c4c4c; text-align:left; text-decoration: none;';
+		$defaultfontcss2 = ' font-size: 14px; font-weight:bold; font-family: arial; color:#4c4c4c; text-align:left; text-decoration: none;';
 		
 		$tabletopspace = 'margin-top: 30px;';
 		$tabletopspace2 = 'margin-top: 15px;';
@@ -10162,21 +10174,21 @@ class Yachtclass {
 				<td width="" align="center" valign="top" style="padding: 15px 0px;"><img src="'. $cm->site_url .'/images/logo-color.png" alt="" style="width:150px;"></td>
 			</tr>
 			<tr>
-				<td align="center" valign="top" style="'. $defaultfontcss .'">'. $comoany_address .'</td>
+				<td align="center" valign="top" style="'. $defaultfontcss2 .'">'. $comoany_address .'</td>
 			</tr>
 			';
 			
 			if ($member_image != ""){
 				$member_image_text .= '
 				<tr>
-					<td width="" align="center" valign="top" style="padding-bottom: 15px;"><img src="'. $cm->site_url .'/userphoto/big/'. $member_image .'" alt="" style="width:150px;"></td>
+					<td width="" align="center" valign="top" style="padding-bottom: 15px;"><img src="'. $cm->site_url .'/userphoto/big/'. $member_image .'" alt="" style="width:100%"></td>
 				</tr>
 				';
 			}
 		}else{
 			$member_image_text .= '
 			<tr>
-				<td width="" align="center" valign="top" style="padding-bottom: 15px;"><img src="'. $cm->site_url .'/images/logo-color.png" alt="" style="width:150px;"></td>
+				<td width="" align="center" valign="top" style="padding-bottom: 15px;"><img src="'. $cm->site_url .'/images/logo-color.png" alt="" style="width:100%"></td>
 			</tr>
 			';
 		}
@@ -10198,10 +10210,13 @@ class Yachtclass {
 				<td style="width:100%; '. $tdheadingonly .'" align="left">Gallery</td>
 			</tr>
 		</table>
-        <div style="width: 100%;'. $tabletopspace2 .'">';
+        <div style="width: 100%;'. $tabletopspace2 .'">
+		';
+		
         foreach($resultp as $rowp){
             $imgpath  = $rowp['imgpath'];
-            $photo_txt .= '<div style="float:left; padding: 0px 5px 10px 5px; margin: 0px; width: 330px; height: 221px;"><img src="'. $cm->site_url .'/yachtimage/'. $listing_no .'/big/'. $imgpath .'" alt="" /></div>';			
+            //$photo_txt .= '<div style="float:left; padding: 0px 5px 10px 5px; margin: 0px; width: 330px; height: 221px;"><img src="'. $cm->site_url .'/yachtimage/'. $listing_no .'/big/'. $imgpath .'" alt="" /></div>';
+			$photo_txt .= '<div style="float:left; padding: 0px 5px 10px 5px; margin: 0px; width: 32%"><img style="width:100%;" src="'. $cm->site_url .'/yachtimage/'. $listing_no .'/big/'. $imgpath .'" alt="" /></div>';		
         }
         $photo_txt .= '</div>'; 
 		
@@ -10293,7 +10308,7 @@ class Yachtclass {
 				 		'. $member_image_text .'
 						
 						<tr>
-							<td align="center" valign="top" style="'. $defaultfontcss .'">'. $broker_address_full .'</td>
+							<td align="center" valign="top" style="'. $defaultfontcss2 .'">'. $broker_address_full .'</td>
 						</tr>
 						
 						'. $company_info_text .'
@@ -10568,6 +10583,44 @@ class Yachtclass {
 
 		//echo $returntxt;
 		//exit;
+		
+		
+		//new code
+		$returntxt = '
+		<!DOCTYPE html>
+		<html>
+		<head>
+		<title>Print Details</title>
+		<style>
+		body
+		{
+			width:100%;
+			margin:0;
+			padding:0;
+			font-family: Arial
+			font-size: 13px;
+		}
+		
+		@page {
+		 margin: 0px 10px;
+		}
+		
+		.printbutton{text-align:center; margin: 5px 5px 10px 5px;}
+		.printbutton a{background-color:#003868;color:#fff; font-family: Arial; font-size: 14px; border:none; text-decoration:none;text-transform:uppercase; padding:6px 18px;cursor: pointer; width:100%; max-width: 100px;}
+		@media print {
+			.printbutton {display: none;}
+		}
+		</style>
+		<body>
+		<div class="printbutton"><a href="javascript:print();">Print</a></div>
+		<table border="0" style="width:90%; max-width: 900px;" align="center" cellspacing="0" cellpadding="0">
+			<tr><td>'. $returntxt .'</td></tr>
+		</table>
+		</body>
+		</html>
+		';
+		//end
+		
 		$return_ar = array(
 			"headertext" => $headertext,
 			"pdffilename" => $pdffilename,
@@ -13700,6 +13753,8 @@ class Yachtclass {
 			global $cm;
 			$lno = round($_REQUEST['lno'], 0);
 			$result = $this->check_yacht_with_return($lno, 1);
+			
+			/*
 			//$html = $this->create_yacht_pdf_html($result);
 			
 			$pdf_content_ar = $this->create_yacht_pdf_html($result);
@@ -13712,6 +13767,14 @@ class Yachtclass {
 			//$filename = "Yacht-" . $lno . ".pdf";
 			$cm->generate_pdf('', $html, $headertext, $pdffilename, 'I');
 			exit;
+			*/
+			
+			$pdf_content_ar = $this->create_yacht_pdf_html($result);
+			$pdf_content_ar = json_decode($pdf_content_ar);
+			$html = $pdf_content_ar->returntxt;
+			echo $html;
+			exit;
+			
 		}
 	}
 	
