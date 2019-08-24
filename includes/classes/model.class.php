@@ -1345,6 +1345,16 @@ class Modelclass {
 				$cat_name = $cm->get_common_field_name('tbl_model_category', 'name', $category_id);
 				
 				$modelcontent .= $this->display_main_slider($id);
+				
+				if ($description != ""){
+					$modelcontent .= '
+					<div class="container pt-5 pb-3-new clearfixmain">
+						<h2 class="font-normal t-center mb-3">'. $model_name .'</h2>
+					'. $description .'
+					</div>
+					';
+				}
+				
 				$modelcontent .= $this->display_exterior_interior_image($id, 2);
 				$modelcontent .= $this->display_exterior_interior_image($id, 3);
 				
@@ -1551,16 +1561,7 @@ class Modelclass {
 				</div>
 				';
 				
-				$modelcontent .= $this->display_layout_image($id);	
-				
-				if ($description != ""){
-					$modelcontent .= '
-					<div class="container pt-5 pb-3-new clearfixmain">
-						<h2 class="font-normal t-center mb-3">'. $model_name .'</h2>
-					'. $description .'
-					</div>
-					';
-				}
+				$modelcontent .= $this->display_layout_image($id);
 				
 				$model_content_ar = array(
 					"modelcontent" => $modelcontent,					
