@@ -10564,8 +10564,7 @@ class Yachtclass {
 		';
 		
 		$returntxt .= $photo_txt;
-
-
+		
 		if ($lat_val == 0 AND $lon_val == 0){
 			//--
 		}else{
@@ -10619,13 +10618,13 @@ class Yachtclass {
 		</body>
 		</html>
 		';
-		//end
+		//end		
 		
 		$return_ar = array(
 			"headertext" => $headertext,
 			"pdffilename" => $pdffilename,
 			"returntxt" => $returntxt
-		);
+		);	
 		return json_encode($return_ar);
 				
 	}
@@ -13753,7 +13752,7 @@ class Yachtclass {
 			global $cm;
 			$lno = round($_REQUEST['lno'], 0);
 			$result = $this->check_yacht_with_return($lno, 1);
-			
+						
 			/*
 			//$html = $this->create_yacht_pdf_html($result);
 			
@@ -13769,7 +13768,7 @@ class Yachtclass {
 			exit;
 			*/
 			
-			$pdf_content_ar = $this->create_yacht_pdf_html($result);
+			$pdf_content_ar = $this->create_yacht_pdf_html($result);			
 			$pdf_content_ar = json_decode($pdf_content_ar);
 			$html = $pdf_content_ar->returntxt;
 			echo $html;
