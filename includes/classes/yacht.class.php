@@ -8015,7 +8015,7 @@ class Yachtclass {
         return $result;
     }
 	
-	public function display_yacht_slider_full($yacht_id){
+	public function display_yacht_slider_full_old($yacht_id){
         global $db, $cm;
         $returntxt = '';
 		$gallerylink = 0;
@@ -8066,6 +8066,72 @@ class Yachtclass {
                 </ul>
 				<a class="prev" href="#" title="Previous">Prev</a><a class="next" href="#" title="Next">Next</a>
 				<div id="pager" class="pager"></div>
+            </div>
+            ';
+			
+			/*if ($gallerylink == 1){
+				if ($cm->isMobileDevice()){
+					$returntxt .= '
+					<div class="clearfixmain">
+						<a class="button buttonfullcenter fc-slick-pop-open" href="javascript:void(0);">View Gallery</a>
+					</div>
+					';
+				}
+			}*/
+        }
+        return $returntxt;
+    }
+	
+	public function display_yacht_slider_full($yacht_id){
+        global $db, $cm;
+        $returntxt = '';
+		$gallerylink = 0;
+
+        $sql = "select * from tbl_yacht_photo where yacht_id = '". $yacht_id ."' and imgpath != '' and status_id = 1 order by rank";
+        $result = $db->fetch_all_array($sql);
+        $found = count($result);
+        if ($found > 0){
+			if ($found > 1){
+				$gallerylink = 1;
+			}
+			$listing_no = $this->get_yacht_no($yacht_id);
+			$yacht_title = $this->yacht_name($yacht_id);
+            $status_id = $cm->get_common_field_name('tbl_yacht', 'status_id', $yacht_id);
+			$custom_label_id = $cm->get_common_field_name('tbl_yacht', 'custom_label_id', $yacht_id);
+			$custom_label_txt = '';
+			$custom_label_extra_class = '';
+            if ($status_id == 3){
+				$custom_label_txt = '<div class="sold"><div>Sold</div></div>';
+            }else{
+				if ($custom_label_id > 0){
+					$custom_label_color = $cm->get_table_fields("tbl_custom_label_options", "custom_label_bgcolor, custom_label_textcolor", $custom_label_id, "custom_label_id");
+					$custom_label_bgcolor = $custom_label_color[0]["custom_label_bgcolor"];
+					$custom_label_textcolor = $custom_label_color[0]["custom_label_textcolor"];
+					
+					$custom_label_extra_class = ' style="background-color: #'. $custom_label_bgcolor .'; color: #'. $custom_label_textcolor .';"';
+					$clabel = $this->get_custom_label_name($custom_label_id);
+					$custom_label_txt = '<div class="custom_label_div"'. $custom_label_extra_class .'><div>'. $clabel .'</div></div>';
+				}
+			}
+
+            $returntxt .= '
+            <div class="product-slider-wrap clearfixmain">
+                '. $custom_label_txt .'
+                <ul class="product-slider">
+                ';
+            foreach($result as $row){
+                $im_title = $row['im_title'];
+                $im_descriptions = $row['im_descriptions'];
+                $imgpath = $row['imgpath'];
+				if ($im_title == ""){
+					$im_title = $yacht_title;
+				}
+                $returntxt .= '<li><a class="fancybox" data-fancybox="gallery" data-caption="'. $im_title .'" href="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'"><img src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/bigger/'. $imgpath .'" title="'. $im_title .'" alt="'. $im_title .'" /></a></li>';
+            }
+
+            $returntxt .= '
+                </ul>
+				<a class="prev" href="#" title="Previous">Prev</a><a class="next" href="#" title="Next">Next</a>
             </div>
             ';
 			
@@ -8209,7 +8275,7 @@ class Yachtclass {
 		 return $slider_ar->returntxt;
 	}
 	
-	public function display_yacht_slider_slick_pop($yacht_id){
+	public function display_yacht_slider_slick_pop_old($yacht_id){
 		 global $db, $cm;		 
 		 $gallery_text = '';
 		 
@@ -8266,6 +8332,62 @@ class Yachtclass {
 		 $returnar = array(
 		 	"gallery_text" => $gallery_text,
 			"returntxt" => $returntxt
+		 );
+		 
+		 return json_encode($returnar);
+	}
+	
+	public function display_yacht_slider_slick_pop($yacht_id){
+		 global $db, $cm;		 
+		 $gallery_text = '';
+		 
+		 $slider_ar = json_decode($this->display_yacht_slider_slick($yacht_id));
+		 $found = $slider_ar->found;
+		 $returntxt = $slider_ar->returntxt;
+		 
+		 if ($found > 1){
+			 $gallery_4pic = $slider_ar->gallery_4pic;
+			 $listing_no = $slider_ar->listing_no;
+			 
+			$gallery_text = '
+			<section class="section2 clearfixmain">
+				<h3 class="singlelinebottom30">Gallery</h3>
+				<div class="twocolumnlist clearfixmain">
+				<ul> 
+			';
+			
+			foreach($gallery_4pic as $gallery_4pic_row){
+				$gallery_text .= '<li><a class="fancybox-externallink" href="javascript:void(0);"><img alt="Open Gallery" src="'. $cm->folder_for_seo .'yachtimage/'. $listing_no .'/'. $gallery_4pic_row .'" /></a></li>';
+			}
+			
+			$gallery_text .= ' 
+				</ul>
+				</div>        
+			</section>
+			 ';
+			 
+			$gallery_text .= '
+			<script>
+				$(document).ready(function(){
+					$(".fancybox-externallink").click(function(){
+						$.fancybox.open( $(".fancybox"), {
+							transitionEffect: "fade",
+							loop: true,
+							hash: false,
+							thumbs : {
+								autoStart : true,
+								axis      : "x"
+							}
+						});
+					});
+				});
+			</script>
+			';
+		 }
+		 
+		 $returnar = array(
+		 	"gallery_text" => $gallery_text,
+			"returntxt" => ''
 		 );
 		 
 		 return json_encode($returnar);
