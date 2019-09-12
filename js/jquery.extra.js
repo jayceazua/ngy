@@ -131,6 +131,12 @@ $(document).ready(function(){
 	/*Product Gallery*/
 	$('.fancybox').fancybox({
 		transitionEffect: "fade",
+		loop: true,
+		hash: false,
+		thumbs : {
+        	autoStart : true,
+			axis      : 'x'
+    	}
 	});
 	
 	
