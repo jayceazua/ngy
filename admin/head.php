@@ -54,8 +54,6 @@ if ($fullpage != "y"){
 	$link_option_ar["Inventory"][] = array('sep', '');
 	$link_option_ar["Inventory"][] = array('View / Edit Model', 'mod_manufacturer.php');
 	$link_option_ar["Inventory"][] = array('Model Search Fields', 'model-search-fields.php');
-	$link_option_ar["Inventory"][] = array('sep', '');
-	$link_option_ar["Inventory"][] = array('Useful Stats', 'useful-stats.php');
 	
 	$link_option_ar["Page Slider Section"][] = "leftslidericon";
 	$link_option_ar["Page Slider Section"][] = array('Add Slider Category', 'add_slider_category.php');
