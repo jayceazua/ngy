@@ -110,9 +110,6 @@ echo $frontend->display_formsubmit_popup();
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.menu.settings.js"></script>
 
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/html5.js"></script>
-<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/waypoints.min.js"></script>
-<script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.counterup.js"></script>
-
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.ui.touch-punch.min.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.timepicker.min.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.cookie.js"></script>

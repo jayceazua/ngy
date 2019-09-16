@@ -1431,6 +1431,8 @@ class Commonclass {
 		if ($template == 1){
 			//$returntext = '<li><a title="Facebook Share" href="http://www.facebook.com/sharer.php?s=100&p[title]='. urlencode($title) .'&p[summary]='. urlencode($content) .'&p[url]='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/facebook.png" alt=""></a></li>';
 			$returntext = '<li><a title="Facebook Share" href="https://www.facebook.com/sharer/sharer.php?u='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/facebook.png" alt="Facebook"></a></li>';
+		}elseif ($template == 3){
+			$returntext = '<li><a title="Facebook Share" href="https://www.facebook.com/sharer/sharer.php?u='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-facebook-f fa-fw"></i><span class="com_none">Facebook</span></a></li>';
 		}else{
 			//$returntext = '<a title="Facebook Share" href="http://www.facebook.com/sharer.php?s=100&p[title]='. urlencode($title) .'&p[summary]='. urlencode($content) .'&p[url]='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-facebook-square"></i>';
 			$returntext = '<a title="Facebook Share" href="https://www.facebook.com/sharer/sharer.php?u='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-facebook-square"></i><div class="com_none">Facebook</div></a>';
@@ -1450,6 +1452,8 @@ class Commonclass {
 		
 		if ($template == 1){
 			 $returntext = '<li><a title="Google + Share" href="https://plusone.google.com/_/+1/confirm?hl=en&url='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/googleplus.png" alt="Google Plus"></a></li>';
+		}elseif ($template == 3){
+			$returntext = '<li><a title=""Google + Share" href="https://plusone.google.com/_/+1/confirm?hl=en&url='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-google-plus-g fa-fw"></i><span class="com_none">Google Plus</span></a></li>';
 		}else{
 			 $returntext = '<a title="Google + Share" href="https://plusone.google.com/_/+1/confirm?hl=en&url='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-google-plus-g"></i><div class="com_none">Google Plus</div></a>';
 		}
@@ -1475,6 +1479,8 @@ class Commonclass {
 		
 		if ($template == 1){
 			$returntext = '<li><a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/twitter.png" alt="Twitter"></a></li>';
+		}elseif ($template == 3){
+			$returntext = '<li><a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'" target="_blank"><i class="fab fa-twitter fa-fw"></i><span class="com_none">Twitter</span></a></li>';
 		}else{
 			$returntext = '<a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'" target="_blank"><i class="fab fa-twitter"></i><div class="com_none">Twitter</div></a>';
 		}
@@ -1500,6 +1506,8 @@ class Commonclass {
 		
 		if ($template == 1){
 			$returntext = '<li><a title="Linkedin Post" href="https://www.linkedin.com/shareArticle?mini=true&url='. urlencode($fullurl) .'&title='. urlencode($title) .'&summary='. urlencode($content) .'&source='. $this->sitename .'" target="_blank"><img src="'. $this->folder_for_seo .'images/linkden.png" alt="Linkedin"></a></li>';
+		}elseif ($template == 3){
+			$returntext = '<li><a title="Linkedin Post" href="https://www.linkedin.com/shareArticle?mini=true&url='. urlencode($fullurl) .'&title='. urlencode($title) .'&summary='. urlencode($content) .'&source='. $this->sitename .'" target="_blank"><i class="fab fa-linkedin-in fa-fw"></i><span class="com_none">Linkedin</span></a></li>';
 		}else{
 			$returntext = '<a title="Linkedin Post" href="https://www.linkedin.com/shareArticle?mini=true&url='. urlencode($fullurl) .'&title='. urlencode($title) .'&summary='. urlencode($content) .'&source='. $this->sitename .'" target="_blank"><i class="fab fa-linkedin-in"></i><div class="com_none">Linkedin</div></a>';
 		}

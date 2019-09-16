@@ -170,6 +170,13 @@ function display_featured_blog_shortcode($argu = array()){
 }
 $shortcodeclass->add_shortcode( 'fcfeaturedblog', 'display_featured_blog_shortcode' );
 
+//Latest News and Event
+function display_latest_news_shortcode($argu = array()){
+	global $blogclass;
+	return $blogclass->display_latest_news($argu);
+}
+$shortcodeclass->add_shortcode( 'fclatestnewsevents', 'display_latest_news_shortcode' );
+
 //Display Button
 function display_button_shortcode($argu = array()){
 	global $frontend;	
@@ -408,6 +415,13 @@ function display_our_team_homelist_shortcode($argu = array()){
 }
 $shortcodeclass->add_shortcode( 'homelistfcourteam', 'display_our_team_homelist_shortcode' );
 
+//our team random - innder page
+function display_our_team_random_shortcode($argu = array()){
+	global $yachtchildclass;
+	return $yachtchildclass->display_our_team_random($argu);
+}
+$shortcodeclass->add_shortcode( 'fcourteamrandom', 'display_our_team_random_shortcode' );
+
 //broker individual profile
 function display_broker_profile_shortcode($argu = array()){
 	global $yachtchildclass;
@@ -529,6 +543,13 @@ function faq_list_shortcode($argu = array()){
 	return $retval->doc;
 }
 $shortcodeclass->add_shortcode( 'fcfaqlist', 'faq_list_shortcode' );
+
+//FAQ list
+function useful_stats_shortcode($argu = array()){
+	global $frontend;
+	return $frontend->display_useful_stats($argu);
+}
+$shortcodeclass->add_shortcode( 'fcusefulstats', 'useful_stats_shortcode' );
 
 //some initialized function
 if(($_REQUEST['fcapi'] != "")){

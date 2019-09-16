@@ -589,6 +589,8 @@ class Frontendclass {
 				
 				if ($submenusection_count > 0){
 					$returntext .= '<li class="megamenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_special_menu(array("mnid" => $mm_id, "submenuclass" => "", "submenusection" => $submenusection, "menutemplate" => 1)) .'</li>';
+				}elseif ($mm_id == 22){
+					$returntext .= '<li class="megamenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_special_menu_2(array("mnid" => $mm_id, "menutemplate" => 1)) .'</li>';
 				}else{
 					$returntext .= '<li class="normalmenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_all_menu(array("mnid" => $mm_id, "submenuclass" => "sub-menu", "last_col" => $last_col, "connected_manufacturer_id" => $connected_manufacturer_id, "connected_group_id" => $connected_group_id)) .'</li>';
 				}	
@@ -1108,6 +1110,117 @@ class Frontendclass {
 			}
 		}
 		//end
+		
+		return $returntext;
+	}
+	
+	public function get_special_menu_2($param = array()){
+		global $db, $cm, $yachtchildclass;
+		$returntext = '';
+		$mnid = $param["mnid"];
+		$menutemplate = $param["menutemplate"];
+		
+		//collect child menu
+		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where parent_id = '". $mnid ."' and status = 'y' order by rank";
+		$ss_result = $db->fetch_all_array($ss_sql);
+		$ss_found = count($ss_result);
+		//end
+		
+		$menulimit = 0;
+		$returntext .= '
+		<ul>
+			<li><div style="width:100%; max-width: 1366px; margin:0 auto;">
+				<div class="cols_menu2">
+				<div class="cols1">
+				<h3>About NGY</h3>
+				<div class="cols3-padded clearfixmain">
+				<ol>
+				';
+		
+		foreach($ss_result as $ss_row){
+			$ss_id = $ss_row['id'];
+			$ss_name = $ss_row['name'];				
+			$ss_open_new_window = $ss_row['new_window'];
+			$ss_extraclass = $ss_row['extraclass'];
+			$ss_lnk_url = $cm->get_page_url($ss_id, "page");
+			
+			$ss_link_target = "";
+			if ($ss_open_new_window == "y"){ $ss_link_target = ' target = "_blank"'; }
+			
+			$returntext .= '<li><a href="'. $ss_lnk_url .'"'. $ss_link_target .'>'. $ss_extraclass_text . $ss_name .'</a></li>';
+		}		
+				
+		$returntext .= '
+						</ol>
+						</div>
+					</div>
+				</div>
+				
+				<div class="cols_menu2_after">
+					'. $this->top_menu_section_news() .'
+				</div>
+			</div>
+			</li>
+		</ul>
+		';
+		
+		return $returntext;
+	}
+	
+	public function top_menu_section_news(){
+		global $db, $cm;
+		$returntext = '';
+		
+		$sorting_sql = "reg_date desc, id desc";
+		
+		$query_sql = "select *,";
+		$query_form = " from tbl_blog,";
+		$query_where = " where";
+		
+		$query_where .= " status_id = 1 and";
+		
+		$query_sql = rtrim($query_sql, ",");
+		$query_form = rtrim($query_form, ",");
+		$query_where = rtrim($query_where, "and");
+		
+		$sql = $query_sql . $query_form . $query_where;
+		$sql = $sql." order by ". $sorting_sql ." limit 0,2";
+		
+		$result = $db->fetch_all_array($sql);
+		$found = count($result);
+		
+		if ($found > 0){
+			global $blogclass;
+			$news_url = $blogclass->get_blog_url(1, 0);
+			$returntext .= '
+			<div class="cols1"><h3>News &amp; Events</h3></div>
+			<div class="clearfixmain">
+			';
+			
+			foreach($result as $row){
+				foreach($row AS $key => $val){
+					${$key} = $cm->filtertextdisplay($val);
+				}
+				
+				if ($blog_image == ""){ $blog_image = "no.jpg"; }
+				$details_url = $cm->get_page_url($slug, "blog");
+				
+				$returntext .= '
+				<div class="cols3">
+					<div class="menuboatimg clearfixmain"><a class="imgbox" href="'. $details_url .'"><img src="'. $cm->folder_for_seo .'blogimage/thumb/'. $blog_image .'" alt="'. $name .'"></a></div>
+					<a href="'. $details_url .'">'. $name .'</a>
+					<a href="'. $details_url .'" class="button">Read More</a>
+				</div>
+				';
+			}
+			
+			$returntext .= '
+			<div class="cols3">
+				<div class="menuboatimg clearfixmain"><a class="imgbox" href="'. $news_url .'"><img src="'. $cm->folder_for_seo .'blogimage/thumb/see-more.png" alt="See More"></a></div>
+			</div>
+			</div>
+			';
+		}
 		
 		return $returntext;
 	}
@@ -1806,6 +1919,75 @@ class Frontendclass {
 					  pauseOnHover: true,
 					  arrows:false,
 					});	
+				});
+				</script>
+				';
+			}
+		}elseif ($template == 3){
+			$query_sql = "select *,";
+			$query_form = " from tbl_testimonial,";
+			$query_where = " where";
+			
+			$query_where .= " status_id = 1 and";
+			$query_sql = rtrim($query_sql, ",");
+			$query_form = rtrim($query_form, ",");
+			$query_where = rtrim($query_where, "and");
+			
+			$sql = $query_sql . $query_form . $query_where;
+			$sql = $sql." order by reg_date desc";
+			$result = $db->fetch_all_array($sql);
+			$found = count($result);
+			
+			if ($found > 0){
+				$returntext .= '
+				<div class="clearfixmain ng-padding ng-testimonialbg">
+					<div class="container clearfixmain">
+						<h1 class="ng-h1 uppercase mb-2"><span>WHAT OUR CLIENTS SAY</span></h1>
+						<h2 class="ng-h3 uppercase white">Read some of our reviews Below</h2>
+						<div class="ng-testimonial owl-carousel">
+				';
+				
+				foreach($result as $row){
+					foreach($row AS $key => $val){
+						${$key} = $cm->filtertextdisplay(($val));
+					}
+					
+					$rating_text = '';
+					$full_rating = $rating;
+					$empty_rating = 5 - $rating;
+					
+					for ($k = 1; $k <= $full_rating; $k++){
+						$rating_text .= '<span class="fa fa-star checked"><span class="com_none">star</span></span>';
+					}
+					for ($k = 1; $k <= $empty_rating; $k++){
+						$rating_text .= '<span class="fa fa-star"><span class="com_none">star</span></span>';
+					}
+					
+					
+					$returntext .= '
+					<div class="item">
+						<p class="ng-testimonial-author">'. $name .'</p>
+						<p>'. $rating_text .'</p>
+						<div class="white ng-text t-justify">'. $description .'</div>
+					</div>
+					';
+				}
+				
+				$returntext .= '
+						</div>
+					</div>
+				</div>
+				';
+				
+				$returntext .= '
+				<script>
+				$(document).ready(function(){
+					var owl = $(".ng-testimonial");
+					  owl.owlCarousel({
+						margin: 10,
+						loop: true,
+						items: 1
+					  });
 				});
 				</script>
 				';
@@ -13209,6 +13391,89 @@ class Frontendclass {
 				});
 			})
 		</script> 
+		';
+		
+		return $returntext;
+	}
+	
+	//useful stats
+	public function get_useful_stats($id){
+		global $db, $cm;
+		$sql = "select * from tbl_stats where id = '". $id ."' and status_id = 1 order by rank";
+		$result = $db->fetch_all_array($sql);
+		$row = $result[0];
+		return json_encode($row);
+	}
+	
+	public function display_useful_stats($argu = array()){
+		global $cm;
+		
+		//stat 1
+		$stat1 = json_decode($this->get_useful_stats(1));
+		$stat1_min_value = $stat1->min_value;
+		$stat1_max_value = $stat1->max_value;
+		$stat1_cell_percent = ($stat1_min_value * 100) / $stat1_max_value;
+		$border_right_class1 = ' progress-bar-status-border';
+		if ($stat1_cell_percent >= 100){$border_right_class1 = '';}
+		//end
+		
+		//stat 2
+		$stat2 = json_decode($this->get_useful_stats(2));
+		$stat2_min_value = $stat2->min_value;
+		$stat2_max_value = $stat2->max_value;
+		$stat2_cell_percent = ($stat2_min_value * 100) / $stat2_max_value;
+		$border_right_class2 = ' progress-bar-status-border';
+		if ($stat2_cell_percent >= 100){$border_right_class2 = '';}
+		//end
+		
+		//stat 3
+		$stat3 = json_decode($this->get_useful_stats(3));
+		$stat3_min_value = $stat3->min_value;
+		$stat3_max_value = $stat3->max_value;
+		$stat3_cell_percent = ($stat3_min_value * 100) / $stat3_max_value;
+		$border_right_class3 = ' progress-bar-status-border';
+		if ($stat3_cell_percent >= 100){$border_right_class3 = '';}
+		//end
+
+	
+		$returntext .= '
+		<ul class="ng-stats">
+			<li>
+				<h3><span class="large-number numbercounter">'. $cm->format_price($stat1_min_value, 0) .'</span>
+				Feet Of Yachts Sold |<span class="white"> As Of Today</span></h3>
+				<p>Stern to Bow, all the yachts we sold would stretchto almost 10 Football fields and growing!</p>
+				<div class="progress-bar-container">
+					<div class="progress-bar-base">
+						<div class="progress-bar-status'. $border_right_class1 .' colcounter" v="'. $stat1_cell_percent .'" style="width:0px;"></div>
+					</div>
+					<span class="floatleft">0</span> <span class="floatright">'. $cm->format_price($stat1_max_value, 0) .'</span>
+				</div>
+			</li>
+			
+			<li>
+            	<h3><span class="large-number numbercounter">'. $cm->format_price($stat2_min_value, 0) .'</span>
+                Sales Call |<span class="white"> Per Day</span></h3>
+                <p>On average per day between our customers and industry network. We stay connected to succeed.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-base">
+                        <div class="progress-bar-status'. $border_right_class2 .' colcounter" v="'. $stat2_cell_percent .'" style="width: 0px"></div>
+                    </div>
+                    <span class="floatleft">0</span> <span class="floatright">'. $cm->format_price($stat2_max_value, 0) .'</span>
+                </div>
+            </li>
+			
+			<li>
+            	<h3><span class="large-number numbercounter">'. $cm->format_price($stat3_min_value, 0) .'</span>
+                Yachts Sold |<span class="white"> Worldwide</span></h3>
+                <p>Our Marketing and network focus on worldwid exposure for faster sales wherever the market is best.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-base">
+                        <div class="progress-bar-status'. $border_right_class3 .' colcounter" v="'. $stat3_cell_percent .'" style="width: 0px"></div>
+                    </div>
+                    <span class="floatleft">0</span> <span class="floatright">'. $cm->format_price($stat3_max_value, 0) .'</span>
+                </div>
+            </li>
+		</ul>
 		';
 		
 		return $returntext;
