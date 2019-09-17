@@ -589,7 +589,7 @@ class Frontendclass {
 				
 				if ($submenusection_count > 0){
 					$returntext .= '<li class="megamenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_special_menu(array("mnid" => $mm_id, "submenuclass" => "", "submenusection" => $submenusection, "menutemplate" => 1)) .'</li>';
-				}elseif ($mm_id == 22){
+				}elseif ($mm_id == 22222){
 					$returntext .= '<li class="megamenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_special_menu_2(array("mnid" => $mm_id, "menutemplate" => 1)) .'</li>';
 				}else{
 					$returntext .= '<li class="normalmenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_all_menu(array("mnid" => $mm_id, "submenuclass" => "sub-menu", "last_col" => $last_col, "connected_manufacturer_id" => $connected_manufacturer_id, "connected_group_id" => $connected_group_id)) .'</li>';
