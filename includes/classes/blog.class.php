@@ -862,19 +862,33 @@ class Blogclass {
 	}
 	
 	//blog share button
-	public function blog_share_button($name, $small_description, $fullurl){
+	public function blog_share_button($name, $small_description, $fullurl, $template = 1){
 	  global $cm;
-	  $returntext = '
-	  <div class="social">
-			<ul>  
-				<li class="title">Share: </li>          
-				'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
-				'. $cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
-				'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
-				'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'                                   
-			</ul>
-	  </div>
-	  ';	  
+	  
+	  if ($template == 2){
+		  $returntext = '
+		  <span class="ng-social">Share:
+		  <ul>
+		  	'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
+			'. $cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
+			'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
+			'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 4)) .'
+		  </ul>
+		  </span>
+		  ';
+	  }else{
+		  $returntext = '
+		  <div class="social">
+				<ul>  
+					<li class="title">Share: </li>          
+					'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
+					'. $cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
+					'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
+					'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'                                   
+				</ul>
+		  </div>
+		  ';
+	  }	  	  
 	  return $returntext;
 	}
 	
@@ -1050,6 +1064,9 @@ class Blogclass {
 		$reg_date_d = $cm->display_date($reg_date, 'y', 8);
 		$details_url = $cm->get_page_url($slug, "blog");
 		
+		$categoryarray = $this->blog_category_fields($category_id);
+		$categoryname = $categoryarray->name;
+		
 		if ($template == 1){
 			//display_date
 			$date_text = '';
@@ -1096,6 +1113,26 @@ class Blogclass {
 				</div>
 				<div class="clearfix"></div>			
 			</li>		
+			';
+		}elseif ($template == 4){
+			$small_description = $cm->fc_word_count($small_description, 200);
+			$returntext .= '
+			<li>
+				<div class="ng-news-flexdiv">
+					<div class="ng-news-left"><img src="'. $cm->folder_for_seo .'blogimage/thumb/'. $blog_image .'" title="'. $name .'" alt="'. $name .'"></div>
+					<div class="ng-news-right">
+						<div class="ng-news-top">
+							<h3>'. $name .'</h3>
+							<h4>'. $categoryname .'</h4>
+							<p>'. $small_description .'...</p>
+						</div>
+						<div class="ng-news-bottom">
+							<a href="'. $details_url .'" class="ng-button">Read More</a>
+							'. $this->blog_share_button($name, $small_description, $fullurl, 2) .'
+						</div>
+					</div>
+				</div>
+			</li>
 			';
 		}else{
 			//display_date
@@ -1219,6 +1256,52 @@ class Blogclass {
 			</ul>
 			<div class="clearfix"></div>					
 			' . $contauner_end;
+		}	  
+		return $returntext;
+	}
+	
+	//latest news
+	public function display_latest_news($argu = array()){
+		global $db, $cm;
+		$returntext = '';
+		$default_title = "News &amp; Events";
+		
+		$categoryid = round($argu["categoryid"], 0);
+		$limit = round($argu["limit"], 0);
+		
+		if ($limit <= 0){ $limit = 3; }
+		$sorting_sql = "reg_date desc, id desc";
+		
+		$query_sql = "select *,";
+		$query_form = " from tbl_blog,";
+		$query_where = " where";
+		
+		//$query_where .= " category_id IN (1,2) and";
+		
+		$query_where .= " status_id = 1 and";
+		//$query_where .= $date_check_sql;
+		
+		$query_sql = rtrim($query_sql, ",");
+		$query_form = rtrim($query_form, ",");
+		$query_where = rtrim($query_where, "and");
+		
+		$sql = $query_sql . $query_form . $query_where;
+		$sql = $sql." order by ". $sorting_sql ." limit 0, " . $limit;
+
+		$result = $db->fetch_all_array($sql);
+		$found = count($result);
+		
+		if ($found > 0){
+			$news_url = $this->get_blog_url($categoryid, $isevent);
+			$returntext .= '<h1 class="ng-h1 uppercase ml-5"><span>NEWS & EVENTS</span></h1>			
+			<ul class="ng-news-list">
+			';
+			foreach($result as $row){
+				$returntext .= $this->display_box_blog_row($row, 4);
+			}
+			$returntext .= '
+			</ul>
+			';
 		}	  
 		return $returntext;
 	}

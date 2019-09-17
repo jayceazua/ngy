@@ -121,7 +121,7 @@
 	.topmenu ul li{float: none;}
 	.topmenu a{white-space: nowrap}
 	.topmenu ul a{white-space: normal}
-	.topmenu .sm-nowrap > li > a, .topmenu .sm-nowrap > li > :not(ul) a {white-space: nowrap}
+	.topmenu .sm-nowrap > li > a, .topmenu .sm-nowrap > li > :not(ul) a {/*white-space: nowrap*/}
 /* End Don't Change */
 
 	.smallmenu,

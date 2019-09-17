@@ -3091,6 +3091,84 @@ class Yachtclass_Child extends Yachtclass{
 		}		
 		return $returntext;
 	}
+	
+	public function display_our_team_random($argu = array()){
+		global $db, $cm;
+		$returntext = '';
+		$_SESSION["s_locationpage"] = 0;
+		$_SESSION["s_brokerprofilepath"] = $cm->get_page_id_by_slug($cm->format_page_slug());
+		
+		//create sql
+		$query_sql = "select *,";
+		$query_form = " from tbl_user,";
+		$query_where = " where";
+
+		$query_where .= " status_id = 2 and";
+		$query_where .= " front_display = 1 and";
+
+		$query_sql = rtrim($query_sql, ",");
+		$query_form = rtrim($query_form, ",");
+		$query_where = rtrim($query_where, "and");
+
+		$sql = $query_sql . $query_form . $query_where;
+		$sql .= " order by RAND() limit 0, 4";
+		//end
+		
+		$result = $db->fetch_all_array($sql);
+		$found = count($result);
+		
+		if ($found > 0){
+			$collected_page_id = $cm->get_page_id_by_shortcode("[fcourteam");
+		  	$ourteam_url = $cm->get_page_url($collected_page_id, "page");
+			
+			$returntext .= '			
+			<ul class="ng-team-members">
+			';
+			
+			foreach($result as $row){
+				foreach($row AS $key => $val){
+					${$key} = $cm->filtertextdisplay($val);
+				}
+				
+				$profile_url = $cm->get_page_url($id, 'user');
+				$target_path_main = 'userphoto/big/';
+				$member_image = $this->get_user_image($id);				
+				$brokername = $fname .' '. $lname;
+				
+				$title_text = '-';
+				if ($title != ""){
+					$title_text = '<h5>'. $title .'</h5>';
+				}
+				
+				$broker_ad_ar = $this->get_broker_address_array($id);		
+				$address = $broker_ad_ar["address"];
+				$city = $broker_ad_ar["city"];
+				$state = $broker_ad_ar["state"];
+				$state_id = $broker_ad_ar["state_id"];
+				$country_id = $broker_ad_ar["country_id"];
+				$zip = $broker_ad_ar["zip"];
+				$officephone = $broker_ad_ar["phone"]; 
+								
+				$addressfull = $this->com_address_format('', $city, $state, $state_id, $country_id);
+				
+				$imgpath_d = '<img alt="'. $brokername .'" src="'. $cm->folder_for_seo . $target_path_main . $member_image .'" border="0" />';
+				
+				$returntext .= '				
+				<li>
+					'. $imgpath_d .'
+					<h4>'. $brokername . '</h4>
+					'. $title_text .'
+					<h6>'. $addressfull .'</h6>
+				</li>
+				';
+			}
+			
+			$returntext .= '
+			</ul>
+			';
+		}		
+		return $returntext;
+	}
 	//end
 			
 	
