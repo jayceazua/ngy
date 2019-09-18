@@ -3111,7 +3111,7 @@ class Yachtclass_Child extends Yachtclass{
 		$query_where = rtrim($query_where, "and");
 
 		$sql = $query_sql . $query_form . $query_where;
-		$sql .= " order by RAND() limit 0, 4";
+		$sql .= " order by rank";
 		//end
 		
 		$result = $db->fetch_all_array($sql);
@@ -3149,9 +3149,15 @@ class Yachtclass_Child extends Yachtclass{
 				$zip = $broker_ad_ar["zip"];
 				$officephone = $broker_ad_ar["phone"]; 
 								
-				$addressfull = $this->com_address_format('', $city, $state, $state_id, $country_id);
+				$addressfull = $this->com_address_format('', $city, $state, $state_id, $country_id);				
+				$imgpath_d = '<a href="'. $profile_url .'"><img alt="'. $brokername .'" src="'. $cm->folder_for_seo . $target_path_main . $member_image .'" border="0" /></a>';
 				
-				$imgpath_d = '<img alt="'. $brokername .'" src="'. $cm->folder_for_seo . $target_path_main . $member_image .'" border="0" />';
+				if ($phone == ""){
+					$phone = $officephone;
+				}
+				
+				//google tracking
+				$gaeventtracking = $this->google_event_tracking_code('broker', $brokername);
 				
 				$returntext .= '				
 				<li>
@@ -3159,6 +3165,11 @@ class Yachtclass_Child extends Yachtclass{
 					<h4>'. $brokername . '</h4>
 					'. $title_text .'
 					<h6>'. $addressfull .'</h6>
+					<ul class="ng-team-icons">
+						<li><a href="'. $profile_url .'"><img src="'. $cm->folder_for_seo .'images/ng-icon-profile.png" alt="Profile"></a></li>
+						<li><a href="tel:'. $phone .'"><img src="'. $cm->folder_for_seo .'images/ng-icon-phone.png" alt="Phone"></a></li>
+						<li><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $id . '&yid=0" class="contactbroker" data-type="iframe"><img src="'. $cm->folder_for_seo .'images/ng-icon-email.png" alt="Email"></a></li>
+					</ul>
 				</li>
 				';
 			}

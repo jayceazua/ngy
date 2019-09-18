@@ -7496,3 +7496,28 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 	}
 
 }
+
+/* Team Icons Sep 18, 2019 */
+ul.ng-team-icons{
+	margin:6px;
+	padding:0;
+	list-style-type:none;
+	text-align:center;
+	font-size:0;
+}
+ul.ng-team-icons li{
+	margin:4px;
+	padding:0;
+	width:auto;
+	list-style-type:none;
+	display:inline-block;
+	font-size:small;
+}
+ul.ng-team-icons li img{
+	border:0;
+	width:19px;
+	height:19px;
+}
+ul.ng-team-icons li a{
+	display:block;
+}
