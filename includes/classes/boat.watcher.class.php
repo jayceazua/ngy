@@ -1096,7 +1096,7 @@ class Boatwatcherclass {
 	
 	public function run_boat_watcher(){
 		global $db, $cm, $sdeml, $fle;
-		$rowset = 25;
+		$rowset = 100;
 		$current_date = date("Y-m-d");
 		
 		$sql = "select count(*) as ttl from tbl_boat_watcher_broker where schedule_date = '". $current_date ."'";
