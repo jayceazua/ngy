@@ -3166,9 +3166,9 @@ class Yachtclass_Child extends Yachtclass{
 					'. $title_text .'
 					<h6>'. $addressfull .'</h6>
 					<ul class="ng-team-icons">
-						<li><a href="'. $profile_url .'"><img src="'. $cm->folder_for_seo .'images/ng-icon-profile.png" alt="Profile"></a></li>
-						<li><a href="tel:'. $phone .'"><img src="'. $cm->folder_for_seo .'images/ng-icon-phone.png" alt="Phone"></a></li>
-						<li><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $id . '&yid=0" class="contactbroker" data-type="iframe"><img src="'. $cm->folder_for_seo .'images/ng-icon-email.png" alt="Email"></a></li>
+						<li><a href="'. $profile_url .'"><i class="fas fa-user fa-fw"></i><span class="com_none">Profile</span></a></li>
+						<li><a href="tel:'. $phone .'"><i class="fas fa-phone fa-fw"></i><span class="com_none">Phone</span></a></li>
+						<li><a '.$gaeventtracking.' href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $id . '&yid=0" class="contactbroker" data-type="iframe"><i class="fas fa-envelope-open fa-fw"></i><span class="com_none">Email</span></a></li>
 					</ul>
 				</li>
 				';

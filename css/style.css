@@ -7520,4 +7520,13 @@ ul.ng-team-icons li img{
 }
 ul.ng-team-icons li a{
 	display:block;
+	-webkit-border-radius: 50%; 
+	-moz-border-radius: 50%; 
+	border-radius: 50%;
+	text-align:center;
+	color: #18173f;
+	background-color: #2abfd0;
+	width: 30px;
+	height: 30px;
+	line-height:28px;
 }
