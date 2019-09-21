@@ -268,6 +268,13 @@ function display_seller_services_form_shortcode($argu = array()){
 }
 $shortcodeclass->add_shortcode( 'fcsellerservicesform', 'display_seller_services_form_shortcode' );
 
+// We Can Sell Your Yacht form
+function display_we_can_sell_your_yacht_form_shortcode($argu = array()){
+	global $frontend;
+	return $frontend->display_we_can_sell_your_yacht_form($argu);
+}
+$shortcodeclass->add_shortcode( 'fcwecansellyouryachtform', 'display_we_can_sell_your_yacht_form_shortcode' );
+
 //Trade-In Evaluation form
 /*function display_tradein_evaluation_form_shortcode($argu = array()){
 	global $frontend;
@@ -613,6 +620,7 @@ if(($_REQUEST['fcapi'] != "")){
 	$frontend->submit_open_yacht_days_form();
 	$frontend->submit_chartering_your_yacht_form();
 	$frontend->submit_watch_price_form();
+	$frontend->submit_we_can_sell_your_yacht_form();
 	
 	$creditappclass->submit_online_credit_application_form();
 

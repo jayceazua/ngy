@@ -264,6 +264,198 @@ class Boatwatcherclass {
 			}
 			</script>
 			';
+		}elseif ($formtemplate == 2){
+			//Brokerage Service and Buyer Service page
+			
+			//--
+			$datastring = $cm->session_field_boat_watcher();
+			$return_ar = $cm->collect_session_for_form($datastring);
+			
+			foreach($return_ar AS $key => $val){
+				${$key} = $val;
+			}
+			//--			
+			
+			if ($loggedin_member_id > 0){
+				
+				$broker_det = $cm->get_table_fields('tbl_user', 'fname, lname, email', $loggedin_member_id);
+				$broker_det = $broker_det[0];
+				$broker_name = $broker_det["fname"] . " " . $broker_det["lname"];
+				$broker_email = $broker_det["email"];
+				
+				$name_email_text = '
+				<li class="breakeall">
+					Name: <strong>'. $broker_name .'</strong><br>
+					Email: <strong>'. $broker_email .'</strong>
+					<input type="hidden" id="reg_name'. $counter .'" name="reg_name'. $counter .'" value="'. $broker_name .'" />
+					<input type="hidden" id="reg_email'. $counter .'" name="email'. $counter .'" value="'. $broker_email .'" />
+				</li>
+				';
+			}else{
+				$name_email_text = '
+				<label for="reg_name'. $counter .'" class="com_none">Name</label>
+				<input type="text" class="input" id="reg_name'. $counter .'" name="reg_name'. $counter .'" value="'. $reg_name .'" placeholder="Name">
+				<label for="reg_email'. $counter .'" class="com_none">Email</label>
+				<input type="text" class="input" id="reg_email'. $counter .'" name="email'. $counter .'" value="'. $email .'" placeholder="Email">				
+				';
+				
+				$login_register_link_text = '
+				<div class="boatwatchelogin clearfixmain">
+					<a href="'. $cm->get_page_url(0, "login") .'">Log-in</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="'. $cm->get_page_url(0, "register") .'">Register</a>
+				</div>
+				';
+			}
+			
+			$makename = $cm->get_common_field_name('tbl_manufacturer', 'name', $makeid);
+			$start_content = '';
+			
+			$formstart = '
+			<form class="ngactivateform" method="post" action="'. $cm->folder_for_seo .'" id="boatwatcher-ff" name="boatwatcher-ff">
+			<label class="com_none" for="email2b">email2</label>
+			<input type="hidden" value="'. $schedule_days .'" id="schedule_days_old'. $counter .'" name="schedule_days_old'. $counter .'" />
+			<input class="finfo" id="email2b" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="submitboatwatcherform" />
+			';
+			
+			$returntext = '
+			'. $start_content .'
+			'. $formstart . '
+			
+			<ul class="ng-activate-form">
+				<li>
+					<h1 class="ng-h1 uppercase mb-2"><span class="whiteborder">ACTiVATE THE YACHT FINDER TODAY!</span></h1>
+					<h4 class="ng-h4 uppercase white m-0">and keep watch on the yacht market.</h4>
+				</li>
+				
+				<li>
+					<p>Contact Info</p>
+					'. $name_email_text .'
+					<p>Send Alert</p>
+					 <label for="schedule_days'. $counter .'" class="com_none">Send Alert</label>
+					<select name="schedule_days'. $counter .'" id="schedule_days'. $counter .'" class="select">
+					'. $this->get_days_frequency_combo($schedule_days) .'
+					</select>
+				</li>
+				
+				<li>
+					<p>Manufacturer</p>
+					<label for=""keyterm'. $counter .'" class="com_none">Manufacturer’s Name</label><label class="com_none" for="mid'. $counter .'">Mid</label>
+					<input type="hidden" value="'. $makeid .'" id="mid'. $counter .'" name="mid'. $counter .'" />
+					<input type="text" id="keyterm'. $counter .'" class="azax_auto input" name="keyterm'. $counter .'" ckpage="5" counter="'. $counter .'"  value="'. $makename .'" placeholder="Manufacturer Name" autocomplete="off">
+					
+					<div class="ng-spacer"></div>
+					
+					<p>Length Range(ft)</p>
+					<label class="com_none" for="lnmin'. $counter .'">Min</label>
+					<label class="com_none" for="lnmax'. $counter .'">Max</label>						
+					<div class="ng-half ng-first"><input id="lnmin'. $counter .'" name="lnmin'. $counter .'" type="text" value="" class="input" value="'. $lnmin .'" placeholder="Minimum"></div>
+					<div class="ng-half"><input id="lnmax'. $counter .'" name="lnmax'. $counter .'" type="text" value="" class="input" value="'. $lnmax .'" placeholder="Maximum"></div>
+					
+					<div class="ng-spacer"></div>
+					
+					<p>Price Range(USD)</p>
+					<label class="com_none" for="prmin'. $counter .'">Min</label>
+					<label class="com_none" for="prmax'. $counter .'">Max</label>
+					<div class="ng-half ng-first"><input id="prmin'. $counter .'" name="prmin'. $counter .'" type="text" value="'. $prmin .'" class="input" placeholder="Minimum"></div>
+					<div class="ng-half"><input id="prmax'. $counter .'" name="prmax'. $counter .'" type="text" value="'. $prmax .'" class="input" placeholder="Maximum"></div>										
+				</li>
+			</ul>
+			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+			<div class="ng-hr clearfixmain">
+				<div><button type="submit" class="ng-submit" value="Submit">Submit</button></div>
+			</div>
+						
+			<div class="yf-fomrsubmit-result com_none"></div>			
+			</form>
+
+			';
+			
+			$returntext .= '
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$("#boatwatcher-ff").submit(function(event){
+					var all_ok = "y";
+					var setfocus = "n";
+					
+					if (!field_validation_border("reg_name0", 1, 1)){ 
+						all_ok = "n"; 
+						setfocus = set_field_focus(setfocus, "reg_name0");
+					}
+						   
+					if (!field_validation_border("reg_email0", 2, 1)){ 
+						all_ok = "n"; 
+						setfocus = set_field_focus(setfocus, "reg_email0"); 		   
+					}
+					
+					var mid = getNumber_validate_nan($("#mid0").val(), 0);
+					var lnmin = getNumber_validate_nan($("#lnmin0").val(), 0);
+					var lnmax = getNumber_validate_nan($("#lnmax0").val(), 0);
+					var prmin = getNumber_validate_nan($("#prmin0").val(), 0);
+					var prmax = getNumber_validate_nan($("#prmax0").val(), 0);
+										
+					if ((mid == 0) && (lnmin == 0) && (lnmax == 0) && (prmin == 0) && (prmax == 0)){
+						all_ok = "n";
+						open_error_area("ERROR! Please add at least one criteria.");
+					}else{
+						close_error_area();
+					}
+					
+					if (all_ok == "n"){						
+						return false;
+					}
+															
+					//Ajax submit
+					var form = $(this);
+					$.ajax({
+						type: form.attr("method"),
+						url: form.attr("action"),
+						data: form.serialize()
+					}).done(function(data){
+						data = $.parseJSON(data);
+						retmsg = parseInt(data.retmsg);
+						if (retmsg == 1){						
+							$(".yf-fomrsubmit-result").addClass("success");
+							$(".yf-fomrsubmit-result").html("THANK YOU! Record saved successfully.");
+							$(".yf-fomrsubmit-result").removeClass("com_none");
+							
+							$("#mid0").val("");
+							$("#reg_name0").val("");
+							$("#reg_email0").val("");
+							$("#keyterm0").val("");
+							$("#prmin0").val("");
+							$("#prmax0").val("");
+							$("#lnmin0").val("");
+							$("#lnmax0").val("");
+						}else{
+							open_error_area("Captcha ERROR! Please try again.");
+						}
+						grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+					}).fail(function(){
+						open_error_area("ERROR! Please try again.");
+						grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+					});
+					
+					if ($(".boatsearchcol").length > 0){
+						$(document.body).trigger("sticky_kit:recalc");
+					}
+					
+					event.preventDefault();
+
+				});					
+			});
+			
+			function open_error_area(msg){
+				$(".yf-fomrsubmit-result").addClass("error");
+				$(".yf-fomrsubmit-result").html(msg);
+				$(".yf-fomrsubmit-result").removeClass("com_none");
+			}
+			function close_error_area(){
+				$(".yf-fomrsubmit-result").removeClass("error");
+				$(".yf-fomrsubmit-result").html("");
+				$(".yf-fomrsubmit-result").addClass("com_none");
+			}
+			</script>
+			';
 		}else{
 			//Collecting Data
 			$boatwatchercode =  $param["boatwatchercode"];

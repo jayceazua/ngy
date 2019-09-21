@@ -1181,9 +1181,9 @@ class Commonclass {
 	}
 	
 	public function session_field_buyer_services_request(){
-		$datastring = "name,email,phone";
+		$datastring = "fname,lname,email,phone";
 		$datastring .= ",boat_make,boat_model,boat_year,boat_location";
-		$datastring .= ",boat_size,boat_ideal_brand,boat_budget,comments";
+		$datastring .= ",boat_size,boat_ideal_brand,boat_budget_min,boat_budget_max,comments";
 		return $datastring;
 	}
 	
@@ -1221,6 +1221,13 @@ class Commonclass {
 	public function session_field_watch_price(){     
 	  $datastring = "name,email,phone";
 	  return $datastring;
+	}
+	
+	public function session_field_we_can_sell_your_yacht(){
+		$datastring = "wcs_fname,wcs_lname,wcs_email,wcs_phone";
+		$datastring .= ",wcs_boat_make,wcs_boat_model,wcs_boat_year";
+		$datastring .= ",wcs_boat_engines,wcs_boat_hours_on_engines,wcs_boat_location";
+		return $datastring;
 	}
  
 	public function create_session_for_form($datastring, $vl_ar = array()){

@@ -21,14 +21,15 @@ class Leadclass {
 		//"key17" => array("name" => "Lead Chekout - Get Financed", "messagebr" => 0, "id" => 17),
 		//"key18" => array("name" => "Lead Chekout - Price Drop", "messagebr" => 0, "id" => 18),
 		//"key19" => array("name" => "Lead Chekout - Send Review", "messagebr" => 0, "id" => 19),
-		"key20" => array("name" => "Buyer Services", "messagebr" => 0, "id" => 20),
-		"key21" => array("name" => "Seller Services", "messagebr" => 0, "id" => 21),
+		"key20" => array("name" => "Next Generation Yachting", "messagebr" => 0, "id" => 20),
+		"key21" => array("name" => "Boat Evaluation", "messagebr" => 0, "id" => 21),
 		"key22" => array("name" => "Increase Yacht Value", "messagebr" => 0, "id" => 22),
 		"key23" => array("name" => "Boat Show Registration", "messagebr" => 0, "id" => 23),
 		"key24" => array("name" => "Open Yacht Days", "messagebr" => 0, "id" => 24),
 		"key25" => array("name" => "Chartering Your Yacht", "messagebr" => 0, "id" => 25),
-		"key26" => array("name" => "Contact Local Model", "messagebr" => 1, "id" => 7),
-		"key27" => array("name" => "Watch Price", "messagebr" => 0, "id" => 8)
+		"key26" => array("name" => "Contact Local Model", "messagebr" => 1, "id" => 26),
+		"key27" => array("name" => "Watch Price", "messagebr" => 0, "id" => 27),
+		"key28" => array("name" => "We Can Sell Your Yacht", "messagebr" => 0, "id" => 28)
 	);
 	
 	//Lead Form Type Combo

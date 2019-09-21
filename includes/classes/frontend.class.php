@@ -6371,6 +6371,10 @@ class Frontendclass {
 	//Buyer Services form
 	public function display_buyer_services_form($argu = array()){
 		global $cm, $yachtclass, $captchaclass;
+		$loggedin_member_id = $yachtclass->loggedin_member_id();
+		
+		$templateid = round($argu["templateid"], 0);
+		$ajaxsubmit = round($argu["ajaxsubmit"], 0);
 		$pgid = round($argu["pgid"], 0);
 		
 		$datastring = $cm->session_field_buyer_services_request();
@@ -6378,84 +6382,166 @@ class Frontendclass {
 		
 		foreach($return_ar AS $key => $val){
 		   ${$key} = $val;
-		}		
+		}
 		
-		$returntext = '
-		<div class="container clearfixmain">
-		<div class="ssform clearfixmain">
-		<h2>Your Yacht Search</h2>
+		if ($fname == "" AND $email == ""){
+			//form not submitted
+			$user_det = $cm->get_table_fields('tbl_user', 'fname, lname, email, phone', $loggedin_member_id);
+			$email = $user_det[0]['email'];
+			$fname = $user_det[0]['fname'];
+			$lname = $user_det[0]['lname'];
+			$phone = $user_det[0]['phone'];
+			//$name = $fname . ' ' . $lname;
+		}
 		
-		<form method="post" action="'. $cm->folder_for_seo .'" id="buyer-services-ff" name="buyer-services-ff">
-		<label class="com_none" for="email2">email2</label>
-		<input class="finfo" id="email2" name="email2" type="text" />
-		<input type="hidden" id="fcapi" name="fcapi" value="buyerservicessubmit" />	
-		<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />   
-		';
-		
-		$returntext .= '
-		<div class="rowflex mt-4">
-			<div class="col-30 pr-2">
-                <h5 class="mb-3"><strong>CONTACT INFO:</strong></h5>                
-                <div class="rowflex mb-1">
-                    <label for="name">Name:<span class="requiredfieldindicate">*</span></label>
-                    <input type="text" id="name" name="name" value="'. $name .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="email">Email:<span class="requiredfieldindicate">*</span></label>
-                    <input type="text" id="email" name="email" value="'. $email .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="phone">Phone Number:</label>
-                    <input type="text" id="phone" name="phone" value="'. $phone .'" class="input" />
-                </div>                
-            </div>
+		if ($templateid == 1){
+			$returntext = '
+			<h4 class="ng-h4 uppercase">MAKE A DIFFERENCE WHEN BUYING</h4>
+        	<h1 class="ng-h1 uppercase white">NEXT GENERATION YACHTING</h1>
 			
-			<div class="col-30 pr-2">
-                <h5 class="mb-3"><strong>YACHT ON TRADE:</strong></h5>                
-                <div class="rowflex mb-1">
-                    <label for="boat_make">Make:</label>
-                    <input type="text" id="boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="boat_model">Model:</label>
-                    <input type="text" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="boat_year">Year:</label>
-                    <input type="text" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
-                </div>    
-                <div class="rowflex mb-1">
-                    <label for="boat_location">Location:</label>
-                    <input type="text" id="boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
-                </div>            
-            </div>
+			<form class="ngsearchform" method="post" action="'. $cm->folder_for_seo .'" id="buyer-services-ff" name="buyer-services-ff">
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="buyerservicessubmit" />	
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
 			
-			<div class="col-30">
-            	<h5 class="mb-3"><strong>YACHT YOU ARE LOOKING FOR:</strong></h5>
-                <div class="rowflex mb-1">
-                    <label for="boat_size">Size:</label>
-                    <input type="text" id="boat_size" name="boat_size" value="'. $boat_size .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="boat_ideal_brand">Ideal Brand:</label>
-                    <input type="text" id="boat_ideal_brand" name="boat_ideal_brand" value="'. $boat_ideal_brand .'" class="input" />
-                </div>
-                <div class="rowflex mb-1">
-                    <label for="boat_budget">Budget:</label>
-                    <input type="text" id="boat_budget" name="boat_budget" value="'. $boat_budget .'" class="input" />
-                </div>
+			<ul class="ng-search-form">
+            	<li>
+                	<p>Contact Info</p>
+                    <label for="bs_fname" class="com_none">Name</label>
+                    <input type="text" id="bs_fname" name="fname" value="'. $fname .'" class="input" placeholder="First Name">
+                    <label for="bs_lname" class="com_none">Last Name</label>
+                    <input type="text" id="bs_lname" name="lname" value="'. $lname .'" class="input" placeholder="Last Name">
+                    <label for="bs_email" class="com_none">Email</label>
+                    <input type="text" id="bs_email" name="email" value="'. $email .'" class="input" placeholder="Email">
+                    <label for="bs_phone" class="com_none">Phone Number</label>
+                    <input type="text" id="bs_phone" name="phone" value="'. $phone .'" class="input" placeholder="Phone Number">
+                </li>   
+                <li>
+                	<p>Yacht On Trade</p>
+                    <label for="bs_boat_make" class="com_none">Make</label>
+                    <input type="text" id="bs_boat_make" name="boat_make" value="'. $boat_make .'" class="input" placeholder="Make">
+                    <label for="bs_boat_model" class="com_none">Model</label>
+                    <input type="text" id="bs_boat_model" name="boat_model" value="'. $boat_model .'" class="input" placeholder="Model">
+                    <label for="bs_boat_year" class="com_none">Year</label>
+                    <input type="text" id="bs_boat_year" name="boat_year" value="'. $boat_year .'" class="input" placeholder="Year">
+                    <label for="bs_boat_location" class="com_none">Location</label>
+                    <input type="text" id="bs_boat_location" name="boat_location" value="'. $boat_location .'" class="input" placeholder="Location">
+                </li>   
+                <li>
+                	<p>Yacht You Are Looking For</p>
+                    <div class="ng-half ng-first"><label for="bs_boat_size" class="com_none">Size</label>
+                    <input type="text" id="bs_boat_size" name="boat_size" value="'. $boat_size .'" class="input" placeholder="Size"></div>
+                    
+                    <div class="ng-half"><label for="bs_boat_ideal_brand" class="com_none">Ideal Brand</label>
+                    <input type="text" id="bs_boat_ideal_brand" name="boat_ideal_brand" value="'. $boat_ideal_brand .'" class="input" placeholder="Ideal Brand"></div>
+                    
+                    <div class="ng-half ng-first"><label for="bs_boat_budget_min" class="com_none">Budget Minimum</label>
+                    <input type="text" id="bs_boat_budget_min" name="boat_budget_min" value="'. $boat_budget_min .'" class="input" placeholder="Budget Minimum"></div>
+                    
+                    <div class="ng-half"><label for="bs_boat_budget_max" class="com_none">Budget Maximum</label>
+                    <input type="text" id="bs_boat_budget_max" name="boat_budget_max" value="'. $boat_budget_max .'" class="input" placeholder="Budget Maximum"></div>
+                    
+                    <label for="bs_comments" class="com_none">Message</label>
+                    <textarea name="comments" id="bs_comments" class="comments" rows="1" cols="1" placeholder="Message">'. $comments .'</textarea>
+                </li>   
+            </ul>
+			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+            <div class="ng-hr clearfixmain">
+            	<div><input type="submit" value="SEARCH FOR YOUR YACHT" class="ng-submit"></div>
             </div>
-		</div>
-		<p class="mb-1">Message:</p>
-		<label class="com_none" for="comments">Message</label>
-		<textarea name="comments" id="comments" class="comments" rows="1" cols="1">'. $comments .'</textarea>
-		<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
-		<div align="center"><input name="submit" type="submit" value="Search Your Yacht"></div>
-
-		</form>
-		</div>
-		</div>
-		';
+						
+			</form>
+			';
+		}else{
+		
+			$returntext = '
+			<div class="container clearfixmain">
+			<div class="ssform clearfixmain">
+			<h2>Your Yacht Search</h2>
+			
+			<form method="post" action="'. $cm->folder_for_seo .'" id="buyer-services-ff" name="buyer-services-ff">
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="buyerservicessubmit" />	
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />   
+			';
+			
+			$returntext .= '
+			<div class="rowflex mt-4">
+				<div class="col-30 pr-2">
+					<h5 class="mb-3"><strong>CONTACT INFO:</strong></h5>                
+					<div class="rowflex mb-1">
+						<label for="bs_fname">First Name:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="bs_fname" name="fname" value="'. $fname .'" class="input" />
+					</div>
+					
+					<div class="rowflex mb-1">
+						<label for="bs_lname">Last Name:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="bs_lname" name="lname" value="'. $lname .'" class="input" />
+					</div>
+					
+					<div class="rowflex mb-1">
+						<label for="bs_email">Email:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="bs_email" name="email" value="'. $email .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="bs_phone">Phone Number:</label>
+						<input type="text" id="bs_phone" name="phone" value="'. $phone .'" class="input" />
+					</div>                
+				</div>
+				
+				<div class="col-30 pr-2">
+					<h5 class="mb-3"><strong>YACHT ON TRADE:</strong></h5>                
+					<div class="rowflex mb-1">
+						<label for="bs_boat_make">Make:</label>
+						<input type="text" id="bs_boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="bs_boat_model">Model:</label>
+						<input type="text" id="bs_boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="bs_boat_year">Year:</label>
+						<input type="text" id="bs_boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
+					</div>    
+					<div class="rowflex mb-1">
+						<label for="bs_boat_location">Location:</label>
+						<input type="text" id="bs_boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
+					</div>            
+				</div>
+				
+				<div class="col-30">
+					<h5 class="mb-3"><strong>YACHT YOU ARE LOOKING FOR:</strong></h5>
+					<div class="rowflex mb-1">
+						<label for="bs_boat_size">Size:</label>
+						<input type="text" id="bs_boat_size" name="boat_size" value="'. $boat_size .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="bs_boat_ideal_brand">Ideal Brand:</label>
+						<input type="text" id="bs_boat_ideal_brand" name="boat_ideal_brand" value="'. $boat_ideal_brand .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="bs_boat_budget_min">Budget Minimun:</label>
+						<input type="text" id="bs_boat_budget_min" name="boat_budget_min" value="'. $boat_budget_min .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="bs_boat_budget_max">Budget Maximum:</label>
+						<input type="text" id="bs_boat_budget_max" name="boat_budget_max" value="'. $boat_budget_max .'" class="input" />
+					</div>
+				</div>
+			</div>
+			<p class="mb-1">Message:</p>
+			<label class="com_none" for="comments">Message</label>
+			<textarea name="comments" id="comments" class="comments" rows="1" cols="1">'. $comments .'</textarea>
+			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+			<div align="center"><input name="submit" type="submit" value="Search Your Yacht"></div>
+	
+			</form>
+			</div>
+			</div>
+			';
+		}
 		
 		$returntext .= '
 		<script type="text/javascript">
@@ -6464,14 +6550,19 @@ class Frontendclass {
 				var all_ok = "y";
 				var setfocus = "n";
 				
-				if (!field_validation_border("name", 1, 1)){
+				if (!field_validation_border("bs_fname", 1, 1)){
 					all_ok = "n";
-					setfocus = set_field_focus(setfocus, "name");
+					setfocus = set_field_focus(setfocus, "bs_fname");
+				}
+				
+				if (!field_validation_border("bs_lname", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "bs_lname");
 				}				
 					
-				if (!field_validation_border("email", 2, 1)){
+				if (!field_validation_border("bs_email", 2, 1)){
 					all_ok = "n";
-					setfocus = set_field_focus(setfocus, "email");
+					setfocus = set_field_focus(setfocus, "bs_email");
 				}				
 				
 				if (all_ok == "n"){
@@ -6491,7 +6582,8 @@ class Frontendclass {
 			global $db, $cm, $sdeml;
 			
 			//get form fields
-			$name = $_POST["name"];
+			$fname = $_POST["fname"];
+			$lname = $_POST["lname"];
 			$email = $_POST["email"];
 			$phone = $_POST["phone"];			
 			
@@ -6502,7 +6594,8 @@ class Frontendclass {
 			
 			$boat_size = $_POST["boat_size"];
 			$boat_ideal_brand = $_POST["boat_ideal_brand"];
-			$boat_budget = $_POST["boat_budget"];
+			$boat_budget_min = $_POST["boat_budget_min"];
+			$boat_budget_max = $_POST["boat_budget_max"];
 			
 			$comments = $_POST["comments"];
 				
@@ -6517,7 +6610,8 @@ class Frontendclass {
 			
 			//checking
 			$red_pg = $_SESSION["s_backpage"];
-			$cm->field_validation($name, '', 'Name', $red_pg, '', '', 1, 'fr_');			
+			$cm->field_validation($fname, '', 'First Name', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($lname, '', 'Last Name', $red_pg, '', '', 1, 'fr_');			
 			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
 						
 			if ($email2 != ""){
@@ -6548,8 +6642,13 @@ class Frontendclass {
 				</tr>
 				
 				<tr>
-					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="55%">Name:</td>
-					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($name, 1) .'</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="55%">First Name:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($fname, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Last Name:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($lname, 1) .'</td>
 				</tr>
 				
 				<tr>
@@ -6601,8 +6700,13 @@ class Frontendclass {
 				</tr>
 				
 				<tr>
-					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Budget:</td>
-					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_budget, 1) .'</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Budget Minimum:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_budget_min, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Budget Maximum:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_budget_max, 1) .'</td>
 				</tr>
 				
 				<tr>
@@ -6613,13 +6717,15 @@ class Frontendclass {
 			';
 			//end
 			
+			$fullname = $fname . ' ' . $lname;
+			
 			//add to lead
 			$form_type = 20;
 			$extra_message = '';
 			global $leadclass;
 			$param = array(
 				"form_type" => $form_type,
-				"name" => $name,
+				"name" => $fullname,
 				"email" => $email,
 				"phone" => $phone,
 				"message" => $emailmessage,
@@ -6644,7 +6750,7 @@ class Frontendclass {
 			$mail_to = $cm->admin_email_to();
 			$mail_bcc = '';
 			$mail_reply = $cm->filtertextdisplay($email);
-			$fromnamesender = $cm->filtertextdisplay($name);		 		  
+			$fromnamesender = $cm->filtertextdisplay($fullname);		 		  
 			$sdeml->send_email($mail_fm, $mail_to, $ad_cc_email, $mail_bcc, $mail_reply, $ad_mail_subject, $ad_msg, $cm->site_url, $fromnamesender);
 			//end
 			
@@ -6655,7 +6761,7 @@ class Frontendclass {
 			$fr_msg = $fr_email_ar->pdes;
 			$fr_mail_subject = $fr_email_ar->email_subject;			
 			
-			$fr_msg = str_replace("#name#", $cm->filtertextdisplay($name), $fr_msg);
+			$fr_msg = str_replace("#name#", $cm->filtertextdisplay($fullname), $fr_msg);
 			$fr_msg = str_replace("#companyname#", $cm->filtertextdisplay($companyname), $fr_msg);
 			$fr_msg = str_replace("#companyphone#", $companyphone, $fr_msg);
 			$fr_msg = str_replace("#companyemail#", $companyemail, $fr_msg);
@@ -6735,6 +6841,55 @@ class Frontendclass {
 			<div class="fcform1">
 				<p><button type="submit" class="button">SUBMIT</button></p>
 			</div> 
+			<div class="fomrsubmit-result com_none"></div>
+			</form>
+			';
+		}elseif ($templateid == 2){
+			$returntext = '
+			<h1 class="ng-h1 uppercase"><span class="navy navyborder">YOUR BOAT EVALUATION</span></h1>
+			
+			<form method="post" action="'. $cm->folder_for_seo .'" id="seller-services-ff" name="seller-services-ff">
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="sellerservicessubmit" />	
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+			<input type="hidden" value="'. $ajaxsubmit .'" id="ajaxsubmit" name="ajaxsubmit" />
+			
+			<ul class="ng-boat-evaluation-form">
+            	<li>
+                	<p>Contact Info</p>
+                    <label for="name" class="com_none">Name</label>
+                    <input type="text" name="name" placeholder="Name" id="name" value="'. $name .'" class="input" />
+                    <label for="email" class="com_none">Email</label>
+                    <input type="text" name="email" placeholder="Email" id="email" value="'. $email .'" class="input" />
+                    <label for="phone" class="com_none">Phone Number</label>
+                    <input type="text" name="phone" placeholder="Phone Number" id="phone" value="'. $phone .'" class="input" />
+                </li>   
+                <li>
+                	<p>Yacht</p>
+                    <label for="boat_make" class="com_none">Make</label>
+                    <input type="text" placeholder="Make" id="boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
+                    <label for="boat_model" class="com_none">Model</label>
+                    <input type="text" placeholder="Model" id="boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
+                    <label for="boat_year" class="com_none">Year</label>
+                    <input type="text" placeholder="Year" id="boat_year" name="boat_year" value="'. $boat_year .'" class="input" />                    
+                </li>   
+                <li>
+                	<p class="mob-none">&nbsp;</p>
+                    <label for="boat_engines" class="com_none">Engines</label>
+                    <input type="text" placeholder="Engines" id="boat_engines" name="boat_engines" value="'. $boat_engines .'" class="input" />
+                    
+                    <label for="boat_hours_on_engines" class="com_none">Hours</label>
+                    <input type="text" placeholder="Hours On Engines" id="boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" />
+                    
+                    <label for="boat_location" class="com_none">Location</label>
+                    <input type="text" placeholder="Location" id="boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
+                </li>   
+            </ul>
+			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+            <div class="ng-hr clearfixmain">
+            	<div><input type="submit" value="EVALUATE YOUR BOAT" class="ng-submit"></div>
+            </div>
 			<div class="fomrsubmit-result com_none"></div>
 			</form>
 			';
@@ -13005,6 +13160,466 @@ class Frontendclass {
 			$_SESSION["thnk"] = $pagecontent;
 			header('Location: ' . $redpageurl);
 			exit;
+		}
+	}
+	
+	//We Can Sell Your Yacht form
+	public function display_we_can_sell_your_yacht_form($argu = array()){
+		global $cm, $yachtclass, $captchaclass;
+		$loggedin_member_id = $yachtclass->loggedin_member_id();
+		
+		$pgid = round($argu["pgid"], 0);
+		$templateid = round($argu["templateid"], 0);
+		$ajaxsubmit = round($argu["ajaxsubmit"], 0);
+		
+		$datastring = $cm->session_field_we_can_sell_your_yacht();
+		$return_ar = $cm->collect_session_for_form($datastring);
+		
+		foreach($return_ar AS $key => $val){
+		   ${$key} = $val;
+		}
+		
+		if ($fname == "" AND $email == ""){
+			//form not submitted
+			$user_det = $cm->get_table_fields('tbl_user', 'fname, lname, email, phone', $loggedin_member_id);
+			$email = $user_det[0]['email'];
+			$fname = $user_det[0]['fname'];
+			$lname = $user_det[0]['lname'];
+			$phone = $user_det[0]['phone'];
+			//$name = $fname . ' ' . $lname;
+		}	
+		
+		if ($templateid == 1){
+			$returntext = '
+			<form method="post" action="'. $cm->folder_for_seo .'" class="sellyachtcatamaranform" id="sell-your-yacht-ff" name="sell-your-yacht-ff">
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="wecansellyouryachtsubmit" />	
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+			<input type="hidden" value="'. $ajaxsubmit .'" id="ajaxsubmit" name="ajaxsubmit" />
+			
+			<ul class="ng-sell-yacht-catamaran-form">
+                <li>
+                	<h4 class="ng-h4 uppercase"><span class="white">WANT TO LEARN MORE ABOUT HOW</span></h4>
+                    <h1 class="ng-h1 uppercase m-0">WE CAN SELL YOUR YACHT OR CATAMARAN?</h1>
+                    
+                </li>   
+                <li>
+                    <p>Contact Info</p>
+                    <label for="wcs_fname" class="com_none">First Name</label>
+                    <input class="input" type="text" id="wcs_fname" name="fname" value="'. $fname .'" placeholder="First Name">
+                    
+                    <label for="wcs_lname" class="com_none">Last Name</label>
+                    <input class="input" type="text" id="wcs_lname" name="lname" value="'. $lname .'" placeholder="Last Name">
+                    
+                    <label for="wcs_email" class="com_none">Email</label>
+                    <input class="input" type="text" id="wcs_email" name="email" value="'. $email .'" placeholder="Email">
+                    
+                    <label for="wcs_phone" class="com_none">Phone Number</label>
+                    <input class="input" type="text" id="wcs_phone" name="phone" value="'. $phone .'" placeholder="Phone Number">                   
+                </li>   
+                <li>
+                    <p>Yacht Info</p>
+                    <div class="ng-half ng-first"><label for="wcs_boat_make" class="com_none">Make</label>
+                    <input class="input" type="text" id="wcs_boat_make" name="boat_make" value="'. $boat_make .'" placeholder="Make"></div>   
+                                     
+                    <div class="ng-half"><label for="wcs_boat_model" class="com_none">Model</label>
+                    <input class="input" type="text" id="wcs_boat_model" name="boat_model" value="'. $boat_model .'" placeholder="Model"></div>                 
+                    
+                    <div class="ng-half ng-first"><label for="wcs_boat_year" class="com_none">Year</label>
+                    <input class="input" type="text" id="wcs_boat_year" name="boat_year" value="'. $boat_year .'" placeholder="Year"></div>
+                    
+                    <div class="ng-half"><label for="wcs_boat_engines" class="com_none">Engines</label>
+                    <input class="input" type="text" id="wcs_boat_engines" name="boat_engines" value="'. $boat_engines .'" placeholder="Engines"></div>
+
+					<label for="wcs_boat_hours_on_engines" class="com_none">Hours On Engines</label>
+                    <input class="input" type="text" id="wcs_boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" placeholder="Hours On Engines">
+                    
+                    <label for="wcs_boat_location" class="com_none">Location</label>
+                    <input class="input" type="text" id="wcs_boat_location" name="boat_location" value="'. $boat_location .'" placeholder="Location">
+                </li>   
+            </ul>
+			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+            <div class="ng-hr clearfixmain">
+                <div><input type="submit" value="Submit" class="ng-submit"></div>
+            </div>						
+			<div class="fomrsubmit-result com_none"></div>
+			</form>
+			';
+		}else{
+			$returntext = '
+			<!--<div class="container clearfixmain">
+			<div class="ssform clearfixmain">
+			<h2>Your Boat Evaluation</h2>-->
+			
+			<form method="post" action="'. $cm->folder_for_seo .'" id="seller-services-ff" name="seller-services-ff">
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="sellerservicessubmit" />	
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+			<input type="hidden" value="'. $ajaxsubmit .'" id="ajaxsubmit" name="ajaxsubmit" /> 
+			';
+			
+			$returntext .= '
+			<div class="rowflex mt-4">
+				<div class="col-30 pr-2">
+					<h5 class="mb-3"><strong>CONTACT INFO:</strong></h5>                
+					<div class="rowflex mb-1">
+						<label for="wcs_fname">First Name:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="wcs_fname" name="fname" value="'. $fname .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="wcs_lname">Last Name:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="wcs_lname" name="lname" value="'. $lname .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="wcs_email">Email:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="wcs_email" name="email" value="'. $email .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="wcs_phone">Phone Number:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="wcs_phone" name="phone" value="'. $phone .'" class="input" />
+					</div>                
+				</div>
+				
+				<div class="col-30 pr-2">
+					<h5 class="mb-3"><strong>YACHT:</strong></h5>                
+					<div class="rowflex mb-1">
+						<label for="wcs_boat_make">Make:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="wcs_boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="wcs_boat_model">Model:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="wcs_boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="wcs_boat_year">Year:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="wcs_boat_year" name="boat_year" value="'. $boat_year .'" class="input" />
+					</div>      
+				</div>
+				
+				<div class="col-30">
+					 <h5 class="mb-3 md-none">&nbsp;</h5>
+					<div class="rowflex mb-1">
+						<label for="wcs_boat_engines">Engines:</label>
+						<input type="text" id="wcs_boat_engines" name="boat_engines" value="'. $boat_engines .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="wcs_boat_hours_on_engines">Hours on Engines:</label>
+						<input type="text" id="wcs_boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" />
+					</div>
+					<div class="rowflex mb-1">
+						<label for="wcs_boat_location">Location:<span class="requiredfieldindicate">*</span></label>
+						<input type="text" id="wcs_boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
+					</div>
+				</div>
+			</div>			
+			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+			<div align="center"><input name="submit" type="submit" value="Evaluate Your Boat"></div>			
+			</form>
+			<!--</div>
+			</div>-->
+			';
+		}
+		
+		
+		$returntext .= '
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#sell-your-yacht-ff").submit(function(event){
+				var all_ok = "y";
+				var setfocus = "n";
+				
+				var ajaxsubmit = $("#ajaxsubmit").val();
+				ajaxsubmit = parseInt(ajaxsubmit);
+				
+				if (!field_validation_border("wcs_fname", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "wcs_fname");
+				}
+				
+				if (!field_validation_border("wcs_lname", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "wcs_lname");
+				}				
+					
+				if (!field_validation_border("wcs_email", 2, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "wcs_email");
+				}
+				
+				if (!field_validation_border("wcs_phone", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "wcs_phone");
+				}	
+				
+				if (!field_validation_border("wcs_boat_make", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "wcs_boat_make");
+				}
+				
+				if (!field_validation_border("wcs_boat_model", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "wcs_boat_model");
+				}
+				
+				if (!field_validation_border("wcs_boat_year", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "wcs_boat_year");
+				}
+				
+				if (!field_validation_border("wcs_boat_location", 1, 1)){
+					all_ok = "n";
+					setfocus = set_field_focus(setfocus, "wcs_boat_location");
+				}		
+				
+				if (all_ok == "n"){
+					return false;
+				}
+				
+				if (ajaxsubmit > 0){
+					
+					//Ajax submit
+					var form = $(this);
+					$.ajax({
+					  type: form.attr("method"),
+					  url: form.attr("action"),
+					  data: form.serialize()
+					}).done(function() {					  
+					  $("#wcs_fname").val("");
+					  $("#wcs_lname").val("");
+					  $("#wcs_email").val("");
+					  $("#wcs_phone").val("");
+					  $("#wcs_boat_make").val("");
+					  $("#wcs_boat_model").val("");
+					  $("#wcs_boat_year").val("");
+					  $("#wcs_boat_engines").val("");
+					  $("#wcs_boat_hours_on_engines").val("");
+					  $("#wcs_boat_location").val("");
+					  
+					  //$(".fomrsubmit-result").addClass("success");
+					  //$(".fomrsubmit-result").html("Email sent successfully");
+					  //$(".fomrsubmit-result").removeClass("com_none");
+					  
+					  $("#formsubmitcontent").html("Thank you for sending your yacht info.<br>We will get back to you asap.");
+					  $("#formsubmitoverlay").show();
+					  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+					}).fail(function() {
+					  $(".fomrsubmit-result").addClass("error");
+					  $(".fomrsubmit-result").html("ERROR! Please try again");
+					  $(".fomrsubmit-result").removeClass("com_none");
+					  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+					});
+					
+					event.preventDefault();
+					
+				}else{
+					return true;
+				}
+			});
+		});
+		</script>
+		';
+		
+			
+		
+		
+		return $returntext;
+	}
+	
+	//Submit We Can Sell Your Yacht form
+	public function submit_we_can_sell_your_yacht_form(){
+		if(($_POST['fcapi'] == "wecansellyouryachtsubmit")){
+			global $db, $cm, $sdeml;
+			
+			//get form fields
+			$fname = $_POST["fname"];
+			$lname = $_POST["lname"];
+			$email = $_POST["email"];
+			$phone = $_POST["phone"];			
+			
+			$boat_make = $_POST["boat_make"];
+			$boat_model = $_POST["boat_model"];
+			$boat_year = $_POST["boat_year"];			
+			
+			$boat_engines = $_POST["boat_engines"];
+			$boat_hours_on_engines = $_POST["boat_hours_on_engines"];
+			$boat_location = $_POST["boat_location"];			
+			
+			$pgid = round($_POST["pgid"], 0);
+			$email2 = $_POST["email2"];
+			$ajaxsubmit = round($_POST["ajaxsubmit"], 0);
+			//end
+			
+			//create the session
+			$datastring = $cm->session_field_we_can_sell_your_yacht();
+			$cm->create_session_for_form($datastring, $_POST);
+			//end
+			
+			//checking
+			$red_pg = $_SESSION["s_backpage"];
+			$cm->field_validation($fname, '', 'First Name', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($lname, '', 'Last Name', $red_pg, '', '', 1, 'fr_');			
+			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($phone, '', 'Phone', $red_pg, '', '', 1, 'fr_');
+			
+			$cm->field_validation($boat_make, '', 'Make', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($boat_model, '', 'Model', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($boat_year, '', 'Year', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($boat_location, '', 'Location', $red_pg, '', '', 1, 'fr_');
+						
+			if ($email2 != ""){
+				header('Location: '. $cm->site_url .'');
+				exit;
+			}
+			//end
+			
+			//captcha
+			global $captchaclass;
+			$captchaclass->validate_captcha($red_pg);
+			//end
+			
+			//$cm->form_post_check_valid_main('partsrequestsubmit');
+			$cm->delete_session_for_form($datastring);			
+		
+			$comments = nl2br($comments);
+			
+			$companyname = $cm->sitename;
+			$companyphone = $cm->get_systemvar('COMPH');
+			$companyemail = $cm->admin_email_to();
+			
+			//create email message
+			$emailmessage = '
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="left" valign="top" style="padding: 15px 5px 5px 0px;'. $defaultheading .'" colspan="2"><strong>Contact Info</strong></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="55%">First Name:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($fname, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Last Name:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($lname, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Email Address:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($email, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Phone:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($phone, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 15px 5px 5px 0px;'. $defaultheading .'" colspan="2"><strong>Yacht</strong></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Make:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_make, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Model:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_model, 1) .'</td>
+				</tr>
+
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Year:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_year, 1) .'</td>
+				</tr>				
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Engines:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_engines, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Hours on Engines:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_hours_on_engines, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Location:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($boat_location, 1) .'</td>
+				</tr>										
+			</table>
+			';
+			//end
+			
+			$fullname = $fname . ' ' . $lname;
+			
+			//add to lead
+			$form_type = 28;
+			$extra_message = '';
+			global $leadclass;
+			$param = array(
+				"form_type" => $form_type,
+				"name" => $fullname,
+				"email" => $email,
+				"phone" => $phone,
+				"message" => $emailmessage,
+				"broker_id" => 1,
+				"yacht_id" => 0
+			);
+			$leadclass->add_lead_message($param);
+			
+			//send email to admin
+			$send_ml_id = 51;
+			$ad_email_ar = $cm->get_table_fields('tbl_system_email', 'email_subject, pdes, cc_email', $send_ml_id);
+			$ad_email_ar = (object)$ad_email_ar[0];
+			$ad_msg = $ad_email_ar->pdes;
+			$ad_mail_subject = $ad_email_ar->email_subject;
+			$ad_cc_email = $ad_email_ar->cc_email;
+			
+			$ad_msg = str_replace("#companyname#", $cm->filtertextdisplay($companyname), $ad_msg);
+			$ad_msg = str_replace("#formdatasubmission#", $emailmessage, $ad_msg);
+			$ad_mail_subject = str_replace("#companyname#", $companyname, $ad_mail_subject);
+			
+			$mail_fm = $cm->admin_email();
+			$mail_to = $cm->admin_email_to();
+			$mail_bcc = '';
+			$mail_reply = $cm->filtertextdisplay($email);
+			$fromnamesender = $cm->filtertextdisplay($fullname);		 		  
+			$sdeml->send_email($mail_fm, $mail_to, $ad_cc_email, $mail_bcc, $mail_reply, $ad_mail_subject, $ad_msg, $cm->site_url, $fromnamesender);
+			//end
+			
+			//send email to user
+			$send_ml_id = 52;
+			$fr_email_ar = $cm->get_table_fields('tbl_system_email', 'email_subject, pdes', $send_ml_id);
+			$fr_email_ar = (object)$fr_email_ar[0];
+			$fr_msg = $fr_email_ar->pdes;
+			$fr_mail_subject = $fr_email_ar->email_subject;			
+			
+			$fr_msg = str_replace("#name#", $cm->filtertextdisplay($name), $fr_msg);
+			$fr_msg = str_replace("#companyname#", $cm->filtertextdisplay($companyname), $fr_msg);
+			$fr_msg = str_replace("#companyphone#", $companyphone, $fr_msg);
+			$fr_msg = str_replace("#companyemail#", $companyemail, $fr_msg);
+			$fr_msg = str_replace("#contactsubmission#", $contactsubmission, $fr_msg);
+			
+			$fr_mail_subject = str_replace("#name#", $cm->filtertextdisplay($fullname), $fr_mail_subject);
+			$fr_mail_subject = str_replace("#companyname#", $companyname, $fr_mail_subject);
+			$fr_mail_subject = str_replace("#companyphone#", $companyphone, $fr_mail_subject);
+			
+			$mail_fm = $cm->admin_email();
+			$mail_to = $cm->filtertextdisplay($email);
+			$mail_cc = "";
+			$mail_reply = "";
+			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $fr_mail_subject, $fr_msg, $cm->site_url);
+			//end
+			
+			if ($ajaxsubmit > 0){
+				return 1;
+			}else{
+				$_SESSION["s_pgid"] = $pgid;
+				header('Location: ' . $cm->get_page_url($pgid, 'page'));
+				exit;
+			}
 		}
 	}
 	
