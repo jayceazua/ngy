@@ -591,6 +591,8 @@ class Frontendclass {
 					$returntext .= '<li class="megamenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_special_menu(array("mnid" => $mm_id, "submenuclass" => "", "submenusection" => $submenusection, "menutemplate" => 1)) .'</li>';
 				}elseif ($mm_id == 22){
 					$returntext .= '<li class="megamenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_special_menu_2(array("mnid" => $mm_id, "menutemplate" => 1)) .'</li>';
+				}elseif ($mm_id == 4){
+					$returntext .= '<li class="megamenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_special_menu_3(array("mnid" => $mm_id, "menutemplate" => 1)) .'</li>';
 				}else{
 					$returntext .= '<li class="normalmenu"><a class="'. $anchorclass . $popclass .'" href="'. $mm_lnk_url .'"'. $popextra . $link_target .'>'. $mm_name .'</a>'. $this->get_all_menu(array("mnid" => $mm_id, "submenuclass" => "sub-menu", "last_col" => $last_col, "connected_manufacturer_id" => $connected_manufacturer_id, "connected_group_id" => $connected_group_id)) .'</li>';
 				}	
@@ -1160,6 +1162,70 @@ class Frontendclass {
 					'. $this->top_menu_section_news() .'
 				</div>
 			</div>
+			</li>
+		</ul>
+		';
+		
+		return $returntext;
+	}
+	
+	public function get_special_menu_3($param = array()){
+		global $db, $cm, $yachtchildclass;
+		$returntext = '';
+		$mnid = $param["mnid"];
+		$menutemplate = $param["menutemplate"];
+		
+		//collect child menu
+		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where parent_id = '". $mnid ."' and status = 'y' order by rank";
+		$ss_result = $db->fetch_all_array($ss_sql);
+		$ss_found = count($ss_result);
+		//end
+		
+		$menulimit = 0;
+		$returntext .= '
+		<ul>
+			<li><div style="width:100%; max-width: 1366px; margin:0 auto;">
+				<div class="cols_menu">
+		';
+		
+		foreach($ss_result as $ss_row){
+				$ss_id = $ss_row['id'];
+				$ss_name = $ss_row['name'];				
+				$ss_open_new_window = $ss_row['new_window'];
+				$ss_extraclass = $ss_row['extraclass'];
+				$ss_lnk_url = $cm->get_page_url($ss_id, "page");
+				
+				$ss_link_target = "";
+				if ($ss_open_new_window == "y"){ $ss_link_target = ' target = "_blank"'; }				
+				
+				$returntext .= '
+				<div class="cols2">
+					<h3><a class="titlelink" href="'. $ss_lnk_url .'"'. $ss_link_target .'>'. $ss_name .'</a></h3>
+					<div class="cols3-padded clearfixmain">
+					'. $this->get_special_menu_next_level(array("mnid" => $ss_id, "parentlink" => $ss_lnk_url, "parentlinktarget" => $ss_link_target, "menulimit" => $menulimit)) .'
+					</div>
+				</div>
+				';
+			}
+			
+			$yf_url = $cm->get_page_url(41, "page");
+			$bv_url = $cm->get_page_url(157, "page");
+				
+		$returntext .= '
+				</div>
+				
+				<div class="cols_menu_after">
+					<div class="cols2">                        	
+						<h3>Yacht Finder</h3>
+						<div class="menuboatimg clearfixmain"><a class="imgbox" href="'. $yf_url .'"><img src="'. $cm->folder_for_seo . 'images/menu_yf.jpg" alt="Yacht Finder"></a></div>
+						<a href="'. $yf_url .'" class="button">Register</a>
+					</div>
+					<div class="cols2">                        	
+						<h3>Boat Valuation</h3>
+						<div class="menuboatimg clearfixmain"><a class="imgbox" href="'. $bv_url .'"><img src="'. $cm->folder_for_seo . 'images/menu_bv.jpg" alt="Boat Valuation"></a></div>
+						<a href="'. $bv_url .'" class="button">Start</a>
+					</div>
+				</div>
 			</li>
 		</ul>
 		';
