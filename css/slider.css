@@ -279,7 +279,7 @@
 	font-size: 15px;
 	font-weight: 600;
 	text-transform: uppercase;
-	padding: 6px 16px;		
+	padding: 9px 16px 3px 16px;		
 	position:relative;
 	/*-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;*/
 }
