@@ -50,7 +50,7 @@
 	letter-spacing: 1px
 }
 
-.topmenu h3 a{font-weight:600;text-transform: capitalize;}
+.topmenu h3 a{text-transform: capitalize;}
 
 .topmenu a .sub-arrow {
 	position: absolute;
@@ -111,7 +111,10 @@
 }
 
 .topmenu a.titlelink,
-.topmenu a.titlelink:hover{padding:0; margin: 0;font-size:20px;color:#000000;line-height:1.5;border-left: 0;}
+.topmenu a.titlelink:hover{padding:0; margin: 0;font-size:16px;color:#000000;line-height:1.5;border-left: 0;}
+
+.topmenu a.titlelink2,
+.topmenu a.titlelink2:hover{padding:0; margin: 0; font-family:'brandon-black';font-size:14px;color:#2abfd0;line-height:1.5;border-left: 0;}
 
 @media (min-width: 1100px) {
 /* Don't Change */
@@ -348,5 +351,5 @@
 	padding:4px 0;
 	border:0
 }
-.topmenu a.button{display:inline-block;width:auto;background-color:#2bbed3; font-weight: 500; color:#fff; padding:6px 7px 2px 7px !important;}
+.topmenu a.button{display:inline-block;width:auto;background-color:#2bbed3; font-weight: 500; color:#fff; margin-top: 8px !important; padding:6px 7px 2px 7px !important;}
 .topmenu a.button:hover{background-color:#0a1b40;}
