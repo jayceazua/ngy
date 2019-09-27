@@ -1274,7 +1274,7 @@ class Frontendclass {
 				$returntext .= '
 				<div class="cols3">
 					<div class="menuboatimg clearfixmain"><a class="imgbox" href="'. $details_url .'"><img src="'. $cm->folder_for_seo .'blogimage/thumb/'. $blog_image .'" alt="'. $name .'"></a></div>
-					<a href="'. $details_url .'">'. $name .'</a>
+					<a class="titlelink2" href="'. $details_url .'">'. $name .'</a>
 					<a href="'. $details_url .'" class="button">Read More</a>
 				</div>
 				';
