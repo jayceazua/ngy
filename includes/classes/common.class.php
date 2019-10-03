@@ -19,7 +19,7 @@ class Commonclass {
     public $logo_im_height = 500;
 
     public $user_im_width = 500;
-    public $user_im_height = 500;
+    public $user_im_height = 668;
 
     public $user_im_width_t = 80;
     public $user_im_height_t = 80;
@@ -64,10 +64,10 @@ class Commonclass {
     public $crt_im_height = 120;
 	
 	public $blog_im_width_t = 500;
-    public $blog_im_height_t = 520;
+    public $blog_im_height_t = 354;
 	
-	public $blog_im_width = 800; //1366
-    public $blog_im_height = 832; //546
+	public $blog_im_width = 1200; //800
+    public $blog_im_height = 849; //832
 	
 	public $location_im_width = 1366;
     public $location_im_height = 500;

@@ -332,7 +332,7 @@ class Boatwatcherclass {
 					'. $name_email_text .'
 					<p>Send Alert</p>
 					 <label for="schedule_days'. $counter .'" class="com_none">Send Alert</label>
-					<select name="schedule_days'. $counter .'" id="schedule_days'. $counter .'" class="select">
+					<select name="schedule_days'. $counter .'" id="schedule_days'. $counter .'" class="newselect">
 					'. $this->get_days_frequency_combo($schedule_days) .'
 					</select>
 				</li>

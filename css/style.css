@@ -8323,3 +8323,5 @@ ul.ng-team-icons li a{
 	height: 26px;
 	line-height:26px;
 }
+
+ul.ng-team-icons li a i {line-height: 24px;}
