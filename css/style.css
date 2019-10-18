@@ -7545,14 +7545,18 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 /*--- Buy with us Page on Sep 13 2019 -----------------------------------*/
 /*-----------------------------------------------------------------------*/
 .ng-buy-with-us-left{
-	width:50%;
+	/*width:50%;
 	border-bottom:2px solid #2abfd0;
+	order:1;*/
+	width:48%;	
 	order:1;
 }
 
 .ng-buy-with-us-right{
-	width:50%;
-	padding-left:7%;
+	/*width:50%;
+	padding-left:7%;*/
+	width:52%;
+	padding-left:70px;
 	order:2;
 
 }
@@ -8325,3 +8329,50 @@ ul.ng-team-icons li a{
 }
 
 ul.ng-team-icons li a i {line-height: 24px;}
+
+/* oct 18,2019*/
+.ng-seller-brochure2{
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c5c5c5+0,f8f8f8+100 */
+	background: #c4c4c4; /* Old browsers */
+	background: -moz-linear-gradient(left,  #c4c4c4 0%, #f8f8f8 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left,  #c4c4c4 0%,#f8f8f8 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right,  #c4c4c4 0%,#f8f8f8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c4c4c4', endColorstr='#f8f8f8',GradientType=1 ); /* IE6-9 */
+	position:relative;
+}
+
+.ng-seller-brochure2 .ng-seller-brochure-left2{
+	width:70%;
+	background: url(../images/ng-seller-brochure2.png) no-repeat right top;
+	background-size:100%;
+	float:right;
+	clear:both;
+}
+
+.ng-seller-brochure2 .ng-seller-brochure-left2 img{
+	visibility:hidden;
+}
+
+.ng-seller-brochure2 .ng-seller-brochure-right2{
+	width:100%;
+	position:absolute;
+	padding-left:5%;
+	padding-right:5%;
+	top: 35%;
+	clear:both;
+}
+
+@media screen and (max-width: 768px){
+	.ng-seller-brochure2 .ng-seller-brochure-right2{
+		position:relative;
+		left:auto;
+		right:auto;
+		top: 0;
+		padding-bottom:50px;
+	}
+	.ng-seller-brochure2 .ng-seller-brochure-left2{
+		background: url(../images/ng-seller-brochure2-2.png) no-repeat right top;
+		background-size:100%;
+		padding-bottom:5%;
+	}
+}
