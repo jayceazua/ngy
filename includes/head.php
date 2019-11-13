@@ -71,7 +71,9 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
 		var siteurlfull = "<?php echo $cm->site_url; ?>";
 	</script>
 	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.min.js"></script> 
-    <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.extra.top.js"></script>    
+    <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.extra.top.js"></script>
+    <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/waypoints.min.js"></script>
+	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.counterup.js"></script>  
 </head>
 <body<?php echo $bodyclass; ?>>
 <!--==============================header start=================================-->
@@ -97,7 +99,6 @@ if ($nohead == 1){
 	<div class="container clearfixmain">
 	';
 }else{
-
     echo $frontend->get_header(array("loggedin_member_id" => $loggedin_member_id, "headertemplate" => $headertemplate, "pageid" => $pageid)); 
 ?>
 <!--==============================header end=================================-->
@@ -127,4 +128,4 @@ if ($nohead == 1){
 <?php 
 	} 
 }
-?> 
+?>

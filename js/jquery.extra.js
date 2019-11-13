@@ -49,6 +49,20 @@ $(document).ready(function(){
 		delay: 10,
 		time: 1000
 	 });
+	 
+	 function barcounter(){
+		  $(".colcounter").each(function(){
+			  var v = $(this).attr("v");
+			  $(this).animate({
+				width: v +"%"
+			  }, 1500 );
+		  });
+	}
+	
+	if ($(".colcounter").length > 0) {
+		var v = $(".colcounter").attr("v");
+		$(".colcounter").waypoint(barcounter, { offset: '100%', triggerOnce: true });
+	}
 
     //tooltip
     $(".main").on("mouseover", ".tooltip", function(){

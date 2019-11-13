@@ -233,7 +233,7 @@ $adm->pagination_main($foundm, $dcon, $small_range, $range_span, $p, $q, $gotopa
 		}
 		
 		if ($typeid > 0 ){
-			$type_name = $cm->get_common_field_name('tbl_typr', 'name', $typeid);
+			$type_name = $cm->get_common_field_name('tbl_type', 'name', $typeid);
 			$searchfield_text .= '
 			<li>
 				<div class="leftfield">Class:</div>
