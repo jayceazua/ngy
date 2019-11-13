@@ -70,10 +70,6 @@ button, input[type=submit], .newselect {
 	appearance: none;
 }
 
-button, input[type=submit] {-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;}
-	
 ::selection {
 	background: #138a46;
 	color: #fff;
@@ -1191,14 +1187,8 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 .cols_search h3,
 .cols_menu_after h3,
 .cols_menu2_after h3 {
-<<<<<<< HEAD
-	font-family: 'Open Sans', serif;
-	font-size:14px;
-	font-weight:600;
-=======
 	font-size:16px;
 	font-weight:normal;
->>>>>>> dev-version
 	color:#000000;
 	line-height:1.5;
 	margin:0;
@@ -6932,10 +6922,7 @@ transform: translateY(-50%);
 
 .white{ color:#fff!important;}
 .black{ color:#141414!important;}
-<<<<<<< HEAD
-=======
 .navy{ color:#0b1b3e!important;}
->>>>>>> dev-version
 
 .ng-h1{
 	font-family: 'brandon-black';
@@ -6944,18 +6931,12 @@ transform: translateY(-50%);
 	clear:both;
 	margin:0 0 30px 0;
 	padding:0;
-<<<<<<< HEAD
-	line-height:1.55;
-=======
 	line-height:1;
->>>>>>> dev-version
 	font-weight:normal;
 }
 
 .ng-h1 span{
 	border-bottom:2px solid #2abfd0;	
-<<<<<<< HEAD
-=======
 	display:inline-block;
 	padding-bottom:10px;
 }
@@ -6966,7 +6947,6 @@ transform: translateY(-50%);
 
 .ng-h1 span.navyborder{
 	border-bottom:2px solid #0b1b3e;
->>>>>>> dev-version
 }
 
 .ng-h3{
@@ -6980,8 +6960,6 @@ transform: translateY(-50%);
 	font-weight:normal;
 }
 
-<<<<<<< HEAD
-=======
 .ng-h4{
 	font-family: 'glober-regular';
 	font-size:22px;
@@ -7006,7 +6984,6 @@ transform: translateY(-50%);
 	font-family: 'glober-bold';
 }
 
->>>>>>> dev-version
 .ng-text{
 	font-family: 'MyriadPro';
 	font-size:20px;
@@ -7170,11 +7147,7 @@ ul.ng-team-members{
 	text-align:center;
 }
 
-<<<<<<< HEAD
-ul.ng-team-members li{
-=======
 ul.ng-team-members > li{
->>>>>>> dev-version
 	margin:2% 0 2% 1.5%;
 	padding:0;
 	font-size:12px;
@@ -7183,19 +7156,11 @@ ul.ng-team-members > li{
 	vertical-align:top;
 }
 
-<<<<<<< HEAD
-ul.ng-team-members li:nth-child(4n+1){
-	margin-left:0;
-}
-
-ul.ng-team-members li img{
-=======
 ul.ng-team-members > li:nth-child(4n+1){
 	margin-left:0;
 }
 
 ul.ng-team-members > li img{
->>>>>>> dev-version
 	display:block;
 	width:100%;
 	height:auto;
@@ -7536,15 +7501,6 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 }
 
 @media screen and (max-width: 600px) {
-<<<<<<< HEAD
-	ul.ng-team-members li{
-		width:49.25%;
-	}
-	ul.ng-team-members li:nth-child(3n+1){
-		margin-left:1.5%;
-	}
-	ul.ng-team-members li:nth-child(2n+1){
-=======
 	ul.ng-team-members > li{
 		width:49.25%;
 	}
@@ -7552,7 +7508,6 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 		margin-left:1.5%;
 	}
 	ul.ng-team-members > li:nth-child(2n+1){
->>>>>>> dev-version
 		margin-left:0;
 	}
 	.ng-about-bottom li{
@@ -7567,36 +7522,23 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 }
 
 @media screen and (max-width: 480px) {
-<<<<<<< HEAD
-	ul.ng-team-members li{
-=======
 	.ng-h1 {font-size: 35px;}
 	.ng-h3 {font-size: 24px;}
 	
 	ul.ng-team-members > li{
->>>>>>> dev-version
 		width:100%;
 		margin-left:0;
 		margin-bottom:25px;
 	}
-<<<<<<< HEAD
-	ul.ng-team-members li:nth-child(3n+1){
-		margin-left:0;
-	}
-	ul.ng-team-members li img{
-=======
 	ul.ng-team-members > li:nth-child(3n+1){
 		margin-left:0;
 	}
 	ul.ng-team-members > li img{
->>>>>>> dev-version
 		max-width:280px;
 		margin-left:auto;
 		margin-right:auto;
 	}
 
-<<<<<<< HEAD
-=======
 }
 
 /*-----------------------------------------------------------------------*/
@@ -8433,5 +8375,4 @@ ul.ng-team-icons li a i {line-height: 24px;}
 		background-size:100%;
 		padding-bottom:5%;
 	}
->>>>>>> dev-version
 }
