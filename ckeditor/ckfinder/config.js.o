@@ -1,1 +1,0 @@
-CKFinder.customConfig=function(config){};

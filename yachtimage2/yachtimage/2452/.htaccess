@@ -1,3 +1,0 @@
-<FilesMatch "\.(php|pl|py|jsp|asp|htm|shtml|sh|cgi)$">
-ForceType text/plain
-</FilesMatch>
