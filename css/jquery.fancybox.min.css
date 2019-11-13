@@ -902,11 +902,11 @@ body.compensate-for-scrollbar {
 /* Styling for Small-Screen Devices */
 @media all and (max-width: 576px) {
     .fancybox-thumbs {
-        width: 110px;
+        /*width: 110px;*/
     }
 
     .fancybox-show-thumbs .fancybox-inner {
-        right: 110px;
+        /*right: 110px;*/
     }
 
     .fancybox-thumbs__list a {

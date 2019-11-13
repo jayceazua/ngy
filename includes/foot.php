@@ -126,6 +126,7 @@ echo $frontend->display_formsubmit_popup();
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/validator.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.extra.js"></script>
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/creditapplication.js"></script>
+<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/wow.min.js"></script>
 
 <script defer="defer" type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/call.captcha.js"></script>
 <script defer="defer" src="https://www.google.com/recaptcha/api.js?onload=fcCaptchaCallback&render=explicit"></script>

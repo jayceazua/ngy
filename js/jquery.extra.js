@@ -4,6 +4,9 @@ $(document).ready(function(){
 		remove_session_storage();		
 	});	
 	
+	// animation
+	new WOW().init();
+	
 	//date
 	if ($(".date-field-a").length > 0) {
 		set_date_picker(".date-field-a", 1);

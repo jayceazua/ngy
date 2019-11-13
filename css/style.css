@@ -52,8 +52,8 @@
 }
 
 html, body { height: 100%; -webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased; }
-body{ margin:0; padding:0; color:#414141; font-size: 16px; font-weight:400; line-height:1.5; font-family: 'Open Sans', verdana, serif; cursor:default; background-color: #fff; }
-.adminbodyclass { padding:0; margin:0; background: #fff; color:#000; font-size: 16px; font-weight:400; font-family: 'Open Sans', verdana, serif; line-height:1.5; cursor:default;}
+body{ margin:0; padding:0; color:#414141; font-size: 20px; font-weight:400; line-height:1.5; font-family: 'glober-regular', verdana, serif; cursor:default; background-color: #fff; }
+.adminbodyclass { padding:0; margin:0; background: #fff; color:#000; font-size: 20px; font-weight:400; font-family: 'glober-regular', verdana, serif; line-height:1.5; cursor:default;}
 .animatedopacity { opacity: 0;}
 .skiptranslate { display: none; }
 
@@ -62,6 +62,12 @@ body{ margin:0; padding:0; color:#414141; font-size: 16px; font-weight:400; line
 	box-sizing: border-box;         /* Opera/IE 8+ */
 	padding: 0;
   	margin: 0;
+}
+
+button, input[type=submit], .newselect {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 button, input[type=submit] {-webkit-appearance: none;
@@ -80,17 +86,26 @@ button, input[type=submit] {-webkit-appearance: none;
 	text-shadow: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2 {
 	line-height: 1.3;
 	margin:0 0 10px 0;
 	padding:0;
 	color:#050505;
 	text-transform:capitalize;
-	font-family: 'Noto Serif', verdana, serif;
+	font-family: 'brandon-black', verdana, serif;
 }
 
-h1 {font-size: 32px;}
-h2 {font-size: 28px;}
+h3, h4, h5, h6 {
+	line-height: 1.3;
+	margin:0 0 10px 0;
+	padding:0;
+	color:#050505;
+	text-transform:capitalize;
+	font-family: 'brandon-medium', verdana, serif;
+}
+
+h1 {font-size: 34px;}
+h2 {font-size: 30px;}
 h3 {font-size: 26px;}
 h4 {font-size: 24px;}
 h5 {font-size: 20px;}
@@ -392,7 +407,7 @@ textarea { resize: none;outline: none; }
 /* end Noscript Info */
 
 #lastPostsLoader { text-align: center; width: 920px; margin: -125px auto 0 auto; }
-.button{background-color:#2bbed3; font-weight: 500; color:#fff; font-size: 16px; font-family:inherit; border:none; text-decoration:none !important; text-transform:capitalize; padding:4px 12px; display:inline-block; cursor: pointer; /*-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;*/ }
+.button{background-color:#2bbed3; font-weight: 500; color:#fff; font-size: 16px; font-family:inherit; border:none; text-decoration:none !important; text-transform:capitalize; padding:8px 12px 4px 12px; display:inline-block; cursor: pointer; /*-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;*/ }
 .button:hover{background-color:#0a1b40; color:#fff;}
 
 .button.buttonarrow { background-image:url(../images/buttonarrow.png); background-position: 90% center; background-repeat: no-repeat; min-width: 100px; padding-right: 52px; }
@@ -670,7 +685,6 @@ ul.social_icon.socialcustom li a.pinterest { background-image:url(../images/soci
 	color:#fff;
 	font-size: 17px;
 	font-weight: 700;
-	font-family: 'Open Sans',serif;
 }
 
 .header-search-show-hide hr {
@@ -1041,7 +1055,6 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 	margin:0 0 10px 0;
 	text-align:center;
 	letter-spacing: 0.6px;
-	font-family:'Open Sans Condensed', serif;
 }
 
 .mobilestatic .mobile-search-container .mobile-search-container-in{width: 100%;}
@@ -1098,7 +1111,7 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 	font-size:14px;
 	font-weight:600;
 	margin:0; 
-	padding:5px 17px;
+	padding:7px 17px 3px 17px;
 	text-align:center;
 	text-transform: uppercase;
 	display:block;
@@ -1178,9 +1191,14 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 .cols_search h3,
 .cols_menu_after h3,
 .cols_menu2_after h3 {
+<<<<<<< HEAD
 	font-family: 'Open Sans', serif;
 	font-size:14px;
 	font-weight:600;
+=======
+	font-size:16px;
+	font-weight:normal;
+>>>>>>> dev-version
 	color:#000000;
 	line-height:1.5;
 	margin:0;
@@ -1252,23 +1270,21 @@ ul.searchextrabutton li .button:hover {background: #0a1b40;}
 }
 .slidersearch .search-container-in{ padding:10px 20px 20px 20px; background-color: rgba(0,0,0,0.5); }
 .slidersearch .search-container h6{ 
-	font-size:24px; 
+	font-size:18px; 
 	text-transform:uppercase; 
 	color:#fff; 
 	background:#2bbed3;
 	padding:6px 0;
 	margin:0;
 	text-align:center;
-	letter-spacing: 0.6px;
-	font-family:'Open Sans Condensed', serif;
+	letter-spacing: 0.6px;	
 }
 .slidersearch .search-container h5{ 
-	font-size:15px;
+	font-size:16px;
 	color:#fff; 
 	margin:0 0 7px 0;
 	color: #2bbed3;
-	text-transform:uppercase;
-	font-family:'Open Sans Condensed', serif;
+	text-transform:uppercase;	
 }
 .slidersearch .search-container p{ font-weight:bold; margin:0 0 3px 0;} 
 .slidersearch .search-container .radio-group{ font-weight:bold; margin-bottom: 5px;} 
@@ -1643,7 +1659,7 @@ ul.generalstat_child li h3 { border: 0; padding-bottom: 0; }
 
 /*home section Brandbox*/
 .homesectionbrandbox { padding: 30px 0 10px 0; background-color: #fff; text-align: center; }
-.homesectionbrandbox h2 {text-align: center; display:inline-block;}
+.homesectionbrandbox h2 {text-align: center; display:inline-block; font-size: 34px;}
 .homesectionbrandbox .singlelinebottom30{margin-bottom:50px;}
 
 .homesectionbrandbox_container2{position: relative;}
@@ -1727,7 +1743,7 @@ ul.brand-exp-list li:hover { border: 1px solid #012641; }
 
 /*home section 1*/
 .homesection1 { padding: 30px 0; background-color: #fff; text-align: left; }
-.homesection1 h2 {}
+.homesection1 h2 {font-size:34px;}
 
 .boatwatcherpage {border: 2px solid #2bbed3;padding: 20px 30px;font-size: 14px;}
 .boatwatcherpage h2 {text-transform:uppercase;}
@@ -1819,7 +1835,7 @@ ul.tophomebox > li .buttontext {}
 /*home Video*/
 .homevideo { padding: 30px 0 0 0; background-color: #fff; text-align:center; }
 .homevideo .containersmall {width: 100%; max-width: 1050px; margin: 0 auto;}
-.homevideo h2 {display:inline-block;}
+.homevideo h2 {display:inline-block;font-size: 34px;}
 
 /*home Map*/
 .homemap { padding: 30px 0 0 0; background-color: #fff; text-align:center; line-height:0; }
@@ -1842,13 +1858,13 @@ ul.tophomebox > li .buttontext {}
 
 /*home section 4 - News*/
 .homesection4 { padding:30px 0 0 0; background-color: #fff; text-align: center; }
-.homesection4 h2 {display:inline-block;}
+.homesection4 h2 {display:inline-block; font-size: 34px;}
 .homesection4 .singlelinebottom30{margin-bottom:50px;}
 .dealercontent { margin: 30px 0; }
 
 /*home section 4*/
 .homesection5 { padding:30px 0 0 0; background-color: #fff; }
-.homesection5 h2{text-transform:capitalize;}
+.homesection5 h2{text-transform:capitalize;font-size: 34px;}
 
 ul.newsletterforpage { padding: 0; margin: 0; list-style:none; }
 ul.newsletterforpage li{ margin: 0; padding: 0; float: left; vertical-align: middle; }
@@ -1874,7 +1890,7 @@ ul.newsletterforpage li:nth-child(2) { width: 34%; }
 
 /*home section insta*/
 .homesectioninsta { padding: 0; background-color: #fff; text-align:center; }
-.homesectioninsta h4 { text-transform:none; margin-bottom: 0; font-size: 14px; font-weight: 700; }
+.homesectioninsta h4 { text-transform:none; margin-bottom: 0; font-size: 18px; font-weight: 700; }
 .homesectioninsta .containersmall{width:100%; max-width:1050px; margin:0 auto;}
 
 .homesectioninsta ul { padding: 0; margin: 0; list-style: none; font-size: 0; }
@@ -2032,7 +2048,7 @@ ul.newsletterforpage li:nth-child(2) { width: 34%; }
 	-ms-transform: translateY(-50%);  
 	transform: translateY(-50%);
 }
-.featuredyachtsnew ul li .info { display:block; margin: 0; font-size: 30px; text-transform: capitalize; color: #000000; font-family: 'Noto Serif', serif; font-weight:700; }
+.featuredyachtsnew ul li .info { display:block; margin: 0; font-size: 30px; text-transform: capitalize; color: #000000; font-family: 'brandon-black', serif; font-weight:700; }
 .featuredyachtsnew ul li .info2 { display:block; margin: 12px 0 0 0; font-size: 18px; text-transform: capitalize; color: #000000; }
 .featuredyachtsnew ul li .price { display:block; margin: 12px 0 0 0; color: #000; font-size: 24px; font-weight: 600; }
 .featuredyachtsnew ul li .overviewtext { display:block; margin: 12px 0 0 0; }
@@ -2193,7 +2209,7 @@ a.joinmaillist:hover { color:#000; background-color: #a4a4a8; }
 
 /*latest news*/
 ul.latestnews { padding: 0; margin: 0; list-style: none; font-size: 0; text-align: center; }
-ul.latestnews li { position:relative; margin:0 0 30px 2%; padding:325px 0 0 0; width: 32%; text-align: center; font-size: 14px; display: inline-block; background-position: center 0; background-repeat: no-repeat; vertical-align:top;}
+ul.latestnews li { position:relative; margin:0 0 30px 2%; padding:225px 0 0 0; width: 32%; text-align: center; font-size: 14px; display: inline-block; background-position: center 0; background-repeat: no-repeat; vertical-align:top;}
 ul.latestnews li:nth-child(3n+1){ margin-left: 0; }
 
 ul.latestnews li .newsimg { line-height: 0;}
@@ -2222,11 +2238,11 @@ ul.latestnews li .newstext:before{
 	background-repeat:repeat-y; 
 	background-position:bottom right;
 	width: 8px;
-	height: -webkit-calc(100% - 195px);
-	height: -moz-calc(100% - 195px);
-	height: calc(100% - 195px);
+	height: -webkit-calc(100% - 128px);
+	height: -moz-calc(100% - 128px);
+	height: calc(100% - 128px);
 	position: absolute;
-	top:195px;
+	top:128px;
 	left: -8px;
 	display: block;
 }
@@ -2236,11 +2252,11 @@ ul.latestnews li .newstext:after{
 	background-repeat:repeat-y; 
 	background-position:bottom left;
 	width: 8px;
-	height: -webkit-calc(100% - 195px);
-	height: -moz-calc(100% - 195px);
-	height: calc(100% - 195px);
+	height: -webkit-calc(100% - 128px);
+	height: -moz-calc(100% - 128px);
+	height: calc(100% - 128px);
 	position: absolute;
-	top:195px;
+	top:128px;
 	right: -8px;
 	display: block;
 }
@@ -2739,7 +2755,7 @@ ul.filtersection-list li a:hover {color:#2bbed3;}
 
 /*Product details*/
 .product-detail-header{padding-bottom:20px; text-align:center;}
-.product-detail-header h1.title{text-align:center; font-size:30px;}
+.product-detail-header h1.title{text-align:center;}
 
 .product-detail-header h1.title:after {
 	margin: 0 auto;
@@ -2845,7 +2861,7 @@ a.brokermobilephone:before{
 .customboatviewcontent { width: 100%; padding: 0; margin: 20px 0 0 0; }
 .customboatviewcontent h2 {font-weight:400;font-size: 25px;}
 
-a.customboattab{font-size: 23px;color:#050505;font-weight:400;text-transform:capitalize; padding: 0 0 5px 0; margin:0 0 10px 0;line-height: 1.3; font-family: 'Noto Serif', serif; border-bottom: 1px solid #2bbed3; display:inline-block;}
+a.customboattab{font-size: 25px;color:#050505;font-weight:400;text-transform:capitalize; padding: 0 0 5px 0; margin:0 0 10px 0;line-height: 1.3; font-family: 'brandon-black', serif; border-bottom: 1px solid #2bbed3; display:inline-block;}
 a.customboattab:hover,
 a.customboattab.active{ color: #2bbed3; }
 a.customboattab:after {
@@ -6916,6 +6932,10 @@ transform: translateY(-50%);
 
 .white{ color:#fff!important;}
 .black{ color:#141414!important;}
+<<<<<<< HEAD
+=======
+.navy{ color:#0b1b3e!important;}
+>>>>>>> dev-version
 
 .ng-h1{
 	font-family: 'brandon-black';
@@ -6924,12 +6944,29 @@ transform: translateY(-50%);
 	clear:both;
 	margin:0 0 30px 0;
 	padding:0;
+<<<<<<< HEAD
 	line-height:1.55;
+=======
+	line-height:1;
+>>>>>>> dev-version
 	font-weight:normal;
 }
 
 .ng-h1 span{
 	border-bottom:2px solid #2abfd0;	
+<<<<<<< HEAD
+=======
+	display:inline-block;
+	padding-bottom:10px;
+}
+
+.ng-h1 span.whiteborder{
+	border-bottom:2px solid #fff;
+}
+
+.ng-h1 span.navyborder{
+	border-bottom:2px solid #0b1b3e;
+>>>>>>> dev-version
 }
 
 .ng-h3{
@@ -6943,6 +6980,33 @@ transform: translateY(-50%);
 	font-weight:normal;
 }
 
+<<<<<<< HEAD
+=======
+.ng-h4{
+	font-family: 'glober-regular';
+	font-size:22px;
+	color:#2abfd0;
+	clear:both;
+	margin:0 0 30px 0;
+	padding:0;
+	line-height:1.2;
+	font-weight:normal;
+}
+
+.ng-h4 span{
+	border-bottom:2px solid #2abfd0;	
+	display:inline-block;
+	padding-bottom:10px;
+}
+
+.ng-h4.bold,
+.ng-h4.strong,
+.ng-h4 bold,
+.ng-h4 strong{
+	font-family: 'glober-bold';
+}
+
+>>>>>>> dev-version
 .ng-text{
 	font-family: 'MyriadPro';
 	font-size:20px;
@@ -7106,7 +7170,11 @@ ul.ng-team-members{
 	text-align:center;
 }
 
+<<<<<<< HEAD
 ul.ng-team-members li{
+=======
+ul.ng-team-members > li{
+>>>>>>> dev-version
 	margin:2% 0 2% 1.5%;
 	padding:0;
 	font-size:12px;
@@ -7115,11 +7183,19 @@ ul.ng-team-members li{
 	vertical-align:top;
 }
 
+<<<<<<< HEAD
 ul.ng-team-members li:nth-child(4n+1){
 	margin-left:0;
 }
 
 ul.ng-team-members li img{
+=======
+ul.ng-team-members > li:nth-child(4n+1){
+	margin-left:0;
+}
+
+ul.ng-team-members > li img{
+>>>>>>> dev-version
 	display:block;
 	width:100%;
 	height:auto;
@@ -7460,6 +7536,7 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 }
 
 @media screen and (max-width: 600px) {
+<<<<<<< HEAD
 	ul.ng-team-members li{
 		width:49.25%;
 	}
@@ -7467,6 +7544,15 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 		margin-left:1.5%;
 	}
 	ul.ng-team-members li:nth-child(2n+1){
+=======
+	ul.ng-team-members > li{
+		width:49.25%;
+	}
+	ul.ng-team-members > li:nth-child(3n+1){
+		margin-left:1.5%;
+	}
+	ul.ng-team-members > li:nth-child(2n+1){
+>>>>>>> dev-version
 		margin-left:0;
 	}
 	.ng-about-bottom li{
@@ -7481,18 +7567,871 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 }
 
 @media screen and (max-width: 480px) {
+<<<<<<< HEAD
 	ul.ng-team-members li{
+=======
+	.ng-h1 {font-size: 35px;}
+	.ng-h3 {font-size: 24px;}
+	
+	ul.ng-team-members > li{
+>>>>>>> dev-version
 		width:100%;
 		margin-left:0;
 		margin-bottom:25px;
 	}
+<<<<<<< HEAD
 	ul.ng-team-members li:nth-child(3n+1){
 		margin-left:0;
 	}
 	ul.ng-team-members li img{
+=======
+	ul.ng-team-members > li:nth-child(3n+1){
+		margin-left:0;
+	}
+	ul.ng-team-members > li img{
+>>>>>>> dev-version
 		max-width:280px;
 		margin-left:auto;
 		margin-right:auto;
 	}
 
+<<<<<<< HEAD
+=======
+}
+
+/*-----------------------------------------------------------------------*/
+/*--- Buy with us Page on Sep 13 2019 -----------------------------------*/
+/*-----------------------------------------------------------------------*/
+.ng-buy-with-us-left{
+	/*width:50%;
+	border-bottom:2px solid #2abfd0;
+	order:1;*/
+	width:48%;	
+	order:1;
+}
+
+.ng-buy-with-us-right{
+	/*width:50%;
+	padding-left:7%;*/
+	width:52%;
+	padding-left:70px;
+	order:2;
+
+}
+
+.ng-buy-with-us-right img{
+	width:100%;
+	height:auto;
+	display:block;
+}
+
+ul.ng-tick{
+	 margin:0 0 20px 0; 
+	 padding:0;
+	 list-style-type:none;	 
+}
+ul.ng-tick li{ 
+	margin:0; 
+	padding:0 0 0 25px;
+	background:url(../images/ng-tick.png) no-repeat left 7px;
+	text-transform:uppercase;
+	color:#141414;
+	font-family: 'glober-bold';
+	font-size:20px;
+	
+}
+
+ul.ng-why-hire-us{
+	margin:70px 0 0 0;
+	padding:0;
+	list-style-type:none;
+	font-size:0;
+}
+
+ul.ng-why-hire-us li{
+	margin:0;
+	padding:0 0 0 50px;
+	display:inline-block;
+	font-size:18px;
+	color:#141414;
+	width:33.33%;
+	vertical-align:top;
+	position:relative;
+	font-family: 'glober-regular';
+}
+
+ul.ng-why-hire-us li:before{
+	font-size:100px;
+	color:#bde8ef;
+	font-family: 'glober-bold';
+	line-height:1;
+	position:absolute;
+	top:-35px;
+	left:0;
+}
+
+ul.ng-why-hire-us li:nth-child(1){
+	margin-left:0;
+}
+
+ul.ng-why-hire-us li:nth-child(1):before{
+	content:"1";
+	left:10px;
+}
+
+ul.ng-why-hire-us li:nth-child(2):before{
+	content:"2";
+}
+
+ul.ng-why-hire-us li:nth-child(3):before{
+	content:"3";
+}
+
+ul.ng-why-hire-us li p{
+	background:url(../images/ng-dot.png) no-repeat left 8px;
+	margin:35px 0 25px -17px;
+	padding:0 0 0 18px;
+}
+
+ul.ng-why-hire-us h3{
+	font-family: 'brandon-black';
+	color:#2abfd0;
+	font-size:22px;
+	font-weight:normal;
+	text-transform:uppercase;
+	margin:0;
+	padding:0;
+	display:inline-block;
+}
+
+ul.ng-why-hire-us h3 .black{
+	text-transform:none;
+}
+
+.ng-buy-with-us-search{
+	background: #2abfd0;
+	padding:70px 50px 125px 50px;
+	color:#fff;
+	font-family: 'glober-regular';
+}
+
+.main .ng-buy-with-us-search .container{ padding:0; background-color:transparent;}
+
+.ng-buy-with-us-search h4{
+	font-size:24px;
+	text-transform:uppercase;
+	font-family: 'glober-regular';
+	color:#fff;
+	font-weight:normal;
+	margin-bottom:30px;
+}
+
+.ng-buy-with-us-search ul.ng-search-form{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	font-size:0;
+}
+
+.ng-buy-with-us-search ul.ng-search-form li{
+	margin:0 0 0 1%;
+	padding:0;
+	font-size:14px;
+	width:32.66%;
+	display:inline-block;
+	vertical-align:top;
+}
+
+.ng-buy-with-us-search ul.ng-search-form li:first-child{
+	margin-left:0;
+}
+
+.ng-buy-with-us-search form.ngsearchform p{
+	margin:0 0 7px 0;
+	padding:0;
+	font-family: 'glober-bold';
+	font-size:14px;
+}
+
+div.ng-half{ width:48.5%; float:right;}
+div.ng-half.ng-first{ float:left;}
+
+.ng-buy-with-us-search form.ngsearchform input[type="text"]{
+	margin:0 0 7px 0;
+	padding:9px;
+	border:none;
+	font-family: 'glober-regular';
+	width:100%;
+	font-size:13px;
+	color:#868686;
+}
+
+.ng-buy-with-us-search form.ngsearchform textarea{
+	margin:0 0 7px 0;
+	padding:9px;
+	border:none;
+	font-family: 'glober-regular';
+	width:100%;
+	height:73px;
+	font-size:13px;
+	color:#868686;
+	line-height:1.3;
+}
+
+div.ng-hr{ border-top:2px solid #FFFFFF; margin-top:20px; margin-bottom:20px;}
+div.ng-hr div{ position:relative; top:-2px; border-left:20px solid #2abfd0; float:right; display:inline-block;}
+
+.ng-submit{
+	display:inline-block;
+	background:#0b1b3e;
+	padding:7px 10px;
+	font-family: 'glober-bold';
+	color:#fff;
+	font-size:14px;
+	text-transform:uppercase;
+	border:none;
+	min-width:160px;
+	cursor:pointer;
+}
+
+.ng-buy-with-us-search form.ngsearchform ::placeholder,
+.ng-activate-yacht-finder form.ngactivateform ::placeholder,
+.ng-sell-yacht-catamaran form.sellyachtcatamaranform ::placeholder,
+.ng-boat-evaluation form.ngboatevaluationform ::placeholder{ 
+    color: #868686;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	-webkit-opacity: 1;   
+	-moz-opacity: 1;     
+	opacity: 1; 
+}
+
+.ng-buy-with-us-search form.ngsearchform ::-webkit-input-placeholder,
+.ng-activate-yacht-finder form.ngactivateform ::-webkit-input-placeholder,
+.ng-sell-yacht-catamaran form.sellyachtcatamaranform ::-webkit-input-placeholder,
+.ng-boat-evaluation form.ngboatevaluationform ::-webkit-input-placeholder{
+  color: #868686;
+}
+
+.ng-buy-with-us-search form.ngsearchform ::-moz-placeholder,
+.ng-activate-yacht-finder form.ngactivateform ::-moz-placeholder,
+.ng-sell-yacht-catamaran form.sellyachtcatamaranform ::-moz-placeholder,
+.ng-boat-evaluation form.ngboatevaluationform ::-moz-placeholder{ 
+  color: #868686;
+}
+
+.ng-buy-with-us-search form.ngsearchform :-moz-placeholder,
+.ng-activate-yacht-finder form.ngactivateform :-moz-placeholder,
+.ng-sell-yacht-catamaran form.sellyachtcatamaranform :-moz-placeholder,
+.ng-boat-evaluation form.ngboatevaluationform :-moz-placeholder{ 
+  color: #868686;
+}
+
+.ng-buy-with-us-search form.ngsearchform :-ms-input-placeholder,
+.ng-activate-yacht-finder form.ngactivateform :-ms-input-placeholder,
+.ng-sell-yacht-catamaran form.sellyachtcatamaranform :-ms-input-placeholder,
+.ng-boat-evaluation form.ngboatevaluationform :-ms-input-placeholder{ 
+  color: #868686;
+}
+
+.ng-buy-with-us-search form.ngsearchform ::-ms-input-placeholder,
+.ng-activate-yacht-finder form.ngactivateform ::-ms-input-placeholder,
+.ng-sell-yacht-catamaran form.sellyachtcatamaranform ::-ms-input-placeholder,
+.ng-boat-evaluation form.ngboatevaluationform ::-ms-input-placeholder{ 
+    color: #868686;
+}
+
+.ng-yacht-finder{
+	padding:100px 0;
+}
+
+.ng-yacht-finder-left {
+	width:60%;
+	padding-right:2%;
+}
+
+.ng-yacht-finder-left img{
+	width:100%;
+}
+
+.ng-yacht-finder-right {
+	width:40%;
+	align-self:center;
+}
+
+.ng-activate-yacht-finder{
+	padding:125px 50px;
+	color:#fff;
+	background:#14244b;
+}
+.main .ng-activate-yacht-finder .container{ padding:0; background-color:transparent;}
+
+.ng-activate-yacht-finder .ngactivateform p{
+	margin:0 0 7px 0;
+	padding:0;
+	font-family: 'glober-bold';
+	font-size:14px;
+	color:#2abfd0;
+}
+
+.ng-activate-yacht-finder ul.ng-activate-form{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	font-size:0;
+}
+
+.ng-activate-yacht-finder ul.ng-activate-form li{
+	margin:0;
+	padding:0 0 0 50px;
+	display:inline-block;
+	font-size:18px;
+	color:#141414;
+	width:33.33%;
+	vertical-align:top;
+	position:relative;
+	font-family: 'glober-regular';
+}
+
+.ng-activate-yacht-finder ul.ng-activate-form li:first-child{
+	padding-left:0;
+}
+
+.ng-activate-yacht-finder form.ngactivateform input[type="text"]{
+	margin:0 0 7px 0;
+	padding:9px;
+	border:none;
+	font-family: 'glober-regular';
+	width:100%;
+	font-size:13px;
+	color:#868686;
+}
+
+.ng-activate-yacht-finder form.ngactivateform select{
+	margin:0 0 7px 0;
+	padding:9px;
+	border:none;
+	font-family: 'glober-regular';
+	width:100%;
+	max-width:150px;
+	font-size:13px;
+	color:#868686;
+	border-radius:5px;
+	height:33px;
+	display:block;
+	background:url(../images/ng-arrow.png) no-repeat 94% center #fff;
+}
+
+.ng-activate-yacht-finder div.ng-hr div{ border-left:20px solid #14244b;}
+
+.ng-activate-yacht-finder .ng-submit{
+	background:#2abfd0;
+}
+
+/*----------- Responsive css -----------*/
+@media screen and (min-width: 769px) {
+	.ng-spacer{ height:6px; clear:both; width:100%;}
+}
+
+@media screen and (max-width: 768px) {
+	.ng-buy-with-us-left{
+		width:100%;		
+	}
+	
+	.ng-buy-with-us-right{
+		width:100%;
+		padding-left:0;
+		margin-bottom:25px;
+	}
+	
+	ul.ng-why-hire-us li{
+		margin-top:30px;
+		width:100%;
+	}
+	
+	ul.ng-why-hire-us li:first-child{
+		margin-top:0;
+	}
+	
+	.ng-buy-with-us-search{
+		padding-left:0;
+		padding-right:0;
+	}
+	
+	.ng-buy-with-us-search ul.ng-search-form li{
+		margin:0 0 10px 0;
+		width:100%;
+	}
+	
+	.ng-yacht-finder-left {
+		width:100%;
+		padding-right:0;
+		margin-bottom:50px;
+	}	
+	
+	.ng-yacht-finder-right {
+		width:100%;
+	}
+	
+	.ng-activate-yacht-finder{
+		padding-left:0;
+		padding-right:0;
+	}
+	
+	.ng-activate-yacht-finder ul.ng-activate-form li{
+		margin:10px 0 0 0;
+		padding:0;
+		width:100%;
+	}
+	
+	.ng-activate-yacht-finder ul.ng-activate-form li:first-child{
+		margin-bottom:25px;
+	}
+
+}
+
+/*-----------------------------------------------------------------------*/
+/*--- Sell with us Page on Sep 16 2019 -----------------------------------*/
+/*-----------------------------------------------------------------------*/
+
+.ng-sell-with-us-left{
+	width:52%;
+	padding-right:70px;
+}
+
+.ng-sell-with-us-right{
+	width:48%;
+}
+
+ul.ng-sell-bottom{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	font-size:0;
+	text-align:center;
+	color:#141414;
+	border-top:2px solid #2abfd0;
+}
+
+ul.ng-sell-bottom li{
+	margin:20px 0 0 2%;
+	padding:0;
+	display:inline-block;
+	font-size:18px;
+	font-family: 'brandon-medium';
+	color:#141414;
+	width:23.5%;
+	vertical-align:top;
+}
+
+ul.ng-sell-bottom li:first-child{
+	margin-left:0;
+}
+
+ul.ng-sell-bottom li img{
+	width:100%;
+	max-width:125px;
+	height:auto;
+}
+
+ul.ng-sell-bottom li h4{
+	text-transform:uppercase;
+	color:#2abfd0;
+	font-size:20px;
+	font-family: 'brandon-black';
+	font-weight:normal;
+	margin:0;
+	padding:0;
+	line-height:1;
+}
+
+ul.ng-sell-bottom li p{
+	line-height:1.2;
+}
+
+.ng-sell-yacht-catamaran{
+	padding:125px 50px;
+	background:#141414;
+	color:#fff;
+}
+.main .ng-sell-yacht-catamaran .container{ padding:0; background-color:transparent;}
+.ng-sell-yacht-catamaran .sellyachtcatamaranform p{
+	margin:0 0 7px 0;
+	padding:0;
+	font-family: 'glober-bold';
+	font-size:14px;
+	color:#2abfd0;
+}
+
+.ng-sell-yacht-catamaran ul.ng-sell-yacht-catamaran-form{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	font-size:0;
+}
+
+.ng-sell-yacht-catamaran ul.ng-sell-yacht-catamaran-form li{
+	margin:0;
+	padding:0 0 0 30px;
+	display:inline-block;
+	font-size:18px;
+	color:#141414;
+	width:33.33%;
+	vertical-align:top;
+	position:relative;
+	font-family: 'glober-regular';
+}
+
+.ng-sell-yacht-catamaran ul.ng-sell-yacht-catamaran-form li:first-child{
+	padding-left:0;
+}
+
+.ng-sell-yacht-catamaran form.sellyachtcatamaranform input[type="text"]{
+	margin:0 0 7px 0;
+	padding:9px;
+	border:none;
+	font-family: 'glober-regular';
+	width:100%;
+	font-size:13px;
+	color:#868686;
+}
+
+
+.ng-sell-yacht-catamaran div.ng-hr{ border-top:2px solid #2abfd0;}
+.ng-sell-yacht-catamaran div.ng-hr div{ border-left:20px solid #141414;}
+
+.ng-sell-yacht-catamaran .ng-submit{
+	background:#2abfd0;
+}
+
+.ng-evaluation {
+	padding:100px 0 0 0;
+}
+
+.ng-evaluation-left{
+	width:50%;
+	padding-right:2%;
+}
+
+.ng-evaluation-right{
+	width:50%;
+	padding-right:5%;
+	align-self:center;
+	margin-bottom:100px;
+}
+
+.ng-evaluation-left img{
+	display:block;
+	width:100%;
+}
+
+.ng-boat-evaluation{
+	background:#2abfd0;
+	padding:150px 0 125px 0;
+}
+
+.main .ng-boat-evaluation .container{ padding:0; background-color:transparent;}
+
+
+ul.ng-boat-evaluation-form{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	font-size:0;
+}
+
+.ng-boat-evaluation ul.ng-boat-evaluation-form li{
+	margin:0 0 0 1%;
+	padding:0;
+	display:inline-block;
+	width:32.66%;
+	font-size:14px;
+	vertical-align:top;
+}
+
+.ng-boat-evaluation ul.ng-boat-evaluation-form li:first-child{
+	margin-left:0;
+}
+
+.ng-boat-evaluation ul.ng-boat-evaluation-form p{
+	margin:0 0 7px 0;
+	padding:0;
+	font-family: 'glober-bold';
+	font-size:14px;
+	color:#0b1b3e;
+}
+
+.ng-boat-evaluation ul.ng-boat-evaluation-form input[type="text"]{
+	margin:0 0 7px 0;
+	padding:9px;
+	border:none;
+	font-family: 'glober-regular';
+	width:100%;
+	font-size:13px;
+	color:#868686;
+}
+
+.ng-boat-evaluation div.ng-hr { border-top:2px solid #0b1b3e;}
+
+.ng-seller-brochure{
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c5c5c5+0,f8f8f8+100 */
+	background: #c5c5c5; /* Old browsers */
+	background: -moz-linear-gradient(left,  #c5c5c5 0%, #f8f8f8 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left,  #c5c5c5 0%,#f8f8f8 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right,  #c5c5c5 0%,#f8f8f8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c5c5c5', endColorstr='#f8f8f8',GradientType=1 ); /* IE6-9 */
+}
+
+.ng-seller-brochure .ng-seller-brochure-left{
+	width:50%;
+}
+
+.ng-seller-brochure .ng-seller-brochure-left img{
+	width:100%;
+}
+
+.ng-seller-brochure .ng-seller-brochure-right{
+	width:50%;
+	padding-right:5%;
+	align-self:center;	
+}
+
+.ng-seller-h1{
+	font-size:65px;
+	font-family: 'brandon-black';
+	color:#2abfd0;
+	font-weight:normal;
+	line-height:1;
+}
+
+.ng-seller-h1 span{
+	display:block;
+	font-size:46px;
+	color:#363436;
+	font-family: 'glober-bold';
+	
+}
+.ng-seller-h4{
+	font-size:22px;
+	font-family: 'glober-bold';
+	color:#2abfd0;
+	font-weight:normal;
+	margin:0;
+	padding:0;
+	text-transform:uppercase;
+}
+
+@media screen and (max-width: 768px){
+	.ng-sell-with-us-left{
+		width:100%;
+		padding-right:2%;
+		margin-bottom:25px;
+	}
+	
+	.ng-sell-with-us-right{
+		width:100%;
+	}
+	
+	.ng-sell-yacht-catamaran ul.ng-sell-yacht-catamaran-form li{
+		margin:20px 0 0 0;
+		padding:0;
+		width:100%;
+	}
+	
+	.ng-sell-yacht-catamaran ul.ng-sell-yacht-catamaran-form li:first-child{
+		margin-top:0;
+	}
+	
+	.ng-evaluation-left{
+		width:100%;
+		padding-right:5%;
+	}
+	
+	.ng-evaluation-right{
+		width:100%;
+		padding-right:5%;
+		padding-left:5%;
+	}
+	
+	.ng-boat-evaluation ul.ng-boat-evaluation-form li{
+		margin:0;
+		padding:0;
+		width:100%;
+	}
+	
+	.mob-none{ display:none;}
+	
+	.ng-seller-brochure .ng-seller-brochure-left{
+		width:100%;
+		padding-right:5%;
+	}
+	
+	.ng-seller-brochure .ng-seller-brochure-right{
+		width:100%;
+		padding-right:5%;
+		padding-left:5%;
+		margin-bottom:100px;
+	}
+	
+	.ng-sell-yacht-catamaran{
+		padding-left:0;
+		padding-right:0;
+	}
+	
+	.ng-seller-h1{
+		font-size:42px;
+	}
+	
+	.ng-seller-h1 span{
+		font-size:30px;		
+	}
+	
+	.ng-seller-h4 span{
+		display:block;
+		margin-top:5px;
+	}
+	
+	ul.ng-sell-bottom li{
+		margin-left:0;
+		width:100%;
+	}
+	
+	ul.ng-sell-bottom li img{
+		max-width:170px;
+	}
+
+}
+
+/*-----------------------------------------------------------------------*/
+/*--- Brokerage Services Page on Sep 19 2019 ----------------------------*/
+/*-----------------------------------------------------------------------*/
+.ng-borkerage-services-hero{
+	position:relative;
+	text-align:center;
+}
+
+.ng-borkerage-services-hero img{
+	width:100%;
+	height:auto;
+}
+
+.ng-borkerage-services-hero > div{
+	position:absolute;
+	left:5%;
+	right:5%;
+	top:50%;
+}
+
+.ng-borkerage-services-hero h1{
+	-ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+	font-family: 'brandon-black';
+	font-weight:normal;
+	font-size:66px;
+	color:#2abfd0;
+	line-height:1;
+	margin-top:-4%;
+}
+
+.ng-borkerage-services-hero h1 span{
+	font-family: 'glober-bold';
+	display:block;
+	color:#fff;
+	font-size:42px;
+}
+
+@media screen and (max-width: 768px){
+	.ng-borkerage-services-hero h1{
+		font-size:42px;
+	}
+	.ng-borkerage-services-hero h1 span{
+		font-size:30px;
+	}
+}
+
+/* Team Icons Sep 18, 2019 */
+ul.ng-team-icons{
+	margin:6px;
+	padding:0;
+	list-style-type:none;
+	text-align:center;
+	font-size:0;
+}
+ul.ng-team-icons li{
+	margin:4px;
+	padding:0;
+	width:auto;
+	list-style-type:none;
+	display:inline-block;
+	font-size:small;
+}
+ul.ng-team-icons li img{
+	border:0;
+	width:19px;
+	height:19px;
+}
+ul.ng-team-icons li a{
+	display:block;
+	-webkit-border-radius: 50%; 
+	-moz-border-radius: 50%; 
+	border-radius: 50%;
+	text-align:center;
+	color: #18173f;
+	background-color: #2abfd0;
+	width: 26px;
+	height: 26px;
+	line-height:26px;
+}
+
+ul.ng-team-icons li a i {line-height: 24px;}
+
+/* oct 18,2019*/
+.ng-seller-brochure2{
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c5c5c5+0,f8f8f8+100 */
+	background: #c4c4c4; /* Old browsers */
+	background: -moz-linear-gradient(left,  #c4c4c4 0%, #f8f8f8 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left,  #c4c4c4 0%,#f8f8f8 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right,  #c4c4c4 0%,#f8f8f8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c4c4c4', endColorstr='#f8f8f8',GradientType=1 ); /* IE6-9 */
+	position:relative;
+}
+
+.ng-seller-brochure2 .ng-seller-brochure-left2{
+	width:70%;
+	background: url(../images/ng-seller-brochure2.png) no-repeat right top;
+	background-size:100%;
+	float:right;
+	clear:both;
+}
+
+.ng-seller-brochure2 .ng-seller-brochure-left2 img{
+	visibility:hidden;
+}
+
+.ng-seller-brochure2 .ng-seller-brochure-right2{
+	width:100%;
+	position:absolute;
+	padding-left:5%;
+	padding-right:5%;
+	top: 35%;
+	clear:both;
+}
+
+@media screen and (max-width: 768px){
+	.ng-seller-brochure2 .ng-seller-brochure-right2{
+		position:relative;
+		left:auto;
+		right:auto;
+		top: 0;
+		padding-bottom:50px;
+	}
+	.ng-seller-brochure2 .ng-seller-brochure-left2{
+		background: url(../images/ng-seller-brochure2-2.png) no-repeat right top;
+		background-size:100%;
+		padding-bottom:5%;
+	}
+>>>>>>> dev-version
 }

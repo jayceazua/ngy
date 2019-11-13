@@ -64,10 +64,10 @@ class Commonclass {
     public $crt_im_height = 120;
 	
 	public $blog_im_width_t = 500;
-    public $blog_im_height_t = 333;
+    public $blog_im_height_t = 354;
 	
 	public $blog_im_width = 1200; //800
-    public $blog_im_height = 798; //832
+    public $blog_im_height = 849; //832
 	
 	public $location_im_width = 1366;
     public $location_im_height = 500;
