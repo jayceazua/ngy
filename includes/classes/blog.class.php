@@ -866,23 +866,23 @@ class Blogclass {
 	  global $cm;
 	  
 	  if ($template == 2){
+		  //$cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3));
 		  $returntext = '
 		  <span class="ng-social">Share:
 		  <ul>
 		  	'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
-			'. $cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
 			'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
 			'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 4)) .'
 		  </ul>
 		  </span>
 		  ';
 	  }else{
+		  //$cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1));
 		  $returntext = '
 		  <div class="social">
 				<ul>  
 					<li class="title">Share: </li>          
 					'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
-					'. $cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
 					'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
 					'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'                                   
 				</ul>
