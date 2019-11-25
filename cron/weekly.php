@@ -1,6 +1,6 @@
 <?php
 set_time_limit(0);
-include("/stage/sites/n/ngyachting.com/htdocs__/includes/common.php");
+include("/data/sites/n/ngyachting.com/htdocs__/includes/common.php");
 $cur_date = date("w");
 if ($cur_date == 1){
 	$sql = "select user_id, emails from tbl_user_lead_settings where timeperiods = 3";
