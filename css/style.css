@@ -1100,7 +1100,7 @@ h2.home-search-heading span{background:url(../images/search.png) 0 center no-rep
 }
 .search-container .button-group .button2:hover{ background:#0a1b40;}
 .search-container .button-group a { color: #fff; font-weight: 700; }
-.search-container .button-group i { color: #bd0000; margin-right: 6px; }
+.search-container .button-group i { color: #0a1b40; margin-right: 6px; }
 
 .input-group{ width:100%; /*border-radius:3px; border:1px solid #ccc;*/ margin-bottom:16px;}
 .input-group .input-icon{ width:40px; height:30px; display:inline-block; float:left; border-right:1px solid #999ba0;}
