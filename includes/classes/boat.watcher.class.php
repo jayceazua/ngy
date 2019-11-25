@@ -1270,8 +1270,7 @@ class Boatwatcherclass {
 			$fr_mail_subject = str_replace("#companyname#", $companyname, $fr_mail_subject);	
 			
 			$mail_fm = $cm->yf_email_from();
-			$mail_to = "rich@yachtcloser.com";
-			//$mail_to = $cm->filtertextdisplay($email_to);
+			$mail_to = $cm->filtertextdisplay($email_to);
 			$mail_cc = "";
 			$mail_reply = "";
 			$fromnamesender = "The Yacht Finder";
@@ -1316,7 +1315,6 @@ class Boatwatcherclass {
 					$broker_name = $reg_name;
 					$broker_status_id = 2;
 				}
-			file_put_contents ('/stage/sites/n/ngyachting.com/htdocs__/output.txt',$broker_status_id);	
 				if ($broker_status_id == 2){
 										
 					$broker_email = $cm->get_common_field_name("tbl_user", "email", $broker_id);				
@@ -1342,7 +1340,6 @@ class Boatwatcherclass {
 						"searchfield" => $searchfield,
 						"boatwatchercode" => $boatwatchercode
 					);					
-					echo $postfields;
 					$this->run_boat_watcher_inside($postfields);
 				}
 				
