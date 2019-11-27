@@ -1315,7 +1315,6 @@ class Boatwatcherclass {
 					$broker_name = $reg_name;
 					$broker_status_id = 2;
 				}
-				
 				if ($broker_status_id == 2){
 										
 					$broker_email = $cm->get_common_field_name("tbl_user", "email", $broker_id);				
