@@ -1340,7 +1340,6 @@ class Boatwatcherclass {
 						"searchfield" => $searchfield,
 						"boatwatchercode" => $boatwatchercode
 					);					
-					
 					$this->run_boat_watcher_inside($postfields);
 				}
 				

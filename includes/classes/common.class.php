@@ -1810,7 +1810,16 @@ class Commonclass {
 	
 	//----------------data session--------------------------
 	public function get_actual_url_from_header(){
-		$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER[HTTP_HOST];
+		//$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER[HTTP_HOST];
+		
+		$isSecure = false;
+		if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+			$isSecure = true;
+		}
+		elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' || !empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on') {
+			$isSecure = true;
+		}
+		$actual_link = ($isSecure ? 'https' : 'http') . "://" . $_SERVER[HTTP_HOST];
 		return $actual_link;
 	}
 
