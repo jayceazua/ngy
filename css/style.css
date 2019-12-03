@@ -7126,6 +7126,7 @@ ul.ng-team-members > li{
 	display:inline-block;
 	width:23.875%;
 	vertical-align:top;
+	text-align:center;
 }
 
 ul.ng-team-members > li:nth-child(4n+1){
