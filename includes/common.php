@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
-require_once("ycconfig-stage.php");
+require_once("ycconfig.php");
 
 require_once("classes/db.class.php");
 require_once("classes/common.class.php");
