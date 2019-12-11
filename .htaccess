@@ -1,14 +1,9 @@
-AuthType Basic
-AuthName "Password Protected Area"
-AuthUserFile /data/configdev/pwd.d/devsites.pwd
-Require valid-user
-
 RewriteEngine On
 
 #CDN redirect
 RewriteCond %{REQUEST_URI} /yachtimage
-RewriteRule ^yachtimage/([0-9]+)/(.*)/(.*)$ https://cdn.yctester.com/dev/feedImageCDN/ngyachting.com/$1/$2/$3 [R=301,L]
-RewriteRule ^yachtimage/([0-9]+)/(.*)$ https://cdn.yctester.com/dev/feedImageCDN/ngyachting.com/$1/big/$2 [R=301,L]
+RewriteRule ^yachtimage/([0-9]+)/(.*)/(.*)$ https://cdn.yctester.com/v1/feedImageCDN/ngyachting.com/$1/$2/$3 [R=301,L]
+RewriteRule ^yachtimage/([0-9]+)/(.*)$ https://cdn.yctester.com/v1/feedImageCDN/ngyachting.com/$1/big/$2 [R=301,L]
 
 #Analytics Permissions Redirect
 RewriteCond %{HTTP_HOST} !^$

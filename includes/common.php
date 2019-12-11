@@ -1,8 +1,9 @@
 <?php
 session_start();
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
-require_once("ycconfig-stage.php");
 
+//check for stage or prod path
+(strpos(__DIR__, 'stage') !== false)?require_once("ycconfig-stage.php"):require_once("ycconfig.php");
 require_once("classes/db.class.php");
 require_once("classes/common.class.php");
 require_once("classes/frontend.class.php");

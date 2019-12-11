@@ -342,6 +342,7 @@ class Blogclass {
 		$display_date = round($_POST["display_date"], 0);
 		$image_display_post = round($_POST["image_display_post"], 0);
 		$featured_post = round($_POST["featured_post"], 0);
+		$poster_id = round($_POST["poster_id"], 0);
 		
 		$m1 = $_POST["m1"];
 		$m2 = $_POST["m2"];
@@ -352,14 +353,14 @@ class Blogclass {
 		if ($frontfrom == 0){
 			//backend
 			$status_id = round($_POST["status_id"], 0);
-			$poster_id = 1;
+			//$poster_id = 1;
 			
 			$reg_date = $_POST["reg_date"];
 			$reg_date_a = $cm->set_date_format($reg_date);
 		}else{
 			//frontend
 			$status_id = 1;
-			$poster_id =  1;
+			//$poster_id =  1;
 			$reg_date_a = date("Y-m-d");
 		}
 		
@@ -367,7 +368,7 @@ class Blogclass {
 			$sql = "insert into tbl_blog (category_id, poster_id) values ('". $cm->filtertext($category_id) ."', '". $poster_id ."')";
 			$iiid = $db->mysqlquery_ret($sql);			
 		}else{
-			$sql = "update tbl_blog set category_id = '". $cm->filtertext($category_id) ."' where id = '".$ms."'";
+			$sql = "update tbl_blog set category_id = '". $cm->filtertext($category_id) ."', poster_id = '". $cm->filtertext($poster_id) ."' where id = '".$ms."'";
 			$db->mysqlquery($sql);
 			$iiid = $ms;
 		}
