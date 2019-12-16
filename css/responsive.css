@@ -585,6 +585,12 @@
 	.mobilestatic .mobile-search-container{
 		max-width:100%;
 	}
+	
+	a.yf-search-header:after {
+		content:"\f067";
+	}
+	a.yf-search-header.clicked:after { content:"\f068"; }
+	.boatwatcherpage-in{display: none;}
 }
 
 @media screen and (max-width: 685px) {

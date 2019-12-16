@@ -1,4 +1,5 @@
 <?php
+$startend = 0;
 $slug = $_REQUEST['slug'];
 $result = $blogclass->check_blog_with_return($slug, 1);
 $row = $result[0];
@@ -46,9 +47,7 @@ $imagelink = '';
 if ($blog_image != ""){ 
 	$imagefolder = 'blogimage/';
 	if ($image_display_post == 1){	
-	$blog_image_text = '
-	<div class="leftfloatdiv"><img src="'. $cm->folder_for_seo . $imagefolder . $blog_image .'" alt="'. $$name .'"></div>
-	';
+		$blog_image_text = '<div class="blog-image-holder wow fadeInUp" data-wow-duration="1.2s"><span class="catname">'. $categoryname .'</span><img src="'. $cm->folder_for_seo . $imagefolder . $blog_image .'" alt="'. $$name .'"></div>';
 	}
 	$imagelink = $cm->site_url . '/' . $imagefolder . $blog_image;
 }
@@ -62,34 +61,36 @@ if ($tagname != ""){
 
 $reg_date_display = '';
 if ($display_date == 1){
-	$reg_date_d = $cm->display_date($reg_date, 'y', 9);
-	$reg_date_display = '<span class="postdate">'. $reg_date_d .'</span>';
+	$reg_date_d = $cm->display_date($reg_date, 'y', 17);
+	$reg_date_display = '<span class="ng-date">'. $reg_date_d .'</span>';
 }
-
-$f_pdata = '
-<div class="editordivrow noborder clearfixmain">
-	'. $blog_image_text .'
-    
-	<div class="blogmeta">
-	'. $reg_date_display .'
-	<span class="postcategory"><a href="'. $catlinkurl .'">'. $categoryname .'</a></span>
-	'. $tagname .'
-	</div>
-	
-    <div class="blog">'. $description .'</div>
-	<a href="javascript:void(0);" class="button backbtn">Back</a>
-	'. $blogclass->blog_share_button($name, $small_description, $fullurl) .'
-</div>
-';
 
 $blogclass->update_blog_view($id);
 $opengraphmeta = $cm->meta_open_graph($name, $small_description, $imagelink, $fullurl);
 include($bdr."includes/head.php");
 ?>
 
-<div class="fullcol">
-	<?php echo $f_pdata; ?>
+<div class="blog-container">
+	<h1 class="t-center"><?php echo $name; ?></h1>
+    <?php echo $blog_image_text; ?>
+    <h6>
+    <?php echo $reg_date_display; ?>
+    <?php echo $blogclass->blog_share_button($name, $small_description, $fullurl, 3); ?>
+    </h6>
+    <hr />
+    <?php echo $description; ?>
+    <hr />
+    <a class="bckn" href="#">Back to news</a>
+    <?php
+	$paramar = array("company_id" => $company_id, "location_id" => $location_id, "broker_id" => $poster_id);
+	echo $yachtclass->display_yacht_broker_info_blog($paramar);
+	?>
 </div>
+
+<?php
+	$latestar = array("categoryid" => 1, "template" => 5);
+	echo $blogclass->display_latest_news($latestar);
+?>
 <?php
 include($bdr."includes/foot.php");
 ?>

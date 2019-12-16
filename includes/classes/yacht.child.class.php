@@ -213,7 +213,7 @@ class Yachtclass_Child extends Yachtclass{
 			</form>';
 			
 			global $boatwatcherclass;
-			$returntext .= $boatwatcherclass->boat_watcher_form(array("formtemplate" => 1));
+			$returntext .= $boatwatcherclass->boat_watcher_form(array("formtemplate" => 3));
 			
 			$returntext .= '
 			<script type="text/javascript">
