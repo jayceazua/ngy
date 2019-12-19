@@ -43,6 +43,7 @@
     <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/creditapplication.js"></script>
     <script src="https://www.google.com/recaptcha/api.js?onload=fcCaptchaCallback&render=explicit" async defer></script>
     <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/call.captcha.js"></script>
+    <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/wow.min.js"></script>
 </head>
 <body class="pop">
 <div class="main text_area">

@@ -39,6 +39,10 @@ include("head.php");
             <input type="text" id="email" name="email" value="<?php echo $email; ?>" class="input" />
         </li>
         <li>
+            <p>Your Phone Number</p>
+            <input type="text" id="phone" name="phone" value="<?php echo $phone; ?>" class="input" />
+        </li>
+        <li>
             <p>Subject</p>
             <input type="text" id="subject" name="subject" value="<?php echo $subject; ?>" class="input" />
         </li>
