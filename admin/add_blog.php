@@ -48,6 +48,10 @@ $(document).ready(function(){
 		
 		if(!validate_text(document.ff.name,1,"Please enter Blog Title")){
 			return false;
+		}
+		
+		if(!validate_text(document.ff.poster_id,1,"Please select Associate Broker")){
+			return false;
 		} 
 		
 		if ($("#imgpath").length > 0) {
@@ -90,6 +94,16 @@ $(document).ready(function(){
         <tr>
           <td width="" align="left"><span class="fontcolor3">* </span>Blog Title:</td>
           <td width="" align="left"><input type="text" id="name" name="name" value="<?php echo $name; ?>" class="inputbox inputbox_size4" /></td>
+        </tr>
+        
+        <tr>
+          <td width="" align="left"><span class="fontcolor3">* </span>Associate Broker:</td>
+          <td width="" align="left"><select name="poster_id" id="poster_id" class="combobox_size4 htext">
+            <option value="">Select</option>
+            <?php
+            echo $yachtclass->get_broker_combo_all($poster_id, 1);
+            ?>
+        </select></td>
         </tr>
         
         <tr>

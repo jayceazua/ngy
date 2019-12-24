@@ -9,6 +9,7 @@ $ctid = round($_GET["ctid"], 0);
 $pno = $_GET["pno"];
 $regdate = $_GET["regdate"];
 $s = round($_GET["s"], 0);
+$posterid = round($_GET["posterid"], 0);
 $sby = $_GET["sby"];
 $ord = $_GET["ord"];
 
@@ -34,6 +35,14 @@ if ($ctid > 0){
     $s_name = $cm->get_common_field_name('tbl_blog_category', 'name', $ctid);
     $msg_1 .= 'Category: <span class="fontcolor3">'.$s_name.'</span>, ';
     $extraqry .= "&ctid=".$cm->filtertextdisplay($ctid);
+}
+
+if ($posterid > 0){	
+	$query_where .= " a.poster_id = '". $cm->filtertext($posterid)."' and";	
+	
+	$s_name = $cm->get_common_field_name('tbl_user', 'concat(fname, \' \', lname)', $posterid);
+    $msg_1 .= 'Broker: <span class="fontcolor3">'.$s_name.'</span>, ';
+    $extraqry .= "&posterid=". $cm->filtertextdisplay($posterid);
 }
 
 if ($pno != ""){
@@ -142,19 +151,34 @@ include("head.php");
     </tr>
     
     <tr>
-    		<td width="" align="left">Date:</td>
-        	<td width="" align="left"><input defaultdateset="" rangeyear="2010:<?php echo (date("Y") + 1); ?>" type="text" id="regdate" name="regdate" value="" class="date-field-d inputbox inputbox_size4_b" /></td>
-        	<td width="" align="left">&nbsp;</td>
-        	<td width="" align="left">Status:</td>
-            <td width="" align="left">
-                <select name="s" class="combobox_size4 htext">
-                    <option value="">All</option>
-                    <?php
-                    $adm->get_commonstatus_combo($s);
-                    ?>
-                </select>
-            </td>
-        </tr>
+        <td width="" align="left">Date:</td>
+        <td width="" align="left"><input defaultdateset="" rangeyear="2010:<?php echo (date("Y") + 1); ?>" type="text" id="regdate" name="regdate" value="" class="date-field-d inputbox inputbox_size4_b" /></td>
+        <td width="" align="left">&nbsp;</td>
+        <td width="" align="left">Status:</td>
+        <td width="" align="left">
+            <select name="s" class="combobox_size4 htext">
+                <option value="">All</option>
+                <?php
+                $adm->get_commonstatus_combo($s);
+                ?>
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    	<td width="" align="left">Associate Broker:</td>
+        <td width="" align="left">
+            <select name="posterid" id="posterid" class="combobox_size4 htext">
+                <option value="">All</option>
+                <?php
+                echo $yachtclass->get_broker_combo_all($posterid, 1);
+                ?>
+            </select>
+        </td>
+        <td width="" align="left">&nbsp;</td>
+        <td width="" align="left">&nbsp;</td>
+        <td width="" align="left">&nbsp;</td>
+    </tr>
 
     <tr>
       <td width="" align="left">Sort By:</td>
@@ -218,6 +242,7 @@ include("head.php");
                    <td class="displaytdheading" align="center" width="20%">Date</td>
                    <td class="displaytdheading" align="center">Image</td>
                    <td class="displaytdheading" align="center">Featured</td>
+                   <td class="displaytdheading" align="center">Broker</td>
                    <td class="displaytdheading" align="center">Status</td>
 			 </tr>
              			 
@@ -235,6 +260,7 @@ include("head.php");
 				 $featured_post = $row['featured_post'];
 				 
                  $category_name = $cm->get_common_field_name('tbl_blog_category', 'name', $category_id);
+				 $poster_name = $cm->get_common_field_name('tbl_user', 'concat(fname, " ", lname)', $poster_id);
 				 $status_d = $cm->get_common_field_name('tbl_common_status', 'name', $status_id);
                  if ($status_id == 1){ $ch_opt = 2; }else{ $ch_opt = 1; }
 				 if ($featured_post == 1){ $featured_post_d = 'Yes'; $ch_opt_dh = 0; }else{ $featured_post_d = 'No';  $ch_opt_dh = 1; }
@@ -253,13 +279,14 @@ include("head.php");
                   <td valign="top" class="displaytd1" align="center"><a href="add_blog.php?id=<?php echo $id; ?>" title="Modify Record"><img alt="Modify Record" title="Modify Record" src="images/mod.gif"  class="imgcommon" /></a></td>
                   <td valign="top" class="displaytd1" width="" align="left"><?php echo $name; ?></td>
                   <td valign="top" class="displaytd1" width="" align="left"><?php echo $category_name; ?></td>
-                  <td valign="top" class="displaytd1" width="" align="left"><?php echo $tagname; ?></td>
+                  <td valign="top" class="displaytd1" width="" align="left"><?php echo $tagname; ?></td>                  
                   <td valign="top" class="displaytd1" width="" align="center">
                   <input defaultdateset="" rangeyear="2010:<?php echo (date("Y") + 1); ?>" type="text" id="reg_date<?php echo $id; ?>" name="reg_date<?php echo $id; ?>" value="<?php echo $reg_date; ?>" class="date-field-d inputbox<?php echo $extraclass; ?> inputbox_size4_b" />&nbsp;<a class="updaterec" updateid="<?php echo $id; ?>" href="javascript:void(0);" title="Modify Date"><img alt="Modify Date" src="images/correct.png"  class="imgcommon" /></a>
                   <span class="updatemessage<?php echo $id; ?> fontcolor3 com_block"></span>
                   </td>
                   <td valign="top" class="displaytd1" width="" align="center"><?php if ($imgpath != ""){?><img src="../blogimage/<?php echo $imgpath; ?>" border="0" width="100" /><?php }else{ ?> - <?php } ?></td>
                   <td class="displaytd1" align="center"><a class="htext" href="javascript:void(0);" onclick="javascript:enable_disable('<?php echo $id; ?>', 'featured_post', 'tbl_blog', '<?php echo $ch_opt_dh; ?>', 'id')"><?php echo $featured_post_d; ?></a></td>
+                  <td valign="top" class="displaytd1" width="" align="left"><?php echo $poster_name; ?></td>
                   <td valign="top" class="displaytd1" align="center"><a class="htext" href="javascript:void(0);" onclick="javascript:enable_disable('<?php echo $id; ?>', 'status_id', 'tbl_blog', '<?php echo $ch_opt; ?>', 'id')"><?php echo $status_d; ?></a></td>                  
             </tr>			 
 			 <?php

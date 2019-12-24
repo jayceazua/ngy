@@ -49,7 +49,7 @@ include("head.php");
             </li>
 			<li>
                 <p>Your Phone Number</p>
-                <input type="text" id="email" name="phone" value="<?php echo $phone; ?>" class="input" />
+                <input type="text" id="phone" name="phone" value="<?php echo $phone; ?>" class="input" />
             </li>
             <li>
                 <p>Subject</p>

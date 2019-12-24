@@ -1307,6 +1307,12 @@ class Yachtclass {
                 $target_path = $target_path_main . "big/";
                 $fle->new_image_fixed($filename_tmp, $r_width, $r_height, $target_path, $cm->filtertextdisplay($filename1));
 				
+				//square image
+                $r_width = $cm->user_im_width_sq;
+                $r_height = $cm->user_im_height_sq;
+                $target_path = $target_path_main . "square/";
+                $fle->new_image_fixed($filename_tmp, $r_width, $r_height, $target_path, $cm->filtertextdisplay($filename1));
+				
 				//original image store
 				$target_path = $target_path_main . 'original/';
 				$target_path = $target_path . $cm->filtertextdisplay($filename1);
@@ -1685,6 +1691,7 @@ class Yachtclass {
             if ($fimg2 != ""){
                 $fle->filedelete("../userphoto/" . $fimg2);
                 $fle->filedelete("../userphoto/big/" . $fimg2);
+				$fle->filedelete("../userphoto/square/" . $fimg2);
 				$fle->filedelete("../userphoto/original/" . $fimg2);
             }
         }
@@ -1696,6 +1703,7 @@ class Yachtclass {
 			if ($fimg2 != ""){
                 $fle->filedelete("../userphoto/" . $fimg2);
                 $fle->filedelete("../userphoto/big/" . $fimg2);
+				$fle->filedelete("../userphoto/square/" . $fimg2);
 				$fle->filedelete("../userphoto/original/" . $fimg2);
             }
         }
@@ -7249,7 +7257,8 @@ class Yachtclass {
 				$cuser_ar = $cm->get_table_fields('tbl_user', 'id, type_id, company_id, location_id', $brokerslug, 'uid');
 				$cuser_id = $cuser_ar[0]["id"];
 				$cuser_type_id = $cuser_ar[0]["type_id"];				
-				$query_where .= " a.broker_id IN (". $cuser_id .", 1) and";
+				//$query_where .= " a.broker_id IN (". $cuser_id .", 1) and";
+				$query_where .= " a.broker_id = '". $cuser_id ."' and";
 				$query_where .= " a.ownboat = 1 and";		
 				$searchitem["s_brokerslug"] = $cm->filtertextdisplay($brokerslug);
 			}
@@ -8946,6 +8955,63 @@ class Yachtclass {
 		
         return $returntxt;
     }
+	
+	public function display_yacht_broker_info_blog($param = array()){
+		global $db, $cm;		
+        
+		//param
+		$default_param = array("company_id" => 0, "location_id" => 0, "broker_id" => 0);
+		$param = array_merge($default_param, $param);
+	
+		$company_id = round($param["company_id"], 0);
+		$broker_id = round($param["broker_id"], 0);
+		$location_id = round($param["location_id"], 0);
+		//end
+		
+		$broker_ar = $cm->get_table_fields('tbl_user', 'fname, lname, email, phone', $broker_id);
+		$fname = $broker_ar[0]["fname"];
+		$lname = $broker_ar[0]["lname"];
+		$email = $broker_ar[0]["email"];
+		$phone = $broker_ar[0]["phone"];
+		
+		$broker_ad_ar = $this->get_broker_address_array($broker_id);		
+		$officephone = $broker_ad_ar["phone"];
+		
+		$member_image = $this->get_user_image($broker_id);
+		$total_y = $this->get_total_yacht_by_broker(array("broker_id" => $broker_id, "status_id" => 1));
+		$brokername = $fname .' '. $lname;
+		
+		$profile_url = $cm->get_page_url($broker_id, 'user');
+		$brokerboat_url = $cm->get_page_url($broker_id, 'brokerboat');
+		
+		$phonetext = '';
+		if ($phone != ""){ 
+			$phonetext .= '<p><strong>Cell</strong>: '. $phone .'</p>'; 
+			$callnow = $phone;
+		}else{
+			$callnow = $officephone;
+		}
+		
+		$returntxt = '
+		<div class="brkbox">
+			<div class="brkbox1"><img class="round" src="'. $cm->folder_for_seo .'userphoto/square/'. $member_image .'" alt="'. $brokername .'"></div>
+			<div class="brkbox2">
+				<h4>'. $brokername .' &nbsp; <span><a href="'. $brokerboat_url .'">'. $total_y .' Listing(S)</a></span></h4>
+				<p><strong>Email</strong>: '. $email .'</p>
+				'. $phonetext .'
+				<p><strong>Office</strong>: '. $officephone .'</p>
+			</div>
+			<div class="brkbox3">
+				<p><a class="phone" href="tel:'. $callnow .'">Call Now</a></p>
+				<p><a class="contactbroker email" href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '" data-type="iframe">Email</a></p>
+				<p><a href="'. $brokerboat_url .'">Show Listings</a></p>
+				<p><a class="active" href="'. $profile_url .'">View Profile</a></p>
+			</div>
+		 </div>
+		';
+		
+		return $returntxt;
+	}
 
     public function yacht_featured_small($s = 0){
         global $db, $cm;

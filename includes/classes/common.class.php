@@ -20,6 +20,9 @@ class Commonclass {
 
     public $user_im_width = 500;
     public $user_im_height = 668;
+	
+	public $user_im_width_sq = 500;
+    public $user_im_height_sq = 500;
 
     public $user_im_width_t = 80;
     public $user_im_height_t = 80;
@@ -338,6 +341,7 @@ class Commonclass {
      if ($dtfmt == 9){ $passeddt = date("m/d/Y", $passeddt); }
      if ($dtfmt == 10){ $passeddt = date("m/d/Y h:i:s A", $passeddt); }	 
 	 if ($dtfmt == 16){ $passeddt = date("Y/n", $passeddt); }
+	 if ($dtfmt == 17){ $passeddt = date("F d, Y", $passeddt); }
      return $passeddt;
   } 
   
@@ -658,6 +662,10 @@ class Commonclass {
           $pagename = $this->get_common_field_name("tbl_user", "uid", $checkid, "id");
           $pagename = $this->serach_url_filtertext($pagename);
           $ret_url = $this->folder_for_seo."brokerprofile/" . $pagename . "/";
+      }elseif ($pagetype == "brokerboat"){
+          $pagename = $this->get_common_field_name("tbl_user", "uid", $checkid, "id");
+          $pagename = $this->serach_url_filtertext($pagename);
+          $ret_url = $this->folder_for_seo."brokerboat/" . $pagename . "/";
       }elseif ($pagetype == "soldboat"){
           $pagename = $this->get_common_field_name("tbl_user", "uid", $checkid, "id");
           $pagename = $this->serach_url_filtertext($pagename);

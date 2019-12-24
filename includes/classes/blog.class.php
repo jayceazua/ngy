@@ -342,6 +342,7 @@ class Blogclass {
 		$display_date = round($_POST["display_date"], 0);
 		$image_display_post = round($_POST["image_display_post"], 0);
 		$featured_post = round($_POST["featured_post"], 0);
+		$poster_id = round($_POST["poster_id"], 0);
 		
 		$m1 = $_POST["m1"];
 		$m2 = $_POST["m2"];
@@ -352,14 +353,14 @@ class Blogclass {
 		if ($frontfrom == 0){
 			//backend
 			$status_id = round($_POST["status_id"], 0);
-			$poster_id = 1;
+			//$poster_id = 1;
 			
 			$reg_date = $_POST["reg_date"];
 			$reg_date_a = $cm->set_date_format($reg_date);
 		}else{
 			//frontend
 			$status_id = 1;
-			$poster_id =  1;
+			//$poster_id =  1;
 			$reg_date_a = date("Y-m-d");
 		}
 		
@@ -367,7 +368,7 @@ class Blogclass {
 			$sql = "insert into tbl_blog (category_id, poster_id) values ('". $cm->filtertext($category_id) ."', '". $poster_id ."')";
 			$iiid = $db->mysqlquery_ret($sql);			
 		}else{
-			$sql = "update tbl_blog set category_id = '". $cm->filtertext($category_id) ."' where id = '".$ms."'";
+			$sql = "update tbl_blog set category_id = '". $cm->filtertext($category_id) ."', poster_id = '". $cm->filtertext($poster_id) ."' where id = '".$ms."'";
 			$db->mysqlquery($sql);
 			$iiid = $ms;
 		}
@@ -876,6 +877,15 @@ class Blogclass {
 		  </ul>
 		  </span>
 		  ';
+	  }elseif ($template == 3){
+		  $returntext = '
+		  <span class="ng-social">Share:
+		  <ul>
+		  	'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
+			'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
+			'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
+		  </ul>
+		  ';
 	  }else{
 		  //$cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1));
 		  $returntext = '
@@ -1134,6 +1144,25 @@ class Blogclass {
 				</div>
 			</li>
 			';
+		}elseif ($template == 5){
+			//display_date
+			$date_text = '';
+			if ($display_date == 1){
+				$reg_date_d = $cm->display_date($reg_date, 'y', 17);
+				$date_text = '<h6>'. $reg_date_d .'</h6>';
+			}
+			$small_description = $cm->fc_word_count($small_description, 200);
+			$returntext .= '
+			<li>
+				<a href="'. $details_url .'"><img src="'. $cm->folder_for_seo .'blogimage/thumb/'. $blog_image .'" title="'. $name .'" alt="'. $name .'"></a>
+				<div>
+					<h4><a href="'. $details_url .'">'. $name .'</a></h4>
+					'. $date_text .'
+					<p class="para">'. $small_description .'...</p>
+					<p><a href="'. $details_url .'">Read More</a></p>
+				</div>
+			</li>
+			';
 		}else{
 			//display_date
 			$date_text = '';
@@ -1267,6 +1296,7 @@ class Blogclass {
 		$default_title = "News &amp; Events";
 		
 		$categoryid = round($argu["categoryid"], 0);
+		$template = round($argu["template"], 0);
 		$limit = round($argu["limit"], 0);
 		
 		if ($limit <= 0){ $limit = 3; }
@@ -1293,15 +1323,35 @@ class Blogclass {
 		
 		if ($found > 0){
 			$news_url = $this->get_blog_url($categoryid, $isevent);
-			$returntext .= '<h1 class="ng-h1 uppercase ml-5"><span>NEWS & EVENTS</span></h1>			
-			<ul class="ng-news-list">
-			';
-			foreach($result as $row){
-				$returntext .= $this->display_box_blog_row($row, 4);
+			
+			if ($template == 5){
+				//blog page latest news
+				$returntext .= '
+				<div class="ng-blog-news">
+					<div class="container">
+						<h5>Latest News & Events</h5>
+						<ul class="ng-blog-news-list wow fadeInUp" data-wow-duration="1.2s">
+				';
+						foreach($result as $row){
+							$returntext .= $this->display_box_blog_row($row, 5);
+						}
+				
+				$returntext .= '
+						</ul>
+					</div>
+				</div>
+				';
+			}else{			
+				$returntext .= '<h1 class="ng-h1 uppercase ml-5"><span>NEWS & EVENTS</span></h1>			
+				<ul class="ng-news-list">
+				';
+				foreach($result as $row){
+					$returntext .= $this->display_box_blog_row($row, 4);
+				}
+				$returntext .= '
+				</ul>
+				';
 			}
-			$returntext .= '
-			</ul>
-			';
 		}	  
 		return $returntext;
 	}
