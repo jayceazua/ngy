@@ -385,7 +385,6 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
                             <div class="boat_details_share_icons animated fast fadeInUp">
                                 <span>
                                     <?php echo $cm->facebook_share_url(array("title" => $yacht_title, "content" => $content, "fullurl" => $fullurl, "template" => 2)); ?>
-									<?php echo $cm->googleplus_share_url(array("title" => $yacht_title, "content" => $content, "fullurl" => $fullurl, "template" => 2)); ?>
                                     <?php echo $cm->twitter_share_url(array("title" => $yacht_title, "content" => $twittercontent, "fullurl" => $fullurl, "template" => 2)); ?>
                                     <?php echo $cm->linkedin_share_url(array("title" => $yacht_title, "content" => $twittercontent, "fullurl" => $fullurl, "template" => 2)); ?>
                                     <?php echo $cm->pinterest_share_url(array("title" => $yacht_title, "listing_no" => $listing_no, "content" => $twittercontent, "image" => $firstimage, "fullurl" => $fullurl, "template" => 2)); ?>
