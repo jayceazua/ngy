@@ -80,7 +80,7 @@ include($bdr."includes/head.php");
     <hr />
     <?php echo $description; ?>
     <hr />
-    <a class="bckn" href="#">Back to news</a>
+    <a class="bckn backbtn" href="javascript:void(0);">Back to news</a>
     <?php
 	$paramar = array("company_id" => $company_id, "location_id" => $location_id, "broker_id" => $poster_id);
 	echo $yachtclass->display_yacht_broker_info_blog($paramar);

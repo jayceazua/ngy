@@ -164,7 +164,6 @@ include($bdr."includes/head.php");
         <ul>            
             <li><a href="<?php echo $cm->folder_for_seo;?>?fcapi=createyachtpdf&lno=<?php echo $listing_no; ?>" title="Create a Brochure" class="boatpdfnormal" data-fancybox-type="iframe"><img src="<?php echo $bdir;?>images/print.png" alt=""></a></li>
             <?php echo $cm->facebook_share_url($yacht_title, '', $fullurl); ?>
-            <?php echo $cm->googleplus_share_url($fullurl); ?>
             <?php echo $cm->twitter_share_url($yacht_title, '', $fullurl); ?>
             <?php echo $cm->linkedin_share_url($yacht_title, '', $fullurl); ?>
             <?php echo $cm->pinterest_share_url($yacht_title, '', $firstimage, $fullurl); ?>

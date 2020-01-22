@@ -1591,7 +1591,7 @@ class Frontendclass {
 		<div class="footerlast clearfixmain">
 			<div class="container clearfixmain">
 				<ul class="footerbox">
-					<li>Copyright &copy; '. date("Y") .'</li>
+					<li>Copyright &copy; '. date("Y") .'&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.boatsgroup.com/privacy/" target="_blank">Do Not Sell My Personal Information</a></li>
 					<li><a href="'. $cm->get_page_url(42, "page").'">Terms and Conditions</a>  |  <a class="fc-open-contact" href="javascript:void(0);">Contact Us</a></li>					
 				</ul>
 			</div>
