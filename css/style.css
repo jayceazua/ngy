@@ -58,7 +58,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
+html{scroll-behavior: smooth;}
 html, body { height: 100%; -webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased; }
 body{ margin:0; padding:0; color:#414141; font-size: 16px; font-weight:400; line-height:1.5; font-family: 'Open Sans', verdana, serif; cursor:default; background-color: #fff; }
 .adminbodyclass { padding:0; margin:0; background: #fff; color:#000; font-size: 16px; font-weight:400; font-family: 'Open Sans', verdana, serif; line-height:1.5; cursor:default;}
@@ -293,6 +293,7 @@ h1::first-word { color: #2bbed3; }
 img{ border:none; max-width:100%; height: auto; }
 img.full {width: 100%;}
 .img_cropped_rounded { -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border:1px solid #2cc1ac; padding: 3px; }
+.img_cropped_rounded2 { -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
 .imageabovetitle { max-width: 206px; display: block; text-align: center; margin: 0 auto; margin-bottom: 5px; line-height:0; }
 
 a{ outline-style:none; text-decoration:none; color:#2bbed3;
@@ -2675,7 +2676,7 @@ ul.cat-list .thumb img{display:block;}
 .section{/*background:#f3f2f2;*/ border:solid 1px #e8e7e7; padding:10px 20px 10px 20px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; margin-bottom:12px;}
 .section.sectionbg { background-color: #f3f2f2; padding: 12px; border: 0; text-align: left; }
 .section.sectionbg2 { padding: 12px; background-color: #ffffff; }
-.section.sectionbg3 { padding: 12px; background-color: #0a1b40; color: #fff; }
+.section.sectionbg3 { padding: 20px 30px; background-color: #0a1b40; color: #fff; }
 .section h3{text-align: left; font-size: 20px;}
 .section.sectionbg h3 { color: #100c0d; border-bottom: 0; padding: 0; margin-bottom: 10px;}
 .section.sectionbg3 h3 { color: #fff; border-bottom: 0; padding: 0; margin-bottom: 10px;}
@@ -2793,8 +2794,8 @@ ul.listing-meta li.loc{background:url(../images/lacation-icon.png) 0 center no-r
 
 .section.broker-wrap {text-align:center;}
 .section.broker-wrap h3 {text-align:center;}
-.product-detail .right-cell .section .broker {margin: 12px 0;}
-.product-detail .right-cell .section .broker h4 {color: #fff;font-size: 16px; text-transform: capitalize; margin: 10px 0 0 0; font-style: normal;}
+.product-detail .right-cell .section .broker {margin: 12px auto; width: 100%; max-width: 220px;}
+.product-detail .right-cell .section .broker h4 { font-family:'MyriadPro';color: #fff;font-size: 20px; text-transform: capitalize; margin: 10px 0 0 0; font-style: normal;}
 .product-detail .right-cell .section .broker h4 span { margin-left: 6px; font-size: 13px; }
 .product-detail .right-cell .section .broker .thumb{float:left; border-radius:100%; margin:0 10px 10px 0;}
 .product-detail .right-cell .section .broker .meta{font-size:16px; line-height:20px;}
@@ -8517,6 +8518,7 @@ ul.ng-blog-news-list li{
 	-webkit-box-shadow: 0px 5px 15px 2px rgba(191,208,211,0.5);
 	-moz-box-shadow: 0px 5px 15px 2px rgba(191,208,211,0.5);
 	box-shadow: 0px 5px 15px 2px rgba(191,208,211,0.5);
+	background-color:#fff;
 }
 
 ul.ng-blog-news-list li:nth-child(3n+1){
@@ -8634,6 +8636,9 @@ ul.ng-blog-news-list .para{
 	margin:15px auto;
 	align-self:center;
 }
+.sectionbg3 .brkbox3{
+	max-width: 225px;
+}
 
 .brkbox2 h4{
 	font-family: 'brandon-medium';
@@ -8665,6 +8670,7 @@ ul.ng-blog-news-list .para{
 	font-weight:600;
 	padding:5px;
 	transition:300ms;
+	background:#fff;
 }
 
 .brkbox3 a:hover,

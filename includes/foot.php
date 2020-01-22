@@ -157,6 +157,41 @@ $google_analytics = $cm->get_systemvar('GLANY');
 echo $google_analytics;
 ?>
 
+<div class="cookie-options-hook cookie-hidden">
+    <a href="javascript:void(0);" class="hook-link">
+        <div class="triangle"></div>
+        <div class="triangle-int">C</div>
+    </a>
+</div>
+<div class="cookie-message cookie-hide">
+    <div class="cookie-header">Cookie Control <span class="close" id="close">X</span></div>
+    <div class="cookie-message-container">
+        <p class="cookie-message__text">We have placed cookies on your device to help make this website better.</p>
+        <p class="cookie-message__text">You can use this tool to change your cookie settings. Otherwise, we’ll assume you’re OK to continue.</p>
+
+        <div class="extra-info cookie-hide">
+            <p class="cookie-message__text">Some of the <a href="http://www.boatsgroup.com/cookies-policy/" target="_blank">cookies we use</a> are essential for the site to work.</p>
+            <p class="cookie-message__text">We also use some non-essential cookies to collect information for making reports and to help us improve the site. The cookies collect information in an anonymous form.</p>
+            <p class="cookie-message__text">To control third party cookies, you can also <a href="http://www.boatsgroup.com/cookies-policy/" target="_blank" id="adjust-browser">adjust your browser settings</a>.</p>
+            <div class="cookie-message__button-wrapper" id="cookies-off">
+                <button class="cookie-message__button" >Turn cookies Off</button>
+            </div>
+            <div class="cookie-message__button-wrapper cookie-hide" id="cookies-on">
+                <button class="cookie-message__button_red">Turn cookies On</button>
+            </div>
+        </div>
+
+        <div class="cookie-message__button-wrapper">
+            <button class="cookie-message__button" id="fine">I'm fine with this</button>
+        </div>
+        <a class="cookie-message__link" id="info" href="javascript:void(0);">Information and Settings</a>
+        <a class="cookie-message__link cookie-hide" id="less" href="javascript:void(0);">read less</a>
+        <a class="cookie-message__link cookie-link" href="http://www.boatsgroup.com/cookies-policy/" target="_blank">About our cookies</a>
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/dmm-analytics.min.js"></script>
+<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/cookie-popup.min.js"></script>
+
 <script type="text/javascript">
 var airbrake = new airbrakeJs.Client({projectId: 117837, projectKey: 'de3d05543b28193078e680a0e845ae4a'});
 if (window.jQuery) 

@@ -1,0 +1,144 @@
+.cookie-message {
+    position: fixed;
+    background: #fff;
+    bottom: 57px;
+    left: 41px;
+    width: 250px;
+    z-index: 9999999;
+    box-sizing: border-box;
+    transition: all 500ms;
+    border-radius: 5px;
+    border: 1px solid #777;
+    overflow: auto;
+    max-height: 80vh
+}
+
+.cookie-message a {
+    color: #337ab7
+}
+
+.cookie-message .cookie-header {
+    background: #0a1b40;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px
+}
+
+.cookie-message .close {
+    float: right;
+    cursor: pointer;
+    color: #FFF
+}
+
+.cookie-message .cookie-message-container {
+    padding: 10px
+}
+
+.cookie-message .cookie-message-container .cookie-message__text {
+    color: #777;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 15 0;
+    vertical-align: middle
+}
+
+.cookie-message .cookie-message-container .cookie-message__link {
+    color: #000;
+    float: right;
+    font-size: 10pt;
+    display: block;
+    clear: both
+}
+
+.cookie-message .cookie-message-container .cookie-message__link:hover {
+    color: #000;
+    text-decoration: underline
+}
+
+.cookie-message .cookie-message-container .cookie-message__link.cookie-hide {
+    display: none
+}
+
+.cookie-message .cookie-message-container .cookie-message__button-wrapper {
+    vertical-align: middle;
+    text-align: center
+}
+
+.cookie-message .cookie-message-container .cookie-message__button-wrapper.cookie-hide {
+    display: none
+}
+
+.cookie-message .cookie-message-container .cookie-message__button {
+    padding: 12px 18px;
+    line-height: 1;
+    height: auto;
+    cursor: pointer;
+    background-color: #2bbed3;
+    color: #FFF;
+    font-size: 14pt;
+    border-radius: 5px;
+    width: 90%;
+    margin-bottom: 10px
+}
+
+.cookie-message .cookie-message-container .cookie-message__button_red {
+    padding: 12px 18px;
+    line-height: 1;
+    height: auto;
+    cursor: pointer;
+    background-color: #e6002e;
+    color: #FFF;
+    font-size: 14pt;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    width: 90%
+}
+
+.cookie-message.cookie-hide {
+    transform: translateY(100%);
+    display: none
+}
+
+.cookie-options-hook {
+    position: fixed;
+    background: transparent;
+    bottom: 0;
+    z-index: 9999;
+    box-sizing: border-box
+}
+
+.cookie-options-hook .hook-link .triangle {
+    width: 0;
+    height: 0;
+    border-top: 65px solid transparent;
+    border-left: 65px solid #0a1b40;
+    margin: 0
+}
+
+.cookie-options-hook .hook-link .triangle-int {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    font-weight: bold;
+    font-size: 20pt;
+    height: 32px;
+    z-index: 10000;
+    color: #FFF;
+    font-family: serif
+}
+
+.cookie-message .extra-info {
+    max-height: 500px;
+    transition: max-height 600ms
+}
+
+.cookie-message .extra-info.cookie-hide {
+    max-height: 0;
+    overflow: hidden
+}
+
+.cookie-hidden {
+    display: none
+}

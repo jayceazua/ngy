@@ -1076,7 +1076,7 @@ class Modelclass {
 			
 			foreach($result as $row){
                 $imgpath = $row['imgpath'];
-                $returntext .= '<div><img alt="'. $model_name .'" src="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/bigger/'. $imgpath .'" /></div>'
+                $returntext .= '<div><a class="fancybox" data-fancybox="gallery" data-caption="'. $model_name .'" href="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/bigger/'. $imgpath .'"><img alt="'. $model_name .'" src="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/bigger/'. $imgpath .'" /></a></div>'
                 ;
             }
 			
@@ -1209,8 +1209,8 @@ class Modelclass {
 			
 			foreach($result as $row){
                 $imgpath = $row['imgpath'];
-                //$returntext .= '<li><a class="fancybox" rel="gallery"  href="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/bigger/'. $imgpath .'" alt="'. $model_name .'"><img src="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/'. $imgpath .'" /></a></li>';
-				$returntext .= '<li><a class="fc-slick-pop-open" c="'. $category_id .'" href="javascript:void(0);"><img alt="'. $model_name .'" src="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/'. $imgpath .'" /></a></li>';
+                $returntext .= '<li><a class="fancybox" data-fancybox="gallery'. $photo_category_name .'" data-caption="'. $model_name .' '. $photo_category_name .'" href="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/bigger/'. $imgpath .'" alt="'. $model_name .'"><img src="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/'. $imgpath .'" /></a></li>';
+				//$returntext .= '<li><a class="fc-slick-pop-open" c="'. $category_id .'" href="javascript:void(0);"><img alt="'. $model_name .'" src="'. $cm->folder_for_seo .'models/'. $model_id .'/modelimage/'. $imgpath .'" /></a></li>';
             }
 			
 			$returntext .= '
@@ -1218,14 +1218,14 @@ class Modelclass {
 			';
 
 			//gallery pop
-			$returntext .= '
+			/*$returntext .= '
 			<div id="overlay2" class="imgoverlayslick'. $category_id .' animated hide">
 				<a class="fc-close-contact" c="imgoverlayslick'. $category_id .'" href="javascript:void(0);"><i class="fas fa-times"></i><span class="com_none">Close</span></a>
 				<div class="fc_slick_slider_top clearfixmain">
 				'. $this->display_exterior_interior_image_slider_slick($model_id, $category_id) .'
 				</div>
 			</div>				
-			';
+			';*/
 
 			
 			$returntext .= '
