@@ -61,6 +61,7 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
     <link href="<?php echo $cm->folder_for_seo; ?>css/style-extend.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $cm->folder_for_seo; ?>css/menu.css?s=1" rel="stylesheet" type="text/css" /> 
     <link href="<?php echo $cm->folder_for_seo; ?>css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $cm->folder_for_seo; ?>css/cookie-popup.css" rel="stylesheet" type="text/css" />
     
     <!--[if IE]>
     <link rel="stylesheet" href="<?php echo $cm->folder_for_seo; ?>css/ie.php?path=<?php echo $cm->folder_for_seo; ?>" type="text/css" media="screen">

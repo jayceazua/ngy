@@ -540,8 +540,8 @@
     .product-detail .right-cell .section .broker .thumb{float:none; margin:0 auto;}
    
     .left-cell{}
-    h3.ad-search{background:#f6f6f6; border:solid 1px #d9d9d9; padding:10px 20px; display:block; text-align:center; cursor:pointer;}
-    h3.ad-search span{background:url(../images/menu2.png) right center no-repeat; display:block;}
+    h3.ad-search{background:#2bbed3; border:solid 1px #2bbed3; padding:10px 20px; display:block; text-align:center; cursor:pointer;}
+    h3.ad-search span{background:url(../images/menu2.png) right center no-repeat; display:block; color: #fff; font-size: 20px;}
     .ad-search-con{display:none;}
 
     .login-page .left-side{width:98%; float:left;}

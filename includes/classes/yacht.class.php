@@ -8769,8 +8769,7 @@ class Yachtclass {
         $logo_imgpath = $company_ar[0]["logo_imgpath"];        
         $profile_url = $cm->get_page_url($broker_id, 'user');		
 		
-		if ($broker_id == 1){
-			
+		if ($broker_id == 1){			
 			if ($template == 1){
 				$broker_photo_text = '<div class="brokerphoto"><img src="'. $cm->folder_for_seo .'images/logo-color.png" alt=""></div>';
 			}else{
@@ -8818,11 +8817,17 @@ class Yachtclass {
 			$total_y = $this->get_total_yacht_by_broker(array("broker_id" => $broker_id, "status_id" => 1));
 			
 			$brokername = $fname .' '. $lname;
-			$broker_photo_text = '<div class="brokerphoto"><img class="full" src="'. $cm->folder_for_seo .'userphoto/big/'. $member_image .'" alt="'. $brokername .'"></div>';
-			$broker_text = '
+			$broker_photo_text = '<div class="brokerphoto"><img class="img_cropped_rounded2" src="'. $cm->folder_for_seo .'userphoto/square/'. $member_image .'" alt="'. $brokername .'"></div>';
+			/*$broker_text = '
 			<div class="broker clearfixmain">				
 				'. $broker_photo_text .'
 				<h4>'. $brokername .' <span>'. $total_y .' Listing(s)</span></h4>
+			</div>
+			';*/
+			$broker_text = '
+			<div class="broker clearfixmain">				
+				'. $broker_photo_text .'
+				<h4>'. $brokername .'</h4>
 			</div>
 			';
 			
@@ -8831,12 +8836,26 @@ class Yachtclass {
 			//google tracking
 			$gaeventtracking = $this->google_event_tracking_code('broker', $brokername);
 			
-			$phonetext = '';
+			/*$phonetext = '';
 			if ($phone != ""){ 
 				$phonetext .= '<a class="tel brokermobilephone" href="tel:'. $phone .'">'. $phone .'</a><br>'; 
 			}
 			$phonetext .= '<a class="tel brokerofficephone" href="tel:'. $officephone .'">'. $officephone .'</a>';
+			*/
+			if ($phone != ""){ 
+				$callnow = $phone;
+			}else{
+				$callnow = $officephone;
+			}			
 			
+			$brokercontactinfo = '
+			<div class="brkbox3 clearfixmain">
+				<p><a class="phone" href="tel:'. $callnow .'">Call Now</a></p>
+				<p><a class="contactbroker email" href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $yacht_id .'" data-type="iframe">Email</a></p>
+				<p><a class="active" href="'. $profile_url .'">View Profile</a></p>
+			</div>
+			';
+			/*
 			$brokercontactinfo = '
 			<div class="brokercontactinfo clearfixmain">
 				<ul>
@@ -8847,7 +8866,7 @@ class Yachtclass {
 					<li><a class="button" href="'. $profile_url .'">View Profile</a></li>
 				</ul>
 			</div>
-			';
+			';*/
 		}
 		
 		if ($ownboat == 1){
@@ -8992,11 +9011,20 @@ class Yachtclass {
 			$callnow = $officephone;
 		}
 		
+		$show_listing_text = '';
+		$show_listing_button = '';
+		$view_profile_button = '';
+		if ($broker_id > 1){
+			$show_listing_text = '<span><a href="'. $brokerboat_url .'">'. $total_y .' Listing(S)</a></span>';
+			$show_listing_button = '<p><a href="'. $brokerboat_url .'">Show Listings</a></p>';
+			$view_profile_button = '<p><a class="active" href="'. $profile_url .'">View Profile</a></p>';
+		}
+		
 		$returntxt = '
 		<div class="brkbox">
 			<div class="brkbox1"><img class="round" src="'. $cm->folder_for_seo .'userphoto/square/'. $member_image .'" alt="'. $brokername .'"></div>
 			<div class="brkbox2">
-				<h4>'. $brokername .' &nbsp; <span><a href="'. $brokerboat_url .'">'. $total_y .' Listing(S)</a></span></h4>
+				<h4>'. $brokername .' &nbsp; '. $show_listing_text .'</h4>
 				<p><strong>Email</strong>: '. $email .'</p>
 				'. $phonetext .'
 				<p><strong>Office</strong>: '. $officephone .'</p>
@@ -9004,8 +9032,8 @@ class Yachtclass {
 			<div class="brkbox3">
 				<p><a class="phone" href="tel:'. $callnow .'">Call Now</a></p>
 				<p><a class="contactbroker email" href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '" data-type="iframe">Email</a></p>
-				<p><a href="'. $brokerboat_url .'">Show Listings</a></p>
-				<p><a class="active" href="'. $profile_url .'">View Profile</a></p>
+				'. $show_listing_button .'
+				'. $view_profile_button.'
 			</div>
 		 </div>
 		';
