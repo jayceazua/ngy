@@ -20,15 +20,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $filename = $fle->uploadfilename($filename);
         $filename1 = $i_iiid."yacht".$filename;
 
-        $target_path_main = "yachtimage/" . $listing_no . "/";
-        //if ($frontfrom == 0){
-            $target_path_main = "../" . $target_path_main;
-        //}
+        $target_path_main = YCROOTPATH."yachtimage/" . $listing_no . "/";
 
         //thumbnail image
         $r_width = $cm->yacht_im_width_t;
         $r_height = $cm->yacht_im_height_t;
-        $target_path = $target_path_main;        
+	$target_path = $target_path_main;  
+
+	if(!is_dir($target_path )){
+                //Directory does not exist, so lets create it.
+                mkdir($target_path, 0775);
+        }
+        	
 		if ($crop_option == 1){
 			$fle->new_image_fixed($filename_tmp, $r_width, $r_height, $target_path, $cm->filtertextdisplay($filename1), $rotateimage);
 		}else{
@@ -38,7 +41,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         //big image
         $r_width = $cm->yacht_im_width_b;
         $r_height = $cm->yacht_im_height_b;
-        $target_path = $target_path_main . "big/";
+	$target_path = $target_path_main . "big/";
+	if(!is_dir($target_path )){
+                //Directory does not exist, so lets create it.
+                mkdir($target_path, 0775);
+        }
         if ($crop_option == 1){
 			$fle->new_image_fixed($filename_tmp, $r_width, $r_height, $target_path, $cm->filtertextdisplay($filename1), $rotateimage);
 		}else{
@@ -48,7 +55,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         //bigger image
         $r_width = $cm->yacht_im_width;
         $r_height = $cm->yacht_im_height;
-        $target_path = $target_path_main . "bigger/";
+	$target_path = $target_path_main . "bigger/";
+	if(!is_dir($target_path )){
+                //Directory does not exist, so lets create it.
+                mkdir($target_path, 0775);
+        }
         if ($crop_option == 1){
 			$fle->new_image_fixed($filename_tmp, $r_width, $r_height, $target_path, $cm->filtertextdisplay($filename1), $rotateimage);
 		}else{
@@ -59,6 +70,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$r_width = $cm->yacht_im_width_sl;
 		$r_height = $cm->yacht_im_height_sl;
 		$target_path = $target_path_main . "slider/";
+		if(!is_dir($target_path )){
+                	//Directory does not exist, so lets create it.
+                	mkdir($target_path, 0775);
+        	}
 		if ($crop_option == 1){
 			$fle->new_image_fixed($filename_tmp, $r_width, $r_height, $target_path, $cm->filtertextdisplay($filename1), $rotateimage);
 		}else{
@@ -67,6 +82,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		
 		//original image store
 		$target_path = $target_path_main . 'original/';
+		if(!is_dir($target_path )){
+                	//Directory does not exist, so lets create it.
+                	mkdir($target_path, 0775);
+        	}
 		$target_path = $target_path . $cm->filtertextdisplay($filename1);
 		$fle->fileupload($filename_tmp, $target_path);
 		

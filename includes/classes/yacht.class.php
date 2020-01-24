@@ -10426,13 +10426,13 @@ class Yachtclass {
 				<td style="width:100%; '. $tdheadingonly .'" align="left">Gallery</td>
 			</tr>
 		</table>
-        <div style="width: 100%;'. $tabletopspace2 .'">
+        <div style="display: flex; flex-wrap: wrap; justify-content:space-between; width: 100%;'. $tabletopspace2 .'">
 		';
 		
         foreach($resultp as $rowp){
             $imgpath  = $rowp['imgpath'];
             //$photo_txt .= '<div style="float:left; padding: 0px 5px 10px 5px; margin: 0px; width: 330px; height: 221px;"><img src="'. $cm->site_url .'/yachtimage/'. $listing_no .'/big/'. $imgpath .'" alt="" /></div>';
-			$photo_txt .= '<div style="float:left; padding: 0px 5px 10px 5px; margin: 0px; width: 32%"><img style="width:100%;" src="'. $cm->site_url .'/yachtimage/'. $listing_no .'/big/'. $imgpath .'" alt="" /></div>';		
+			$photo_txt .= '<div style="margin: 10px 0 0 0px; width: 49%"><img style="width:100%;" src="'. $cm->site_url .'/yachtimage/'. $listing_no .'/big/'. $imgpath .'" alt="" /></div>';		
         }
         $photo_txt .= '</div>'; 
 		
@@ -10802,9 +10802,11 @@ class Yachtclass {
 		
 		//new code
 		$returntxt = '
-		<!DOCTYPE html>
-		<html>
+		<!DOCTYPE HTML>
+		<html lang="en">
 		<head>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Print Details</title>
 		<style>
 		body
