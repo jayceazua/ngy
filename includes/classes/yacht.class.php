@@ -892,7 +892,8 @@ class Yachtclass {
 
                     $this->send_user_email($_SESSION["usernid"], 2);
                     $_SESSION["thnk"] = $frontend->display_message(5, 'index.php');
-                    header('Location: '. $cm->folder_for_seo .'thanks.php');
+ 					$gotopage = $cm->get_page_url('', 'thankyou');
+					header('Location: '. $gotopage);
                 }else{
                     $log_remember_me = $_POST["log_remember_me"];
                     $this->set_remember_login($log_remember_me, $_SESSION["cr_uid"], $row['pwd']);
