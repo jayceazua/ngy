@@ -5,7 +5,7 @@ $collectno = 1;
 $query_string = $_SERVER['QUERY_STRING'];
 $currenpageturl = $_SERVER["REQUEST_URI"];
 
-$pattern = '~\b(js|popuppage|css|images|yachtimage|cmsfile|contentimages|sorry|thanks|login|register)\b~i';
+$pattern = '~\b(js|popuppage|css|images|yachtimage|cmsfile|contentimages|favicons|yimage|sorry|thankyou|login|register)\b~i';
 $inv_page = preg_match($pattern, $newpagename);
 $inv_page2 = preg_match($pattern, $currenpageturl);
 if ($inv_page == 0 AND $inv_page2 == 0){ $_SESSION["file_name"] = $currenpageturl; }
