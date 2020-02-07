@@ -106,7 +106,9 @@ class Ymclass {
 	}
 	
 	public function check_ym_login_step2($tempkey){
-		global $db, $cm;		
+		global $db, $cm;
+		echo $tempkey;
+		exit;		
 		if ($tempkey != ""){
 			$sqltext = "select count(*) as ttl from ngy.tbl_mainsite where tempkey = '". $cm->filtertext($tempkey) ."'";
 			$iffound = $db->total_record_count($sqltext);
