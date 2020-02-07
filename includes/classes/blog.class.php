@@ -8,6 +8,11 @@ class Blogclass {
 		return $cm->get_page_url(7, 'page');
 	}
 	
+	public function get_all_news_url(){
+		global $cm;
+		return $cm->get_page_url(165, 'page');
+	}
+	
 	public function get_blog_url($category_id = 0, $isevent = 0){
 		global $cm;
 		
@@ -529,10 +534,12 @@ class Blogclass {
 		$result = $db->fetch_all_array($sql);
         $found = count($result);
 		if ($found > 0){
+			$all_news_url = $this->get_all_news_url();
 			$returntext .= '
 			<h2 class="sidebartitle">Categories</h2>
 			<div class="leftrightcolsection notopborder clearfix">
 			<ul class="tick">
+				<li><a href="'. $all_news_url .'">All</a></li>
 			';
 			foreach($result as $row){
 				foreach($row AS $key => $val){
