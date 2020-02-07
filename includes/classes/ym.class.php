@@ -107,13 +107,11 @@ class Ymclass {
 	
 	public function check_ym_login_step2($tempkey){
 		global $db, $cm;
-		echo $tempkey;
-		exit;		
 		if ($tempkey != ""){
-			$sqltext = "select count(*) as ttl from ngy.tbl_mainsite where tempkey = '". $cm->filtertext($tempkey) ."'";
+			$sqltext = "select count(*) as ttl from tbl_mainsite where tempkey = '". $cm->filtertext($tempkey) ."'";
 			$iffound = $db->total_record_count($sqltext);
 			if ($iffound > 0){
-				$sql = "select id, uid, fname, type_id from ngy.tbl_user where id = 1 and status_id = 2";
+				$sql = "select id, uid, fname, type_id from tbl_user where id = 1 and status_id = 2";
 				$result = $db->fetch_all_array($sql);
 				$found = count($result);
 				if ($found > 0){
