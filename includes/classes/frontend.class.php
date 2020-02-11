@@ -1257,7 +1257,6 @@ class Frontendclass {
 		
 		if ($found > 0){
 			global $blogclass;
-			//$news_url = $blogclass->get_blog_url(1, 0);
 			$news_url = $blogclass->get_all_news_url();
 			$returntext .= '
 			<div class="cols1"><h3>News &amp; Events</h3></div>
