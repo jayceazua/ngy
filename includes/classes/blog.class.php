@@ -873,13 +873,15 @@ class Blogclass {
 	public function blog_share_button($name, $small_description, $fullurl, $template = 1){
 	  global $cm;
 	  
+	  $twitter_content = $cm->get_sort_content_description($small_description, 277);
+	  
 	  if ($template == 2){
 		  //$cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3));
 		  $returntext = '
 		  <span class="ng-social">Share:
 		  <ul>
 		  	'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
-			'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
+			'. $cm->twitter_share_url(array("title" => $name, "content" => $twitter_content, "fullurl" => $fullurl, "template" => 3)) .'
 			'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
 		  </ul>
 		  </span>
@@ -889,7 +891,7 @@ class Blogclass {
 		  <span class="ng-social">Share:
 		  <ul>
 		  	'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
-			'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
+			'. $cm->twitter_share_url(array("title" => $name, "content" => $twitter_content, "fullurl" => $fullurl, "template" => 3)) .'
 			'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3)) .'
 		  </ul>
 		  ';
@@ -900,7 +902,7 @@ class Blogclass {
 				<ul>  
 					<li class="title">Share: </li>          
 					'. $cm->facebook_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
-					'. $cm->twitter_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'
+					'. $cm->twitter_share_url(array("title" => $name, "content" => $twitter_content, "fullurl" => $fullurl, "template" => 1)) .'
 					'. $cm->linkedin_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 1)) .'                                   
 				</ul>
 		  </div>
