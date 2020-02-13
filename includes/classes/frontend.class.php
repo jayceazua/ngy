@@ -996,7 +996,7 @@ class Frontendclass {
 				<div class="cols2">                        	
 					<h3>Featured '. $menusectiontag .'</h3>
 					<div class="menuboatimg clearfixmain">'. $custom_label_txt .'<a class="imgbox" href="'. $details_url .'"><img src="'. $cm->folder_for_seo . $imagefolder . $ppath .'" alt="'. $imgalt .'"></a></div>
-					<a href="'. $details_url .'">'. $name .'</a>
+					<a class="titlelink2" href="'. $details_url .'">'. $name .'</a>
 					<a href="'. $featuredboat_url .'" class="button">See All</a>
 				</div>
 				';
@@ -1105,7 +1105,7 @@ class Frontendclass {
 				<div class="cols2">                        	
 					<h3>New '. $menusectiontag2 .'</h3>
 					<div class="menuboatimg clearfixmain"><a class="imgbox" href="'. $go_url .'"><img src="'. $cm->folder_for_seo .'menuboximage/'. $imagepath .'" alt="'. $name .'"></a></div>
-					<a href="'. $go_url .'">'. $name .'</a>
+					<a class="titlelink2" href="'. $go_url .'">'. $name .'</a>
 					<a href="'. $go_url2 .'" class="button">See All</a>
 				</div>
 				';
@@ -1257,7 +1257,7 @@ class Frontendclass {
 		
 		if ($found > 0){
 			global $blogclass;
-			$news_url = $blogclass->get_blog_url(1, 0);
+			$news_url = $blogclass->get_all_news_url();
 			$returntext .= '
 			<div class="cols1"><h3>News &amp; Events</h3></div>
 			<div class="clearfixmain">

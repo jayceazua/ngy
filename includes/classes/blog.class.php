@@ -8,6 +8,11 @@ class Blogclass {
 		return $cm->get_page_url(7, 'page');
 	}
 	
+	public function get_all_news_url(){
+		global $cm;
+		return $cm->get_page_url(165, 'page');
+	}
+	
 	public function get_blog_url($category_id = 0, $isevent = 0){
 		global $cm;
 		
@@ -529,10 +534,12 @@ class Blogclass {
 		$result = $db->fetch_all_array($sql);
         $found = count($result);
 		if ($found > 0){
+			$all_news_url = $this->get_all_news_url();
 			$returntext .= '
 			<h2 class="sidebartitle">Categories</h2>
 			<div class="leftrightcolsection notopborder clearfix">
 			<ul class="tick">
+				<li><a href="'. $all_news_url .'">All</a></li>
 			';
 			foreach($result as $row){
 				foreach($row AS $key => $val){
@@ -1154,7 +1161,7 @@ class Blogclass {
 			$small_description = $cm->fc_word_count($small_description, 200);
 			$returntext .= '
 			<li>
-				<a href="'. $details_url .'"><img src="'. $cm->folder_for_seo .'blogimage/thumb/'. $blog_image .'" title="'. $name .'" alt="'. $name .'"></a>
+				<a href="'. $details_url .'"><img class="full" src="'. $cm->folder_for_seo .'blogimage/'. $blog_image .'" title="'. $name .'" alt="'. $name .'"></a>
 				<div>
 					<h4><a href="'. $details_url .'">'. $name .'</a></h4>
 					'. $date_text .'
