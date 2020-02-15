@@ -873,6 +873,7 @@ class Blogclass {
 	public function blog_share_button($name, $small_description, $fullurl, $template = 1){
 	  global $cm;
 	  
+	  //create 280 chars description
 	  $twitter_content = $cm->get_sort_content_description($small_description, 277);
 	  
 	  if ($template == 2){
