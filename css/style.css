@@ -2754,7 +2754,7 @@ ul.filtersection-list li a:hover {color:#2bbed3;}
 
 a.yf-search-header{ position:relative; font-size: 20px; font-weight: 700; color:#050505; display:block;}
 a.yf-search-header:after {
-	content:"\f068";
+	content:"\f067";
 	font-family: "Font Awesome 5 Free";
 	font-size: 20px;
 	color:inherit;
@@ -2763,7 +2763,7 @@ a.yf-search-header:after {
 	top: 0px;
 	right: 0px;
 }
-a.yf-search-header.clicked:after { content:"\f067"; }
+a.yf-search-header.clicked:after { content:"\f068"; }
 
 /*.input{color:#a6a6a6; font-size:14px; line-height:32px;}*/
 

@@ -516,7 +516,7 @@ class Boatwatcherclass {
 			$returntext = '
 			<div class="boatwatcherpage clearfixmain">
 				<a class="yf-search-header" href="javascript:void(0);"><h2 class="singlelinebottom30">Yacht <span>Finder</span></h2></a>
-				<div class="boatwatcherpage-in clearfixmain">
+				<div class="boatwatcherpage-in com_none clearfixmain">
 				'. $start_content .'
 				'. $formstart . '
 				
