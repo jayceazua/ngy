@@ -786,8 +786,9 @@ class Yachtclass_Pop extends Yachtclass{
 			if ($sendmecopy == 1){ $mail_cc = $mail_reply; }
 			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $subject, $message, $cm->site_url, $news_footer_u);			
 			
-			$_SESSION["thnk"] = $frontend->display_message(16);
-			header('Location: ' . $cm->get_page_url(0, "popthankyou"));
+			//$_SESSION["thnk"] = $frontend->display_message(16);
+			$redpageurl = $cm->get_page_url(0, "popthankyou") . "?p=2";
+			header('Location: ' . $redpageurl);
 			exit;
 		}
 	}
