@@ -129,6 +129,7 @@ class Yachtclass_Pop extends Yachtclass{
 			$red_pg = $cm->folder_for_seo . "contact-broker/?id=" . $id . "&yid=" . $yid;
 			$cm->field_validation($fullname, '', 'Name', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($phone, '', 'Phone', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($subject, '', 'Subject', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($message, '', 'Message', $red_pg, '', '', 1, 'fr_');
 			if ($email2 != ""){
@@ -260,6 +261,7 @@ class Yachtclass_Pop extends Yachtclass{
 			global $db, $cm, $frontend, $leadclass, $sdeml;
 			$fullname = $_POST["fullname"];
 			$email = $_POST["email"];
+			$phone = $_POST["phone"];
 			$subject = $_POST["subject"];
 			$message = $_POST["message"];
 			$email2 = $_POST["email2"];
@@ -281,6 +283,7 @@ class Yachtclass_Pop extends Yachtclass{
 			$red_pg = $cm->folder_for_seo . "contact-model/";
 			$cm->field_validation($fullname, '', 'Name', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($phone, '', 'Phone', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($subject, '', 'Subject', $red_pg, '', '', 1, 'fr_');
 			$cm->field_validation($message, '', 'Message', $red_pg, '', '', 1, 'fr_');
 			if ($email2 != ""){
@@ -303,6 +306,7 @@ class Yachtclass_Pop extends Yachtclass{
 				"form_type" => $form_type,
 				"name" => $fullname,
 				"email" => $email,
+				"phone" => $phone,
 				"message" => $message,
 				"broker_id" => 1,
 				"yacht_id" => $yid
@@ -322,6 +326,11 @@ class Yachtclass_Pop extends Yachtclass{
 			  <tr>
 				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Email Address:</td>
 				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($email, 1) .'</td>
+			  </tr>
+			  
+			  <tr>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Phone:</td>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($phone, 1) .'</td>
 			  </tr>
 			
 			  <tr>

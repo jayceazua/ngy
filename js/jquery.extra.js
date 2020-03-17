@@ -395,6 +395,7 @@ $(document).ready(function(){
         var all_ok = "y";
         if (!field_validation_border("fullname", 1, 1)){ all_ok = "n"; }
         if (!field_validation_border("email", 2, 1)){ all_ok = "n"; }
+		if (!field_validation_border("phone", 1, 1)){ all_ok = "n"; }
         if (!field_validation_border("subject", 1, 1)){ all_ok = "n"; }
         if (!field_validation_border("message", 1, 1)){ all_ok = "n"; }
 
