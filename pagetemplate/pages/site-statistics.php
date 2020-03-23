@@ -43,7 +43,7 @@ include($bdr."includes/head.php");
 				<div class="fieldval"><select name="chosanbrokerid" id="chosanbrokerid" class="select impressionviewlead">
 					<option value="0">All</option>
 					<?php
-					echo $yachtclass->get_all_broker_combo(0, 0);
+					echo $yachtclass->get_broker_combo_all(0, 1);
 					?>               
 				</select></div>
 			</li>
