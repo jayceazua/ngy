@@ -1349,7 +1349,8 @@ $(document).ready(function(){
         var newprice = eval(setpr) * eval(convert_val);
         newprice = number_round(newprice);
         newprice_display = curtext + newprice;
-        $("#pricechange" + tdiv).html(newprice_display);
+        $("#pricechange" + tdiv).html(newprice);
+        //$("#pricechange" + tdiv).html(newprice_display);
         //$('#pricechange').currency({ region: 'EUR', thousands: ',' });
     });
 	

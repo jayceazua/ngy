@@ -2793,10 +2793,12 @@ ul.listing-meta li.loc{background:url(../images/lacation-icon.png) 0 center no-r
 .product-detail .right-cell .section ul li a{color:#727272;}
 .product-detail .right-cell .section ul li a:hover{color:#000000;}*/
 
-.product-detail .right-cell .section.price{}
+.product-detail .right-cell .section.price{ text-align: center;}
 .product-detail .right-cell .section.price .left{color:#2bbed3; font-size:20px; font-weight:700;}
 .product-detail .right-cell .section.price .right{width:64px;}
 .product-detail .right-cell .section.price .full{color:#2bbed3; font-size:20px; font-weight:700; }
+.product-detail .right-cell .section.price .my-dropdown2{ width: auto; height: auto; line-height: auto;}
+.product-detail .right-cell .section.price #pricechange{ color:#2bbed3; font-size:20px; font-weight:700;}
 
 .section.broker-wrap {text-align:center;}
 .section.broker-wrap h3 {text-align:center;}

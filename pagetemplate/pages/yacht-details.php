@@ -315,12 +315,12 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 				?>
 				<div class="full"><?php echo $price_display_message; ?></div>
 				<?php }else{ ?>
-				<div class="left"><span id="pricechange">$<?php echo $cm->price_format($price); ?></span></div>
-                <div class="right">
-                    <label class="com_none" for="currency_id">Price</label>
+				<div class="clearfixmain">
+               		<label class="com_none" for="currency_id">Price</label>
                     <select tdiv="" setpr="<?php echo round($price, 0); ?>" class="my-dropdown2" id="currency_id" name="currency_id">
                         <?php echo $yachtclass->get_currency_combo(0, 1); ?>
                     </select>
+                    <span id="pricechange"><?php echo $cm->price_format($price); ?></span>
                 </div>               
 				<?php 
 					}
