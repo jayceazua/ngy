@@ -331,7 +331,7 @@ RewriteRule ^pop-chartering-your-yacht(/)?$ index.php?templateseo=chartering-you
 RewriteRule ^pop-watch-price(/)?$ index.php?templateseo=watch-price&popp=1&%{QUERY_STRING} [L]
 
 RewriteRule ^popsorry(/)?$ index.php?templateseo=sorry&popp=1 [L]
-RewriteRule ^popthankyou(/)?$ index.php?templateseo=thanks&popp=1 [L]
+RewriteRule ^popthankyou(/)?$ index.php?templateseo=thanks&popp=1&%{QUERY_STRING} [L]
 RewriteRule ^mkt-campaign-creator(/)?$ index.php?templateseo=mkt-campaign-creator [L]
 RewriteRule ^mkt-custom-slideshow(/)?$ index.php?templateseo=mkt-custom-slideshow [L]
 RewriteRule ^customboatslideshow/([^/\.]+)/?$ index.php?templateseo=customboatslideshow&slideshowcode=$1&nohead=3 [L]
