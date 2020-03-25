@@ -8385,7 +8385,7 @@ class Yachtclass {
 							loop: true,
 							hash: false,
 							thumbs : {
-								autoStart : true,
+								autoStart : false,
 								axis      : "x"
 							}
 						});
