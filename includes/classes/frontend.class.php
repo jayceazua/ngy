@@ -6470,6 +6470,7 @@ class Frontendclass {
 			<input class="finfo" id="email2" name="email2" type="text" />
 			<input type="hidden" id="fcapi" name="fcapi" value="buyerservicessubmit" />	
 			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+			<input type="hidden" value="'. $ajaxsubmit .'" id="ajaxsubmit" name="ajaxsubmit" />
 			
 			<ul class="ng-search-form">
             	<li>
@@ -6530,7 +6531,8 @@ class Frontendclass {
 			<label class="com_none" for="email2">email2</label>
 			<input class="finfo" id="email2" name="email2" type="text" />
 			<input type="hidden" id="fcapi" name="fcapi" value="buyerservicessubmit" />	
-			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />   
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+			<input type="hidden" value="'. $ajaxsubmit .'" id="ajaxsubmit" name="ajaxsubmit" /> 
 			';
 			
 			$returntext .= '
@@ -6612,9 +6614,12 @@ class Frontendclass {
 		$returntext .= '
 		<script type="text/javascript">
 		$(document).ready(function(){
-			$("#buyer-services-ff").submit(function(){
+			$("#buyer-services-ff").submit(function(event){
 				var all_ok = "y";
 				var setfocus = "n";
+				
+				var ajaxsubmit = $("#ajaxsubmit").val();
+				ajaxsubmit = parseInt(ajaxsubmit);
 				
 				if (!field_validation_border("bs_fname", 1, 1)){
 					all_ok = "n";
@@ -6634,7 +6639,45 @@ class Frontendclass {
 				if (all_ok == "n"){
 					return false;
 				}
-				return true;
+				
+				if (ajaxsubmit > 0){
+					
+					//Ajax submit
+					var form = $(this);
+					$.ajax({
+					  type: form.attr("method"),
+					  url: form.attr("action"),
+					  data: form.serialize()
+					}).done(function() {					  
+					  $("#bs_fname").val("");
+					  $("#bs_lname").val("");
+					  $("#bs_email").val("");
+					  $("#bs_phone").val("");
+					  $("#bs_boat_make").val("");
+					  $("#bs_boat_model").val("");
+					  $("#bs_boat_year").val("");
+					  $("#bs_boat_location").val("");
+					  $("#bs_boat_size").val("");
+					  $("#bs_boat_ideal_brand").val("");
+					  $("#bs_boat_budget_min").val("");
+					  $("#bs_boat_budget_max").val("");
+					  $("#bs_comments").val("");
+					  
+					  $("#formsubmitcontent").html("Your Enquiry has been sent.<br>We will get back to you asap.");
+					  $("#formsubmitoverlay").show();
+					  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+					}).fail(function() {
+					  $(".fomrsubmit-result").addClass("error");
+					  $(".fomrsubmit-result").html("ERROR! Please try again");
+					  $(".fomrsubmit-result").removeClass("com_none");
+					  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+					});
+					
+					event.preventDefault();
+					
+				}else{
+					return true;
+				}
 			});
 		});
 		</script>
@@ -13463,11 +13506,7 @@ class Frontendclass {
 					  $("#wcs_boat_hours_on_engines").val("");
 					  $("#wcs_boat_location").val("");
 					  
-					  //$(".fomrsubmit-result").addClass("success");
-					  //$(".fomrsubmit-result").html("Email sent successfully");
-					  //$(".fomrsubmit-result").removeClass("com_none");
-					  
-					  $("#formsubmitcontent").html("Thank you for sending your yacht info.<br>We will get back to you asap.");
+					  $("#formsubmitcontent").html("Your Enquiry has been sent.<br>We will get back to you asap.");
 					  $("#formsubmitoverlay").show();
 					  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
 					}).fail(function() {
