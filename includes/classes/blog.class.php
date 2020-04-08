@@ -874,7 +874,9 @@ class Blogclass {
 	  global $cm;
 	  
 	  //create 280 chars description
-	  $twitter_content = $cm->get_sort_content_description($small_description, 277);
+	  $urllength = strlen($fullurl);
+	  $c_count = 276 - $urllength;
+	  $twitter_content = $cm->get_sort_content_description($small_description, $c_count);
 	  
 	  if ($template == 2){
 		  //$cm->googleplus_share_url(array("title" => $name, "content" => $small_description, "fullurl" => $fullurl, "template" => 3));

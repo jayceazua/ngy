@@ -277,7 +277,7 @@ $atm2 = $final_meta->m2;
 $atm3 = $final_meta->m3;
 
 $content = $atm2;
-$twittercontent = "View this ". $yacht_title ." for sale at ". $cm->sitename ." in " . $addressfull . ".\n" . $fullurl;
+$twittercontent = "View this ". $yacht_title ." for sale at ". $cm->sitename ." in " . $addressfull;
 $imagelink =  $cm->site_url . '/yachtimage/'. $listing_no .'/big/' . $firstimage;
 $opengraphmeta = $cm->meta_open_graph($yacht_title, $content, $imagelink, $fullurl);
 

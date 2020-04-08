@@ -1489,15 +1489,15 @@ class Commonclass {
 		//end
 		
 		if ($content == ""){
-            $content = $this->default_share_content() . ' ' . $fullurl;
+            $content = $this->default_share_content();
         }
 		
 		if ($template == 1){
-			$returntext = '<li><a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/twitter.png" alt="Twitter"></a></li>';
+			$returntext = '<li><a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'&url='. urlencode($fullurl) .'" target="_blank"><img src="'. $this->folder_for_seo .'images/twitter.png" alt="Twitter"></a></li>';
 		}elseif ($template == 3){
-			$returntext = '<li><a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'" target="_blank"><i class="fab fa-twitter fa-fw"></i><span class="com_none">Twitter</span></a></li>';
+			$returntext = '<li><a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'&url='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-twitter fa-fw"></i><span class="com_none">Twitter</span></a></li>';
 		}else{
-			$returntext = '<a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'" target="_blank"><i class="fab fa-twitter"></i><div class="com_none">Twitter</div></a>';
+			$returntext = '<a title="Twitter Post" href="https://twitter.com/intent/tweet?text='. urlencode($content) .'&url='. urlencode($fullurl) .'" target="_blank"><i class="fab fa-twitter"></i><div class="com_none">Twitter</div></a>';
 		}
         
         return $returntext;
