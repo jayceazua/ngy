@@ -8801,7 +8801,7 @@ class Yachtclass {
 			$gaeventtracking = $this->google_event_tracking_code('broker', $brokername);
 			$brokercontactinfo = '
 			<div class="brkbox3 clearfixmain">
-				<p><a class="phone" href="tel:'. $officephone .'">Call Now</a></p>
+				<p><a class="phone active" href="tel:'. $officephone .'">Call Now</a></p>
 				<p><a class="contactbroker email" href="javascript:void(0);" data-src="'. $cm->folder_for_seo .'contact-broker/?id='. $broker_id . '&yid='. $yacht_id .'" data-type="iframe">Email</a></p>
 			</div>
 			';
