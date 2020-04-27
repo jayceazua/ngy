@@ -2677,7 +2677,7 @@ class Frontendclass {
 			
 			$ad_msg = str_replace("#companyname#", $cm->filtertextdisplay($companyname), $ad_msg);
 			$ad_msg = str_replace("#testimonialsubmission#", $testimonialsubmission, $ad_msg);
-			$ad_mail_subject = str_replace("#companyname#", $companyname, $mail_subject);
+			$ad_mail_subject = str_replace("#companyname#", $companyname, $ad_mail_subject);
 			
 			$mail_fm = $cm->admin_email();
 			$mail_to = $cm->admin_email_to();

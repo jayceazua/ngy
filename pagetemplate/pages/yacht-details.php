@@ -37,7 +37,7 @@ if ($yw_id > 0 AND $ownboat == 0){
 	
 	$display_yachtworld_disclaimer_text = '
 	<div class="disclaimer_div"><br>
-		'. $cm->get_systemvar('YWTXT') .'
+		'. $disclaimer_text .'
 		<span class="yw">('. $yw_id .')</span>
 	</div>
 	';
