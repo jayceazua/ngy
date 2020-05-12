@@ -15,10 +15,7 @@ if ($nohead == 1 OR $nohead == 3){
 		<?php if (isset($display_yachtworld_disclaimer) AND $display_yachtworld_disclaimer == 1){?>
 		<div class="disclaimer_div">
 			<?php
-				echo $cm->get_systemvar('YWTXT');
-				if ($yw_id > 0){
-					echo '<span class="yw">('. $yw_id .')</span>';
-				}
+				echo $disclaimer_text;
 			?>
 		</div>
 		<?php } ?>
@@ -51,10 +48,7 @@ if ($nohead == 1 OR $nohead == 3){
         <div class="container clearfixmain">
 		<div class="disclaimer_div">
 			<?php
-				echo $cm->get_systemvar('YWTXT');
-				if ($yw_id > 0){
-					echo '<span class="yw">('. $yw_id .')</span>';
-				}
+				echo $disclaimer_text;
 			?>
 		</div>
         </div>

@@ -36,8 +36,9 @@ if ($yw_id > 0 AND $ownboat == 0){
 	$display_yachtworld_disclaimer = 0;
 	
 	$display_yachtworld_disclaimer_text = '
-	<div class="disclaimer_div"><br>
-		'. $cm->get_systemvar('YWTXT') .'
+	<div class="disclaimer_div">
+		<strong>Disclaimer:</strong><br />
+		'. $disclaimer_text .'
 		<span class="yw">('. $yw_id .')</span>
 	</div>
 	';
@@ -714,7 +715,6 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 			<div class="clearfixmain"><a href="javascript:void(0);" ctabid="6" class="customboattab">Descriptions</a></div>
 			<div id="ctab6" class="customboattabcontent com_none clearfixmain">
 			<?php echo $descriptions; ?>
-            <?php echo $display_yachtworld_disclaimer_text; ?>
             </div>
 			<?php
 			}
@@ -735,6 +735,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
             <h2 class="singlelinebottom">Location</h2>
             <?php echo $mapdisplay; ?>
             
+            <?php echo $display_yachtworld_disclaimer_text; ?>            
        </div>
         
     </div>
