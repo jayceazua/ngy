@@ -143,7 +143,7 @@ $adm->pagination_main($foundm, $dcon, $small_range, $range_span, $p, $q, $gotopa
       <td class="displaytd1" align="center"><a href="add-sysvar.php?id=<?php echo $id; ?>&category_id=<?php echo $categoryid; ?>" title="Modify Record"><img alt="Modify Record" title="Modify Record" src="images/mod.gif"  class="imgcommon" /></a></td>
       <td class="displaytd1" align="left"><?php echo $code; ?></td>
       <td class="displaytd1" align="left"><?php echo $name; ?></td>
-      <td class="displaytd1" width="" align="left"><?php echo $field_value; ?></td>
+      <td class="displaytd1 breakall" width="" align="left"><?php echo $field_value; ?></td>
       <td class="displaytd1" align="center" nowrap="nowrap"><input type="text" class="inputboxcenter1 inputbox_size3" name="sortorder<?php echo $rc_count; ?>" id="sortorder<?php echo $rc_count; ?>" value="<?php echo $categoryrank; ?>" maxlength="5" /><input type="hidden" value="<?php echo $id; ?>" name="id<?php echo $rc_count; ?>" id="id<?php echo $rc_count; ?>" /></td>
      </tr>
      <?php $rc_count++; } ?>

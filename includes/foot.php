@@ -221,6 +221,9 @@ function ___log__error(aMsg, aUrl, aLine, aCol, aErr) {
 $google_remarketing_tag = $cm->get_systemvar('GORTC');
 echo $google_remarketing_tag;
 
+$facebook_pixel_code = $cm->get_systemvar('FBPXC');
+echo $facebook_pixel_code;
+
 //$live_chat_code = $cm->get_systemvar('LVCHC');
 //echo $live_chat_code;
 
