@@ -1835,7 +1835,34 @@ $(document).ready(function(){
 			plx_position = scroll;
 		}
 	});
-		
+	
+	//seller service scroller
+	$('.sell-success-scroller').slick({
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			prevArrow: '<span class="sell-prev"><i class="fas fa-chevron-left"></i></span>',
+			nextArrow: '<span class="sell-next"><i class="fas fa-chevron-right"></i></span>',
+			dots:false,
+			responsive: [
+			{
+			  breakpoint: 1280,
+			  settings: {
+				slidesToShow: 2,
+				arrows: false,
+				dots: true
+			  }
+			},
+			{
+			  breakpoint: 768,
+			  settings: {
+				slidesToShow: 1,
+				arrows: false,
+				dots: true
+			  }
+			}
+		  ]
+	});		
 });
 
 
