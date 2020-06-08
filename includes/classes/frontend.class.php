@@ -2058,6 +2058,83 @@ class Frontendclass {
 				</script>
 				';
 			}
+		}elseif ($template == 4){
+			$query_sql = "select *,";
+			$query_form = " from tbl_testimonial,";
+			$query_where = " where";
+			
+			$query_where .= " status_id = 1 and";
+			$query_sql = rtrim($query_sql, ",");
+			$query_form = rtrim($query_form, ",");
+			$query_where = rtrim($query_where, "and");
+			
+			$sql = $query_sql . $query_form . $query_where;
+			$sql = $sql." order by reg_date desc";
+			$result = $db->fetch_all_array($sql);
+			$found = count($result);
+			
+			if ($found > 0){
+				$returntext .= '
+				<div class="sell-review wow fadeInUp" data-wow-duration="1.2s">
+					<div class="sell-review-scroller">						
+				';
+				
+				foreach($result as $row){
+					foreach($row AS $key => $val){
+						${$key} = $cm->filtertextdisplay(($val));
+					}
+					if ($imgpath == ""){
+						$imgpath = "avatar.jpg";
+					}
+					
+					$rating_text = '';
+					$full_rating = $rating;
+					$empty_rating = 5 - $rating;
+					
+					for ($k = 1; $k <= $full_rating; $k++){
+						$rating_text .= '<span class="fa fa-star checked"><span class="com_none">star</span></span>';
+					}
+					for ($k = 1; $k <= $empty_rating; $k++){
+						$rating_text .= '<span class="fa fa-star"><span class="com_none">star</span></span>';
+					}
+					
+					$testimonial_posted_time_display = $cm->timeAgo($reg_date);				
+					
+					$returntext .= '
+					<div class="item">
+						<div class="review">
+							<div class="review-avatar"><img src="'. $cm->folder_for_seo .'testimonialimage/'. $imgpath .'" title="'. $name .'" alt="'. $name .'"></div>
+							<div class="review-text">
+								<h5>'. $name .'</h5>
+								<h6>
+									'. $rating_text . '&nbsp;' . $testimonial_posted_time_display . '
+								</h6>
+								<p">'. $description .'</p>
+							</div>
+						</div>
+					</div>
+					';
+				}
+				
+				$returntext .= '						
+					</div>
+				</div>
+				';
+				
+				$returntext .= '
+				<script>
+				$(document).ready(function(){
+					$(".sell-review-scroller").slick({
+						infinite: true,
+						slidesToShow: 1,
+						adaptiveHeight: true,	
+						arrows:false,		
+						dots:true,
+					});
+				});
+				</script>
+				';
+			}
 		}else{
 		
 			if ($template == 1){
@@ -13352,6 +13429,59 @@ class Frontendclass {
             <div class="ng-hr clearfixmain">
                 <div><input type="submit" value="Submit" class="ng-submit"></div>
             </div>						
+			<div class="fomrsubmit-result com_none"></div>
+			</form>
+			';
+		}elseif ($templateid == 2){
+			$returntext = '
+			<form method="post" action="'. $cm->folder_for_seo .'" class="sellyachtcatamaranform" id="sell-your-yacht-ff" name="sell-your-yacht-ff">
+			<label class="com_none" for="email2">email2</label>
+			<input class="finfo" id="email2" name="email2" type="text" />
+			<input type="hidden" id="fcapi" name="fcapi" value="wecansellyouryachtsubmit" />	
+			<input type="hidden" id="pgid" name="pgid" value="'. $pgid .'" />
+			<input type="hidden" value="'. $ajaxsubmit .'" id="ajaxsubmit" name="ajaxsubmit" />
+			
+			<h1 class="sell-h1 t-center uppercase"><span>Learn</span> More</h1>
+			
+			<ul class="ng-boat-evaluation-form">			
+				<li>
+                	<p>Contact Info</p>
+                    <label for="wcs_fname" class="com_none">First Name</label>
+                    <span class="pseudo-require"><input type="text" name="fname" placeholder="First Name" id="wcs_fname" value="'. $fname .'" class="input" /></span>
+					<label for="wcs_lname" class="com_none">Last Name</label>
+                    <span class="pseudo-require"><input type="text" name="lname" placeholder="Last Name" id="wcs_lname" value="'. $lname .'" class="input" /></span>
+                    <label for="wcs_email" class="com_none">Email</label>
+                    <span class="pseudo-require"><input type="text" name="email" placeholder="Email" id="wcs_email" value="'. $email .'" class="input" /></span>
+                    <label for="wcs_phone" class="com_none">Phone Number</label>
+                    <span class="pseudo-require"><input type="text" name="phone" placeholder="Phone Number" id="wcs_phone" value="'. $phone .'" class="input" /></span>
+                </li>
+				
+				<li>
+                	<p>Yacht</p>
+                    <label for="wcs_boat_make" class="com_none">Make</label>
+                    <span class="pseudo-require"><input type="text" placeholder="Make" id="wcs_boat_make" name="boat_make" value="'. $boat_make .'" class="input" /></span>
+                    <label for="wcs_boat_model" class="com_none">Model</label>
+                    <span class="pseudo-require"><input type="text" placeholder="Model" id="wcs_boat_model" name="boat_model" value="'. $boat_model .'" class="input" /></span>
+                    <label for="wcs_boat_year" class="com_none">Year</label>
+                    <span class="pseudo-require"><input type="text" placeholder="Year" id="wcs_boat_year" name="boat_year" value="'. $boat_year .'" class="input" /></span>                   
+                </li>   
+                <li>
+                	<p class="mob-none">&nbsp;</p>
+                    <label for="wcs_boat_engines" class="com_none">Engines</label>
+                    <input type="text" placeholder="Engines" id="wcs_boat_engines" name="boat_engines" value="'. $boat_engines .'" class="input" />
+                    
+                    <label for="wcs_boat_hours_on_engines" class="com_none">Hours</label>
+                    <input type="text" placeholder="Hours On Engines" id="wcs_boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" />
+                    
+                    <label for="wcs_boat_location" class="com_none">Location</label>
+                    <span class="pseudo-require"><input type="text" placeholder="Location" id="wcs_boat_location" name="boat_location" value="'. $boat_location .'" class="input" /></span>
+                </li>			
+			</ul>
+			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>
+			<div class="sell-boat-submit">
+                <input type="submit" value="SUBMIT" class="button fat">
+            </div>
+			
 			<div class="fomrsubmit-result com_none"></div>
 			</form>
 			';
