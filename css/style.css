@@ -4587,6 +4587,8 @@ ul.locationgallery li:nth-child(4n+1) { margin-left:0; }
 
 /*Steps - form*/
 .multistepform-main { padding: 20px; background-color: #f3f1f1; position: relative; }
+.safesecure { position: absolute; top: -40px; right: 0; }
+.safesecure img { max-width: 100px; }
 .divborder { border: 1px solid #c3c3c3; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
 .form-steps { width: 100%; }
 
