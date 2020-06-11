@@ -7366,9 +7366,13 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 	background:#2abfd0;
 	padding:10px 30px;
 	font-family: 'MyriadPro';
-	color:#fff;
+	color:#181818;
 	font-size:20px;
 	text-transform:uppercase;
+}
+
+.ng-button:hover{
+	color:#fff;
 }
 
 .ng-social{
