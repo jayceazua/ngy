@@ -525,7 +525,9 @@ class Blogclass {
 	
 	public function blog_category_list_col($argu = array()){
 		global $db, $cm;
-		$returntext = '';
+		$blogtext = '';
+		$mobileview = round($argu["mobileview"], 0);
+		
 		$limit = round($argu["limit"], 0);
 		if ($limit <= 0){ $limit = 5; }
 		
@@ -535,7 +537,7 @@ class Blogclass {
         $found = count($result);
 		if ($found > 0){
 			$all_news_url = $this->get_all_news_url();
-			$returntext .= '
+			$blogtext .= '
 			<h2 class="sidebartitle">Categories</h2>
 			<div class="leftrightcolsection notopborder clearfix">
 			<ul class="tick">
@@ -546,14 +548,23 @@ class Blogclass {
                     ${$key} = $cm->filtertextdisplay(($val));
                 }
 				$linkurl = $cm->get_page_url($slug, 'blogcategory');
-				$returntext .= '
+				$blogtext .= '
 				<li><a href="'. $linkurl .'">'. $name .'</a></li>
 				';
 			}
-			$returntext .= '</ul>
+			$blogtext .= '</ul>
 			</div>		
 			';
-		}		
+		}
+		
+		if ($cm->isMobileDevice() AND $mobileview == 1){
+			$returntext = $blogtext;
+		}
+		
+		if (!($cm->isMobileDevice()) AND $mobileview == 0){
+			$returntext = $blogtext;
+		}
+				
 		return $returntext;
 	}
 	
