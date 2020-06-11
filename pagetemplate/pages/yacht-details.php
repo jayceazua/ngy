@@ -143,18 +143,21 @@ if ($ownboat == 1){
 	if ($type_id == $yachtclass->catamaran_id OR $feed_id == $yachtclass->catamaran_feed_id2){
 		$sp_typeid = 2;
 		$column_id = 7;
+		$price_title = "Catamaran Price";
 	}else{
 		$sp_typeid = 1;
 		$column_id = 6;
+		$price_title = "Yacht Price";
 	}
-	//$column_id = 8;
 }else{
 	if ($feed_id == $yachtclass->catamaran_feed_id){
 		$sp_typeid = 2;
 		$column_id = 7;
+		$price_title = "Catamaran Price";
 	}else{
 		$sp_typeid = 1;
 		$column_id = 6;
+		$price_title = "Yacht Price";
 	}
 }
 
@@ -309,7 +312,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 		<section class="section sectionbg3 sectionbgtop price topprice clearfixmain">
 			<?php if ($charter_id == 1 OR $charter_id == 3){?>
 			<div class="pricediv saleprice clearfixmain">
-				<h3>Yacht price</h3>
+				<h3><?php echo $price_title; ?></h3>
 				<?php
 				if ($price_tag_id > 0){
 					$price_display_message = $cm->get_common_field_name('tbl_price_tag', 'name', $price_tag_id);
