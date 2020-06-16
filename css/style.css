@@ -7364,12 +7364,13 @@ ul.ng-news-list > li:nth-child(even) .ng-news-right{
 	background:#2abfd0;
 	padding:10px 30px;
 	font-family: 'MyriadPro';
-	color:#181818;
+	color:#fff;
 	font-size:20px;
 	text-transform:uppercase;
 }
 
 .ng-button:hover{
+	background:#181818;
 	color:#fff;
 }
 
