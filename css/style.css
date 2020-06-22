@@ -2209,7 +2209,7 @@ a.joinmaillist:hover { color:#000; background-color: #a4a4a8; }
 
 /*latest news*/
 ul.latestnews { padding: 0; margin: 0; list-style: none; font-size: 0; text-align: center; }
-ul.latestnews li { position:relative; margin:0 0 30px 2%; padding:159px 0 0 0; width: 32%; text-align: center; font-size: 14px; display: inline-block; background-position: center 0; background-repeat: no-repeat; vertical-align:top;}
+ul.latestnews li { position:relative; margin:0 0 30px 2%; padding:138px 0 0 0; width: 32%; text-align: center; font-size: 14px; display: inline-block; background-position: center 0; background-repeat: no-repeat; vertical-align:top;}
 ul.latestnews li:nth-child(3n+1){ margin-left: 0; }
 
 ul.latestnews li .newsimg { line-height: 0;}
