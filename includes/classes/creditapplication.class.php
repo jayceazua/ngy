@@ -991,7 +991,8 @@ class Creditapplicationclass {
 	  
 	  $returntext = '
 	  <div id="creditapplicationform" class="multistepform-main divborder">
-	  	   <div class="form-steps">    
+			<div class="safesecure"><img src="'. $cm->folder_for_seo.'images/safe-secure.png" /></div>
+			<div class="form-steps">    
 				<ul class="stephead">
 					<li class="s1 active">Applicant</li>
 					<li class="s2 com_none">Co-Applicant</li>
