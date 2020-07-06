@@ -266,11 +266,11 @@ class Commonclass {
 	  return strtoupper($pass); 
   }  
   
-  public function get_unq_code($tblnm, $fldnm){  
+  public function get_unq_code($tblnm, $fldnm, $x = 6){  
       global $db;
-	  $ucd = $this->campaignid(40);
+	  $ucd = $this->campaignid($x);
 	  $wh_present = $db->total_record_count("select count(*) as ttl from ".$tblnm." where ".$fldnm." = '". $ucd ."'");	  
-	  if ($wh_present > 0){ $ucd = $this->get_unq_code($tblnm, $fldnm); } // next recursion
+	  if ($wh_present > 0){ $ucd = $this->get_unq_code($tblnm, $fldnm, $x); } // next recursion
 	  return $ucd;
   }
   
