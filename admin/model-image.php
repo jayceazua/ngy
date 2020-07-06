@@ -200,6 +200,8 @@ include("head.php");
     <div class="formholder">
         <form name="demoFiler" id="demoFiler" enctype="multipart/form-data">
             <input type="hidden" value="<?php echo $ms; ?>" id="ms" name="ms" />
+            <input type="hidden" value="<?php echo $make_id; ?>" id="make_id" name="make_id" />
+            <input type="hidden" value="<?php echo $photocategoryid; ?>" id="photocategoryid" name="photocategoryid" />
             
             <p>Hard crop image?&nbsp;&nbsp;<input class="checkbox" type="checkbox" id="crop_option" name="crop_option" value="1" <?php if ($crop_option == 1){?> checked="checked"<?php } ?> /> Yes</p>
             <p>Rotate Image?&nbsp;&nbsp;
