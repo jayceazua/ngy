@@ -56,6 +56,12 @@ if ($fullpage != "y"){
 	$link_option_ar["Inventory"][] = array('Model Search Fields', 'model-search-fields.php');
 	$link_option_ar["Inventory"][] = array('sep', '');
 	$link_option_ar["Inventory"][] = array('Useful Stats', 'useful-stats.php');
+	$link_option_ar["Inventory"][] = array('sep', '');
+	$link_option_ar["Inventory"][] = array('Charter Boat', '');
+	$link_option_ar["Inventory"][] = array('Manage Tender and Toy', 'mod-tendertoy.php');
+	$link_option_ar["Inventory"][] = array('Manage Cruising Area', 'mod-cruisingarea.php');
+	$link_option_ar["Inventory"][] = array('Manage Destination', 'mod-destination.php');
+	$link_option_ar["Inventory"][] = array('Manage Charter Boat', 'mod-charterboat.php');
 	
 	$link_option_ar["Page Slider Section"][] = "leftslidericon";
 	$link_option_ar["Page Slider Section"][] = array('Add Slider Category', 'add_slider_category.php');

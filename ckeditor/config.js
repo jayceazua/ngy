@@ -21,9 +21,8 @@ CKEDITOR.editorConfig = function( config )
 		['NumberedList','BulletedList','-','Outdent','Indent','CreateDiv','-','WPMore','OpenContent','-','Templates'],		
 		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','HorizontalRule','Smiley'],
 		['Link','Unlink','Anchor','-','Image','Flash','Table','SpecialChar','PageBreak','Iframe'],
-		['TextColor','BGColor'],
 		['Styles','Format','Font','FontSize'],
-		['shortcodes']
+		['TextColor','BGColor','shortcodes']
 	];
 	
 	config.toolbar_frontendbasic =

@@ -132,6 +132,18 @@ if ($t=="companylocation"){
 }elseif ($t=="model"){
     $modelclass->delete_model($del_id);
 
+}elseif ($t=="tendertoy"){
+    $charterboatclass->delete_tendertoy($del_id);
+
+}elseif ($t=="cruisingarea"){
+    $charterboatclass->delete_cruisingarea($del_id);
+
+}elseif ($t=="destination"){
+    $charterboatclass->delete_destination($del_id);
+
+}elseif ($t=="charterboat"){
+    $charterboatclass->delete_charterboat($del_id);
+
 }else{
 	//--
 } 

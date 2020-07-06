@@ -12,7 +12,9 @@ class Database {
 	public $errno = 0;
 	public $field_table= "";
 	public $affected_rows = 0;
-	public $query_id = 0;	
+	public $query_id = 0;
+	
+	private $pdo = "";	
 
 	public function __construct($dbuser, $dbpassword, $dbname, $dbhost) {
 		$this->link_id = @mysqli_connect($dbhost, $dbuser, $dbpassword);
@@ -29,6 +31,15 @@ class Database {
 		$this->_user = $dbuser;
 		$this->_pass = $dbpassword;
 		$this->_database = $dbname;
+		
+		//PDO connection
+		$dsn = "mysql:host=".$this->_server.";dbname=".$this->_database."";
+		try {
+			 $this->pdo = new PDO($dsn, $this->_user, $this->_pass);
+			 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} catch (\PDOException $e) {
+			 $this->error_display($e->getMessage());
+		}
 	}	
 		
 	function query_insert($table, $data) {
@@ -199,5 +210,47 @@ class Database {
 		</table> 
 	<?php
    }
+	//PDO functions
+	public function pdo_query($sql, $pdo_param = array(), $whreturnid = 0){	
+
+		$pdo_param = json_decode(json_encode($pdo_param));
+		$stmt = $this->pdo->prepare($sql);
+		
+		foreach($pdo_param AS $pdo_row) {
+			$stmt->bindParam(':'.$pdo_row->id, $pdo_row->value, constant("PDO::$pdo_row->c"));
+		}
+		$stmt->execute();
+		//print_r($this->pdo->errorInfo());
+			
+		if ($whreturnid == 1){
+			return $this->pdo->lastInsertId();
+		}
+	}
+   
+	public function pdo_get_single_value($sql, $pdo_param = array()){
+		$pdo_param = json_decode(json_encode($pdo_param));
+		$stmt = $this->pdo->prepare($sql);
+		foreach($pdo_param AS $pdo_row) {
+			$stmt->bindParam(':'.$pdo_row->id, $pdo_row->value, constant("PDO::$pdo_row->c"));
+		}		
+		$stmt->execute();		
+		return $stmt->fetchColumn();	
+	}
+   
+	public function pdo_select($sql, $pdo_param = array()){
+		$pdo_param = json_decode(json_encode($pdo_param));
+		$stmt = $this->pdo->prepare($sql);
+		foreach($pdo_param AS $pdo_row) {
+			$stmt->bindParam(':'.$pdo_row->id, $pdo_row->value, constant("PDO::$pdo_row->c"));
+		}		
+		$stmt->execute();
+		$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		return $result;
+		$stmt->closeCursor();
+	}
+   
+	public function pdo_close() {
+		$this->pdo = null;
+	}
 }
 ?>

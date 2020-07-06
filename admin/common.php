@@ -28,6 +28,7 @@ require_once("../includes/classes/sitemap.class.php");
 require_once("../includes/classes/medialibrary.class.php");
 require_once("../includes/classes/logoscroll.class.php");
 require_once("../includes/classes/boat.watcher.class.php");
+require_once("../includes/classes/charter.boat.class.php");
 
 $db = new Database(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);     //******************  Database class
 $cm = new Commonclass();   //******************  Common class
@@ -53,4 +54,5 @@ $sitemapclass = new Sitemapclass();   //******************  Sitemap class
 $medialibraryclass = new MediaLibraryclass();   //******************  Media Library class
 $logoscrollclass = new Logoscrollclass();   //******************  Logo Scroll class
 $boatwatcherclass = new Boatwatcherclass();    //******************  Boat Watcher class
+$charterboatclass = new CharterBoatclass();   //******************  Charter Boat class
 ?>

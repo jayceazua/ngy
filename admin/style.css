@@ -640,6 +640,11 @@ ul.mediafileslist li .box .thumb img{
 .threecolumnlist ul .leftfield { float: left; width: 48%; }
 .threecolumnlist ul .rightfield { float: right; width: 48%; }
 
+/*Multiselect*/
+.multiselect3col ul { padding:0; margin:0; list-style:none;}
+.multiselect3col ul li{float:left; margin:4px 0 4px 2%; padding:0; background:none; width:32%; cursor:move; }
+.multiselect3col ul li:nth-child(3n+1) { clear: both; margin-left: 0; }
+
 /*date picker*/
 .ui-datepicker-trigger  { vertical-align:text-bottom; padding-left: 5px; margin-top: 5px; cursor: pointer; }
 .ui-datepicker { font-size: 12px !important; }

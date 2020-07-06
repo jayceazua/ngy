@@ -440,5 +440,37 @@ if ($az == 50){
 			echo $modelclass->remove_original_model_image();
 		}
 	}
+	
+	if ($az == 800){
+		$inoption = round($_REQUEST["inoption"], 0);
+		
+		if ($inoption == 1){
+			//charter boat image display
+			$ms = round($_POST["ms"], 0);
+			echo $charterboatclass->charterboat_image_display_list($ms);
+		}
+		
+		if ($inoption == 2){
+			//charter boat image delete
+			$imid = $_POST["imid"];
+			$charterboatclass->delete_charterboat_image_ajax_call($imid);					
+			echo 'y';
+		}
+		
+		if ($inoption == 3){
+			//charter boat image sort
+			$charterboatclass->update_charterboat_image_rank();
+		}
+		
+		if ($inoption == 4){
+			//charter boat image rotate
+			echo $charterboatclass->rotate_charterboat_image();
+		}
+		
+		if ($inoption == 5){
+			//model image - remove original
+			echo $modelclass->remove_original_charterboat_image();
+		}
+	}
 }
 ?>

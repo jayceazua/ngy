@@ -384,6 +384,21 @@ class Commonclass {
       $common_nm = $db->total_record_count("select ". $field_name ." as ttl from ". $tbl_name ." where ". $wherefield ." = '". $this->filtertext($common_id) ."'");
       return $common_nm;
   }
+  
+  public function get_common_field_name_pdo($tbl_name, $field_name, $common_id, $wherefield = "id"){
+		global $db;
+		$sql = "select ". $field_name ." as ttl from ". $tbl_name ." where ". $wherefield ." = :common_id";
+		$pdo_param = array(
+			array(
+			"id" => "common_id",
+			"value" => $common_id,
+			"c" => "PARAM_STR"
+			)				
+		);
+		
+		$common_nm = $db->pdo_get_single_value($sql, $pdo_param);
+		return $common_nm;
+  }
    
   public function get_table_fields($tbl_name, $field_name, $common_id, $wherefield = "id"){
       global $db;
