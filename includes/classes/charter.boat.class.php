@@ -225,9 +225,8 @@ class CharterBoatclass {
 	}
 	
 	//assign tendertoy to boat
-	public function assign_tendertoy_boat(){
+	public function assign_tendertoy_boat($ms){
 		global $db, $cm;
-		$ms = round($_POST["ms"], 0);
 		
 		$pdo_param = array();
 		$sql = "delete from tbl_tendertoy_boat_assign where boat_id = :ms";
@@ -430,9 +429,8 @@ class CharterBoatclass {
 	}
 	
 	//assign cruisingarea to boat
-	public function assign_cruisingarea_boat(){
+	public function assign_cruisingarea_boat($ms){
 		global $db, $cm;
-		$ms = round($_POST["ms"], 0);
 		
 		$pdo_param = array();
 		$sql = "delete from tbl_cruisingarea_boat_assign where boat_id = :ms";
@@ -684,9 +682,8 @@ class CharterBoatclass {
 	}
 	
 	//assign destination to boat
-	public function assign_destination_boat(){
+	public function assign_destination_boat($ms){
 		global $db, $cm;
-		$ms = round($_POST["ms"], 0);
 		
 		$pdo_param = array();
 		$sql = "delete from tbl_destination_boat_assign where boat_id = :ms";
@@ -899,15 +896,15 @@ class CharterBoatclass {
 		// end
 		
 		//assign tendertoy
-		$this->assign_tendertoy_boat();
+		$this->assign_tendertoy_boat($iiid);
 		//end
 		
 		//assign cruisingarea
-		$this->assign_cruisingarea_boat();
+		$this->assign_cruisingarea_boat($iiid);
 		//end
 		
 		//assign destination
-		$this->assign_destination_boat();
+		$this->assign_destination_boat($iiid);
 		//end
 		
 		//section bg upload file upload
