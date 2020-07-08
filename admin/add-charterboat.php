@@ -99,18 +99,25 @@ include("head.php");
                     <td width="" align="left"><input type="text" id="max_speed" name="max_speed" value="<?php echo $max_speed; ?>" class="inputbox inputbox_size4" /></td>
                 </tr>
                 
+                <tr>                	
+                   	<td width="" align="left"><span class="fontcolor3">* </span>Category:</td>
+                    <td width="" align="left">
+                    	<select name="category_id" id="category_id" class="combobox_size4 htext">
+                            <option value="">Select</option>
+                            <?php
+                            $yachtclass->get_category_combo($category_id);
+                            ?>
+                        </select>
+                    </td>
+                    <td width="" align="left"><span class="fontcolor3">* </span>Subtitle:</td>
+                    <td width="" align="left"><input type="text" id="subtitle" name="subtitle" value="<?php echo $subtitle; ?>" class="inputbox inputbox_size4" /></td>
+                </tr>
+                
                 <tr>
                 	<td width="" align="left"><span class="fontcolor3">&nbsp;&nbsp;</span>Price Per Day [US$]:</td>
                     <td width="" align="left"><input type="text" id="price_perday" name="price_perday" value="<?php echo $price_perday; ?>" class="inputbox inputbox_size4" /><br />If left blank, <strong>Enquire Now</strong> text will display.</td>
                    	<td width="" align="left"><span class="fontcolor3">&nbsp;&nbsp;</span>Price Per Week [US$]:</td>
                     <td width="" align="left"><input type="text" id="price_perweek" name="price_perweek" value="<?php echo $price_perweek; ?>" class="inputbox inputbox_size4" /><br />If left blank, <strong>Enquire Now</strong> text will display.</td>
-                </tr>
-                
-                <tr>
-                	<td width="" align="left"><span class="fontcolor3">* </span>Subtitle:</td>
-                    <td width="" align="left"><input type="text" id="subtitle" name="subtitle" value="<?php echo $subtitle; ?>" class="inputbox inputbox_size4" /></td>
-                   	<td width="" align="left">&nbsp;</td>
-                    <td width="" align="left">&nbsp;</td>
                 </tr>
             </table>
         </div>
@@ -304,10 +311,13 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		if(!validate_text(document.ff.subtitle,1,"Please enter Subtitle")){
+		if(!validate_text(document.ff.category_id,1,"Please select Category")){
 			return false;
 		}
 		
+		if(!validate_text(document.ff.subtitle,1,"Please enter Subtitle")){
+			return false;
+		}
 		
 		for (var imk = 1; imk <= 5; imk++){
 			if ($("#bg_section" + imk).length > 0) {

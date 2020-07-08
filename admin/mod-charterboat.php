@@ -235,6 +235,7 @@ include("head.php");
                    <td class="displaytdheading" width="70" align="center">Mod</td>
                    <td class="displaytdheading" width="" align="left">Name</td>
                    <td class="displaytdheading" width="" align="left">Builder</td>
+                   <td class="displaytdheading" width="" align="left">Category</td>
                    <td class="displaytdheading" width="" align="left">Year</td>
                    <td class="displaytdheading" width="" align="left">Length</td>
                    <td class="displaytdheading" align="center">Image</td>
@@ -247,14 +248,16 @@ include("head.php");
                  $id = $row['id'];
                  $boat_name = $row['boat_name'];
 				 $make_id = $row['make_id'];
+				 $category_id = $row['category_id'];
 				 $year = $row['year'];
 				 $length = $row['length'];
                  $status_id = $row['status_id'];
 				 
-				 $status_d = $cm->get_common_field_name('tbl_common_status', 'name', $status_id);
+				 $status_d = $cm->get_common_field_name_pdo('tbl_common_status', 'name', $status_id);
                  if ($status_id == 1){ $ch_opt = 2; }else{ $ch_opt = 1; }
 				 
-				 $make_name = $cm->get_common_field_name('tbl_manufacturer', 'name', $make_id);
+				 $make_name = $cm->get_common_field_name_pdo('tbl_manufacturer', 'name', $make_id);
+				 $category_name = $cm->get_common_field_name_pdo('tbl_category', 'name', $category_id);
 				 $imgpath = $charterboatclass->get_charterboat_first_image($id);
 			 ?>     
 			 <tr> 
@@ -265,6 +268,7 @@ include("head.php");
                   </td>
                   <td class="displaytd1" width="" align="left"><?php echo $boat_name; ?></td>
                   <td class="displaytd1" width="" align="left"><?php echo $make_name; ?></td>
+                  <td class="displaytd1" width="" align="left"><?php echo $category_name; ?></td>
                   <td class="displaytd1" width="" align="left"><?php echo $year; ?></td>
                   <td class="displaytd1" width="" align="left"><?php echo $length; ?> ft</td>
                   <td class="displaytd1" valign="top" width="" align="center"><?php if ($imgpath != ""){?><img src="../charterboat/listings/<?php echo $id; ?>/thumbnail/<?php echo $imgpath; ?>" border="0" width="65" /><?php }else{ ?> - <?php } ?></td>

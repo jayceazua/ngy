@@ -11,6 +11,9 @@ class CharterBoatclass {
     public $boat_im_height = 630;
 	//end
 	
+	//common functions
+	
+	
 	/*-----------TENDER AND TOY------------*/
 	
 	//tendertoy insert/update
@@ -729,7 +732,8 @@ class CharterBoatclass {
 			if ($key != "ms"){
 				if ($key == "price_perday" OR $key == "price_perweek" OR $key == "length" OR $key == "max_speed"){
 					${$key} = round(${$key}, 2);
-				}elseif ($key == "make_id"
+				}elseif ($key == "make_id" 
+					OR $key == "category_id"
 					OR $key == "guest"
 					OR $key == "cabin"
 					OR $key == "crew"
@@ -790,6 +794,7 @@ class CharterBoatclass {
 		// common update
 		$sql = "update tbl_boat_charter set boat_slug = :boat_slug
 		, make_id = :make_id
+		, category_id = :category_id
 		, year = :year
 		, guest = :guest
 		, cabin = :cabin
@@ -814,6 +819,11 @@ class CharterBoatclass {
 			array(
 				"id" => "make_id",
 				"value" => $make_id,
+				"c" => "PARAM_INT"
+			),			
+			array(
+				"id" => "category_id",
+				"value" => $category_id,
 				"c" => "PARAM_INT"
 			),
 			array(
@@ -1453,6 +1463,47 @@ class CharterBoatclass {
 		return $imgpath;
 	}
 	
+	//Boat listings main
+	public function display_charterboat_listings_main($argu = array()){
+		global $db, $cm, $yachtclass;
+        $returntext = '
+		<div class="listing-yeacht-search wow fadeInUp" data-wow-duration="1.2s">
+			<div class="container">
+				<h1>Yacht Search</h1>
+				<form id="cbsecrhfilter" name="cbsecrhfilter">
+					<ul class="listing-yeacht-search-list clearfixmain">
+						<li>
+							<label for="boat_name">Name</label>
+							<input type="text" name="boat_name" placeholder="" id="boat_name" value="">
+						</li>
+						<li>                    
+							<label for="guest">Guests</label>                        
+							<select name="guest" id="guest">
+								<option value="0">ANY</option>
+								'. $yachtclass->get_common_number_combo(0, 100, 1) .'
+							</select>
+						</li>
+						<li>
+							<label for="boattype">Boat Type</label>
+							<select name="category_id" id="category_id">
+								<option value="0">ANY</option>
+								'. $yachtclass->get_category_combo($category_id, 0, 1) .'
+							</select>
+						</li>
+						<li class="half">    
+							<div><label for="lnmin">Size</label>
+							<input type="text" name="lnmin" placeholder="Min" id="lnmin" value=""></div>                    
+							<div><label for="lnmax" class="com_none">Max Size</label>
+							<input type="text" name="lnmax" placeholder="Max" id="lnmax" value=""></div>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		';
+		
+		return $returntext;
+	}
 	/*-----------/BOAT------------*/	
 }
 ?>
