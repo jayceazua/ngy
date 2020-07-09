@@ -1453,7 +1453,7 @@ ul.video li:first-child { padding-top: 0px; }
 /*Main CSS
 -----------------------------------------------------------------------------------------------------------*/
 .main{}
-.main .container{ padding:20px 0; background-color: #fff; }
+.main .container{ padding:20px 0;}
 .main .container.containernopadding{ padding:0; background-color: #fff; }
 .home .main { background-color:transparent; }
 .home .main .container { padding: 0; margin-top: 0; background-color:transparent; }
