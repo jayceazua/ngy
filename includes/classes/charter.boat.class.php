@@ -5,14 +5,189 @@ class CharterBoatclass {
 	public $destination_im_height = 700;
 	
 	public $boat_im_width_t = 600;
-    public $boat_im_height_t = 229;
+    public $boat_im_height_t = 284;
 	
 	public $boat_im_width = 1650;
-    public $boat_im_height = 630;
+    public $boat_im_height = 780;
 	//end
 	
 	//common functions
+	public function get_cruisingarea_combo($cruisingarea_id = 0){
+        global $db;
+		$returntext = '';
+        $sql = "select id, name from tbl_cruisingarea where status_id = 1 order by rank";
+		$pdo_param = array();
+        $result = $db->pdo_select($sql, $pdo_param);
+        foreach($result as $row){
+            $c_id = $row['id'];
+            $cname = $row['name'];
+			
+			$bck = '';
+			if ($cruisingarea_id == $c_id){
+				$bck = ' selected="selected"';	
+			}
+			$returntext .= '<option value="'. $c_id .'"'. $bck .'>'. $cname .'</option>';
+        }
+		
+		return $returntext;
+    }
 	
+	public function get_guest_combo($guest = 0){
+        global $db;
+		$d_ar = array(
+			array(
+				"id" => 1,
+				"name" => "6+",
+			),
+			array(
+				"id" => 2,
+				"name" => "8+",
+			),
+			array(
+				"id" => 3,
+				"name" => "10+",
+			),
+			array(
+				"id" => 4,
+				"name" => "12",
+			),
+			array(
+				"id" => 5,
+				"name" => "12+",
+			)
+		);
+		
+		$returntext = '';
+        foreach($d_ar as $row){
+            $c_id = $row['id'];
+            $cname = $row['name'];
+			
+			$bck = '';
+			if ($guest == $c_id){
+				$bck = ' selected="selected"';	
+			}
+			$returntext .= '<option value="'. $c_id .'"'. $bck .'>'. $cname .'</option>';
+        }
+		
+		return $returntext;
+    }
+	
+	public function get_cabin_combo($cabin = 0){
+        global $db;
+		$d_ar = array(
+			array(
+				"id" => 2,
+				"name" => "2+",
+			),
+			array(
+				"id" => 4,
+				"name" => "4+",
+			),
+			array(
+				"id" => 6,
+				"name" => "6+",
+			),
+			array(
+				"id" => 8,
+				"name" => "8+",
+			),
+			array(
+				"id" => 10,
+				"name" => "10+",
+			),
+			array(
+				"id" => 12,
+				"name" => "12+",
+			)
+		);
+		
+		$returntext = '';
+        foreach($d_ar as $row){
+            $c_id = $row['id'];
+            $cname = $row['name'];
+			
+			$bck = '';
+			if ($cabin == $c_id){
+				$bck = ' selected="selected"';	
+			}
+			$returntext .= '<option value="'. $c_id .'"'. $bck .'>'. $cname .'</option>';
+        }
+		
+		return $returntext;
+    }
+	
+	public function get_crew_combo($crew = 0){
+        global $db;
+		$d_ar = array(
+			array(
+				"id" => 5,
+				"name" => "5+",
+			),
+			array(
+				"id" => 10,
+				"name" => "10+",
+			),
+			array(
+				"id" => 15,
+				"name" => "15+",
+			),
+			array(
+				"id" => 20,
+				"name" => "20+",
+			),
+			array(
+				"id" => 25,
+				"name" => "25+",
+			),
+			array(
+				"id" => 30,
+				"name" => "30+",
+			)
+		);
+		
+		$returntext = '';
+        foreach($d_ar as $row){
+            $c_id = $row['id'];
+            $cname = $row['name'];
+			
+			$bck = '';
+			if ($crew == $c_id){
+				$bck = ' selected="selected"';	
+			}
+			$returntext .= '<option value="'. $c_id .'"'. $bck .'>'. $cname .'</option>';
+        }
+		
+		return $returntext;
+    }
+	
+	public function get_number_combo($numberval, $start = 0, $upto = 100, $increment = 1){
+		$returntext = '';
+		for ($xk = $start; $xk <= $upto; $xk+=$increment){
+			$vck = '';
+			if ($numberval == $xk){ $vck = ' selected="selected"'; }
+			$returntext .= '<option value="'. $xk . '"'. $vck .'>'. $xk .'</option>';
+		}
+		return $returntext;
+	}
+	
+	public function get_category_list(){
+        global $db;
+		$returntext = '';
+        $sql = "select id, name from tbl_category where status_id = 1 order by rank";
+		$pdo_param = array();
+        $result = $db->pdo_select($sql, $pdo_param);
+		$ar_data = array();
+        foreach($result as $row){
+            $c_id = $row['id'];
+            $cname = $row['name'];
+			
+			$ar_data[] = array(
+				"id" => $c_id,
+				"name" => $cname,
+			);			
+        }
+		echo json_encode($ar_data);
+    }
 	
 	/*-----------TENDER AND TOY------------*/
 	
@@ -1463,43 +1638,305 @@ class CharterBoatclass {
 		return $imgpath;
 	}
 	
+	//Boat listings
+	public function charterboat_sql($argu = array()){
+		$pdo_param = array();
+		
+		$category_id = round($argu["category_id"], 0);
+		$guest = round($argu["guest"], 0);
+		$cruisingarea_id = round($argu["cruisingarea_id"], 0);
+		$lnmin = round($argu["lnmin"], 0);
+		$lnmax = round($argu["lnmax"], 0);
+		$cabin = round($argu["cabin"], 0);
+		$crew = round($argu["crew"], 0);
+		
+        $query_sql = "select distinct a.*";
+        $query_form = " from tbl_boat_charter as a,";
+        $query_where = " where";
+		
+		if ($category_id > 0){
+			$query_where .= " a.category_id = :category_id and";
+			$pdo_param[] = array(
+				"id" => "category_id",
+				"value" => $category_id,
+				"c" => "PARAM_INT"
+			);
+		}
+		
+		if ($guest > 0){
+			switch($guest){
+				case 1:
+					$query_where .= " a.guest > 6 and";
+					break;
+				case 2:
+					$query_where .= " a.guest > 8 and";
+					break;
+				case 3:
+					$query_where .= " a.guest > 10 and";
+					break;
+				case 4:
+					$query_where .= " a.guest = 12 and";
+					break;
+				case 5:
+					$query_where .= " a.guest > 12 and";
+					break;
+				 default:
+				 	break;
+			}
+		}
+		
+		if ($cabin > 0){
+			$query_where .= " a.cabin > :cabin and";
+			$pdo_param[] = array(
+				"id" => "cabin",
+				"value" => $cabin,
+				"c" => "PARAM_INT"
+			);
+		}
+		
+		if ($crew > 0){
+			$query_where .= " a.crew > :crew and";
+			$pdo_param[] = array(
+				"id" => "crew",
+				"value" => $crew,
+				"c" => "PARAM_INT"
+			);
+		}
+		
+		if ($lnmin > 0){
+			$query_where .= " a.length >= :lnmin and";
+			$pdo_param[] = array(
+				"id" => "lnmin",
+				"value" => $lnmin,
+				"c" => "PARAM_INT"
+			);
+		}
+		
+		if ($lnmax > 0){
+			$query_where .= " a.length <= :lnmax and";
+			$pdo_param[] = array(
+				"id" => "lnmax",
+				"value" => $lnmax,
+				"c" => "PARAM_INT"
+			);
+		}
+		
+		if ($cruisingarea_id > 0){
+			$query_form .= " tbl_cruisingarea_boat_assign as ca,";
+			$query_where .= " a.id = ca.boat_id and ca.cruisingarea_id = :cruisingarea_id and";
+			$pdo_param[] = array(
+				"id" => "cruisingarea_id",
+				"value" => $cruisingarea_id,
+				"c" => "PARAM_INT"
+			);
+		}
+		
+		/*
+		if ($posterid > 0){
+			$query_where .= " a.poster_id = '". $posterid ."' and";
+		}
+		
+		if ($byear > 0){
+			$query_where .= " YEAR(a.reg_date) = '". $byear ."' and";
+		}
+		
+		if ($bmonth > 0){
+			$query_where .= " MONTH(a.reg_date) = '". $bmonth ."' and";
+		}
+		
+		if ($tagid > 0){
+			$query_form .= " tbl_blog_tag_assign as b,";
+			$query_where .= " a.id = b.blog_id and";
+			$query_where .= " b.tag_id = '". $tagid ."' and";
+		}*/
+	
+        $query_where .= " a.status_id = 1 and";
+        $query_sql = rtrim($query_sql, ",");
+        $query_form = rtrim($query_form, ",");
+        $query_where = rtrim($query_where, "and");
+
+        $sql = $query_sql . $query_form . $query_where;
+        $returnar = array(
+			"sql" => $sql,			
+			"pdo_param" => $pdo_param
+		);
+		return $returnar;
+  	}
+	
+	public function total_charterboat_found($sql, $pdo_param = array()){
+		global $db;
+		$sqlm = str_replace("select distinct a.*","select count(distinct a.id) as ttl", $sql);
+		$foundm = $db->pdo_get_single_value($sqlm, $pdo_param);
+		return $foundm;
+	}
+	
+	public function charterboat_list($argu = array()){
+		global $db, $cm;
+		$sorting_sql = "a.length";
+		
+		$sql_ar = $this->charterboat_sql($argu);
+		$sql = $sql_ar["sql"];
+		$pdo_param = $sql_ar["pdo_param"];
+		
+		$sql = $sql." order by ". $sorting_sql;
+		$result = $db->pdo_select($sql, $pdo_param);
+        $found = count($result);
+		$boatdata = array();
+		
+		foreach($result as $row){
+			foreach($row AS $key => $val){
+				${$key} = $cm->filtertextdisplay(($val));
+			}
+			
+			$make_name = $cm->get_common_field_name_pdo('tbl_manufacturer', 'name', $make_id);
+			$imgpath = $this->get_charterboat_first_image($id);
+			$boat_url = $cm->get_page_url($boat_slug, "charterboat");
+			
+			$boatdata[] = array(
+				"id" => $id,
+				"boatname" => $boat_name,
+				"boatlength" => $length,
+				"boatguest" => $guest,
+				"makename" => $make_name,
+				"imgpath" => $imgpath,
+				"boaturl" => $boat_url
+			);
+		}
+		
+		$all_details = array(
+			"totalrecord" => $found,
+			"allboats" => $boatdata,
+		);
+		echo json_encode($all_details);
+	}
+	
 	//Boat listings main
 	public function display_charterboat_listings_main($argu = array()){
 		global $db, $cm, $yachtclass;
         $returntext = '
-		<div class="listing-yeacht-search wow fadeInUp" data-wow-duration="1.2s">
-			<div class="container">
-				<h1>Yacht Search</h1>
-				<form id="cbsecrhfilter" name="cbsecrhfilter">
-					<ul class="listing-yeacht-search-list clearfixmain">
-						<li>
-							<label for="boat_name">Name</label>
-							<input type="text" name="boat_name" placeholder="" id="boat_name" value="">
-						</li>
-						<li>                    
-							<label for="guest">Guests</label>                        
-							<select name="guest" id="guest">
-								<option value="0">ANY</option>
-								'. $yachtclass->get_common_number_combo(0, 100, 1) .'
-							</select>
-						</li>
-						<li>
-							<label for="boattype">Boat Type</label>
-							<select name="category_id" id="category_id">
-								<option value="0">ANY</option>
-								'. $yachtclass->get_category_combo($category_id, 0, 1) .'
-							</select>
-						</li>
-						<li class="half">    
-							<div><label for="lnmin">Size</label>
-							<input type="text" name="lnmin" placeholder="Min" id="lnmin" value=""></div>                    
-							<div><label for="lnmax" class="com_none">Max Size</label>
-							<input type="text" name="lnmax" placeholder="Max" id="lnmax" value=""></div>
-						</li>
-					</ul>
-				</form>
+		<div ng-app="live_search_app" ng-controller="live_search_controller" ng-init="fetchData()">
+			<div class="listing-yeacht-search wow fadeInUp" data-wow-duration="1.2s">
+				<div class="container">
+					<h1>Yacht Search</h1>
+					<form id="cbsecrhfilter" name="cbsecrhfilter">
+						<ul class="listing-yeacht-search-list clearfixmain">
+							<li>
+								<label for="boat_name">Name</label>
+								<input type="text" name="boat_name" placeholder="" id="boat_name" value="">
+							</li>
+							<li>                    
+								<label for="guest">Guests</label>                        
+								<select name="guest" id="guest" ng-model="guest" ng-change="fetchData()">
+									<option value="">ANY</option>
+									'. $this->get_guest_combo(0) .'
+								</select>
+							</li>
+							<li>
+								<label for="boattype">Boat Type</label>
+								<select name="category_id" ng-model="category_id" ng-change="fetchData()">
+									<option value="">ANY</option>
+									'. $yachtclass->get_category_combo(0, 0, 1) .'
+								</select>
+							</li>
+							<li class="half">    
+								<div><label for="lnmin">Size (M)</label>
+								<select name="lnmin" id="lnmin" ng-model="lnmin" ng-change="fetchData()">
+									<option value="">NO MIN</option>
+									'. $this->get_number_combo(0, 30, 100, 10) .'
+								</select></div>
+								<div><label for="lnmax" class="com_none">Max Size</label>
+								<select name="lnmax" id="lnmax" ng-model="lnmax" ng-change="fetchData()">
+									<option value="">NO MAX</option>
+									'. $this->get_number_combo(0, 30, 100, 10) .'
+								</select></div>
+							</li>
+							<li>
+								<label for="max_speed">Max Speed (KT)</label>
+								<input type="text" name="max_speed" placeholder="" id="max_speed" value="">
+							</li>
+							<li>
+								<label for="cruisingarea_id">Cruising Area</label>
+								<select name="cruisingarea_id" id="cruisingarea_id" ng-model="cruisingarea_id" ng-change="fetchData()">
+									<option value="">ANY</option>
+									'. $this->get_cruisingarea_combo(0) .'
+								</select>
+							</li>
+							<li>                    
+								<label for="cabin">Cabins</label>                        
+								<select name="cabin" id="cabin" ng-model="cabin" ng-change="fetchData()">
+									<option value="">ANY</option>
+									'. $this->get_cabin_combo(0) .'
+								</select>
+							</li>
+							<li>                    
+								<label for="crew">Crew</label>                        
+								<select name="crew" id="crew" ng-model="crew" ng-change="fetchData()">
+									<option value="">ANY</option>
+									'. $this->get_crew_combo(0) .'
+								</select>
+							</li>
+							<li class="half">
+								<div><input type="button" value="Search"></div>
+								<div><input type="button" value="Reset" ng-click="clearSearch()"></div>
+							</li>
+							<li class="listing-yeacht-search-result-count"><span class="totalitem">{{ totalrecord }}</span></li>
+						</ul>
+					</form>
+				</div>
 			</div>
-		</div>
+			
+			<div class="listing-yeacht-items wow fadeInUp" data-wow-duration="1.2s">
+				<ul class="listing-yeacht-items-list clearfixmain">
+					<li ng-repeat="data in searchData">
+						<a href="{{ data.boaturl }}">
+							<img src="'. $cm->folder_for_seo.'charterboat/listings/{{ data.id }}/thumbnail/{{ data.imgpath }}" alt="{{ data.boatname }}">                    
+							<div class="overlayy"></div>
+							<div class="listing-yeacht-items-details">
+								<h3>{{ data.boatname }}</h3>
+								<p>{{ data.makename }} |  {{ data.boatlength }}M | {{ data.boatguest }}Guests</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>	
+		';
+		
+		$returntext .= '
+		<script>
+			var app = angular.module("live_search_app", []);
+			app.controller("live_search_controller", function($scope, $http){				
+			$scope.fetchData = function(){	
+				$http({
+					method:"POST",
+					url: bkfolder + "includes/nggetdata.php",
+					data:{
+						az:1,
+						category_id:$scope.category_id,
+						guest:$scope.guest,
+						cruisingarea_id:$scope.cruisingarea_id,
+						lnmin:$scope.lnmin,
+						lnmax:$scope.lnmax,
+						cabin:$scope.cabin,
+						crew:$scope.crew,
+					}
+				}).then(function successCallback(response){
+              		$scope.searchData = response.data.allboats;
+					var totalboatfound = response.data.totalrecord
+					if (totalboatfound > 1){
+						$scope.totalrecord = totalboatfound + " Yachts";
+					}else{
+						$scope.totalrecord = totalboatfound + " Yacht";
+					}					
+                });
+			};
+			
+			$scope.clearSearch = function(){
+				$scope.formData = {};
+      			$scope.cbsecrhfilter.$setPristine();
+			};
+		});
+		</script>
 		';
 		
 		return $returntext;

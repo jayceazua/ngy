@@ -71,7 +71,8 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
 		var bkfolder = "<?php echo $cm->folder_for_seo; ?>";
 		var siteurlfull = "<?php echo $cm->site_url; ?>";
 	</script>
-	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.min.js"></script> 
+	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/angular.min.js"></script> 
     <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.extra.top.js"></script>
     <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/waypoints.min.js"></script>
 	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.counterup.js"></script>  

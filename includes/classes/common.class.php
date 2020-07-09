@@ -727,16 +727,19 @@ class Commonclass {
 		}elseif ($pagetype == "blog"){
 		  $pagename = $this->serach_url_filtertext($checkid);
 		  $ret_url = $this->folder_for_seo."blog/" . $pagename . "/";
-      }elseif ($pagetype == "boatslideshow"){
-		  $pagename = $this->serach_url_filtertext($checkid);
-		  $ret_url = $this->folder_for_seo."boatslideshow/" . $pagename . "/";
-      }elseif ($pagetype == "customboatslideshow"){
-          $ret_url = $this->folder_for_seo . "customboatslideshow/" . $checkid . "/";
-
-      }elseif ($pagetype == "boatmodel"){
+		}elseif ($pagetype == "boatslideshow"){
+			$pagename = $this->serach_url_filtertext($checkid);
+			$ret_url = $this->folder_for_seo."boatslideshow/" . $pagename . "/";
+		}elseif ($pagetype == "customboatslideshow"){
+			$ret_url = $this->folder_for_seo . "customboatslideshow/" . $checkid . "/";		
+		}elseif ($pagetype == "boatmodel"){
 			$pagename = $this->serach_url_filtertext($checkid);
 			$ret_url = $this->folder_for_seo."boatmodel/" . $pagename . "/";		  
-	  	}elseif ($pagetype == "page"){
+		}elseif ($pagetype == "charterboat"){
+			$pagename = $this->serach_url_filtertext($checkid);
+			$ret_url = $this->folder_for_seo."charterboat/" . $pagename . "/";		  
+
+		}elseif ($pagetype == "page"){
 	  	  $pagedet_ar = $this->get_table_fields('tbl_page', 'page_type, int_page_id, int_page_tp, pgnm, page_url, doc_name, only_menu', $checkid);
 		  $pagedet_ar = (object)$pagedet_ar[0];
 		  

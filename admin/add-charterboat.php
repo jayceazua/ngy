@@ -93,7 +93,7 @@ include("head.php");
                 </tr>
                 
                 <tr>
-                	<td width="" align="left"><span class="fontcolor3">* </span>Length [in Ft.]:</td>
+                	<td width="" align="left"><span class="fontcolor3">* </span>Length [in Meter]:</td>
                     <td width="" align="left"><input type="text" id="length" name="length" value="<?php echo $length; ?>" class="meterconvert inputbox inputbox_size4_a" insplit="0" convertval="<?php echo $yachtclass->ft_to_meter; ?>" /> <span class="lengthm fontbold"><?php echo $lengthm; ?></span></td>
                    	<td width="" align="left"><span class="fontcolor3">* </span>Max Speed [in KT]:</td>
                     <td width="" align="left"><input type="text" id="max_speed" name="max_speed" value="<?php echo $max_speed; ?>" class="inputbox inputbox_size4" /></td>
@@ -115,9 +115,9 @@ include("head.php");
                 
                 <tr>
                 	<td width="" align="left"><span class="fontcolor3">&nbsp;&nbsp;</span>Price Per Day [US$]:</td>
-                    <td width="" align="left"><input type="text" id="price_perday" name="price_perday" value="<?php echo $price_perday; ?>" class="inputbox inputbox_size4" /><br />If left blank, <strong>Enquire Now</strong> text will display.</td>
+                    <td width="" align="left"><input type="text" id="price_perday" name="price_perday" value="<?php echo $price_perday; ?>" class="inputbox inputbox_size4" /><br />If left blank or enter 0, <strong>Enquire Now</strong> text will display.</td>
                    	<td width="" align="left"><span class="fontcolor3">&nbsp;&nbsp;</span>Price Per Week [US$]:</td>
-                    <td width="" align="left"><input type="text" id="price_perweek" name="price_perweek" value="<?php echo $price_perweek; ?>" class="inputbox inputbox_size4" /><br />If left blank, <strong>Enquire Now</strong> text will display.</td>
+                    <td width="" align="left"><input type="text" id="price_perweek" name="price_perweek" value="<?php echo $price_perweek; ?>" class="inputbox inputbox_size4" /><br />If left blank or enter 0, <strong>Enquire Now</strong> text will display.</td>
                 </tr>
             </table>
         </div>
@@ -303,11 +303,11 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		if(!validate_pnumeric(document.ff.price_perday,0,"Please enter Price Per Day")){
+		if(!validate_numeric(document.ff.price_perday,0,"Please enter Price Per Day")){
 			return false;
 		}
 		
-		if(!validate_pnumeric(document.ff.price_perweek,0,"Please enter Price Per Week")){
+		if(!validate_numeric(document.ff.price_perweek,0,"Please enter Price Per Week")){
 			return false;
 		}
 		

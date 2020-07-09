@@ -270,7 +270,7 @@ include("head.php");
                   <td class="displaytd1" width="" align="left"><?php echo $make_name; ?></td>
                   <td class="displaytd1" width="" align="left"><?php echo $category_name; ?></td>
                   <td class="displaytd1" width="" align="left"><?php echo $year; ?></td>
-                  <td class="displaytd1" width="" align="left"><?php echo $length; ?> ft</td>
+                  <td class="displaytd1" width="" align="left"><?php echo $length; ?> M</td>
                   <td class="displaytd1" valign="top" width="" align="center"><?php if ($imgpath != ""){?><img src="../charterboat/listings/<?php echo $id; ?>/thumbnail/<?php echo $imgpath; ?>" border="0" width="65" /><?php }else{ ?> - <?php } ?></td>
                   <td class="displaytd1" align="center"><a class="htext" href="javascript:void(0);" onclick="javascript:enable_disable('<?php echo $id; ?>', 'status_id', 'tbl_boat_charter', '<?php echo $ch_opt; ?>', 'id')"><?php echo $status_d; ?></a></td>
             </tr>			 

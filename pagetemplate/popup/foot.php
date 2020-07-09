@@ -17,4 +17,5 @@ echo $call_tracking_code;
 </html>
 <?php
 $db->close();
+$db->pdo_close(); 
 ?>
