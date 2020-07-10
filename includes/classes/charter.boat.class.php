@@ -170,9 +170,33 @@ class CharterBoatclass {
 		return $returntext;
 	}
 	
+	public function get_boatname_list($searchTxt){
+		global $db, $cm;
+		$sql = "select boat_name, boat_slug from tbl_boat_charter where boat_name like :searchTxt and status_id = 1 order by boat_name";
+		$pdo_param = array(
+			array(
+				"id" => "searchTxt",
+				"value" => "%". $searchTxt ."%",
+				"c" => "PARAM_STR"
+			)
+		);
+        $result = $db->pdo_select($sql, $pdo_param);
+		$ar_data = array();
+		foreach($result as $row){
+            $boat_name = $row['boat_name'];
+            $boat_slug = $row['boat_slug'];
+			$boat_url = $cm->get_page_url($boat_slug, "charterboat");
+			
+			$ar_data[] = array(
+				"boatName" => $boat_name,
+				"boatUrl" => $boat_url,
+			);			
+        }
+		echo json_encode($ar_data);
+	}
+	
 	public function get_category_list(){
         global $db;
-		$returntext = '';
         $sql = "select id, name from tbl_category where status_id = 1 order by rank";
 		$pdo_param = array();
         $result = $db->pdo_select($sql, $pdo_param);
@@ -1822,30 +1846,33 @@ class CharterBoatclass {
 						<ul class="listing-yeacht-search-list clearfixmain">
 							<li>
 								<label for="boat_name">Name</label>
-								<input type="text" name="boat_name" placeholder="" id="boat_name" value="">
+								<input type="text" name="boat_name" placeholder="" id="boat_name" value="" ng-model="cb.boat_name" ng-keyup="fetchBoats()" ng-click="searchboxClicked($event);">
+								<ul ng-show="showdataval" id="autoCompleteResult" class="autoCompleteResult">
+									<li ng-repeat="data in boatNameData" ><a href="{{ data.boatUrl }}">{{ data.boatName }}</a></li>
+								</ul>
 							</li>
 							<li>                    
 								<label for="guest">Guests</label>                        
-								<select name="guest" id="guest" ng-model="guest" ng-change="fetchData()">
+								<select name="guest" id="guest" ng-model="cb.guest" ng-change="fetchData()">
 									<option value="">ANY</option>
 									'. $this->get_guest_combo(0) .'
 								</select>
 							</li>
 							<li>
 								<label for="boattype">Boat Type</label>
-								<select name="category_id" ng-model="category_id" ng-change="fetchData()">
+								<select name="category_id" ng-model="cb.category_id" ng-change="fetchData()">
 									<option value="">ANY</option>
-									'. $yachtclass->get_category_combo(0, 0, 1) .'
+									'. $yachtclass->get_category_combo(2, 0, 1) .'
 								</select>
 							</li>
 							<li class="half">    
 								<div><label for="lnmin">Size (M)</label>
-								<select name="lnmin" id="lnmin" ng-model="lnmin" ng-change="fetchData()">
+								<select name="lnmin" id="lnmin" ng-model="cb.lnmin" ng-change="fetchData()">
 									<option value="">NO MIN</option>
 									'. $this->get_number_combo(0, 30, 100, 10) .'
 								</select></div>
 								<div><label for="lnmax" class="com_none">Max Size</label>
-								<select name="lnmax" id="lnmax" ng-model="lnmax" ng-change="fetchData()">
+								<select name="lnmax" id="lnmax" ng-model="cb.lnmax" ng-change="fetchData()">
 									<option value="">NO MAX</option>
 									'. $this->get_number_combo(0, 30, 100, 10) .'
 								</select></div>
@@ -1856,28 +1883,27 @@ class CharterBoatclass {
 							</li>
 							<li>
 								<label for="cruisingarea_id">Cruising Area</label>
-								<select name="cruisingarea_id" id="cruisingarea_id" ng-model="cruisingarea_id" ng-change="fetchData()">
+								<select name="cruisingarea_id" id="cruisingarea_id" ng-model="cb.cruisingarea_id" ng-change="fetchData()">
 									<option value="">ANY</option>
 									'. $this->get_cruisingarea_combo(0) .'
 								</select>
 							</li>
 							<li>                    
 								<label for="cabin">Cabins</label>                        
-								<select name="cabin" id="cabin" ng-model="cabin" ng-change="fetchData()">
+								<select name="cabin" id="cabin" ng-model="cb.cabin" ng-change="fetchData()">
 									<option value="">ANY</option>
 									'. $this->get_cabin_combo(0) .'
 								</select>
 							</li>
 							<li>                    
 								<label for="crew">Crew</label>                        
-								<select name="crew" id="crew" ng-model="crew" ng-change="fetchData()">
+								<select name="crew" id="crew" ng-model="cb.crew" ng-change="fetchData()">
 									<option value="">ANY</option>
 									'. $this->get_crew_combo(0) .'
 								</select>
 							</li>
-							<li class="half">
-								<div><input type="button" value="Search"></div>
-								<div><input type="button" value="Reset" ng-click="clearSearch()"></div>
+							<li class="">								
+								<div><input type="button" value="Reset" ng-click="clearSearch(); fetchData()"></div>
 							</li>
 							<li class="listing-yeacht-search-result-count"><span class="totalitem">{{ totalrecord }}</span></li>
 						</ul>
@@ -1905,20 +1931,24 @@ class CharterBoatclass {
 		$returntext .= '
 		<script>
 			var app = angular.module("live_search_app", []);
-			app.controller("live_search_controller", function($scope, $http){				
-			$scope.fetchData = function(){	
+			app.controller("live_search_controller", function($scope, $http, $document){				
+			$scope.cb = angular.copy({});
+			//$scope.boatNameData = {};
+			//$scope.showdataval = false;
+			
+			$scope.fetchData = function(){				
 				$http({
 					method:"POST",
 					url: bkfolder + "includes/nggetdata.php",
 					data:{
 						az:1,
-						category_id:$scope.category_id,
-						guest:$scope.guest,
-						cruisingarea_id:$scope.cruisingarea_id,
-						lnmin:$scope.lnmin,
-						lnmax:$scope.lnmax,
-						cabin:$scope.cabin,
-						crew:$scope.crew,
+						category_id:$scope.cb.category_id,
+						guest:$scope.cb.guest,
+						cruisingarea_id:$scope.cb.cruisingarea_id,
+						lnmin:$scope.cb.lnmin,
+						lnmax:$scope.cb.lnmax,
+						cabin:$scope.cb.cabin,
+						crew:$scope.cb.crew,
 					}
 				}).then(function successCallback(response){
               		$scope.searchData = response.data.allboats;
@@ -1931,9 +1961,41 @@ class CharterBoatclass {
                 });
 			};
 			
+			$scope.fetchBoats = function(){
+				var searchText_len = $scope.cb.boat_name.trim().length;
+				if(searchText_len > 0){
+					$http({
+					method:"POST",
+					url: bkfolder + "includes/nggetdata.php",
+					data:{
+						az:2,
+						subsection:1,
+						boat_name:$scope.cb.boat_name
+					}
+				}).then(function successCallback(response){
+              		$scope.boatNameData = response.data;
+					$scope.showdataval = true;
+					$(".autoCompleteResult").show();									
+                });
+				}else{
+					$scope.boatNameData = {};
+					$scope.showdataval = false;
+				}				
+			};
+			
+			$scope.searchboxClicked = function($event){
+				$event.stopPropagation();
+			}
+			
+			$document.on("click",function(){
+				$scope.boatNameData = {};
+				$scope.showdataval = false;
+				$(".autoCompleteResult").hide();
+				$("#boat_name").val("");
+			});
+			
 			$scope.clearSearch = function(){
-				$scope.formData = {};
-      			$scope.cbsecrhfilter.$setPristine();
+				$scope.cb = angular.copy({});
 			};
 		});
 		</script>

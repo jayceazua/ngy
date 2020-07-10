@@ -28,6 +28,12 @@ if ($az == 1){
 if ($az == 2){
 	$subsection = round($data->subsection, 0);
 	if ($subsection == 1){
+		//get boat name data
+		$boat_name = $data->boat_name;
+		echo $charterboatclass->get_boatname_list($boat_name);
+	}
+	
+	if ($subsection == 2){
 		//get category data
 		echo $charterboatclass->get_category_list();
 	}
