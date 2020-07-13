@@ -155,24 +155,27 @@ include($bdr."includes/head.php");
         <div class="detail-enquire-overlay">
             <div class="container">		
                  <h1 class="t-center detail-h1">Enquire</h1>              
-                <form method="" action="" id="" name="">                   
+                <form method="post" action="<?php echo $cm->folder_for_seo; ?>" id="charterboat-ff" name="charterboat-ff">
+                	<input class="finfo" id="email2" name="email2" type="text" />
+                    <input type="hidden" id="fcapi" name="fcapi" value="charterboatsubmit" />
+                    <input type="hidden" id="pgid" name="pgid" value="53" />                   
                     <ul class="detail-enquire-list clearfixmain">
                         <li>
                             <label for="subject" class="com_none">Subject</label>
-                            <span class="pseudo-require"><input type="text" name="subject" placeholder="Subject" id="subject" value=""></span>
+                            <span class="pseudo-require"><input type="text" name="subject" placeholder="Subject" id="subject" class="cominput" value=""></span>
                             
                             <label for="name" class="com_none">Full Name</label>                        
-                            <span class="pseudo-require"><input type="text" name="name" placeholder="Full Name" id="name" value=""></span>
+                            <span class="pseudo-require"><input type="text" name="name" placeholder="Full Name" id="name" class="cominput" value=""></span>
                             
                             <label for="phone" class="com_none">Phone Number</label>
-                            <span class="pseudo-require"><input type="text" name="phone" placeholder="Phone Number" id="phone" value=""></span>
+                            <span class="pseudo-require"><input type="text" name="phone" placeholder="Phone Number" id="phone" class="cominput" value=""></span>
                             
                             <label for="email" class="com_none">Email Address</label>
-                            <span class="pseudo-require"><input type="text" name="email" placeholder="Email Address" id="email" value=""></span>
+                            <span class="pseudo-require"><input type="text" name="email" placeholder="Email Address" id="email" class="cominput" value=""></span>
                         </li>
                         <li>
                             <label for="comment" class="com_none">Comment</label>
-                            <span class="pseudo-require"><textarea placeholder="Comment" id="comment" name="comment"></textarea></span>                        
+                            <span class="pseudo-require"><textarea placeholder="Comment" id="comment" name="comment" class="cominput"></textarea></span>                        
                         </li>   
                     </ul>
                     <div class="t-center">
@@ -268,20 +271,59 @@ app.filter('trustAsHtml',['$sce', function($sce) {
     };
 }]);
 
-if ($(".cbscroll").length > 0){
-	$(document).on("click", ".cbscroll", function() {
-		var goto = $(this).attr("g");
-		jQuery('html, body').animate({
-			scrollTop: jQuery("#" + goto).offset().top - $(".blank_top").height()
-		}, 500);
 
-		return false;
-	});
-	$(".cbscrolldd").click(function(){
-		alert("aa");
+
+	if ($(".cbscroll").length > 0){
+		$(document).on("click", ".cbscroll", function() {
+			var goto = $(this).attr("g");
+			jQuery('html, body').animate({
+				scrollTop: jQuery("#" + goto).offset().top - $(".blank_top").height()
+			}, 500);
+	
+			return false;
+		});
+		$(".cbscrolldd").click(function(){
+			alert("aa");
+			
+		});
+	}	
+
+	$(document).on("submit", "#charterboat-ff", function() {
+		var all_ok = "y";
+		var setfocus = "n";
 		
+		if (!field_validation_border("subject", 1, 1)){
+			all_ok = "n";
+			setfocus = set_field_focus(setfocus, "subject");
+		}
+		
+		if (!field_validation_border("name", 1, 1)){
+			all_ok = "n";
+			setfocus = set_field_focus(setfocus, "name");
+		}
+		
+		if (!field_validation_border("phone", 1, 1)){
+			all_ok = "n";
+			setfocus = set_field_focus(setfocus, "phone");
+		}
+		
+		if (!field_validation_border("email", 2, 1)){
+			all_ok = "n";
+			setfocus = set_field_focus(setfocus, "email");
+		}
+		
+		if (!field_validation_border("comment", 1, 1)){
+			all_ok = "n";
+			setfocus = set_field_focus(setfocus, "comment");
+		}
+		
+		if (all_ok == "n"){
+			return false;
+		}
+		return true;
 	});
-}
+	
+
 </script>
 <?php
 include($bdr."includes/foot.php");

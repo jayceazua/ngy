@@ -179,7 +179,7 @@ $(document).ready(function(){
 		$(".ad-search-con").slideToggle();
 	});
 
-    $("body").off("mouseover", ".input, .input2, .select, .newListSelected2, .comments").on("mouseover", ".input, .input2, .select, .newListSelected2, .comments", function(){
+    $("body").off("mouseover", ".input, .input2, .select, .newListSelected2, .comments, .cominput").on("mouseover", ".input, .input2, .select, .newListSelected2, .comments, .cominput", function(){
         if ( $( this ).hasClass( "requiredfield" ) ) {
             $(this).removeClass('requiredfield');
         }
