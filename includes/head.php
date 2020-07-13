@@ -20,7 +20,7 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
 }
 ?>
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en"<?php if (isset($ng) AND $ng == 1){?> ng-app="page_app" ng-controller="page_controller"<?php } ?>>
 <head>
     <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

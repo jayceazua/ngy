@@ -12,6 +12,7 @@ $bodyclass = $systemarray->bodyclass;
 $lastpageid = $systemarray->lastpageid;
 $startend = $systemarray->startend;
 $nohead = $systemarray->nohead;
+$ng = $systemarray->ng;
 include($bdr."includes/page_set.php");
 
 //display template
