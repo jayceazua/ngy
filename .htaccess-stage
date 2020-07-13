@@ -342,6 +342,7 @@ RewriteRule ^mkt-custom-slideshow(/)?$ index.php?templateseo=mkt-custom-slidesho
 RewriteRule ^customboatslideshow/([^/\.]+)/?$ index.php?templateseo=customboatslideshow&slideshowcode=$1&nohead=3 [L]
 RewriteRule ^boat-watcher-broker(/)?$ index.php?templateseo=boat-watcher-broker [L]
 RewriteRule ^boatmodel/([^/\.]+)/?$ index.php?templateseo=boatmodeldetails&slug=$1 [L]
+RewriteRule ^charterboat/([^/\.]+)/?$ index.php?templateseo=charterboatdetails&slug=$1&ng=1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

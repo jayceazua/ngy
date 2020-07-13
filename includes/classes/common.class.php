@@ -1578,10 +1578,10 @@ class Commonclass {
 			$imageurl = $this->site_url . "/images/shareimg.png";
 		}
 		$returntext = '
-		<meta property="og:title" content="'. $title .'" />
-		<meta property="og:description" content="'. $content .'" />
-		<meta property="og:url" content="'. $fullurl .'" />
-		<meta property="og:image" content="'. $imageurl .'" />
+		<meta property="og:title" content="'. $title .'" id="ogtitle" />
+		<meta property="og:description" content="'. $content .'" id="ogdescription" />
+		<meta property="og:url" content="'. $fullurl .'" id="ogurl" />
+		<meta property="og:image" content="'. $imageurl .'" id="ogimage" />
 		
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:description" content="'. $content .'" />

@@ -991,6 +991,10 @@ class CharterBoatclass {
 		$boat_slug = $cm->create_slug($boat_name);
 		
 		// common update
+		if ($m1 == ""){
+			$m1 = $boat_name;
+		}
+		
 		$sql = "update tbl_boat_charter set boat_slug = :boat_slug
 		, make_id = :make_id
 		, category_id = :category_id
@@ -1673,6 +1677,8 @@ class CharterBoatclass {
 		$lnmax = round($argu["lnmax"], 0);
 		$cabin = round($argu["cabin"], 0);
 		$crew = round($argu["crew"], 0);
+		$max_speed_min = round($argu["max_speed_min"], 0);
+		$max_speed_max = round($argu["max_speed_max"], 0);
 		
         $query_sql = "select distinct a.*";
         $query_form = " from tbl_boat_charter as a,";
@@ -1745,6 +1751,24 @@ class CharterBoatclass {
 			);
 		}
 		
+		if ($max_speed_min > 0){
+			$query_where .= " a.max_speed >= :max_speed_min and";
+			$pdo_param[] = array(
+				"id" => "max_speed_min",
+				"value" => $max_speed_min,
+				"c" => "PARAM_INT"
+			);
+		}
+		
+		if ($max_speed_max > 0){
+			$query_where .= " a.max_speed <= :max_speed_max and";
+			$pdo_param[] = array(
+				"id" => "max_speed_max",
+				"value" => $max_speed_max,
+				"c" => "PARAM_INT"
+			);
+		}
+		
 		if ($cruisingarea_id > 0){
 			$query_form .= " tbl_cruisingarea_boat_assign as ca,";
 			$query_where .= " a.id = ca.boat_id and ca.cruisingarea_id = :cruisingarea_id and";
@@ -1754,25 +1778,6 @@ class CharterBoatclass {
 				"c" => "PARAM_INT"
 			);
 		}
-		
-		/*
-		if ($posterid > 0){
-			$query_where .= " a.poster_id = '". $posterid ."' and";
-		}
-		
-		if ($byear > 0){
-			$query_where .= " YEAR(a.reg_date) = '". $byear ."' and";
-		}
-		
-		if ($bmonth > 0){
-			$query_where .= " MONTH(a.reg_date) = '". $bmonth ."' and";
-		}
-		
-		if ($tagid > 0){
-			$query_form .= " tbl_blog_tag_assign as b,";
-			$query_where .= " a.id = b.blog_id and";
-			$query_where .= " b.tag_id = '". $tagid ."' and";
-		}*/
 	
         $query_where .= " a.status_id = 1 and";
         $query_sql = rtrim($query_sql, ",");
@@ -1861,25 +1866,33 @@ class CharterBoatclass {
 							<li>
 								<label for="boattype">Boat Type</label>
 								<select name="category_id" ng-model="cb.category_id" ng-change="fetchData()">
-									<option value="">ANY</option>
+									<option value="" selected="selected">ANY</option>
 									'. $yachtclass->get_category_combo(2, 0, 1) .'
 								</select>
 							</li>
 							<li class="half">    
 								<div><label for="lnmin">Size (M)</label>
 								<select name="lnmin" id="lnmin" ng-model="cb.lnmin" ng-change="fetchData()">
-									<option value="">NO MIN</option>
+									<option value="">MIN</option>
 									'. $this->get_number_combo(0, 30, 100, 10) .'
 								</select></div>
 								<div><label for="lnmax" class="com_none">Max Size</label>
 								<select name="lnmax" id="lnmax" ng-model="cb.lnmax" ng-change="fetchData()">
-									<option value="">NO MAX</option>
+									<option value="">MAX</option>
 									'. $this->get_number_combo(0, 30, 100, 10) .'
 								</select></div>
 							</li>
-							<li>
-								<label for="max_speed">Max Speed (KT)</label>
-								<input type="text" name="max_speed" placeholder="" id="max_speed" value="">
+							<li class="half">    
+								<div><label for="max_speed_min">Max Speed (KT)</label>
+								<select name="max_speed_min" id="max_speed_min" ng-model="cb.max_speed_min" ng-change="fetchData()">
+									<option value="">MIN</option>
+									'. $this->get_number_combo(0, 10, 70, 10) .'
+								</select></div>
+								<div><label for="max_speed_max" class="com_none">Max Speed (KT)</label>
+								<select name="max_speed_max" id="max_speed_max" ng-model="cb.max_speed_max" ng-change="fetchData()">
+									<option value="">MAX</option>
+									'. $this->get_number_combo(0, 10, 70, 10) .'
+								</select></div>
 							</li>
 							<li>
 								<label for="cruisingarea_id">Cruising Area</label>
@@ -1932,24 +1945,44 @@ class CharterBoatclass {
 		<script>
 			var app = angular.module("live_search_app", []);
 			app.controller("live_search_controller", function($scope, $http, $document){				
-			$scope.cb = angular.copy({});
-			//$scope.boatNameData = {};
-			//$scope.showdataval = false;
-			
+						
+			if (sessionStorage.cbsearch) {
+					var temp = sessionStorage.getItem("cbsearch");
+        			var viewName = $.parseJSON(temp);
+					//alert(viewName.category_id);				
+					$scope.cb = angular.copy({
+							category_id: viewName.category_id,
+							guest: viewName.guest,
+							cruisingarea_id: viewName.cruisingarea_id,
+							lnmin: viewName.lnmin,
+							lnmax: viewName.lnmax,
+							cabin: viewName.cabin,
+							crew: viewName.crew,
+							max_speed_min: viewName.max_speed_min,
+							max_speed_max: viewName.max_speed_max,
+					});
+			}else{
+				$scope.cb = angular.copy({});
+			}
+						
 			$scope.fetchData = function(){				
+				$scope.filterdata = {
+					az:1,
+					category_id:$scope.cb.category_id,
+					guest:$scope.cb.guest,
+					cruisingarea_id:$scope.cb.cruisingarea_id,
+					lnmin:$scope.cb.lnmin,
+					lnmax:$scope.cb.lnmax,
+					cabin:$scope.cb.cabin,
+					crew:$scope.cb.crew,
+					max_speed_min:$scope.cb.max_speed_min,
+					max_speed_max:$scope.cb.max_speed_max,
+				};
+				sessionStorage.setItem("cbsearch", JSON.stringify($scope.filterdata));			
 				$http({
 					method:"POST",
 					url: bkfolder + "includes/nggetdata.php",
-					data:{
-						az:1,
-						category_id:$scope.cb.category_id,
-						guest:$scope.cb.guest,
-						cruisingarea_id:$scope.cb.cruisingarea_id,
-						lnmin:$scope.cb.lnmin,
-						lnmax:$scope.cb.lnmax,
-						cabin:$scope.cb.cabin,
-						crew:$scope.cb.crew,
-					}
+					data:$scope.filterdata
 				}).then(function successCallback(response){
               		$scope.searchData = response.data.allboats;
 					var totalboatfound = response.data.totalrecord
@@ -1957,7 +1990,8 @@ class CharterBoatclass {
 						$scope.totalrecord = totalboatfound + " Yachts";
 					}else{
 						$scope.totalrecord = totalboatfound + " Yacht";
-					}					
+					}
+									
                 });
 			};
 			
@@ -2002,6 +2036,148 @@ class CharterBoatclass {
 		';
 		
 		return $returntext;
+	}
+	
+	public function charterboat_details($param = array()){
+		global $db, $cm, $frontend;
+		
+		//param
+		$default_param = array("checkopt" => 0, "htmlreturn" => 1);
+		$param = array_merge($default_param, $param);
+		
+		$checkval = $param["checkval"];
+		$checkopt = $param["checkopt"];
+		$htmlreturn = $param["htmlreturn"];
+		//ends
+		
+		if ($checkopt == 1){
+			$checkfield = 'boat_slug';
+		}else{
+			$checkfield = 'id';
+		}
+		
+		$sql = "select * from tbl_boat_charter where ". $checkfield ." = '". $cm->filtertext($checkval) ."' and status_id = 1";	
+		$result = $db->fetch_all_array($sql);		
+		$found = count($result);
+		
+		$boatdata = array();		
+		foreach($result as $row){
+			foreach($row AS $key => $val){
+				${$key} = $cm->filtertextdisplay(($val));
+			}
+			
+			$make_name = $cm->get_common_field_name_pdo('tbl_manufacturer', 'name', $make_id);
+			$category_name = $cm->get_common_field_name_pdo('tbl_category', 'name', $category_id);
+			$imgpath = $this->get_charterboat_first_image($id);
+			$boat_url = $cm->get_page_url($boat_slug, "charterboat");
+			$imagelink = $cm->site_url . '/' ."charterboat/listings/" . $id . "/big/" .$imgpath;
+			
+			//cruisingarea
+			$cruisingarea = array();
+			$pdo_param2 = array();
+			$sql2 = "select a.name from tbl_cruisingarea as a, tbl_cruisingarea_boat_assign as b where a.id = b.cruisingarea_id and b.boat_id = :id order by rank";
+			$pdo_param2[] = array(
+				"id" => "id",
+				"value" => $id,
+				"c" => "PARAM_INT"
+			);
+			$result2 = $db->pdo_select($sql2, $pdo_param2);
+			foreach($result2 as $row2){
+				$cruisingarea[] = array(
+					"name" => $cm->filtertextdisplay($row2["name"])
+				);
+			}
+			
+			//boatgallery
+			$boatgallery = array();
+			$pdo_param2 = array();
+			$sql2 = "select * from tbl_boat_charter_photo where boat_id = :id and imgpath != '' and status_id = 1 order by rank";
+			$pdo_param2[] = array(
+				"id" => "id",
+				"value" => $id,
+				"c" => "PARAM_INT"
+			);
+			$result2 = $db->pdo_select($sql2, $pdo_param2);
+			foreach($result2 as $row2){
+				$boatgallery[] = array(
+					"imgpath" => $cm->filtertextdisplay($row2["imgpath"])
+				);
+			}
+			
+			//tendortoy
+			$tendertoy = array();
+			$pdo_param2 = array();
+			$sql2 = "select a.* from tbl_tendertoy as a, tbl_tendertoy_boat_assign as b where a.id = b.tendertoy_id and b.boat_id = :id order by rank";
+			$pdo_param2[] = array(
+				"id" => "id",
+				"value" => $id,
+				"c" => "PARAM_INT"
+			);
+			$result2 = $db->pdo_select($sql2, $pdo_param2);
+			foreach($result2 as $row2){
+				$tendertoy[] = array(
+					"name" => $cm->filtertextdisplay($row2["name"]),
+					"iconpath" => $cm->filtertextdisplay($row2["iconpath"])
+				);
+			}
+			
+			//destination
+			$destination = array();
+			$pdo_param2 = array();
+			$sql2 = "select a.* from tbl_destination as a, tbl_destination_boat_assign as b where a.id = b.destination_id and b.boat_id = :id order by rank";
+			$pdo_param2[] = array(
+				"id" => "id",
+				"value" => $id,
+				"c" => "PARAM_INT"
+			);
+			$result2 = $db->pdo_select($sql2, $pdo_param2);
+			foreach($result2 as $row2){
+				$destination[] = array(
+					"name" => $cm->filtertextdisplay($row2["name"]),
+					"imagepath" => $cm->filtertextdisplay($row2["imagepath"])
+				);
+			}
+				
+			$boatdata[] = array(
+				"id" => $id,
+				"boatname" => $boat_name,
+				"subtitle" => $subtitle,
+				"boatlength" => $length,
+				"boatyear" => $year,
+				"boatguest" => $guest,
+				"boatcabin" => $cabin,
+				"boatcrew" => $crew,
+				"maxspeed" => $max_speed,
+				"priceperday" => $price_perday,
+				"priceperdayformat" => $cm->format_price($price_perday, 0),
+				"priceperweek" => $price_perweek,
+				"priceperweekformat" => $cm->format_price($price_perweek, 0),
+				"makename" => $make_name,
+				"categoryname" => $category_name,
+				"imgpath" => $imgpath,
+				"boaturl" => $boat_url,
+				"imagelink" => $imagelink,
+				"description" => $description,
+				"bg_section1" => $bg_section1,
+				"bg_section2" => $bg_section2,
+				"bg_section3" => $bg_section3,
+				"bg_section4" => $bg_section4,
+				"bg_section5" => $bg_section5,
+				"m1" => $m1,
+				"m2" => $m2,
+				"m3" => $m3,
+				"cruisingarea" => $cruisingarea,
+				"boatgallery" => $boatgallery,
+				"tendertoy" => $tendertoy,
+				"destination" => $destination,
+			);
+		}
+		
+		$all_details = array(
+			"totalrecord" => $found,
+			"allboats" => $boatdata,
+		);
+		echo json_encode($all_details);
 	}
 	/*-----------/BOAT------------*/	
 }

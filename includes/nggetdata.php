@@ -12,6 +12,8 @@ if ($az == 1){
 	$lnmax = $data->lnmax;
 	$cabin = $data->cabin;
 	$crew = $data->crew;
+	$max_speed_min = $data->max_speed_min;
+	$max_speed_max = $data->max_speed_max;
 	
 	$param = array(
 		"category_id" => $category_id,
@@ -21,6 +23,8 @@ if ($az == 1){
 		"lnmax" => $lnmax,
 		"cabin" => $cabin,
 		"crew" => $crew,
+		"max_speed_min" => $max_speed_min,
+		"max_speed_max" => $max_speed_max,
 	);
 	echo $charterboatclass->charterboat_list($param);
 }
@@ -37,5 +41,15 @@ if ($az == 2){
 		//get category data
 		echo $charterboatclass->get_category_list();
 	}
+}
+
+if ($az == 3){
+	$slug = $data->slug;
+	
+	$param = array(
+		"checkval" => $slug,
+		"checkopt" => 1,
+	);
+	echo $charterboatclass->charterboat_details($param);
 }
 ?>
