@@ -24,7 +24,7 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
 <head>
     <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php echo $tm1; ?></title>
+    <title ng-bind="pTitle"><?php echo $tm1; ?></title>
     <meta name="description" content="<?php echo $tm2; ?>" />
     <meta name="keywords" content="<?php echo $tm3; ?>" />
     <meta name="google-site-verification" content="<?php echo $googlesiteverification; ?>" />
