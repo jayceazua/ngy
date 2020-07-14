@@ -30,7 +30,7 @@ class Leadclass {
 		"key26" => array("name" => "Contact Local Model", "messagebr" => 1, "id" => 26),
 		"key27" => array("name" => "Watch Price", "messagebr" => 0, "id" => 27),
 		"key28" => array("name" => "We Can Sell Your Yacht", "messagebr" => 0, "id" => 28),
-		"key29" => array("name" => "Charter Boat Enquery", "messagebr" => 0, "id" => 29)
+		"key29" => array("name" => "Charter Boat Enquire", "messagebr" => 0, "id" => 29)
 	);
 	
 	//Lead Form Type Combo

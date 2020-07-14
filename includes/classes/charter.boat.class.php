@@ -2192,7 +2192,7 @@ class CharterBoatclass {
 		echo json_encode($all_details);
 	}
 	
-	public function submit_charterboat_enquery_form(){
+	public function submit_charterboat_enquire_form(){
 		if(($_POST['fcapi'] == "charterboatsubmit")){
 			global $db, $cm, $sdeml;
 			
