@@ -158,7 +158,8 @@ include($bdr."includes/head.php");
                 <form method="post" action="<?php echo $cm->folder_for_seo; ?>" id="charterboat-ff" name="charterboat-ff">
                 	<input class="finfo" id="email2" name="email2" type="text" />
                     <input type="hidden" id="fcapi" name="fcapi" value="charterboatsubmit" />
-                    <input type="hidden" id="pgid" name="pgid" value="53" />                   
+                    <input type="hidden" id="boat_id" name="boat_id" value="{{ data.id }}" />
+                    <input type="hidden" id="pgid" name="pgid" value="169" />                   
                     <ul class="detail-enquire-list clearfixmain">
                         <li>
                             <label for="subject" class="com_none">Subject</label>

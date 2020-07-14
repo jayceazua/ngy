@@ -29,7 +29,8 @@ class Leadclass {
 		"key25" => array("name" => "Chartering Your Yacht", "messagebr" => 0, "id" => 25),
 		"key26" => array("name" => "Contact Local Model", "messagebr" => 1, "id" => 26),
 		"key27" => array("name" => "Watch Price", "messagebr" => 0, "id" => 27),
-		"key28" => array("name" => "We Can Sell Your Yacht", "messagebr" => 0, "id" => 28)
+		"key28" => array("name" => "We Can Sell Your Yacht", "messagebr" => 0, "id" => 28),
+		"key29" => array("name" => "Charter Boat Enquery", "messagebr" => 0, "id" => 29)
 	);
 	
 	//Lead Form Type Combo
@@ -139,7 +140,7 @@ class Leadclass {
     }
 	
 	public function form_lead_list($p, $pp = 0, $allrec = 0, $broker_id = 0){
-		global $db, $cm, $yachtclass, $ymclass, $modelclass;
+		global $db, $cm, $yachtclass, $ymclass, $modelclass, $charterboatclass;
         $returntext = '';
         $moreviewtext = '';
 		$limitsql = '';
@@ -214,16 +215,18 @@ class Leadclass {
                     ${$key} = $cm->filtertextdisplay(($val));
                 }
 	
+				$listing_no = '';	
 				if ($form_type == 7){
 					$retval = json_decode($ymclass->get_manufacturer_model_name_by_id($yacht_id));
 					$yacht_title = $retval->boat_title;
 				}elseif ($form_type == 26){
 					$yacht_title = $modelclass->get_model_name($yacht_id);
+				}elseif ($form_type == 29){
+					$yacht_title = $charterboatclass->get_boat_name($yacht_id);
 				}else{
 					$yacht_title = $yachtclass->yacht_name($yacht_id);
+					$listing_no = $yachtclass->get_yacht_no($yacht_id);
 				}
-				
-				$listing_no = $yachtclass->get_yacht_no($yacht_id);
 								
 				$contacted_to = $yachtclass->member_field('concat(fname, \' \', lname)', $broker_id);					
 				$date_summitted = $cm->display_date($reg_date, 'y', 10);

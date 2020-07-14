@@ -1314,7 +1314,7 @@ class CharterBoatclass {
 	}
 	
 	//check boat
-	public function check_charterboat($boat_id){
+	public function check_charterboat($boat_id, $whfrontend = 0){
         global $db, $cm;
 		$sql = "select * from tbl_boat_charter where id =:boat_id";
 		$pdo_param = array(			
@@ -1327,9 +1327,14 @@ class CharterBoatclass {
 		$result = $db->pdo_select($sql, $pdo_param);
 		$found = count($result);
 		if ($found == 0){
-			$_SESSION["admin_sorry"] = "ERROR! Invalid Manufacturer - Model selection.";
-			header('Location: sorry.php');
-			exit;
+			if ($whfrontend == 1){
+				header('Location: '. $cm->sorryredirect(3));
+				exit;
+			}else{
+				$_SESSION["admin_sorry"] = "ERROR! Invalid Manufacturer - Model selection.";
+				header('Location: sorry.php');
+				exit;
+			}
 		}
 		return $result;        
     }
@@ -1649,7 +1654,7 @@ class CharterBoatclass {
 		return $returntext;
 	}
 	
-	//get model first image
+	//get boat first image
 	public function get_charterboat_first_image($boat_id, $picktitle = 0){
 		global $db, $cm;
 		
@@ -1664,6 +1669,13 @@ class CharterBoatclass {
 		$imgpath = $db->pdo_get_single_value($sql, $pdo_param);
 		if ($imgpath == ""){ $imgpath = "no.jpg"; }
 		return $imgpath;
+	}
+	
+	//get boat name by is
+	public function get_boat_name($boat_id){
+		global $cm;
+		$boat_name = $cm->get_common_field_name_pdo('tbl_boat_charter', 'boat_name', $boat_id);
+		return $boat_name;
 	}
 	
 	//Boat listings
@@ -2178,6 +2190,163 @@ class CharterBoatclass {
 			"allboats" => $boatdata,
 		);
 		echo json_encode($all_details);
+	}
+	
+	public function submit_charterboat_enquery_form(){
+		if(($_POST['fcapi'] == "charterboatsubmit")){
+			global $db, $cm, $sdeml;
+			
+			//get form fields
+			$subject = $_POST["subject"];
+			$name = $_POST["name"];
+			$email = $_POST["email"];
+			$phone = $_POST["phone"];
+			$comment = $_POST["comment"];
+			
+			$email2 = $_POST["email2"];
+			$pgid = round($_POST["pgid"], 0);
+			$boat_id = round($_POST["boat_id"], 0);
+			//end
+			
+			//create the session
+			$datastring = $cm->session_field_charterboat_enquery();
+			$cm->create_session_for_form($datastring, $_POST);
+			//end
+			
+			//checking
+			$boat_ar = $this->check_charterboat($boat_id, 1);
+			$boat_row = $boat_ar[0];
+			$boat_name = $boat_row["boat_name"];
+			$boat_slug = $boat_row["boat_slug"];
+			$fullurl = $cm->site_url . $cm->get_page_url($boat_slug, "charterboat");
+			
+			$red_pg = $_SESSION["s_backpage"];
+			$cm->field_validation($subject, '', 'Subject', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($name, '', 'Name', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($email, '', 'Email Address', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($phone, '', 'Phone', $red_pg, '', '', 1, 'fr_');
+			$cm->field_validation($comment, '', 'Comment', $red_pg, '', '', 1, 'fr_');
+						
+			if ($email2 != ""){
+				header('Location: ' . $cm->get_page_url(0, "popsorry"));
+				exit;
+			}
+			//end
+			
+			//captcha
+			global $captchaclass;
+			$captchaclass->validate_captcha($red_pg);
+			//end
+			
+			$cm->delete_session_for_form($datastring);
+			$comment = nl2br($comment);
+			
+			$companyname = $cm->sitename;
+			$companyphone = $cm->get_systemvar('COMPH');
+			$companyemail = $cm->admin_email_to();
+			
+			//create email message - admin
+			$emailmessage = '
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="left" valign="top" style="padding: 15px 5px 5px 0px;'. $defaultheading .'" colspan="2"><strong>Charter Boat Enquery Form</strong></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="55%">Boat Name:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width=""><a href="'. $fullurl .'">'. $cm->filtertextdisplay($boat_name, 1) .'</a></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Subject:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($subject, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Name:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($name, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Email Address:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($email, 1) .'</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Phone:</td>
+					<td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($phone, 1) .'</td>
+				</tr>
+				
+				<tr>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">Comment:</td>
+				   <td align="left" valign="top" style="padding: 5px 10px 5px 0px;'. $defaultfontcss .'" width="">'. $cm->filtertextdisplay($comment, 1) .'</td>
+			  	</tr>												
+			</table>
+			';
+			//end
+			
+			//add to lead
+			$form_type = 29;
+			$extra_message = '';
+			global $leadclass;
+			$param = array(
+				"form_type" => $form_type,
+				"name" => $name,
+				"email" => $email,
+				"phone" => $phone,
+				"message" => $emailmessage,
+				"broker_id" => 1,
+				"yacht_id" => $boat_id
+			);
+			$leadclass->add_lead_message($param);
+			//end
+			
+			//send email to admin
+			$send_ml_id = 53;
+			$ad_email_ar = $cm->get_table_fields('tbl_system_email', 'email_subject, pdes, cc_email', $send_ml_id);
+			$ad_email_ar = (object)$ad_email_ar[0];
+			$ad_msg = $ad_email_ar->pdes;
+			$ad_mail_subject = $ad_email_ar->email_subject;
+			$ad_cc_email = $ad_email_ar->cc_email;
+			
+			$ad_msg = str_replace("#companyname#", $cm->filtertextdisplay($companyname), $ad_msg);
+			$ad_msg = str_replace("#formdatasubmission#", $emailmessage, $ad_msg);
+			$ad_mail_subject = str_replace("#companyname#", $companyname, $ad_mail_subject);
+			
+			$mail_fm = $cm->admin_email();
+			$mail_to = $cm->admin_email_to();
+			$mail_bcc = '';
+			$mail_reply = $cm->filtertextdisplay($email);
+			$fromnamesender = $cm->filtertextdisplay($name);		 		  
+			$sdeml->send_email($mail_fm, $mail_to, $ad_cc_email, $mail_bcc, $mail_reply, $ad_mail_subject, $ad_msg, $cm->site_url, $fromnamesender);
+			//end
+			
+			//send email to user
+			$send_ml_id = 54;
+			$fr_email_ar = $cm->get_table_fields('tbl_system_email', 'email_subject, pdes', $send_ml_id);
+			$fr_email_ar = (object)$fr_email_ar[0];
+			$fr_msg = $fr_email_ar->pdes;
+			$fr_mail_subject = $fr_email_ar->email_subject;			
+			
+			$fr_msg = str_replace("#name#", $cm->filtertextdisplay($name), $fr_msg);
+			$fr_msg = str_replace("#companyname#", $cm->filtertextdisplay($companyname), $fr_msg);
+			$fr_msg = str_replace("#companyphone#", $companyphone, $fr_msg);
+			$fr_msg = str_replace("#companyemail#", $companyemail, $fr_msg);
+			
+			$fr_mail_subject = str_replace("#name#", $cm->filtertextdisplay($name), $fr_mail_subject);
+			$fr_mail_subject = str_replace("#companyname#", $companyname, $fr_mail_subject);
+			$fr_mail_subject = str_replace("#companyphone#", $companyphone, $fr_mail_subject);
+			
+			$mail_fm = $cm->admin_email();
+			$mail_to = $cm->filtertextdisplay($email);
+			$mail_cc = "";
+			$mail_reply = "";
+			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $fr_mail_subject, $fr_msg, $cm->site_url);
+			//end
+			
+			header('Location: ' . $cm->get_page_url($pgid, 'page'));
+			exit;
+		}
 	}
 	/*-----------/BOAT------------*/	
 }

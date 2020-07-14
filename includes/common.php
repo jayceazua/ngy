@@ -638,5 +638,6 @@ if(($_REQUEST['fcapi'] != "")){
 	$leadclass->export_leads();
 	$boatwatcherclass->submit_boat_watcher_form();
 	$boatwatcherclass->boat_watcher_unsubscribe();
+	$charterboatclass->submit_charterboat_enquery_form();
 }
 ?>

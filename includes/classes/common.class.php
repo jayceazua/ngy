@@ -1255,6 +1255,11 @@ class Commonclass {
 		$datastring .= ",wcs_boat_engines,wcs_boat_hours_on_engines,wcs_boat_location";
 		return $datastring;
 	}
+	
+	public function session_field_charterboat_enquery(){
+		$datastring = "subject,name,email,phone,comment";
+		return $datastring;
+	}
  
 	public function create_session_for_form($datastring, $vl_ar = array()){
 		$datastring_ar = explode(",", $datastring);
