@@ -183,7 +183,8 @@ include($bdr."includes/head.php");
                         <input type="submit" value="SUBMIT">
                     </div>
                 </form> 
-            </div>
+                <div class="fomrsubmit-result com_none"></div>
+            </div>            
         </div>
     </div>
 
@@ -289,7 +290,7 @@ app.filter('trustAsHtml',['$sce', function($sce) {
 		});
 	}	
 
-	$(document).on("submit", "#charterboat-ff", function() {
+	$(document).on("submit", "#charterboat-ff", function(event) {
 		var all_ok = "y";
 		var setfocus = "n";
 		
@@ -321,10 +322,32 @@ app.filter('trustAsHtml',['$sce', function($sce) {
 		if (all_ok == "n"){
 			return false;
 		}
-		return true;
+		
+		//Ajax submit
+		var form = $(this);
+		$.ajax({
+		  type: form.attr("method"),
+		  url: form.attr("action"),
+		  data: form.serialize()
+		}).done(function() {					  
+		  $("#subject").val("");
+		  $("#name").val("");
+		  $("#phone").val("");
+		  $("#email").val("");
+		  $("#comment").val("");		  
+		  $("#formsubmitcontent").html("Your Enquiry has been sent.<br>We will get back to you asap.");
+		  $("#formsubmitoverlay").show();
+		  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+		}).fail(function() {
+		  $(".fomrsubmit-result").addClass("error");
+		  $(".fomrsubmit-result").html("ERROR! Please try again");
+		  $(".fomrsubmit-result").removeClass("com_none");
+		  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
+		});
+		
+		event.preventDefault();		
+		
 	});
-	
-
 </script>
 <?php
 include($bdr."includes/foot.php");

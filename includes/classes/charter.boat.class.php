@@ -2344,6 +2344,7 @@ class CharterBoatclass {
 			$sdeml->send_email($mail_fm, $mail_to, $mail_cc, $mail_bcc, $mail_reply, $fr_mail_subject, $fr_msg, $cm->site_url);
 			//end
 			
+			$_SESSION["s_pgid"] = $pgid;
 			header('Location: ' . $cm->get_page_url($pgid, 'page'));
 			exit;
 		}
