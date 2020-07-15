@@ -1944,7 +1944,7 @@ class CharterBoatclass {
 							<div class="overlayy"></div>
 							<div class="listing-yeacht-items-details">
 								<h3>{{ data.boatname }}</h3>
-								<p>{{ data.makename }} |  {{ data.boatlength }}M | {{ data.boatguest }}Guests</p>
+								<p>{{ data.makename }} |  {{ data.boatlength }}M | {{ data.boatguest }} Guests</p>
 							</div>
 						</a>
 					</li>
@@ -1957,22 +1957,25 @@ class CharterBoatclass {
 		<script>
 			var app = angular.module("live_search_app", []);
 			app.controller("live_search_controller", function($scope, $http, $document){				
-						
-			if (sessionStorage.cbsearch) {
-					var temp = sessionStorage.getItem("cbsearch");
-        			var viewName = $.parseJSON(temp);
-					//alert(viewName.category_id);				
-					$scope.cb = angular.copy({
-							category_id: viewName.category_id,
-							guest: viewName.guest,
-							cruisingarea_id: viewName.cruisingarea_id,
-							lnmin: viewName.lnmin,
-							lnmax: viewName.lnmax,
-							cabin: viewName.cabin,
-							crew: viewName.crew,
-							max_speed_min: viewName.max_speed_min,
-							max_speed_max: viewName.max_speed_max,
-					});
+			if (sessionStorage.keepsearchsessioncb){
+				sessionStorage.removeItem("keepsearchsessioncb");		
+				if (sessionStorage.cbsearch) {
+						var temp = sessionStorage.getItem("cbsearch");
+						var viewName = $.parseJSON(temp);		
+						$scope.cb = angular.copy({
+								category_id: viewName.category_id,
+								guest: viewName.guest,
+								cruisingarea_id: viewName.cruisingarea_id,
+								lnmin: viewName.lnmin,
+								lnmax: viewName.lnmax,
+								cabin: viewName.cabin,
+								crew: viewName.crew,
+								max_speed_min: viewName.max_speed_min,
+								max_speed_max: viewName.max_speed_max,
+						});
+				}else{
+					$scope.cb = angular.copy({});
+				}
 			}else{
 				$scope.cb = angular.copy({});
 			}
@@ -1990,7 +1993,7 @@ class CharterBoatclass {
 					max_speed_min:$scope.cb.max_speed_min,
 					max_speed_max:$scope.cb.max_speed_max,
 				};
-				sessionStorage.setItem("cbsearch", JSON.stringify($scope.filterdata));			
+				sessionStorage.setItem("cbsearch", JSON.stringify($scope.filterdata));						
 				$http({
 					method:"POST",
 					url: bkfolder + "includes/nggetdata.php",

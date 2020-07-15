@@ -289,7 +289,9 @@ app.filter('trustAsHtml',['$sce', function($sce) {
 			
 		});
 	}	
-
+$(document).ready(function(){
+	//create local session storage for boat search to track back page search
+	sessionStorage.keepsearchsessioncb = 1;
 	$(document).on("submit", "#charterboat-ff", function(event) {
 		var all_ok = "y";
 		var setfocus = "n";
@@ -345,9 +347,9 @@ app.filter('trustAsHtml',['$sce', function($sce) {
 		  grecaptcha.reset(jQuery(form).find("#data-widget-id").attr("data-widget-id"));
 		});
 		
-		event.preventDefault();		
-		
+		event.preventDefault();	
 	});
+});
 </script>
 <?php
 include($bdr."includes/foot.php");
