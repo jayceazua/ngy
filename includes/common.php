@@ -33,6 +33,7 @@ require_once("classes/emailcampaign.class.php");
 require_once("classes/slideshow.class.php");
 require_once("classes/boat.watcher.class.php");
 require_once("classes/instagram.class.php");
+require_once("classes/charter.boat.class.php");
 
 $db = new Database(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);      //******************  Database class
 $cm = new Commonclass();   //******************  Common class
@@ -63,6 +64,7 @@ $emailcampaignclass = new Emailcampaignclass();   //******************  Email Ca
 $slideshowclass = new Slideshowclass();   //******************  Slideshow class
 $boatwatcherclass = new Boatwatcherclass();    //******************  Boat Watcher class
 $instagramclass = new Instagramclass();   //******************  Instagram class
+$charterboatclass = new CharterBoatclass();   //******************  Charter Boat class
 
 /*SHORTCODE CREATION*/
 
@@ -458,6 +460,13 @@ function boat_search_by_boat_type_shortcode(){
 }
 $shortcodeclass->add_shortcode( 'fcboatsearchboattype', 'boat_search_by_boat_type_shortcode' );
 
+//Charter boat listings
+function display_charterboat_listings_main_shortcode($argu = array()){
+	global $charterboatclass;
+	return $charterboatclass->display_charterboat_listings_main($argu);
+}
+$shortcodeclass->add_shortcode( 'fccharterboatlist', 'display_charterboat_listings_main_shortcode' );
+
 //Homepage map and locations
 function display_location_homepage_shortcode($argu = array()){
 	global $yachtchildclass;
@@ -629,5 +638,6 @@ if(($_REQUEST['fcapi'] != "")){
 	$leadclass->export_leads();
 	$boatwatcherclass->submit_boat_watcher_form();
 	$boatwatcherclass->boat_watcher_unsubscribe();
+	$charterboatclass->submit_charterboat_enquire_form();
 }
 ?>

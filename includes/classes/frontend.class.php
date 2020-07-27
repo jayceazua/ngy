@@ -43,6 +43,7 @@ class Frontendclass {
 		$templateseo = $_REQUEST["templateseo"];
 		$popp = round($_REQUEST["popp"], 0);
 		$nohead = round($_REQUEST["nohead"], 0);
+		$ng = round($_REQUEST["ng"], 0);
 		
 		$pageslug = $cm->format_page_slug();
 		$pageid = $cm->get_page_id_by_slug($pageslug);
@@ -92,7 +93,8 @@ class Frontendclass {
 			'bodyclass' => $bodyclass,
 			'lastpageid' => $lastpageid,
 			'startend' => $startend,
-			'nohead' => $nohead
+			'nohead' => $nohead,
+			'ng' => $ng,
         );
         return json_encode($returnval);
 	}

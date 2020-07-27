@@ -266,11 +266,11 @@ class Commonclass {
 	  return strtoupper($pass); 
   }  
   
-  public function get_unq_code($tblnm, $fldnm){  
+  public function get_unq_code($tblnm, $fldnm, $x = 6){  
       global $db;
-	  $ucd = $this->campaignid(40);
+	  $ucd = $this->campaignid($x);
 	  $wh_present = $db->total_record_count("select count(*) as ttl from ".$tblnm." where ".$fldnm." = '". $ucd ."'");	  
-	  if ($wh_present > 0){ $ucd = $this->get_unq_code($tblnm, $fldnm); } // next recursion
+	  if ($wh_present > 0){ $ucd = $this->get_unq_code($tblnm, $fldnm, $x); } // next recursion
 	  return $ucd;
   }
   
@@ -383,6 +383,21 @@ class Commonclass {
       global $db;
       $common_nm = $db->total_record_count("select ". $field_name ." as ttl from ". $tbl_name ." where ". $wherefield ." = '". $this->filtertext($common_id) ."'");
       return $common_nm;
+  }
+  
+  public function get_common_field_name_pdo($tbl_name, $field_name, $common_id, $wherefield = "id"){
+		global $db;
+		$sql = "select ". $field_name ." as ttl from ". $tbl_name ." where ". $wherefield ." = :common_id";
+		$pdo_param = array(
+			array(
+			"id" => "common_id",
+			"value" => $common_id,
+			"c" => "PARAM_STR"
+			)				
+		);
+		
+		$common_nm = $db->pdo_get_single_value($sql, $pdo_param);
+		return $common_nm;
   }
    
   public function get_table_fields($tbl_name, $field_name, $common_id, $wherefield = "id"){
@@ -712,16 +727,19 @@ class Commonclass {
 		}elseif ($pagetype == "blog"){
 		  $pagename = $this->serach_url_filtertext($checkid);
 		  $ret_url = $this->folder_for_seo."blog/" . $pagename . "/";
-      }elseif ($pagetype == "boatslideshow"){
-		  $pagename = $this->serach_url_filtertext($checkid);
-		  $ret_url = $this->folder_for_seo."boatslideshow/" . $pagename . "/";
-      }elseif ($pagetype == "customboatslideshow"){
-          $ret_url = $this->folder_for_seo . "customboatslideshow/" . $checkid . "/";
-
-      }elseif ($pagetype == "boatmodel"){
+		}elseif ($pagetype == "boatslideshow"){
+			$pagename = $this->serach_url_filtertext($checkid);
+			$ret_url = $this->folder_for_seo."boatslideshow/" . $pagename . "/";
+		}elseif ($pagetype == "customboatslideshow"){
+			$ret_url = $this->folder_for_seo . "customboatslideshow/" . $checkid . "/";		
+		}elseif ($pagetype == "boatmodel"){
 			$pagename = $this->serach_url_filtertext($checkid);
 			$ret_url = $this->folder_for_seo."boatmodel/" . $pagename . "/";		  
-	  	}elseif ($pagetype == "page"){
+		}elseif ($pagetype == "charterboat"){
+			$pagename = $this->serach_url_filtertext($checkid);
+			$ret_url = $this->folder_for_seo."charterboat/" . $pagename . "/";		  
+
+		}elseif ($pagetype == "page"){
 	  	  $pagedet_ar = $this->get_table_fields('tbl_page', 'page_type, int_page_id, int_page_tp, pgnm, page_url, doc_name, only_menu', $checkid);
 		  $pagedet_ar = (object)$pagedet_ar[0];
 		  
@@ -1237,6 +1255,11 @@ class Commonclass {
 		$datastring .= ",wcs_boat_engines,wcs_boat_hours_on_engines,wcs_boat_location";
 		return $datastring;
 	}
+	
+	public function session_field_charterboat_enquery(){
+		$datastring = "subject,name,email,phone,comment";
+		return $datastring;
+	}
  
 	public function create_session_for_form($datastring, $vl_ar = array()){
 		$datastring_ar = explode(",", $datastring);
@@ -1560,10 +1583,10 @@ class Commonclass {
 			$imageurl = $this->site_url . "/images/shareimg.png";
 		}
 		$returntext = '
-		<meta property="og:title" content="'. $title .'" />
-		<meta property="og:description" content="'. $content .'" />
-		<meta property="og:url" content="'. $fullurl .'" />
-		<meta property="og:image" content="'. $imageurl .'" />
+		<meta property="og:title" content="'. $title .'" id="ogtitle" />
+		<meta property="og:description" content="'. $content .'" id="ogdescription" />
+		<meta property="og:url" content="'. $fullurl .'" id="ogurl" />
+		<meta property="og:image" content="'. $imageurl .'" id="ogimage" />
 		
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:description" content="'. $content .'" />

@@ -20,11 +20,11 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
 }
 ?>
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en"<?php if (isset($ng) AND $ng == 1){?> ng-app="page_app" ng-controller="page_controller"<?php } ?>>
 <head>
     <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php echo $tm1; ?></title>
+    <title ng-bind="pTitle"><?php echo $tm1; ?></title>
     <meta name="description" content="<?php echo $tm2; ?>" />
     <meta name="keywords" content="<?php echo $tm3; ?>" />
     <meta name="google-site-verification" content="<?php echo $googlesiteverification; ?>" />
@@ -71,7 +71,8 @@ if (!isset($opengraphmeta) OR $opengraphmeta == ""){
 		var bkfolder = "<?php echo $cm->folder_for_seo; ?>";
 		var siteurlfull = "<?php echo $cm->site_url; ?>";
 	</script>
-	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.min.js"></script> 
+	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/angular.min.js"></script> 
     <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.extra.top.js"></script>
     <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/waypoints.min.js"></script>
 	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/jquery.counterup.js"></script>  

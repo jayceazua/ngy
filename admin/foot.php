@@ -43,4 +43,7 @@
 <?php } ?>
     </body>
     </html>
-<?php $db->close(); ?>
+<?php
+$db->close();
+$db->pdo_close(); 
+?>

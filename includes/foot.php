@@ -232,4 +232,7 @@ echo $call_tracking_code;
 ?>
 </body>
 </html>
-<?php $db->close(); ?>
+<?php
+$db->close();
+$db->pdo_close(); 
+?>
