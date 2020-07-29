@@ -13449,23 +13449,23 @@ class Frontendclass {
 				<li>
                 	<p>Contact Info</p>
                     <label for="wcs_fname" class="com_none">First Name</label>
-                    <span class="pseudo-require"><input type="text" name="fname" placeholder="First Name" id="wcs_fname" value="'. $fname .'" class="input" /></span>
+                    <input type="text" name="fname" placeholder="First Name" id="wcs_fname" value="'. $fname .'" class="input" />
 					<label for="wcs_lname" class="com_none">Last Name</label>
-                    <span class="pseudo-require"><input type="text" name="lname" placeholder="Last Name" id="wcs_lname" value="'. $lname .'" class="input" /></span>
+                    <input type="text" name="lname" placeholder="Last Name" id="wcs_lname" value="'. $lname .'" class="input" />
                     <label for="wcs_email" class="com_none">Email</label>
-                    <span class="pseudo-require"><input type="text" name="email" placeholder="Email" id="wcs_email" value="'. $email .'" class="input" /></span>
+                    <input type="text" name="email" placeholder="Email" id="wcs_email" value="'. $email .'" class="input" />
                     <label for="wcs_phone" class="com_none">Phone Number</label>
-                    <span class="pseudo-require"><input type="text" name="phone" placeholder="Phone Number" id="wcs_phone" value="'. $phone .'" class="input" /></span>
+                    <input type="text" name="phone" placeholder="Phone Number" id="wcs_phone" value="'. $phone .'" class="input" />
                 </li>
 				
 				<li>
                 	<p>Yacht</p>
                     <label for="wcs_boat_make" class="com_none">Make</label>
-                    <span class="pseudo-require"><input type="text" placeholder="Make" id="wcs_boat_make" name="boat_make" value="'. $boat_make .'" class="input" /></span>
+                    <input type="text" placeholder="Make" id="wcs_boat_make" name="boat_make" value="'. $boat_make .'" class="input" />
                     <label for="wcs_boat_model" class="com_none">Model</label>
-                    <span class="pseudo-require"><input type="text" placeholder="Model" id="wcs_boat_model" name="boat_model" value="'. $boat_model .'" class="input" /></span>
+                    <input type="text" placeholder="Model" id="wcs_boat_model" name="boat_model" value="'. $boat_model .'" class="input" />
                     <label for="wcs_boat_year" class="com_none">Year</label>
-                    <span class="pseudo-require"><input type="text" placeholder="Year" id="wcs_boat_year" name="boat_year" value="'. $boat_year .'" class="input" /></span>                   
+                    <input type="text" placeholder="Year" id="wcs_boat_year" name="boat_year" value="'. $boat_year .'" class="input" />               
                 </li>   
                 <li>
                 	<p class="mob-none">&nbsp;</p>
@@ -13476,7 +13476,7 @@ class Frontendclass {
                     <input type="text" placeholder="Hours On Engines" id="wcs_boat_hours_on_engines" name="boat_hours_on_engines" value="'. $boat_hours_on_engines .'" class="input" />
                     
                     <label for="wcs_boat_location" class="com_none">Location</label>
-                    <span class="pseudo-require"><input type="text" placeholder="Location" id="wcs_boat_location" name="boat_location" value="'. $boat_location .'" class="input" /></span>
+                    <input type="text" placeholder="Location" id="wcs_boat_location" name="boat_location" value="'. $boat_location .'" class="input" />
                 </li>			
 			</ul>
 			<div class="recaptchablock">'. $captchaclass->call_captcha(). '</div>

@@ -8820,8 +8820,10 @@ ul.ng-blog-news-list .para{
     height: 100%;
     display: block;
     z-index: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.2);
 }
+
+.rowblock .div_image img {width: 100%;}
 
 .rowblock .div_image h2 {
 	position: absolute;
@@ -9107,7 +9109,8 @@ ul.ng-blog-news-list .para{
 		width:70px;
 		height:70px;
 		border-radius:50%;
-		background:#fff000;
+		background:#2abfd0;
+		color: #fff;
 		text-align:center;
 		-webkit-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15);
 		-moz-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15);
