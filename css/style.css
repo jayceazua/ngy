@@ -8843,7 +8843,11 @@ ul.ng-blog-news-list .para{
 	z-index:2;	
 }
 
-.rowblock .div_image h2 a{color: #fff;}
+.rowblock .div_image h2 a{
+	color: #fff;
+	height: 100%;
+	display: block;
+}
 
 @media (max-width: 1050px) {
 	.rowblock > div.div_image{
