@@ -8771,12 +8771,6 @@ class Yachtclass {
         $profile_url = $cm->get_page_url($broker_id, 'user');		
 		
 		if ($broker_id == 1){			
-			if ($template == 1){
-				$broker_photo_text = '<div class="brokerphoto"><img src="'. $cm->folder_for_seo .'images/logo-color.png" alt=""></div>';
-			}else{
-				$broker_photo_text = '<div class="brokerphoto"><img src="'. $cm->folder_for_seo .'images/logo.png" alt=""></div>';
-			}			
-			
 			$brokername = $cm->sitename;
 			
 			$location_ad_ar = $this->get_location_address_array($location_id);
@@ -8789,11 +8783,21 @@ class Yachtclass {
 			$addressfull = $this->com_address_format('', $city, $state, $state_id, $country_id, '');
 			//$addressfull = $address . '<br>' . $addressfull;
 			
-			$broker_text = '
-			<div class="broker clearfixmain">
-				'. $broker_photo_text .'
-			</div>
-			';
+			if ($ownboat == 1){
+				if ($template == 1){
+					$broker_photo_text = '<div class="brokerphoto"><img src="'. $cm->folder_for_seo .'images/logo-color.png" alt="'. $brokername .'"></div>';
+				}else{
+					$broker_photo_text = '<div class="brokerphoto"><img src="'. $cm->folder_for_seo .'images/logo.png" alt="'. $brokername .'"></div>';
+				}
+			
+				$broker_text = '
+				<div class="broker clearfixmain">
+					'. $broker_photo_text .'
+				</div>
+				';
+			}else{
+				$broker_text = '';
+			}
 			
 			$contact_button_text = 'Contact';
 			

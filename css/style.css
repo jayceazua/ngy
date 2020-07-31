@@ -4956,7 +4956,7 @@ ul.footerlocationlist > li .appointmenttime { display: block; margin-top: 15px; 
 
 /*Footer CSS
 -----------------------------------------------------------------------------------------------------------*/
-.disclaimer_div { font-size: 14px; width: 100%; line-height: normal; }
+.disclaimer_div {width: 100%;}
 .disclaimer_div .yw { font-size: 11px; color: #E9E9E9; }
 
 .footer { width: 100%; margin: 0; padding: 30px 0; color: #b9b9b9; background-color: #141414; font-size: 14px; text-align: center;}
