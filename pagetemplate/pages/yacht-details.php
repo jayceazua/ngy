@@ -31,7 +31,7 @@ $b_ar = array(
 );
 $fullurl = $cm->site_url . $yachtclass->get_boat_details_url($b_ar);
 
-if ($yw_id > 0 AND $ownboat == 0){
+if ($yw_id > 0 AND $ownboat == 0 AND !empty($disclaimer_text)){
 	$display_boat_disclaimer = 0;
 	$display_yachtworld_disclaimer = 0;
 	
