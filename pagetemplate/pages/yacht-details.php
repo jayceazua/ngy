@@ -31,12 +31,12 @@ $b_ar = array(
 );
 $fullurl = $cm->site_url . $yachtclass->get_boat_details_url($b_ar);
 
-if ($yw_id > 0 AND $ownboat == 0){
+if ($yw_id > 0 AND $ownboat == 0 AND !empty($disclaimer_text)){
 	$display_boat_disclaimer = 0;
 	$display_yachtworld_disclaimer = 0;
 	
 	$display_yachtworld_disclaimer_text = '
-	<div class="disclaimer_div">
+	<div class="disclaimer_div mb-2">
 		<strong>Disclaimer:</strong><br />
 		'. $disclaimer_text .'
 		<span class="yw">('. $yw_id .')</span>
@@ -412,6 +412,8 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
         	<?php
 			}
 			?>
+			
+			<?php echo $display_yachtworld_disclaimer_text; ?>
             
             <h2 class="singlelinebottom">Highlights</h2>
             <div class="customboattabcontent clearfixmain">
@@ -736,9 +738,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
       		<?php echo $yachtclass->display_yacht_video2($id);?>
              
             <h2 class="singlelinebottom">Location</h2>
-            <?php echo $mapdisplay; ?>
-            
-            <?php echo $display_yachtworld_disclaimer_text; ?>            
+            <?php echo $mapdisplay; ?>                        
        </div>
         
     </div>
