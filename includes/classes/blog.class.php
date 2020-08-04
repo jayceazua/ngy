@@ -826,6 +826,7 @@ class Blogclass {
 			}
 	
 			$(".main").on("click", ".moreblog", function(){
+				$(this).blur();
 				var p = $(this).attr("p");
 				var c = $(this).attr("c");
 				$(this).filterblog(p, c);
@@ -1076,6 +1077,7 @@ class Blogclass {
 			}
 	
 			$(".main").on("click", ".moreblogcategorylist", function(){
+				$(this).blur();
 				var p = $(this).attr("p");
 				$(this).filterblogcategorylist(p);
 			});

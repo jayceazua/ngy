@@ -2521,6 +2521,7 @@ class Frontendclass {
 					}
 
 					$(".main").on("click", ".moretestimonial", function(){
+						$(this).blur();
 						var p = $(this).attr("p");
 						var c = $(this).attr("c");
 						$(this).filtertestimonial(p, c);
