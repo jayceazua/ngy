@@ -1063,6 +1063,7 @@ $(document).ready(function(){
 
     //yacht pagination
     $(".main").on("click", ".moreyacht", function(){
+		$(this).blur();
         var p = $(this).attr('p');
         var dval = $(".vp a.active").attr('dval');
 		
