@@ -99,9 +99,6 @@ echo $frontend->display_formsubmit_popup();
 	<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/maplisting.js"></script>
 <?php } ?>
 
-<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/abclient.js"></script>
-<script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/abjquery.js"></script>
-
 <?php
 $google_analytics = $cm->get_systemvar('GLANY');
 echo $google_analytics;
@@ -141,22 +138,6 @@ echo $google_analytics;
 </div>
 <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/dmm-analytics.min.js"></script>
 <script type="text/javascript" src="<?php echo $cm->folder_for_seo; ?>js/cookie-popup.min.js"></script>
-
-<script type="text/javascript">
-var airbrake = new airbrakeJs.Client({projectId: 117837, projectKey: 'de3d05543b28193078e680a0e845ae4a'});
-if (window.jQuery) 
-  airbrakeJs.instrumentation.jquery(airbrake, jQuery);
-
-function ___log__error(aMsg, aUrl, aLine, aCol, aErr) {
- airbrake.notify({
-	error:       aErr,
-	context:     { script: 'script-name', url : aUrl, line: aLine, col: aCol },
-	session:     { userid: 'userid-if-any' }
-  });
-   return false;
-};
-//window.onerror = ___log__error;
-</script>
 
 <div id="fc_msg" class="errormessagepop">
 <?php if ($_SESSION["fr_postmessage"] != ""){ 
