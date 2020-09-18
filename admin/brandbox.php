@@ -9,6 +9,8 @@ if ($sectionid == 2){
 	$link_name = "Brand Box - Yacht Page";
 }elseif ($sectionid == 3){
 	$link_name = "Brand Box - Catamaran Page";
+}elseif ($sectionid == 4){
+	$link_name = "Brand Box - Sailing Catamaran Page";
 }else{
 	$sectionid = 1;
 	$link_name = "Brand Box - Home Page";
@@ -37,6 +39,15 @@ include("head.php");
 	</table>
 <?php $_SESSION["postmessage"] = ""; } ?>
 
+<table border="0" width="95%" cellspacing="0" cellpadding="4" class="htext" align="center">
+	<tr>
+    	<td>
+        <strong>Shortcode:</strong><br />
+        Home Page: [fcbrandbox sectionid=<?php echo $sectionid; ?>]<br />
+        Inner Page: [fcbrandbox sectionid=<?php echo $sectionid; ?> innerpage=1 hideheading=1]
+        </td>
+    </tr>
+</table>
 		
 <form method="post" action="brandbox.php" name="ff" enctype="multipart/form-data">
 		<input type="hidden" value="tbl_brand_specific" name="tblname" id="tblname" />

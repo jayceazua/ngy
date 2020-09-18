@@ -23,6 +23,8 @@ if ($sectionid == 2){
 	$link_name = "Brand Box - Yacht Page";
 }elseif ($sectionid == 3){
 	$link_name = "Brand Box - Catamaran Page";
+}elseif ($sectionid == 4){
+	$link_name = "Brand Box - Sailing Catamaran Page";
 }else{
 	$sectionid = 1;
 	$link_name = "Brand Box - Home Page";
