@@ -60,7 +60,7 @@ if ($filename != ""){
 	$filename = $fle->uploadfilename($filename);	
 	$filename1 = $iiid."brandboximage".$filename;
 	
-	$target_path_main = "../brandboximage/";
+	$target_path_main = YCROOTPATH . "brandboximage/";
 
 	$imw = $cm->boattype_box_im_width;
 	$imh = $cm->boattype_box_im_height;
@@ -83,7 +83,7 @@ if ($filename != ""){
 	$filename = $fle->uploadfilename($filename);	
 	$filename1 = $iiid."brandlogoimage".$filename;
 	
-	$target_path_main = "../brandboximage/";
+	$target_path_main = YCROOTPATH . "brandboximage/";
 
 	$imw = $cm->brand_box_logo_im_width;
 	$imh = $cm->brand_box_logo_im_height;
