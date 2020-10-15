@@ -954,6 +954,7 @@ $(document).ready(function(){
                 az:4
             },
             function(data){
+				alert (data);
 	            data = $.parseJSON(data);
                 content = data[0].doc;
                 displayoption = data[0].displayoption;
