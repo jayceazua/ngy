@@ -17,6 +17,8 @@ class Yachtclass {
 	public $yacht_feed_id = "iqfvvoqavhlo";
 	public $catamaran_feed_id = "90sxtvkwmutb";
 	public $catamaran_feed_id2 = "9695221a8b884112b1a4dd39fbaf3c";
+	public $sailingyacht_feed_id = "d0efcdab38";
+	public $sailingyacht_exclude_make_ids = "466,573,662,1146,1986,2043,2170";
 	public $mostviewdno = 30;
 	public $mostviewdday = 30;
     //end
@@ -5984,35 +5986,44 @@ class Yachtclass {
 		global $db, $cm;
 		
 		//param
-		$default_param = array("boatid" => 0, "makeid" => 0, "ownboat" => 0, "feed_id" => "", "getdet" => 0);
+		$default_param = array("boatid" => 0, "makeid" => 0, "category_id" => 0, "ownboat" => 0, "feed_id" => "", "getdet" => 0);
 		$param = array_merge($default_param, $param);
 		
 		$boatid = round($param["boatid"], 0);
 		$makeid = round($param["makeid"], 0);
+		$category_id = round($param["category_id"], 0);
 		$ownboat = round($param["ownboat"], 0);
 		$feed_id = $param["feed_id"];
 		$getdet = round($param["getdet"], 0);
 		//end
 		
 		if ($getdet == 1){
-			$b_ar = $cm->get_table_fields('tbl_yacht', 'manufacturer_id, ownboat, feed_id', $boatid);
+			$b_ar = $cm->get_table_fields('tbl_yacht', 'manufacturer_id, category_id, ownboat, feed_id', $boatid);
 			$b_ar = $b_ar[0];
 			$makeid = $b_ar["manufacturer_id"];
+			$category_id = $b_ar["category_id"];
 			$ownboat = $b_ar["ownboat"];
 			$feed_id = $b_ar["feed_id"];
 		}
 		$type_id = $cm->get_common_field_name('tbl_yacht_type_assign', 'type_id', $boatid, 'yacht_id');
 		if ($ownboat == 1){
-			if ($type_id == $this->catamaran_id OR $feed_id == $this->catamaran_feed_id2){
-				$details_url = $cm->get_page_url($boatid, "catamaransales");
+			$ex_make = explode(",", $sailingyacht_exclude_make_ids);
+			if ($category_id == 2 AND !in_array($makeid, $ex_make)){
+				$details_url = $cm->get_page_url($boatid, "sailingyachtsale");
 			}else{
-				$details_url = $cm->get_page_url($boatid, "yachtsale");
+				if ($type_id == $this->catamaran_id OR $feed_id == $this->catamaran_feed_id2){
+					$details_url = $cm->get_page_url($boatid, "catamaransales");
+				}else{
+					$details_url = $cm->get_page_url($boatid, "yachtsale");
+				}
 			}
 		}else{
 			if ($feed_id == $this->yacht_feed_id){
 				$details_url = $cm->get_page_url($boatid, "yachtsale");
 			}elseif ($feed_id == $this->catamaran_feed_id){
 				$details_url = $cm->get_page_url($boatid, "catamaransales");
+			}elseif ($feed_id == $this->sailingyacht_feed_id){
+				$details_url = $cm->get_page_url($boatid, "sailingyachtsale");
 			}else{
 				$details_url = $cm->get_page_url($boatid, "yacht");
 			}
@@ -6039,6 +6050,7 @@ class Yachtclass {
 			$b_ar = array(
 				"boatid" => $id, 
 				"makeid" => $manufacturer_id, 
+				"category_id" => $category_id,
 				"ownboat" => $ownboat, 
 				"feed_id" => $feed_id, 
 				"getdet" => 0
@@ -6113,6 +6125,7 @@ class Yachtclass {
 			$b_ar = array(
 				"boatid" => $id, 
 				"makeid" => $manufacturer_id, 
+				"category_id" => $category_id,
 				"ownboat" => $ownboat, 
 				"feed_id" => $feed_id, 
 				"getdet" => 0
@@ -6503,6 +6516,7 @@ class Yachtclass {
 				$b_ar = array(
 					"boatid" => $id, 
 					"makeid" => $manufacturer_id, 
+					"category_id" => $category_id,
 					"ownboat" => $ownboat, 
 					"feed_id" => $feed_id, 
 					"getdet" => 0
@@ -7499,10 +7513,17 @@ class Yachtclass {
 					if ($owned == 1){
 						if ($sp_typeid == 1){
 							$query_form .= " tbl_yacht_type_assign as d,";
+							$query_where .= "  a.category_id = 1 and";
 							$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->catamaran_id .") and";
 						}elseif ($sp_typeid == 2){
 							$query_form .= " tbl_yacht_type_assign as d,";
+							$query_where .= "  a.category_id = 1 and";
 							$query_where .= " a.id = d.yacht_id and (d.type_id IN (". $this->catamaran_id .")  OR a.feed_id = '". $this->catamaran_feed_id2 ."') and";
+						}elseif ($sp_typeid == 3){
+							$query_form .= " tbl_yacht_type_assign as d,";
+							$query_where .= "  a.manufacturer_id NOT IN (". $this->sailingyacht_exclude_make_ids .") and";
+							$query_where .= "  a.category_id = 2 and";
+							$query_where .= " a.id = d.yacht_id and (d.type_id IN (". $this->catamaran_id .")  OR a.feed_id = '". $this->sailingyacht_feed_id ."') and";
 						}
 					}elseif ($owned == 2){
 						if ($similaryacht_type_filter > 0){
@@ -7546,6 +7567,8 @@ class Yachtclass {
 						$query_where .= "  a.feed_id = '". $this->yacht_feed_id."' and";
 					}elseif ($sp_typeid == 2){
 						$query_where .= "  a.feed_id = '". $this->catamaran_feed_id."' and";
+					}elseif ($sp_typeid == 3){
+						$query_where .= "  a.feed_id = '". $this->sailingyacht_feed_id."' and";
 					}				
 				}
 				
@@ -7563,10 +7586,17 @@ class Yachtclass {
 				}else{
 					if ($sp_typeid == 1){
 						$query_form .= " tbl_yacht_type_assign as d,";
+						$query_where .= "  a.category_id = 1 and";
 						$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->yacht_feed_id."') and";
 					}elseif ($sp_typeid == 2){
 						$query_form .= " tbl_yacht_type_assign as d,";
+						$query_where .= "  a.category_id = 1 and";
 						$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->catamaran_feed_id."','". $this->catamaran_feed_id2 ."')) and";
+					}elseif ($sp_typeid == 3){
+						$query_form .= " tbl_yacht_type_assign as d,";
+						$query_where .= "  a.manufacturer_id NOT IN (". $this->sailingyacht_exclude_make_ids .") and";
+						$query_where .= "  a.category_id = 2 and";
+						$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->sailingyacht_feed_id."','". $this->catamaran_feed_id2 ."')) and";
 					}
 				}
 			}

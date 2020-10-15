@@ -34,7 +34,7 @@ $fullurl = $cm->site_url . $yachtclass->get_boat_details_url($b_ar);
 if ($yw_id > 0 AND $ownboat == 0 AND !empty($disclaimer_text)){
 	$display_boat_disclaimer = 0;
 	$display_yachtworld_disclaimer = 0;
-	
+
 	$display_yachtworld_disclaimer_text = '
 	<div class="disclaimer_div mb-2">
 		<strong>Disclaimer:</strong><br />
@@ -140,20 +140,31 @@ $from_price_ck = $price - 500000;
 $to_price_ck = $price + 500000;
 
 if ($ownboat == 1){
-	if ($type_id == $yachtclass->catamaran_id OR $feed_id == $yachtclass->catamaran_feed_id2){
-		$sp_typeid = 2;
-		$column_id = 7;
-		$price_title = "Catamaran Price";
-	}else{
-		$sp_typeid = 1;
+	$ex_make = explode(",", $yachtclass->sailingyacht_exclude_make_ids);
+	if ($category_id == 2 AND !in_array($manufacturer_id, $ex_make)){
+		$sp_typeid = 3;
 		$column_id = 6;
-		$price_title = "Yacht Price";
+		$price_title = "Sailing Yacht Price";
+	}else{
+		if ($type_id == $yachtclass->catamaran_id OR $feed_id == $yachtclass->catamaran_feed_id2){
+			$sp_typeid = 2;
+			$column_id = 7;
+			$price_title = "Catamaran Price";
+		}else{
+			$sp_typeid = 1;
+			$column_id = 6;
+			$price_title = "Yacht Price";
+		}
 	}
 }else{
 	if ($feed_id == $yachtclass->catamaran_feed_id){
 		$sp_typeid = 2;
 		$column_id = 7;
 		$price_title = "Catamaran Price";
+	}elseif ($feed_id == $yachtclass->sailingyacht_feed_id){
+		$sp_typeid = 3;
+		$column_id = 6;
+		$price_title = "Sailing Yacht Price";
 	}else{
 		$sp_typeid = 1;
 		$column_id = 6;
@@ -319,13 +330,14 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 				?>
 				<div class="full"><?php echo $price_display_message; ?></div>
 				<?php }else{ ?>
-				<div class="clearfixmain">
+                
+                <div class="clearfixmain">
                		<label class="com_none" for="currency_id">Price</label>
                     <select tdiv="" setpr="<?php echo round($price, 0); ?>" class="my-dropdown2" id="currency_id" name="currency_id">
                         <?php echo $yachtclass->get_currency_combo(0, 1); ?>
                     </select>
                     <span id="pricechange"><?php echo $cm->price_format($price); ?></span>
-                </div>               
+                </div>         
 				<?php 
 					}
 
@@ -412,8 +424,8 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
         	<?php
 			}
 			?>
-			
-			<?php echo $display_yachtworld_disclaimer_text; ?>
+            
+            <?php echo $display_yachtworld_disclaimer_text; ?>
             
             <h2 class="singlelinebottom">Highlights</h2>
             <div class="customboattabcontent clearfixmain">
@@ -719,7 +731,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
 			?>
 			<div class="clearfixmain"><a href="javascript:void(0);" ctabid="6" class="customboattab">Descriptions</a></div>
 			<div id="ctab6" class="customboattabcontent com_none clearfixmain">
-			<?php echo $descriptions; ?>
+			<?php echo $descriptions; ?>            
             </div>
 			<?php
 			}
@@ -746,7 +758,7 @@ echo $frontend->page_brdcmp_array($brdcmp_array);
     <div class="right-cell scrollcol" parentdiv="product-detail">
         <section class="section sectionbg3 broker-wrap clearfixmain">
             <?php
-				$paramar = array("company_id" => $company_id, "location_id" => $location_id, "broker_id" => $broker_id, "yacht_id" => $id, "manufacturer_id" => $manufacturer_id, "condition_id" => $condition_id, "ownboat" => $ownboat);
+				$paramar = array("company_id" => $company_id, "location_id" => $location_id, "broker_id" => $broker_id, "yacht_id" => $id, "manufacturer_id" => $manufacturer_id, "category_id" => $category_id, "condition_id" => $condition_id, "ownboat" => $ownboat);
             	echo $yachtclass->display_yacht_broker_info($paramar); 
 			?>
         </section>

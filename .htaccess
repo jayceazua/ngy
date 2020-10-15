@@ -237,6 +237,11 @@ RewriteRule ^catamaran-sales/([^/\.]+)/([^/\.]+)/embed/?$ index.php?templateseo=
 RewriteRule ^catamaran-sales/([^/\.]+)/([^/\.]+)/slideshow/([^/\.]+)/?$ index.php?templateseo=yacht-details&boatslug=$1&lnum=$2&slideshowcode=$3&nohead=5 [L]
 RewriteRule ^catamaran-sales/([^/\.]+)/([^/\.]+)/campaign/([^/\.]+)/?$ index.php?templateseo=yacht-details&boatslug=$1&lnum=$2&campaigncode=$3&nohead=5 [L]
 
+RewriteRule ^sailingyacht-sales/([^/\.]+)/([^/\.]+)/?$ index.php?templateseo=yacht-details&boatslug=$1&lnum=$2 [L]
+RewriteRule ^sailingyacht-sales/([^/\.]+)/([^/\.]+)/embed/?$ index.php?templateseo=yacht-details&boatslug=$1&lnum=$2&nohead=1 [L]
+RewriteRule ^sailingyacht-sales/([^/\.]+)/([^/\.]+)/slideshow/([^/\.]+)/?$ index.php?templateseo=yacht-details&boatslug=$1&lnum=$2&slideshowcode=$3&nohead=5 [L]
+RewriteRule ^sailingyacht-sales/([^/\.]+)/([^/\.]+)/campaign/([^/\.]+)/?$ index.php?templateseo=yacht-details&boatslug=$1&lnum=$2&campaigncode=$3&nohead=5 [L]
+
 RewriteRule ^boat/([^/\.]+)/?$ index.php?templateseo=yacht-details&lno=$1 [L]
 RewriteRule ^boat/([^/\.]+)/([^/\.]+)/([^/\.]+)/([^/\.]+)/?$ index.php?templateseo=yacht-details&y=$1&mf=$2&md=$3&lnum=$4 [L]
 RewriteRule ^boat/([^/\.]+)/([^/\.]+)/([^/\.]+)/([^/\.]+)/embed/?$ index.php?templateseo=yacht-details&y=$1&mf=$2&md=$3&lnum=$4&nohead=1 [L]

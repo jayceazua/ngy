@@ -6042,18 +6042,26 @@ class Yachtclass_Child extends Yachtclass{
 		';
 		
 		if ($searchtypeselection == 1){
-			if ($sp_typeid == 2){
+			if ($sp_typeid == 3){
+				$sp_typeid1 = '';
+				$sp_typeid2 = '';
+				$sp_typeid3 = ' checked="checked"';
+				$sp_typeid4 = '';
+			}elseif ($sp_typeid == 2){
 				$sp_typeid1 = '';
 				$sp_typeid2 = ' checked="checked"';
 				$sp_typeid3 = '';
+				$sp_typeid4 = '';
 			}elseif ($sp_typeid == 1){
 				$sp_typeid1 = ' checked="checked"';
 				$sp_typeid2 = '';
 				$sp_typeid3 = '';
+				$sp_typeid4 = '';
 			}else{
 				$sp_typeid1 = '';
 				$sp_typeid2 = '';
-				$sp_typeid3 = ' checked="checked"';
+				$sp_typeid3 = '';
+				$sp_typeid4 = ' checked="checked"';
 			}
 			
 			$searchtypeselection_text = '
@@ -6062,10 +6070,12 @@ class Yachtclass_Child extends Yachtclass{
 			<div class="clearfixmain">
 				<label class="com_none" for="ls_sp_typeid1">Yacht</label>
 				<label class="com_none" for="ls_sp_typeid2">Catamaran</label>
-				<label class="com_none" for="ls_sp_typeid3">All</label>
+				<label class="com_none" for="ls_sp_typeid3">Sailing Yacht</label>
+				<label class="com_none" for="ls_sp_typeid4">All</label>
 				<div><input class="radiobutton ownedradio" type="radio" id="ls_sp_typeid1" name="ls_sp_typeid" value="1"'. $sp_typeid1 .' /> Yacht</div> 
 				<div><input class="radiobutton ownedradio" type="radio" id="ls_sp_typeid2" name="ls_sp_typeid" value="2"'. $sp_typeid2 .' /> Catamaran</div>
-				<div><input class="radiobutton ownedradio" type="radio" name="ls_sp_typeid" id="ls_sp_typeid3" value="0"'. $sp_typeid3 .' /> All</div>
+				<div><input class="radiobutton ownedradio" type="radio" id="ls_sp_typeid3" name="ls_sp_typeid" value="3"'. $sp_typeid3 .' /> Sailing Yacht</div>
+				<div><input class="radiobutton ownedradio" type="radio" name="ls_sp_typeid" id="ls_sp_typeid4" value="0"'. $sp_typeid4 .' /> All</div>
 			</div>
 			</div>
 			';
