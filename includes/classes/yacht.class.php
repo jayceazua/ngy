@@ -7731,7 +7731,7 @@ class Yachtclass {
 		}else{
 			$dcon = $cm->pagination_record;
 		}*/
-		$dcon = 15;
+		$dcon = 12;
         
         $page = ($p - 1) * $dcon;
         if ($page <= 0){ $page = 0; }
