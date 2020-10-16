@@ -7836,7 +7836,6 @@ class Yachtclass {
 
                 foreach($result as $row){
 					$returntxt .= $this->display_yacht($row, $displayoption, $extraclass, $compareboat, $charter, $nohead, $boat_custom_ar);
-					echo "FF: " . $found;
 					if ($_SESSION["created_impression_icr"] == 1){
 						$this->update_yacht_view($row["id"], 2);
 					}
@@ -7963,7 +7962,7 @@ class Yachtclass {
 				'statelistfull' => ''
             );
         }
-
+echo "FF: " . $found;
         return json_encode($returnval);
     }
 
