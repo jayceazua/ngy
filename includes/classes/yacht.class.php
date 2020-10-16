@@ -7811,7 +7811,7 @@ class Yachtclass {
 
         $result = $db->fetch_all_array($sql);
         $found = count($result);
-echo "F: " . $found;
+
         $remaining = $foundm - ($p * $dcon);
 		//$returntxt .= $sql;
         if ($found > 0){
@@ -7836,6 +7836,7 @@ echo "F: " . $found;
 
                 foreach($result as $row){
 					$returntxt .= $this->display_yacht($row, $displayoption, $extraclass, $compareboat, $charter, $nohead, $boat_custom_ar);
+					echo "FF: " . $found;
 					if ($_SESSION["created_impression_icr"] == 1){
 						$this->update_yacht_view($row["id"], 2);
 					}
