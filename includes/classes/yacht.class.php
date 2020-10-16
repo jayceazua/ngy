@@ -7791,7 +7791,7 @@ class Yachtclass {
 		}else{
 			$sql = $cm->get_data_set(array("to_check_val" => $to_check_val, "section_for" => 2));
 		}
-echo "aaaa: " . $sql;
+
         $foundm = $this->total_yach_found($sql);
 		if ($mostviewed_sh > 0 OR $mostviewed_qr > 0){
 			if ($foundm > $this->mostviewdno){
@@ -7811,7 +7811,7 @@ echo "aaaa: " . $sql;
 
         $result = $db->fetch_all_array($sql);
         $found = count($result);
-
+echo "F: " . $found;
         $remaining = $foundm - ($p * $dcon);
 		//$returntxt .= $sql;
         if ($found > 0){
