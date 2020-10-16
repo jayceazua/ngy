@@ -7586,16 +7586,13 @@ class Yachtclass {
 				}else{
 					if ($sp_typeid == 1){
 						$query_form .= " tbl_yacht_type_assign as d,";
-						$query_where .= "  a.category_id = 1 and";
 						$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->yacht_feed_id."') and";
 					}elseif ($sp_typeid == 2){
 						$query_form .= " tbl_yacht_type_assign as d,";
-						$query_where .= "  a.category_id = 1 and";
 						$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->catamaran_feed_id."','". $this->catamaran_feed_id2 ."')) and";
 					}elseif ($sp_typeid == 3){
 						$query_form .= " tbl_yacht_type_assign as d,";
 						$query_where .= "  a.manufacturer_id NOT IN (". $this->sailingyacht_exclude_make_ids .") and";
-						$query_where .= "  a.category_id = 2 and";
 						$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->sailingyacht_feed_id."','". $this->catamaran_feed_id2 ."')) and";
 					}
 				}
@@ -7699,7 +7696,7 @@ class Yachtclass {
 
 	public function display_yacht_listing($p, $param = array()){	
         global $db, $cm;
-		
+		echo "aaa";
 		//param
 		$default_param = array("compareboat" => 0, "displayoption" => 1, "ajaxpagination" => 0, "dstat" => 0, "sortop" => 0, "orderbyop" => 0, "to_check_val" => '', "qreset" => 0, "mostviewed" => 0, "sp_typeid" => 0);
 		$param = array_merge($default_param, $param);
