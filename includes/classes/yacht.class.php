@@ -7696,7 +7696,7 @@ class Yachtclass {
 
 	public function display_yacht_listing($p, $param = array()){	
         global $db, $cm;
-		echo "aaa";
+		
 		//param
 		$default_param = array("compareboat" => 0, "displayoption" => 1, "ajaxpagination" => 0, "dstat" => 0, "sortop" => 0, "orderbyop" => 0, "to_check_val" => '', "qreset" => 0, "mostviewed" => 0, "sp_typeid" => 0);
 		$param = array_merge($default_param, $param);
@@ -7791,7 +7791,7 @@ class Yachtclass {
 		}else{
 			$sql = $cm->get_data_set(array("to_check_val" => $to_check_val, "section_for" => 2));
 		}
-
+echo "aaaa: " . $sql;
         $foundm = $this->total_yach_found($sql);
 		if ($mostviewed_sh > 0 OR $mostviewed_qr > 0){
 			if ($foundm > $this->mostviewdno){
