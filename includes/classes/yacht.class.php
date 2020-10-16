@@ -7962,7 +7962,7 @@ class Yachtclass {
 				'statelistfull' => ''
             );
         }
-echo "FF: " . $found;
+print_r($returnval);
         return json_encode($returnval);
     }
 
