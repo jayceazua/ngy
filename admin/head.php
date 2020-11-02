@@ -93,7 +93,7 @@ if ($fullpage != "y"){
 	$link_option_ar["Box Content"][] = array('Brand Box - Yacht Page', 'brandbox.php?sectionid=2');
 	$link_option_ar["Box Content"][] = array('Brand Box - Catamaran Page', 'brandbox.php?sectionid=3');
 	$link_option_ar["Box Content"][] = array('Brand Box - Sailing Catamaran Page', 'brandbox.php?sectionid=4');
-	$link_option_ar["Box Content"][] = array('New Yacht / Catamaran Box', 'menu-box.php');
+	$link_option_ar["Box Content"][] = array('New Yacht / Catamaran / Sailing Yacht Box', 'menu-box.php');
     $linksql = "select id, name from tbl_box_content where status = 'y' order by rank";
     $linkresult = $db->fetch_all_array($linksql);
     $linkfound = count($linkresult);

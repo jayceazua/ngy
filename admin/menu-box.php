@@ -69,6 +69,8 @@ include("head.php");
 				 
 				 if ($id == 2){
 					 $box_title = "Catamaran Box";
+				 }elseif ($id == 3){
+					 $box_title = "Sailing Yacht Box";
 				 }else{
 					 $box_title = "Yacht Box";
 				 }
