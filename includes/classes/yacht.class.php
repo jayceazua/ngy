@@ -7592,8 +7592,7 @@ class Yachtclass {
 						$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->catamaran_feed_id."','". $this->catamaran_feed_id2 ."')) and";
 					}elseif ($sp_typeid == 3){
 						$query_form .= " tbl_yacht_type_assign as d,";
-						$query_where .= "  a.manufacturer_id NOT IN (". $this->sailingyacht_exclude_make_ids .") and";
-						$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->sailingyacht_feed_id."')) and";
+						$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .") and a.manufacturer_id NOT IN (". $this->sailingyacht_exclude_make_ids .") and a.category_id = 2 and a.ownboat = 1) OR a.feed_id IN ('". $this->sailingyacht_feed_id."')) and";
 					}
 				}
 			}
