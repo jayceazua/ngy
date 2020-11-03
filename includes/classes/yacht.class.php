@@ -4898,11 +4898,15 @@ class Yachtclass {
 		
 		$type_id = $cm->get_common_field_name('tbl_yacht_type_assign', 'type_id', $boat_id, 'yacht_id');
 			
-		$boat_ar = $cm->get_table_fields('tbl_yacht', 'ownboat, yw_id, feed_id', $boat_id);
+		$boat_ar = $cm->get_table_fields('tbl_yacht', 'manufacturer_id, category_id, ownboat, yw_id, feed_id', $boat_id);
 		$boat_ar = (object)$boat_ar[0];
 		$ownboat = $boat_ar->ownboat;
 		$yw_id = $boat_ar->yw_id;
 		$feed_id = $boat_ar->feed_id;
+		$makeid = $boat_ar->manufacturer_id;
+		$category_id = $boat_ar->category_id;
+		
+		$ex_make = explode(",", $this->sailingyacht_exclude_make_ids);
 		
 		$wh_manual_boat = 0;
 		if ($ownboat == 1 AND $yw_id == 0){
@@ -4912,12 +4916,16 @@ class Yachtclass {
 		if ($ownboat == 1){
 			if ($type_id == $this->catamaran_id OR $feed_id == $this->catamaran_feed_id2){
 				$categoryid_front = 2;
+			}elseif ($category_id == 2 AND !in_array($makeid, $ex_make)){
+				$categoryid_front = 3;
 			}else{
 				$categoryid_front = 1;
 			}
 		}else{
 			if ($feed_id == $this->catamaran_feed_id){
 				$categoryid_front = 2;
+			}elseif ($feed_id == $this->sailingyacht_feed_id){
+				$categoryid_front = 3;
 			}else{
 				$categoryid_front = 1;
 			}
@@ -6007,7 +6015,7 @@ class Yachtclass {
 		}
 		$type_id = $cm->get_common_field_name('tbl_yacht_type_assign', 'type_id', $boatid, 'yacht_id');
 		if ($ownboat == 1){
-			$ex_make = explode(",", $sailingyacht_exclude_make_ids);
+			$ex_make = explode(",", $this->sailingyacht_exclude_make_ids);
 			if ($category_id == 2 AND !in_array($makeid, $ex_make)){
 				$details_url = $cm->get_page_url($boatid, "sailingyachtsale");
 			}else{
