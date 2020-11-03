@@ -7532,7 +7532,7 @@ class Yachtclass {
 							$query_form .= " tbl_yacht_type_assign as d,";
 							$query_where .= "  a.manufacturer_id NOT IN (". $this->sailingyacht_exclude_make_ids .") and";
 							$query_where .= "  a.category_id = 2 and";
-							$query_where .= " a.id = d.yacht_id and (d.type_id NOT IN (". $this->catamaran_id .")  OR a.feed_id = '". $this->sailingyacht_feed_id ."') and";
+							$query_where .= " a.id = d.yacht_id and (d.type_id NOT IN (". $this->catamaran_id .")) and";
 						}
 					}elseif ($owned == 2){
 						if ($similaryacht_type_filter > 0){
