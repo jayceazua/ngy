@@ -3161,6 +3161,7 @@ class Yachtclass {
 		$val_ar[] = array("name" => "Our Listings");
 		$val_ar[] = array("name" => "Co-Brokerage - Yacht Feed");
 		$val_ar[] = array("name" => "Co-Brokerage - Catamaran Feed");
+		$val_ar[] = array("name" => "Co-Brokerage - Sailing Yacht Feed");
 		
 		$val_ar = json_encode($val_ar);
 		return $val_ar;		
@@ -8928,7 +8929,7 @@ class Yachtclass {
 				}
 			}
 			
-			$presented_by = '<p>Need more information? Please contact your <strong>'. $manufacturer_name_display .'</strong> expert</p><hr>';
+			$presented_by = '<p>Need more information? Please contact our <strong>'. $manufacturer_name_display .'</strong> expert</p><hr>';
 		}
 		
 		

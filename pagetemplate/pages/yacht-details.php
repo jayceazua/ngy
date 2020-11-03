@@ -144,7 +144,7 @@ if ($ownboat == 1){
 	if ($category_id == 2 AND !in_array($manufacturer_id, $ex_make)){
 		$sp_typeid = 3;
 		$column_id = 6;
-		$price_title = "Sailing Yacht Price";
+		$price_title = "Offered for";
 	}else{
 		if ($type_id == $yachtclass->catamaran_id OR $feed_id == $yachtclass->catamaran_feed_id2){
 			$sp_typeid = 2;
@@ -164,7 +164,7 @@ if ($ownboat == 1){
 	}elseif ($feed_id == $yachtclass->sailingyacht_feed_id){
 		$sp_typeid = 3;
 		$column_id = 6;
-		$price_title = "Sailing Yacht Price";
+		$price_title = "Offered for";
 	}else{
 		$sp_typeid = 1;
 		$column_id = 6;
