@@ -800,8 +800,8 @@ class Frontendclass {
 			$featuredboat_url = $cm->get_page_url(65, "page");
 			$feacat = 2;
 		}elseif ($mnid == 170){
-			$menusectiontag = 'Yachts';
-			$menusectiontag2 = 'Yachts';
+			$menusectiontag = 'Sailing Yachts';
+			$menusectiontag2 = 'Sailing Yachts';
 			$featuredboat_url = $cm->get_page_url(175, "page");
 			$feacat = 3;
 		}else{
