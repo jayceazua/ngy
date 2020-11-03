@@ -10,7 +10,7 @@ if ($sectionid == 2){
 }elseif ($sectionid == 3){
 	$link_name = "Brand Box - Catamaran Page";
 }elseif ($sectionid == 4){
-	$link_name = "Brand Box - Sailing Catamaran Page";
+	$link_name = "Brand Box - Sailing Yacht Page";
 }else{
 	$sectionid = 1;
 	$link_name = "Brand Box - Home Page";
