@@ -6042,18 +6042,26 @@ class Yachtclass_Child extends Yachtclass{
 		';
 		
 		if ($searchtypeselection == 1){
-			if ($sp_typeid == 2){
+			if ($sp_typeid == 3){
+				$sp_typeid1 = '';
+				$sp_typeid2 = '';
+				$sp_typeid3 = ' checked="checked"';
+				$sp_typeid4 = '';
+			}elseif ($sp_typeid == 2){
 				$sp_typeid1 = '';
 				$sp_typeid2 = ' checked="checked"';
 				$sp_typeid3 = '';
+				$sp_typeid4 = '';
 			}elseif ($sp_typeid == 1){
 				$sp_typeid1 = ' checked="checked"';
 				$sp_typeid2 = '';
 				$sp_typeid3 = '';
+				$sp_typeid4 = '';
 			}else{
 				$sp_typeid1 = '';
 				$sp_typeid2 = '';
-				$sp_typeid3 = ' checked="checked"';
+				$sp_typeid3 = '';
+				$sp_typeid4 = ' checked="checked"';
 			}
 			
 			$searchtypeselection_text = '
@@ -6062,10 +6070,12 @@ class Yachtclass_Child extends Yachtclass{
 			<div class="clearfixmain">
 				<label class="com_none" for="ls_sp_typeid1">Yacht</label>
 				<label class="com_none" for="ls_sp_typeid2">Catamaran</label>
-				<label class="com_none" for="ls_sp_typeid3">All</label>
+				<label class="com_none" for="ls_sp_typeid3">Sailing Yacht</label>
+				<label class="com_none" for="ls_sp_typeid4">All</label>
 				<div><input class="radiobutton ownedradio" type="radio" id="ls_sp_typeid1" name="ls_sp_typeid" value="1"'. $sp_typeid1 .' /> Yacht</div> 
 				<div><input class="radiobutton ownedradio" type="radio" id="ls_sp_typeid2" name="ls_sp_typeid" value="2"'. $sp_typeid2 .' /> Catamaran</div>
-				<div><input class="radiobutton ownedradio" type="radio" name="ls_sp_typeid" id="ls_sp_typeid3" value="0"'. $sp_typeid3 .' /> All</div>
+				<div><input class="radiobutton ownedradio" type="radio" id="ls_sp_typeid3" name="ls_sp_typeid" value="3"'. $sp_typeid3 .' /> Sailing Yacht</div>
+				<div><input class="radiobutton ownedradio" type="radio" name="ls_sp_typeid" id="ls_sp_typeid4" value="0"'. $sp_typeid4 .' /> All</div>
 			</div>
 			</div>
 			';
@@ -7602,10 +7612,17 @@ class Yachtclass_Child extends Yachtclass{
 			if ($owned == 1){
 				if ($sp_typeid == 1){
 					$query_form .= " tbl_yacht_type_assign as d,";
+					$query_where .= "  a.category_id = 1 and";
 					$query_where .= " a.id = d.yacht_id and d.type_id NOT IN (". $this->catamaran_id .") and";
 				}elseif ($sp_typeid == 2){
 					$query_form .= " tbl_yacht_type_assign as d,";
+					$query_where .= "  a.category_id = 1 and";
 					$query_where .= " a.id = d.yacht_id and (d.type_id IN (". $this->catamaran_id .")  OR a.feed_id = '". $this->catamaran_feed_id2 ."') and";
+				}elseif ($sp_typeid == 3){
+					$query_form .= " tbl_yacht_type_assign as d,";
+					$query_where .= "  a.manufacturer_id NOT IN (". $this->sailingyacht_exclude_make_ids .") and";
+					$query_where .= "  a.category_id = 2 and";
+					$query_where .= " a.id = d.yacht_id and (d.type_id NOT IN (". $this->catamaran_id .")  OR a.feed_id = '". $this->sailingyacht_feed_id ."') and";
 				}
 				
 				$query_where .= "  a.ownboat = 1 and";
@@ -7616,15 +7633,20 @@ class Yachtclass_Child extends Yachtclass{
 					$query_where .= "  a.feed_id = '". $this->yacht_feed_id."' and";
 				}elseif ($sp_typeid == 2){
 					$query_where .= "  a.feed_id IN = '". $this->catamaran_feed_id."' and";
+				}elseif ($sp_typeid == 3){
+					$query_where .= "  a.feed_id = '". $this->sailingyacht_feed_id."' and";
 				}
 			}
 		}else{
 			if ($sp_typeid == 1){
 				$query_form .= " tbl_yacht_type_assign as d,";
-				$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id = '". $this->yacht_feed_id."') and";
+				$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .")  and a.category_id = 1  and a.ownboat = 1) OR a.feed_id = '". $this->yacht_feed_id."') and";
 			}elseif ($sp_typeid == 2){
 				$query_form .= " tbl_yacht_type_assign as d,";
-				$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.ownboat = 1) OR a.feed_id IN ('". $this->catamaran_feed_id."','". $this->catamaran_feed_id2 ."')) and";
+				$query_where .= " a.id = d.yacht_id and ((d.type_id IN (". $this->catamaran_id .")  and a.category_id = 1  and a.ownboat = 1) OR a.feed_id IN ('". $this->catamaran_feed_id."','". $this->catamaran_feed_id2 ."')) and";
+			}elseif ($sp_typeid == 3){
+				$query_form .= " tbl_yacht_type_assign as d,";
+				$query_where .= " a.id = d.yacht_id and ((d.type_id NOT IN (". $this->catamaran_id .") and a.manufacturer_id NOT IN (". $this->sailingyacht_exclude_make_ids .") and a.category_id = 2 and a.ownboat = 1) OR a.feed_id IN ('". $this->sailingyacht_feed_id."')) and";
 			}
 		}
 		

@@ -799,6 +799,11 @@ class Frontendclass {
 			$menusectiontag2 = 'Constructions';
 			$featuredboat_url = $cm->get_page_url(65, "page");
 			$feacat = 2;
+		}elseif ($mnid == 170){
+			$menusectiontag = 'Sailing Yachts';
+			$menusectiontag2 = 'Sailing Yachts';
+			$featuredboat_url = $cm->get_page_url(175, "page");
+			$feacat = 3;
 		}else{
 			$menusectiontag = '';
 			$feacat = 0;
@@ -890,7 +895,7 @@ class Frontendclass {
 				$ss_link_target = "";
 				if ($ss_open_new_window == "y"){ $ss_link_target = ' target = "_blank"'; }
 				
-				if ($ss_id == 48 OR $ss_id == 67){
+				if ($ss_id == 48 OR $ss_id == 67 OR $ss_id == 176){
 					$menulimit = 11;
 				}
 				
@@ -14130,7 +14135,7 @@ class Frontendclass {
 		</div>
 		';*/
 		
-		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where id IN (48,67) and status = 'y' order by rank";
+		$ss_sql = "select id, name, int_page_id, int_page_tp, new_window, extraclass from tbl_page where id IN (48,67,176) and status = 'y' order by rank";
 		$ss_result = $db->fetch_all_array($ss_sql);
 		$ss_found = count($ss_result);
 		if ($ss_found > 0){

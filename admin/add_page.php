@@ -375,6 +375,9 @@ $(document).ready(function(){
 		}else if (custom_owned == 3){
 			custom_owned = 2;
 			sp_typeid = 2;
+		}else if (custom_owned == 4){
+			custom_owned = 2;
+			sp_typeid = 3;
 		}else if (custom_owned == 1){
 			//catamaran_id
 			if (custom_type_id == catamaran_id){

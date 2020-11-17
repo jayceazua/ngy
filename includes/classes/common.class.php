@@ -652,6 +652,11 @@ class Commonclass {
 		  $boatslug = $this->get_common_field_name('tbl_yacht', 'boat_slug', $checkid);
           $ret_url = $this->folder_for_seo . "catamaran-sales/" . $boatslug . "/".$listingno.'/';
 
+      }elseif ($pagetype == "sailingyachtsale"){		  
+		  $listingno = $this->get_common_field_name('tbl_yacht', 'listing_no', $checkid);
+		  $boatslug = $this->get_common_field_name('tbl_yacht', 'boat_slug', $checkid);
+          $ret_url = $this->folder_for_seo . "sailingyacht-sales/" . $boatslug . "/".$listingno.'/';
+
       }elseif ($pagetype == "yachtsmall"){
           $pagename = $this->get_common_field_name('tbl_yacht', 'listing_no', $checkid);
           $pagename = $this->serach_url_filtertext($pagename);
